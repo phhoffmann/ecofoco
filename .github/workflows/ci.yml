@@ -47,7 +47,10 @@ jobs:
           java-version: 21
           cache: gradle
 
+      # The default package list includes the removed 'tools' package; AGP fetches platforms itself
       - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
 
       - run: npm ci
       - run: npm run build
