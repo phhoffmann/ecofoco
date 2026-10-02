@@ -101,8 +101,8 @@ export interface PlotLayout<T> {
 
 /**
  * Places items onto a bounded plot, one per tile, in the given order. Earlier items keep their
- * tile when more are appended (as long as the plot size doesn't change). When the largest plot is
- * full, the earliest items are dropped so the latest ones stay visible.
+ * tile when more are appended, as long as the plot size doesn't change and nothing overflows.
+ * When the largest plot is full, the earliest items are dropped so the latest ones stay visible.
  */
 export function placeOnPlot<T>(items: readonly T[]): PlotLayout<T> {
   const plotSize = plotSizeFor(items.length)
