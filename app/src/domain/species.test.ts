@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { SPECIES_CATALOG, collectedCatalogSpeciesIds } from './species'
+import { PLANT_ARCHETYPES, SPECIES_CATALOG, collectedCatalogSpeciesIds, type Archetype } from './species'
 import type { CollectedEntry } from './types'
 
 function entry(speciesId: string): CollectedEntry {
@@ -16,5 +16,13 @@ describe('collectedCatalogSpeciesIds', () => {
   it('counts each catalog species once', () => {
     const known = SPECIES_CATALOG[0].id
     expect(collectedCatalogSpeciesIds([entry(known), entry(known)]).size).toBe(1)
+  })
+})
+
+const isPlantArchetype = (archetype: Archetype) => (PLANT_ARCHETYPES as Archetype[]).includes(archetype)
+
+describe('SPECIES_CATALOG archetypes', () => {
+  it.each(SPECIES_CATALOG)('$id has an archetype matching its type', (species) => {
+    expect(isPlantArchetype(species.archetype)).toBe(species.type === 'plant')
   })
 })

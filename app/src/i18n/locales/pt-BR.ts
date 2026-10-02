@@ -53,6 +53,22 @@ export const ptBR: typeof en = {
     logSighting: '+ Registrar avistamento',
     unknown: '???',
     empty: 'Complete uma sessão de foco para coletar sua primeira espécie.',
+    garden: {
+      periods: {
+        day: 'Dia',
+        week: 'Semana',
+        month: 'Mês',
+      },
+      previous: 'Período anterior',
+      next: 'Próximo período',
+      plants_one: '{{count}} planta',
+      plants_other: '{{count}} plantas',
+      animals_one: '{{count}} animal',
+      animals_other: '{{count}} animais',
+      empty: 'Nada coletado neste período ainda.',
+      overflow: '+{{count}} não exibidos',
+      sceneLabel: 'Jardim das espécies coletadas neste período',
+    },
   },
   settings: {
     notifications: 'Notificações',
@@ -62,6 +78,12 @@ export const ptBR: typeof en = {
     stepGoal: 'Meta diária de passos',
     stepGoalHint: 'Passos necessários pra liberar o sorteio de animal do dia',
     stepGoalValue: '{{count}} passos',
+    collectionView: 'Visualização da coleção',
+    collectionViewHint: 'A grade completa de espécies, ou um jardim do que você coletou em um período',
+    collectionViewOptions: {
+      grid: 'Grade',
+      isometric: 'Jardim',
+    },
   },
   speciesDetail: {
     method: {

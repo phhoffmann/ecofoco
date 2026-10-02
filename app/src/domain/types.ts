@@ -25,3 +25,8 @@ export interface DailyProgress {
 }
 
 export const DEFAULT_STEP_GOAL = 6000
+
+/** How the Collection tab is shown: the full Pokédex grid, or the isometric garden for a period. */
+export type CollectionView = 'grid' | 'isometric'
+
+export const DEFAULT_COLLECTION_VIEW: CollectionView = 'grid'

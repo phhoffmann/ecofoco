@@ -18,6 +18,7 @@ const {
     type: 'animal',
     rarity: 'rare',
     biome: ['atlantic-forest'],
+    archetype: 'small-mammal',
     image: 'quati.jpg',
     imageLicense: 'CC0',
   } as Species,

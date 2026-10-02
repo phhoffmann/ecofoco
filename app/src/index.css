@@ -4,3 +4,40 @@ body {
   margin: 0;
   color-scheme: light dark;
 }
+
+/* Garden view: trees sway, animals bob. Delays are set inline so sprites don't move in lockstep. */
+@keyframes garden-sway {
+  0%,
+  100% {
+    transform: rotate(-1.5deg);
+  }
+  50% {
+    transform: rotate(1.5deg);
+  }
+}
+
+@keyframes garden-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10%);
+  }
+}
+
+.garden-sway {
+  transform-origin: 50% 100%;
+  animation: garden-sway 4s ease-in-out infinite;
+}
+
+.garden-bob {
+  animation: garden-bob 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .garden-sway,
+  .garden-bob {
+    animation: none;
+  }
+}
