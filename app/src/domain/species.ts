@@ -26,12 +26,12 @@ export const SPECIES_CATALOG: Species[] = [
     imageAttribution: 'Fabrício Mil Homens Riella via GBIF, CC-BY',
   },
   {
-    id: 'jacaranda-mimoso',
-    scientificName: 'Jacaranda mimosifolia',
+    id: 'quaresmeira',
+    scientificName: 'Pleroma granulosum',
     type: 'plant',
     rarity: 'common',
     biome: ['atlantic-forest'],
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/608327053/original.jpg',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/351559976/original.jpg',
     imageLicense: 'CC0',
   },
   {
