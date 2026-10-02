@@ -96,7 +96,7 @@ export function CollectionGarden({ entries, onSelectSpecies }: CollectionGardenP
 
       <IsometricGarden entries={periodEntries} onSelectSpecies={onSelectSpecies} />
 
-      {periodEntries.length === 0 && (
+      {plants + animals === 0 && (
         <p className="text-center text-sm text-emerald-400">{t('collection.garden.empty')}</p>
       )}
     </div>

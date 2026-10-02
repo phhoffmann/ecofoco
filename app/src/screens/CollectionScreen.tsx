@@ -59,7 +59,7 @@ export function CollectionScreen() {
           })}
         </div>
       )}
-      {loaded && collectedSpeciesIds.size === 0 && (
+      {collectionView === 'grid' && loaded && collectedSpeciesIds.size === 0 && (
         <p className="mt-8 text-center text-sm text-emerald-400">{t('collection.empty')}</p>
       )}
 
