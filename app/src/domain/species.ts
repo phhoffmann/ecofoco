@@ -1,3 +1,5 @@
+import type { CollectedEntry } from './types'
+
 export type SpeciesKind = 'plant' | 'animal'
 export type Rarity = 'common' | 'rare' | 'epic'
 export type Biome = 'atlantic-forest'
@@ -26,12 +28,12 @@ export const SPECIES_CATALOG: Species[] = [
     imageAttribution: 'Fabrício Mil Homens Riella via GBIF, CC-BY',
   },
   {
-    id: 'jacaranda-mimoso',
-    scientificName: 'Jacaranda mimosifolia',
+    id: 'quaresmeira',
+    scientificName: 'Pleroma granulosum',
     type: 'plant',
     rarity: 'common',
     biome: ['atlantic-forest'],
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/608327053/original.jpg',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/351559976/original.jpg',
     imageLicense: 'CC0',
   },
   {
@@ -207,3 +209,11 @@ export const SPECIES_CATALOG: Species[] = [
     imageAttribution: 'Pablo Bombín via GBIF, CC-BY',
   },
 ]
+
+export function collectedCatalogSpeciesIds(
+  entries: CollectedEntry[],
+  catalog: Species[] = SPECIES_CATALOG,
+): Set<string> {
+  const catalogIds = new Set(catalog.map((s) => s.id))
+  return new Set(entries.map((e) => e.speciesId).filter((id) => catalogIds.has(id)))
+}

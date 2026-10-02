@@ -81,10 +81,10 @@ export const en = {
       description:
         'Iconic Brazilian tree known for its brilliant yellow blooms in late winter, often flowering with almost no leaves on the branches.',
     },
-    'jacaranda-mimoso': {
-      name: 'Jacaranda',
+    quaresmeira: {
+      name: 'Glory Bush Tree',
       description:
-        'Native to South America and famous for its clusters of purple-blue trumpet-shaped flowers that carpet the ground each spring.',
+        'Atlantic Forest native that covers hillsides in vivid purple flowers around Lent, which gives it its Portuguese name.',
     },
     'pau-brasil': {
       name: 'Brazilwood',

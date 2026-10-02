@@ -83,10 +83,10 @@ export const ptBR: typeof en = {
       description:
         'Árvore brasileira icônica, conhecida por suas flores amarelas vibrantes no final do inverno, muitas vezes florescendo quase sem folhas nos galhos.',
     },
-    'jacaranda-mimoso': {
-      name: 'Jacarandá-mimoso',
+    quaresmeira: {
+      name: 'Quaresmeira',
       description:
-        'Nativa da América do Sul, famosa pelos cachos de flores roxo-azuladas em formato de trombeta que cobrem o chão a cada primavera.',
+        'Nativa da Mata Atlântica, cobre as encostas de flores roxas vibrantes por volta da Quaresma, época que lhe dá o nome.',
     },
     'pau-brasil': {
       name: 'Pau-brasil',

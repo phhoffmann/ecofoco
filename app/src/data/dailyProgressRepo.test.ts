@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 
 const mockDb = { query: vi.fn(), run: vi.fn() }
 vi.mock('./db', () => ({ getDb: () => Promise.resolve(mockDb) }))
@@ -78,5 +78,50 @@ describe('dailyProgressRepo', () => {
     expect(mockDb.run).toHaveBeenCalledWith('UPDATE daily_progress SET drawCompleted = 1 WHERE date = ?', [
       '2026-09-10',
     ])
+  })
+})
+
+describe('dailyProgressRepo at UTC−3 (America/Sao_Paulo)', () => {
+  const drawCompletedDates = new Set<string>()
+
+  beforeAll(() => {
+    vi.stubEnv('TZ', 'America/Sao_Paulo')
+  })
+
+  afterAll(() => {
+    vi.unstubAllEnvs()
+  })
+
+  beforeEach(() => {
+    drawCompletedDates.clear()
+    mockDb.run.mockReset()
+    mockDb.query.mockReset()
+    mockDb.run.mockImplementation(async (sql: string, [date]: [string]) => {
+      if (sql.startsWith('UPDATE daily_progress SET drawCompleted = 1')) drawCompletedDates.add(date)
+    })
+    mockDb.query.mockImplementation(async (_sql: string, [date]: [string]) => ({
+      values: [{ date, steps: 7000, goalMet: 1, drawCompleted: drawCompletedDates.has(date) ? 1 : 0 }],
+    }))
+    vi.useFakeTimers()
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
+  it('keeps one Draw per local day across the 21:00 local (00:00 UTC) boundary', async () => {
+    vi.setSystemTime(new Date('2026-09-10T23:00:00.000Z')) // 20:00 local, Sept 10
+    expect((await getTodayProgress()).drawCompleted).toBe(false)
+    await markDrawCompleted()
+
+    vi.setSystemTime(new Date('2026-09-11T00:30:00.000Z')) // 21:30 local, still Sept 10
+    const evening = await getTodayProgress()
+    expect(evening.date).toBe('2026-09-10')
+    expect(evening.drawCompleted).toBe(true)
+
+    vi.setSystemTime(new Date('2026-09-11T03:00:00.000Z')) // 00:00 local, Sept 11
+    const nextDay = await getTodayProgress()
+    expect(nextDay.date).toBe('2026-09-11')
+    expect(nextDay.drawCompleted).toBe(false)
   })
 })

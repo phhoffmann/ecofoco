@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ManualSightingModal } from '../components/ManualSightingModal'
 import { SpeciesDetailModal } from '../components/SpeciesDetailModal'
-import { SPECIES_CATALOG } from '../domain/species'
+import { SPECIES_CATALOG, collectedCatalogSpeciesIds } from '../domain/species'
 import { useCollectionStore } from '../stores/collectionStore'
 
 export function CollectionScreen() {
@@ -15,7 +15,7 @@ export function CollectionScreen() {
     void refresh()
   }, [refresh])
 
-  const collectedSpeciesIds = new Set(entries.map((e) => e.speciesId))
+  const collectedSpeciesIds = collectedCatalogSpeciesIds(entries)
   const selectedSpecies = SPECIES_CATALOG.find((s) => s.id === selectedSpeciesId) ?? null
 
   return (
@@ -52,7 +52,7 @@ export function CollectionScreen() {
           )
         })}
       </div>
-      {loaded && entries.length === 0 && (
+      {loaded && collectedSpeciesIds.size === 0 && (
         <p className="mt-8 text-center text-sm text-emerald-400">{t('collection.empty')}</p>
       )}
 
