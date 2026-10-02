@@ -34,7 +34,7 @@ Personal use by the creator. Validate the mechanic before thinking about externa
 - Single, integrated view of plants + animals (one "ecosystem").
 - Dedicated **Pokédex/collection** screen, listing everything collected so far (and what's missing).
 - The collection is **permanent** — nothing dies or decays after being collected.
-- Alternative **isometric garden** view (Forest-style): shows only what was collected in a chosen day / week / month; the grid stays as the full Pokédex. Ships with CC0 placeholder sprites, one per growth-form/body-plan archetype (not per species).
+- Alternative **isometric garden** view (Forest-style), switched from a grid ↔ garden toggle on the Collection screen itself: shows only what was collected in a chosen day / week / month; the grid stays as the full Pokédex. Ships with CC0 placeholder sprites, one per growth-form/body-plan archetype (not per species).
 
 ### 4.4 Species catalog
 - Static list of species (plants and animals), built from **GBIF** data (filtering to CC0/CC-BY licenses only, compatible with future commercial use).
@@ -44,7 +44,6 @@ Personal use by the creator. Validate the mechanic before thinking about externa
 - Notifications **off by default**, with an option to enable them (structure in place, no real notifications implemented in the MVP).
 - Language selector: English or Portuguese (Brazil), applied to both UI chrome and species names/descriptions.
 - Daily step goal is editable (default 6,000, adjustable in increments of 500).
-- Collection view toggle: grid ↔ isometric garden.
 
 ## 5. Out of scope (v1, but mapped for later)
 
