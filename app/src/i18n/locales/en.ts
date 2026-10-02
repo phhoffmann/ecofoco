@@ -51,6 +51,22 @@ export const en = {
     logSighting: '+ Log sighting',
     unknown: '???',
     empty: 'Complete a focus session to collect your first species.',
+    garden: {
+      periods: {
+        day: 'Day',
+        week: 'Week',
+        month: 'Month',
+      },
+      previous: 'Previous period',
+      next: 'Next period',
+      plants_one: '{{count}} plant',
+      plants_other: '{{count}} plants',
+      animals_one: '{{count}} animal',
+      animals_other: '{{count}} animals',
+      empty: 'Nothing collected in this period yet.',
+      overflow: '+{{count}} more not shown',
+      sceneLabel: 'Garden of the species collected in this period',
+    },
   },
   settings: {
     notifications: 'Notifications',
@@ -60,6 +76,12 @@ export const en = {
     stepGoal: 'Daily step goal',
     stepGoalHint: 'Steps needed to unlock the daily animal draw',
     stepGoalValue: '{{count}} steps',
+    collectionView: 'Collection view',
+    collectionViewHint: 'The full species grid, or a garden of what you collected in a period',
+    collectionViewOptions: {
+      grid: 'Grid',
+      isometric: 'Garden',
+    },
   },
   speciesDetail: {
     method: {

@@ -3,7 +3,14 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 const mockDb = { query: vi.fn(), run: vi.fn() }
 vi.mock('./db', () => ({ getDb: () => Promise.resolve(mockDb) }))
 
-import { getNotificationsEnabled, getStepGoal, setNotificationsEnabled, setStepGoal } from './settingsRepo'
+import {
+  getCollectionView,
+  getNotificationsEnabled,
+  getStepGoal,
+  setCollectionView,
+  setNotificationsEnabled,
+  setStepGoal,
+} from './settingsRepo'
 
 describe('settingsRepo', () => {
   beforeEach(() => {
@@ -47,5 +54,28 @@ describe('settingsRepo', () => {
   it('setStepGoal persists the value as a string', async () => {
     await setStepGoal(8000)
     expect(mockDb.run).toHaveBeenCalledWith(expect.stringContaining('INSERT INTO settings'), ['stepGoal', '8000'])
+  })
+
+  it('getCollectionView defaults to the grid when unset', async () => {
+    mockDb.query.mockResolvedValue({ values: [] })
+    expect(await getCollectionView()).toBe('grid')
+  })
+
+  it('getCollectionView falls back to the grid when the stored value is invalid', async () => {
+    mockDb.query.mockResolvedValue({ values: [{ value: 'hexagonal' }] })
+    expect(await getCollectionView()).toBe('grid')
+  })
+
+  it('getCollectionView reflects a stored "isometric" value', async () => {
+    mockDb.query.mockResolvedValue({ values: [{ value: 'isometric' }] })
+    expect(await getCollectionView()).toBe('isometric')
+  })
+
+  it('setCollectionView persists the value', async () => {
+    await setCollectionView('isometric')
+    expect(mockDb.run).toHaveBeenCalledWith(expect.stringContaining('INSERT INTO settings'), [
+      'collectionView',
+      'isometric',
+    ])
   })
 })

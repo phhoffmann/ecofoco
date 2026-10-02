@@ -9,6 +9,7 @@ const { appListeners, addCollectedEntry, recordFocusSession, keepScreenAwake, al
       type: 'plant',
       rarity: 'common',
       biome: ['atlantic-forest'],
+      archetype: 'broadleaf-tree',
       image: 'jatoba.jpg',
       imageLicense: 'CC0',
     }

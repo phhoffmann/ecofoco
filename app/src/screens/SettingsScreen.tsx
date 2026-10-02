@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import type { CollectionView } from '../domain/types'
 import { SUPPORTED_LOCALES, type Locale } from '../i18n/locale'
 import { useSettingsStore } from '../stores/settingsStore'
 
@@ -8,13 +9,25 @@ const LANGUAGE_LABELS: Record<Locale, string> = {
   'pt-BR': 'Português',
 }
 
+const COLLECTION_VIEWS: CollectionView[] = ['grid', 'isometric']
+
 const STEP_GOAL_INCREMENT = 500
 const STEP_GOAL_MIN = 1000
 
 export function SettingsScreen() {
   const { t } = useTranslation()
-  const { notificationsEnabled, language, stepGoal, loaded, load, setNotificationsEnabled, setLanguage, setStepGoal } =
-    useSettingsStore()
+  const {
+    notificationsEnabled,
+    language,
+    stepGoal,
+    collectionView,
+    loaded,
+    load,
+    setNotificationsEnabled,
+    setLanguage,
+    setStepGoal,
+    setCollectionView,
+  } = useSettingsStore()
 
   useEffect(() => {
     void load()
@@ -63,6 +76,25 @@ export function SettingsScreen() {
               }`}
             >
               {LANGUAGE_LABELS[locale]}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="rounded-xl bg-emerald-900/50 px-4 py-3">
+        <p className="font-medium text-emerald-50">{t('settings.collectionView')}</p>
+        <p className="mb-3 text-xs text-emerald-400">{t('settings.collectionViewHint')}</p>
+        <div className="flex gap-2">
+          {COLLECTION_VIEWS.map((view) => (
+            <button
+              key={view}
+              aria-pressed={collectionView === view}
+              onClick={() => void setCollectionView(view)}
+              className={`flex-1 rounded-lg px-3 py-2 text-sm font-medium ${
+                collectionView === view ? 'bg-emerald-500 text-emerald-950' : 'bg-emerald-800 text-emerald-100'
+              }`}
+            >
+              {t(`settings.collectionViewOptions.${view}`)}
             </button>
           ))}
         </div>

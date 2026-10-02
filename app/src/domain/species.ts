@@ -4,12 +4,34 @@ export type SpeciesKind = 'plant' | 'animal'
 export type Rarity = 'common' | 'rare' | 'epic'
 export type Biome = 'atlantic-forest'
 
+// Body-plan / growth-form archetype: garden sprites are chosen per archetype, not per species.
+export type PlantArchetype = 'flowering-tree' | 'broadleaf-tree' | 'emergent-tree' | 'pioneer-tree' | 'palm' | 'shrub'
+export type AnimalArchetype =
+  | 'primate'
+  | 'songbird'
+  | 'large-bird'
+  | 'small-mammal'
+  | 'mid-mammal'
+  | 'reptile'
+  | 'insect'
+export type Archetype = PlantArchetype | AnimalArchetype
+
+export const PLANT_ARCHETYPES: PlantArchetype[] = [
+  'flowering-tree',
+  'broadleaf-tree',
+  'emergent-tree',
+  'pioneer-tree',
+  'palm',
+  'shrub',
+]
+
 export interface Species {
   id: string
   scientificName: string
   type: SpeciesKind
   rarity: Rarity
   biome: Biome[]
+  archetype: Archetype
   image: string
   imageLicense: 'CC0' | 'CC-BY'
   imageAttribution?: string
@@ -23,6 +45,7 @@ export const SPECIES_CATALOG: Species[] = [
     type: 'plant',
     rarity: 'common',
     biome: ['atlantic-forest'],
+    archetype: 'flowering-tree',
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/351406107/original.jpeg',
     imageLicense: 'CC-BY',
     imageAttribution: 'Fabrício Mil Homens Riella via GBIF, CC-BY',
@@ -33,6 +56,7 @@ export const SPECIES_CATALOG: Species[] = [
     type: 'plant',
     rarity: 'common',
     biome: ['atlantic-forest'],
+    archetype: 'flowering-tree',
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/351559976/original.jpg',
     imageLicense: 'CC0',
   },
@@ -42,6 +66,7 @@ export const SPECIES_CATALOG: Species[] = [
     type: 'plant',
     rarity: 'epic',
     biome: ['atlantic-forest'],
+    archetype: 'broadleaf-tree',
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/608953236/original.jpg',
     imageLicense: 'CC0',
   },
@@ -51,6 +76,7 @@ export const SPECIES_CATALOG: Species[] = [
     type: 'plant',
     rarity: 'epic',
     biome: ['atlantic-forest'],
+    archetype: 'emergent-tree',
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/693111344/original.jpg',
     imageLicense: 'CC-BY',
     imageAttribution: 'Marcio Santos Ferreira via GBIF, CC-BY',
@@ -61,6 +87,7 @@ export const SPECIES_CATALOG: Species[] = [
     type: 'plant',
     rarity: 'rare',
     biome: ['atlantic-forest'],
+    archetype: 'palm',
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/618457199/original.jpg',
     imageLicense: 'CC0',
   },
@@ -70,6 +97,7 @@ export const SPECIES_CATALOG: Species[] = [
     type: 'plant',
     rarity: 'rare',
     biome: ['atlantic-forest'],
+    archetype: 'broadleaf-tree',
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/637605683/original.jpg',
     imageLicense: 'CC-BY',
     imageAttribution: 'Fabrício Mil Homens Riella via GBIF, CC-BY',
@@ -80,6 +108,7 @@ export const SPECIES_CATALOG: Species[] = [
     type: 'plant',
     rarity: 'common',
     biome: ['atlantic-forest'],
+    archetype: 'flowering-tree',
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/610840682/original.jpg',
     imageLicense: 'CC0',
   },
@@ -89,6 +118,7 @@ export const SPECIES_CATALOG: Species[] = [
     type: 'plant',
     rarity: 'common',
     biome: ['atlantic-forest'],
+    archetype: 'pioneer-tree',
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/604863863/original.jpg',
     imageLicense: 'CC-BY',
     imageAttribution: 'Paulo C. O. Cunha via GBIF, CC-BY',
@@ -99,6 +129,7 @@ export const SPECIES_CATALOG: Species[] = [
     type: 'plant',
     rarity: 'rare',
     biome: ['atlantic-forest'],
+    archetype: 'pioneer-tree',
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/623371192/original.jpg',
     imageLicense: 'CC0',
   },
@@ -108,6 +139,7 @@ export const SPECIES_CATALOG: Species[] = [
     type: 'plant',
     rarity: 'common',
     biome: ['atlantic-forest'],
+    archetype: 'shrub',
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/605176859/original.jpg',
     imageLicense: 'CC0',
   },
@@ -119,6 +151,7 @@ export const SPECIES_CATALOG: Species[] = [
     type: 'animal',
     rarity: 'common',
     biome: ['atlantic-forest'],
+    archetype: 'primate',
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/605675307/original.jpg',
     imageLicense: 'CC-BY',
     imageAttribution: 'Paulo Nogueira via GBIF, CC-BY',
@@ -129,6 +162,7 @@ export const SPECIES_CATALOG: Species[] = [
     type: 'animal',
     rarity: 'common',
     biome: ['atlantic-forest'],
+    archetype: 'songbird',
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/604606426/original.jpg',
     imageLicense: 'CC0',
   },
@@ -138,6 +172,7 @@ export const SPECIES_CATALOG: Species[] = [
     type: 'animal',
     rarity: 'common',
     biome: ['atlantic-forest'],
+    archetype: 'small-mammal',
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/609708102/original.jpg',
     imageLicense: 'CC-BY',
     imageAttribution: 'Daniel Duarte via GBIF, CC-BY',
@@ -148,6 +183,7 @@ export const SPECIES_CATALOG: Species[] = [
     type: 'animal',
     rarity: 'rare',
     biome: ['atlantic-forest'],
+    archetype: 'large-bird',
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/610209843/original.jpg',
     imageLicense: 'CC0',
   },
@@ -157,6 +193,7 @@ export const SPECIES_CATALOG: Species[] = [
     type: 'animal',
     rarity: 'epic',
     biome: ['atlantic-forest'],
+    archetype: 'large-bird',
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/605144497/original.jpg',
     imageLicense: 'CC-BY',
     imageAttribution: 'Lucas Lopes via GBIF, CC-BY',
@@ -167,6 +204,7 @@ export const SPECIES_CATALOG: Species[] = [
     type: 'animal',
     rarity: 'rare',
     biome: ['atlantic-forest'],
+    archetype: 'mid-mammal',
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/605105456/original.jpg',
     imageLicense: 'CC0',
   },
@@ -176,6 +214,7 @@ export const SPECIES_CATALOG: Species[] = [
     type: 'animal',
     rarity: 'rare',
     biome: ['atlantic-forest'],
+    archetype: 'reptile',
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/604868901/original.jpg',
     imageLicense: 'CC0',
   },
@@ -185,6 +224,7 @@ export const SPECIES_CATALOG: Species[] = [
     type: 'animal',
     rarity: 'common',
     biome: ['atlantic-forest'],
+    archetype: 'songbird',
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/605467269/original.jpg',
     imageLicense: 'CC-BY',
     imageAttribution: 'Leonel Roget via GBIF, CC-BY',
@@ -195,6 +235,7 @@ export const SPECIES_CATALOG: Species[] = [
     type: 'animal',
     rarity: 'rare',
     biome: ['atlantic-forest'],
+    archetype: 'insect',
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/605967817/original.jpg',
     imageLicense: 'CC0',
   },
@@ -204,6 +245,7 @@ export const SPECIES_CATALOG: Species[] = [
     type: 'animal',
     rarity: 'common',
     biome: ['atlantic-forest'],
+    archetype: 'small-mammal',
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/605551029/original.jpg',
     imageLicense: 'CC-BY',
     imageAttribution: 'Pablo Bombín via GBIF, CC-BY',

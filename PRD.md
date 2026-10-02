@@ -34,6 +34,7 @@ Personal use by the creator. Validate the mechanic before thinking about externa
 - Single, integrated view of plants + animals (one "ecosystem").
 - Dedicated **Pokédex/collection** screen, listing everything collected so far (and what's missing).
 - The collection is **permanent** — nothing dies or decays after being collected.
+- Alternative **isometric garden** view (Forest-style): shows only what was collected in a chosen day / week / month; the grid stays as the full Pokédex. Ships with CC0 placeholder sprites, one per growth-form/body-plan archetype (not per species).
 
 ### 4.4 Species catalog
 - Static list of species (plants and animals), built from **GBIF** data (filtering to CC0/CC-BY licenses only, compatible with future commercial use).
@@ -43,6 +44,7 @@ Personal use by the creator. Validate the mechanic before thinking about externa
 - Notifications **off by default**, with an option to enable them (structure in place, no real notifications implemented in the MVP).
 - Language selector: English or Portuguese (Brazil), applied to both UI chrome and species names/descriptions.
 - Daily step goal is editable (default 6,000, adjustable in increments of 500).
+- Collection view toggle: grid ↔ isometric garden.
 
 ## 5. Out of scope (v1, but mapped for later)
 
@@ -56,7 +58,7 @@ Personal use by the creator. Validate the mechanic before thinking about externa
 | GPS / distance traveled | MVP uses step count only |
 | Perk for exceeding the daily step goal | Paulo wants some reward for walking past the configured goal, not just hitting it. Must NOT add a second Draw per day — that "max once/day" rule was a deliberate anti-farming decision (see CONTEXT.md's Draw entry). Leading candidate: scale that day's Draw rarity odds up the further past the goal you go, still capped at one Draw. Not designed or implemented yet |
 | Donating/planting a real tree as part of the reward | Backlog idea, not validated yet |
-| Isometric biome visualization | Replace (or complement) the Collection grid with an isometric garden scene where collected species are placed visually, Forest-app style — see `design-references/isometric-biome-example.png` for the look Paulo wants. Toggle in Settings to switch between grid and isometric view. Real art/asset pipeline needed (can't reuse the flat GBIF catalog photos for this), not designed yet |
+| Baked isometric garden art | The isometric garden itself is in v1 (§4.3). Still deferred: baked per-archetype sprites replacing the placeholders, and per-biome ground — see `design-references/isometric-biome-example.png` for the target look |
 | Web app (browser-accessible layout) | A way to check progress/collection from a browser, not just the installed Android app. Needs its own responsive layout (not a reuse of the mobile-first screens) and depends on the future backend for the data to sync anywhere — blocked on that item above |
 | Motivational quotes | Show a rotating motivational quote somewhere in the app. Off by default, toggle in Settings. Content (which quotes, source/licensing) not decided yet |
 

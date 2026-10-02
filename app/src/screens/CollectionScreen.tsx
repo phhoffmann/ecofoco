@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { CollectionGarden } from '../components/CollectionGarden'
 import { ManualSightingModal } from '../components/ManualSightingModal'
 import { SpeciesDetailModal } from '../components/SpeciesDetailModal'
 import { SPECIES_CATALOG, collectedCatalogSpeciesIds } from '../domain/species'
 import { useCollectionStore } from '../stores/collectionStore'
+import { useSettingsStore } from '../stores/settingsStore'
 
 export function CollectionScreen() {
   const { t } = useTranslation()
   const { entries, loaded, refresh } = useCollectionStore()
+  const collectionView = useSettingsStore((s) => s.collectionView)
   const [selectedSpeciesId, setSelectedSpeciesId] = useState<string | null>(null)
   const [showManualSighting, setShowManualSighting] = useState(false)
 
@@ -31,28 +34,32 @@ export function CollectionScreen() {
           {t('collection.logSighting')}
         </button>
       </div>
-      <div className="grid grid-cols-3 gap-3">
-        {SPECIES_CATALOG.map((species) => {
-          const isCollected = collectedSpeciesIds.has(species.id)
-          const name = t(`species.${species.id}.name`)
-          return (
-            <button
-              key={species.id}
-              disabled={!isCollected}
-              onClick={() => setSelectedSpeciesId(species.id)}
-              className="flex flex-col items-center gap-1 rounded-xl bg-emerald-900/50 p-2 text-center disabled:cursor-default"
-            >
-              <img
-                src={species.image}
-                alt={name}
-                className={`size-16 rounded-lg object-cover ${isCollected ? '' : 'brightness-0'}`}
-              />
-              <span className="text-xs text-emerald-100">{isCollected ? name : t('collection.unknown')}</span>
-            </button>
-          )
-        })}
-      </div>
-      {loaded && collectedSpeciesIds.size === 0 && (
+      {collectionView === 'isometric' ? (
+        <CollectionGarden entries={entries} onSelectSpecies={setSelectedSpeciesId} />
+      ) : (
+        <div className="grid grid-cols-3 gap-3">
+          {SPECIES_CATALOG.map((species) => {
+            const isCollected = collectedSpeciesIds.has(species.id)
+            const name = t(`species.${species.id}.name`)
+            return (
+              <button
+                key={species.id}
+                disabled={!isCollected}
+                onClick={() => setSelectedSpeciesId(species.id)}
+                className="flex flex-col items-center gap-1 rounded-xl bg-emerald-900/50 p-2 text-center disabled:cursor-default"
+              >
+                <img
+                  src={species.image}
+                  alt={name}
+                  className={`size-16 rounded-lg object-cover ${isCollected ? '' : 'brightness-0'}`}
+                />
+                <span className="text-xs text-emerald-100">{isCollected ? name : t('collection.unknown')}</span>
+              </button>
+            )
+          })}
+        </div>
+      )}
+      {collectionView === 'grid' && loaded && collectedSpeciesIds.size === 0 && (
         <p className="mt-8 text-center text-sm text-emerald-400">{t('collection.empty')}</p>
       )}
 

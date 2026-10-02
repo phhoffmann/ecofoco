@@ -7,6 +7,8 @@ const {
   setLanguage,
   getStepGoal,
   setStepGoal,
+  getCollectionView,
+  setCollectionView,
   changeLanguage,
 } = vi.hoisted(() => ({
   getNotificationsEnabled: vi.fn(),
@@ -15,6 +17,8 @@ const {
   setLanguage: vi.fn().mockResolvedValue(undefined),
   getStepGoal: vi.fn(),
   setStepGoal: vi.fn().mockResolvedValue(undefined),
+  getCollectionView: vi.fn(),
+  setCollectionView: vi.fn().mockResolvedValue(undefined),
   changeLanguage: vi.fn().mockResolvedValue(undefined),
 }))
 vi.mock('../data/settingsRepo', () => ({
@@ -24,6 +28,8 @@ vi.mock('../data/settingsRepo', () => ({
   setLanguage,
   getStepGoal,
   setStepGoal,
+  getCollectionView,
+  setCollectionView,
 }))
 vi.mock('i18next', () => ({ default: { changeLanguage } }))
 
@@ -37,14 +43,23 @@ describe('settingsStore', () => {
     setLanguage.mockClear()
     getStepGoal.mockReset().mockResolvedValue(6000)
     setStepGoal.mockClear()
+    getCollectionView.mockReset().mockResolvedValue('grid')
+    setCollectionView.mockClear()
     changeLanguage.mockClear()
-    useSettingsStore.setState({ notificationsEnabled: false, language: 'en', stepGoal: 6000, loaded: false })
+    useSettingsStore.setState({
+      notificationsEnabled: false,
+      language: 'en',
+      stepGoal: 6000,
+      collectionView: 'grid',
+      loaded: false,
+    })
   })
 
-  it('load() reads the persisted flag, language, and step goal, and marks the store as loaded', async () => {
+  it('load() reads the persisted flag, language, step goal, and collection view, and marks the store as loaded', async () => {
     getNotificationsEnabled.mockResolvedValue(true)
     getLanguage.mockResolvedValue('pt-BR')
     getStepGoal.mockResolvedValue(8000)
+    getCollectionView.mockResolvedValue('isometric')
 
     await useSettingsStore.getState().load()
 
@@ -52,6 +67,7 @@ describe('settingsStore', () => {
     expect(state.notificationsEnabled).toBe(true)
     expect(state.language).toBe('pt-BR')
     expect(state.stepGoal).toBe(8000)
+    expect(state.collectionView).toBe('isometric')
     expect(state.loaded).toBe(true)
     expect(changeLanguage).toHaveBeenCalledWith('pt-BR')
   })
@@ -76,5 +92,12 @@ describe('settingsStore', () => {
 
     expect(setStepGoal).toHaveBeenCalledWith(8000)
     expect(useSettingsStore.getState().stepGoal).toBe(8000)
+  })
+
+  it('setCollectionView() persists and updates the view', async () => {
+    await useSettingsStore.getState().setCollectionView('isometric')
+
+    expect(setCollectionView).toHaveBeenCalledWith('isometric')
+    expect(useSettingsStore.getState().collectionView).toBe('isometric')
   })
 })

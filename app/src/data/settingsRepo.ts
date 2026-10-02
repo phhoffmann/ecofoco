@@ -1,10 +1,11 @@
 import { DEFAULT_LOCALE, type Locale } from '../i18n/locale'
-import { DEFAULT_STEP_GOAL } from '../domain/types'
+import { DEFAULT_COLLECTION_VIEW, DEFAULT_STEP_GOAL, type CollectionView } from '../domain/types'
 import { getDb } from './db'
 
 const NOTIFICATIONS_ENABLED_KEY = 'notificationsEnabled'
 const LANGUAGE_KEY = 'language'
 const STEP_GOAL_KEY = 'stepGoal'
+const COLLECTION_VIEW_KEY = 'collectionView'
 
 async function getSetting(key: string): Promise<string | undefined> {
   const db = await getDb()
@@ -46,4 +47,13 @@ export async function getStepGoal(): Promise<number> {
 
 export async function setStepGoal(stepGoal: number): Promise<void> {
   await setSetting(STEP_GOAL_KEY, String(stepGoal))
+}
+
+export async function getCollectionView(): Promise<CollectionView> {
+  const value = await getSetting(COLLECTION_VIEW_KEY)
+  return value === 'grid' || value === 'isometric' ? value : DEFAULT_COLLECTION_VIEW
+}
+
+export async function setCollectionView(view: CollectionView): Promise<void> {
+  await setSetting(COLLECTION_VIEW_KEY, view)
 }
