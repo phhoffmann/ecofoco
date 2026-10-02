@@ -58,7 +58,8 @@ jobs:
 
       - name: Assemble debug APK
         working-directory: app/android
-        run: ./gradlew assembleDebug --no-daemon
+        # gradle.properties pins a local JDK path; point Gradle at the runner's JDK instead
+        run: ./gradlew assembleDebug --no-daemon -Dorg.gradle.java.home="$JAVA_HOME"
 
       - name: Locate merged manifest
         id: manifest
