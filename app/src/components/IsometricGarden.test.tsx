@@ -107,4 +107,16 @@ describe('IsometricGarden', () => {
     act(() => button.click())
     expect(onSelect).toHaveBeenCalledWith('quati')
   })
+
+  it('keeps the newest entries when the plot overflows', () => {
+    const later = Array.from({ length: 64 }, (_, i) =>
+      entry(`n${i}`, 'ipe-amarelo', new Date(Date.UTC(2026, 9, 2, 11, i)).toISOString()),
+    )
+    render([...later, entry('oldest', 'quati', '2026-10-02T10:00:00.000Z')], vi.fn())
+
+    const names = [...container.querySelectorAll('ul button')].map((b) => b.textContent)
+    expect(names).toHaveLength(64)
+    expect(names).not.toContain('South American Coati')
+    expect(container.textContent).toContain('+1 more not shown')
+  })
 })

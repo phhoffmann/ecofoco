@@ -95,17 +95,19 @@ export interface Placement<T> extends TilePos {
 export interface PlotLayout<T> {
   plotSize: number
   placements: Placement<T>[]
-  /** Items that did not fit on the largest plot. */
+  /** Earliest items that did not fit on the largest plot. */
   overflow: number
 }
 
 /**
  * Places items onto a bounded plot, one per tile, in the given order. Earlier items keep their
- * tile when more are appended (as long as the plot size doesn't change).
+ * tile when more are appended (as long as the plot size doesn't change). When the largest plot is
+ * full, the earliest items are dropped so the latest ones stay visible.
  */
 export function placeOnPlot<T>(items: readonly T[]): PlotLayout<T> {
   const plotSize = plotSizeFor(items.length)
   const order = tileFillOrder(plotSize)
-  const placements = items.slice(0, order.length).map((item, i) => ({ item, ...order[i] }))
-  return { plotSize, placements, overflow: Math.max(0, items.length - order.length) }
+  const overflow = Math.max(0, items.length - order.length)
+  const placements = items.slice(overflow).map((item, i) => ({ item, ...order[i] }))
+  return { plotSize, placements, overflow }
 }

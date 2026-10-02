@@ -159,4 +159,9 @@ describe('placeOnPlot', () => {
     expect(layout.placements).toHaveLength(64)
     expect(layout.overflow).toBe(6)
   })
+
+  it('drops the earliest items on overflow so the latest stay on the plot', () => {
+    const layout = placeOnPlot(Array.from({ length: 70 }, (_, i) => i))
+    expect(layout.placements.map((p) => p.item)).toEqual(Array.from({ length: 64 }, (_, i) => i + 6))
+  })
 })
