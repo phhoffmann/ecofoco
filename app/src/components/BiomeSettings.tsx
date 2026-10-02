@@ -107,7 +107,10 @@ export function BiomeSettings() {
       >
         {detecting ? t('biomeSetup.detecting') : t('settings.biome.redetect')}
       </button>
-      {result && (
+      {result?.outcome === 'unavailable' && (
+        <p className="mt-2 text-sm text-emerald-200">{t('settings.biome.redetectUnavailable')}</p>
+      )}
+      {result && result.outcome !== 'unavailable' && (
         <div className="mt-2 space-y-2">
           <DetectResultMessage result={result} />
           {result.outcome !== 'detected' && (

@@ -34,7 +34,7 @@ interface BiomeState {
   load: () => Promise<void>
   /** Coarse location → Biome. Sets it as home only when it is playable; otherwise the caller offers the picker. */
   detectHome: () => Promise<DetectResult>
-  /** Home from detection or the manual picker. Free, starts unlocked, and becomes the current Biome. */
+  /** Home from detection or the manual picker. Free and unlocked; the first home also becomes current. A former home stays unlocked. */
   setHome: (biome: BiomeId) => Promise<void>
   unlock: (biome: BiomeId) => Promise<boolean>
   switchTo: (biome: BiomeId) => Promise<boolean>
@@ -109,17 +109,31 @@ export const useBiomeStore = create<BiomeState>((set, get) => ({
 
   setHome: async (biome) => {
     if (!hasCatalog(biome)) return
+    const { homeBiome: previous, purchased } = get()
+    if (previous && previous !== biome && !purchased.includes(previous)) {
+      await addBiomeUnlock(previous, 0)
+      set((s) => ({ purchased: [...s.purchased, previous] }))
+    }
     await setHomeBiome(biome)
-    await setCurrentBiome(biome)
-    set({ homeBiome: biome, currentBiome: biome })
+    if (!previous) {
+      await setCurrentBiome(biome)
+      set({ homeBiome: biome, currentBiome: biome })
+    } else {
+      set({ homeBiome: biome })
+    }
   },
 
   unlock: async (biome) => {
     const progress = selectBiomeProgress(get())
     if (!progress || !canUnlock(biome, progress)) return false
-    await addBiomeUnlock(biome, NEIGHBOUR_UNLOCK_COST)
     set((s) => ({ purchased: [...s.purchased, biome], spent: s.spent + NEIGHBOUR_UNLOCK_COST }))
-    return true
+    try {
+      await addBiomeUnlock(biome, NEIGHBOUR_UNLOCK_COST)
+      return true
+    } catch {
+      set((s) => ({ purchased: s.purchased.filter((b) => b !== biome), spent: s.spent - NEIGHBOUR_UNLOCK_COST }))
+      return false
+    }
   },
 
   switchTo: async (biome) => {

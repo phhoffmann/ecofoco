@@ -113,6 +113,7 @@ export const en = {
       locked: 'Locked',
       comingSoon: 'Coming soon',
       redetect: 'Re-detect from location',
+      redetectUnavailable: "Couldn't get your location. Your home biome is unchanged.",
     },
     credits: {
       title: 'Credits',

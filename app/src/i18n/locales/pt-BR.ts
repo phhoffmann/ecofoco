@@ -115,6 +115,7 @@ export const ptBR: typeof en = {
       locked: 'Bloqueado',
       comingSoon: 'Em breve',
       redetect: 'Detectar de novo pela localização',
+      redetectUnavailable: 'Não foi possível obter sua localização. Seu bioma de casa não mudou.',
     },
     credits: {
       title: 'Créditos',

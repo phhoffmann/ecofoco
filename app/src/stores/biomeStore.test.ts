@@ -118,14 +118,45 @@ describe('biomeStore', () => {
   })
 
   describe('setHome', () => {
-    it('makes the new home current, and a former free home no longer unlocked', async () => {
+    it('makes the first home current', async () => {
+      await loadWith({ home: null })
+      await useBiomeStore.getState().setHome('caatinga')
+
+      expect(mocks.setCurrentBiome).toHaveBeenCalledWith('caatinga')
+      expect(selectBiomeProgress(useBiomeStore.getState())).toMatchObject({ home: 'caatinga', current: 'caatinga' })
+      expect(mocks.addBiomeUnlock).not.toHaveBeenCalled()
+    })
+
+    it('keeps a former home unlocked as a free unlock and leaves the current biome unchanged', async () => {
       await loadWith({ home: 'atlantic-forest' })
       await useBiomeStore.getState().setHome('caatinga')
 
-      const progress = selectBiomeProgress(useBiomeStore.getState())!
-      expect(progress.home).toBe('caatinga')
-      expect(progress.current).toBe('caatinga')
-      expect(progress.purchased).toEqual([])
+      expect(mocks.addBiomeUnlock).toHaveBeenCalledWith('atlantic-forest', 0)
+      expect(mocks.setCurrentBiome).not.toHaveBeenCalled()
+      expect(selectBiomeProgress(useBiomeStore.getState())).toEqual({
+        home: 'caatinga',
+        current: 'atlantic-forest',
+        purchased: ['atlantic-forest'],
+        balance: 0,
+      })
+    })
+
+    it('does not refund or re-record a home that was already unlocked', async () => {
+      await loadWith({
+        home: 'atlantic-forest',
+        sessions: 10,
+        unlocks: [{ biomeId: 'caatinga', cost: 100 }],
+      })
+      await useBiomeStore.getState().setHome('caatinga')
+      await useBiomeStore.getState().setHome('atlantic-forest')
+
+      expect(mocks.addBiomeUnlock).toHaveBeenCalledTimes(1)
+      expect(mocks.addBiomeUnlock).toHaveBeenCalledWith('atlantic-forest', 0)
+      expect(selectBiomeProgress(useBiomeStore.getState())).toMatchObject({
+        home: 'atlantic-forest',
+        purchased: ['caatinga', 'atlantic-forest'],
+        balance: 0,
+      })
     })
 
     it('ignores biomes without a catalog', async () => {
@@ -143,6 +174,31 @@ describe('biomeStore', () => {
       const progress = selectBiomeProgress(useBiomeStore.getState())!
       expect(progress.purchased).toEqual(['caatinga'])
       expect(progress.balance).toBe(0)
+    })
+
+    it('buys at most once under concurrent calls and never overspends', async () => {
+      await loadWith({ home: 'cerrado', sessions: 10 })
+      let finish!: () => void
+      mocks.addBiomeUnlock.mockReturnValueOnce(new Promise<void>((resolve) => (finish = resolve)))
+
+      const calls = [
+        useBiomeStore.getState().unlock('caatinga'),
+        useBiomeStore.getState().unlock('caatinga'),
+        useBiomeStore.getState().unlock('atlantic-forest'),
+      ]
+      finish()
+
+      expect(await Promise.all(calls)).toEqual([true, false, false])
+      expect(mocks.addBiomeUnlock).toHaveBeenCalledTimes(1)
+      expect(selectBiomeProgress(useBiomeStore.getState())!.balance).toBe(0)
+    })
+
+    it('rolls back when saving the unlock fails', async () => {
+      await loadWith({ sessions: 10 })
+      mocks.addBiomeUnlock.mockRejectedValueOnce(new Error('disk full'))
+
+      expect(await useBiomeStore.getState().unlock('caatinga')).toBe(false)
+      expect(selectBiomeProgress(useBiomeStore.getState())).toMatchObject({ purchased: [], balance: 100 })
     })
 
     it('refuses when the balance is short', async () => {
