@@ -52,6 +52,11 @@ export const ptBR: typeof en = {
     discovered: '{{count}} / {{total}} espécies descobertas',
     logSighting: '+ Registrar avistamento',
     unknown: '???',
+    view: {
+      label: 'Visualização da coleção',
+      grid: 'Grade',
+      isometric: 'Jardim',
+    },
     empty: 'Complete uma sessão de foco para coletar sua primeira espécie.',
     garden: {
       periods: {
@@ -78,12 +83,10 @@ export const ptBR: typeof en = {
     stepGoal: 'Meta diária de passos',
     stepGoalHint: 'Passos necessários pra liberar o sorteio de animal do dia',
     stepGoalValue: '{{count}} passos',
-    collectionView: 'Visualização da coleção',
-    collectionViewHint: 'A grade completa de espécies, ou um jardim do que você coletou em um período',
-    collectionViewOptions: {
-      grid: 'Grade',
-      isometric: 'Jardim',
-    },
+  },
+  celebration: {
+    title: 'Você coletou!',
+    tapToContinue: 'Toque para continuar',
   },
   speciesDetail: {
     method: {
@@ -93,6 +96,7 @@ export const ptBR: typeof en = {
       photo_ai: 'Identificação por foto',
     },
     history: 'Histórico de coletas ({{count}})',
+    firstCollected: 'Coletado pela primeira vez em {{date}}',
     photoCredit: 'Foto: {{credit}}',
   },
   manualSighting: {

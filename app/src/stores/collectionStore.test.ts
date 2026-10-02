@@ -5,7 +5,9 @@ const { listCollectedEntries, addCollectedEntry } = vi.hoisted(() => ({
   addCollectedEntry: vi.fn().mockResolvedValue({ id: 'entry-1' }),
 }))
 vi.mock('../data/collectionRepo', () => ({ listCollectedEntries, addCollectedEntry }))
+vi.mock('../data/haptics', () => ({ lightHaptic: vi.fn() }))
 
+import { useCelebrationStore } from './celebrationStore'
 import { useCollectionStore } from './collectionStore'
 
 describe('collectionStore', () => {
@@ -13,6 +15,7 @@ describe('collectionStore', () => {
     listCollectedEntries.mockReset()
     addCollectedEntry.mockClear()
     useCollectionStore.setState({ entries: [], loaded: false })
+    useCelebrationStore.setState({ species: null })
   })
 
   it('refresh() loads entries from the repository and marks the store as loaded', async () => {
@@ -38,5 +41,21 @@ describe('collectionStore', () => {
     expect(addCollectedEntry).toHaveBeenCalledWith('jatoba', 'manual_sighting')
     expect(useCollectionStore.getState().entries).toEqual(entries)
     expect(useCollectionStore.getState().loaded).toBe(true)
+  })
+
+  it('logManualSighting() celebrates the sighted catalog species', async () => {
+    listCollectedEntries.mockResolvedValue([])
+
+    await useCollectionStore.getState().logManualSighting('ipe-amarelo')
+
+    expect(useCelebrationStore.getState().species?.id).toBe('ipe-amarelo')
+  })
+
+  it('logManualSighting() skips the celebration for an id missing from the catalog', async () => {
+    listCollectedEntries.mockResolvedValue([])
+
+    await useCollectionStore.getState().logManualSighting('jatoba')
+
+    expect(useCelebrationStore.getState().species).toBeNull()
   })
 })

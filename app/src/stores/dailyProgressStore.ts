@@ -12,6 +12,7 @@ import { canDraw } from '../domain/dailyProgress'
 import { pickRandomSpecies } from '../domain/draw'
 import type { Species } from '../domain/species'
 import type { DailyProgress } from '../domain/types'
+import { useCelebrationStore } from './celebrationStore'
 import { useSettingsStore } from './settingsStore'
 
 interface DailyProgressState {
@@ -75,6 +76,7 @@ export const useDailyProgressStore = create<DailyProgressState>((set, get) => ({
     await markDrawCompleted()
     const updated = await getTodayProgress()
     set({ progress: updated, resultSpecies: species })
+    useCelebrationStore.getState().celebrate(species)
   },
 
   clearResult: () => set({ resultSpecies: null }),

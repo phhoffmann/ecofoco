@@ -1,4 +1,4 @@
-import { useMemo, type MouseEvent } from 'react'
+import { useMemo, useState, type MouseEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { depthSort, pickTile, placeOnPlot, tileCenter, tileNoise, tileToScreen, type TilePos } from '../domain/iso'
 import { SPECIES_CATALOG, type Species } from '../domain/species'
@@ -37,6 +37,7 @@ interface IsometricGardenProps {
 
 export function IsometricGarden({ entries, onSelectSpecies }: IsometricGardenProps) {
   const { t } = useTranslation()
+  const [poppedKey, setPoppedKey] = useState<string | null>(null)
 
   const layout = useMemo(() => {
     const items = [...entries]
@@ -83,7 +84,9 @@ export function IsometricGarden({ entries, onSelectSpecies }: IsometricGardenPro
     const tile = pickTile(point, TILE, size)
     if (!tile) return
     const hit = layout.placements.find((p) => p.col === tile.col && p.row === tile.row)
-    if (hit) onSelectSpecies(hit.item.species.id)
+    if (!hit) return
+    setPoppedKey(hit.item.entry.id)
+    onSelectSpecies(hit.item.species.id)
   }
 
   const at = (x: number, y: number) => `${origin.x + x},${origin.y + y}`
@@ -146,13 +149,20 @@ export function IsometricGarden({ entries, onSelectSpecies }: IsometricGardenPro
                 zIndex: i + 1,
               }}
             >
-              <img
-                src={s.sprite.src}
-                alt=""
-                draggable={false}
-                className={`block w-full ${s.sprite.motion === 'none' ? '' : `garden-${s.sprite.motion}`}`}
-                style={{ animationDelay: `${-tileNoise(s) * 4}s` }}
-              />
+              <div
+                className={s.key === poppedKey ? 'garden-pop' : undefined}
+                onAnimationEnd={(e) => {
+                  if (e.target === e.currentTarget) setPoppedKey(null)
+                }}
+              >
+                <img
+                  src={s.sprite.src}
+                  alt=""
+                  draggable={false}
+                  className={`block w-full ${s.sprite.motion === 'none' ? '' : `garden-${s.sprite.motion}`}`}
+                  style={{ animationDelay: `${-tileNoise(s) * 4}s` }}
+                />
+              </div>
             </div>
           )
         })}

@@ -42,7 +42,9 @@ vi.mock('../data/stepProvider', () => ({
   writeTestSteps: vi.fn(),
 }))
 vi.mock('../domain/draw', () => ({ pickRandomSpecies: vi.fn(() => mockSpecies) }))
+vi.mock('../data/haptics', () => ({ lightHaptic: vi.fn() }))
 
+import { useCelebrationStore } from './celebrationStore'
 import { useDailyProgressStore } from './dailyProgressStore'
 
 const idleProgress = { date: '2026-09-10', steps: 0, goalMet: false, drawCompleted: false }
@@ -65,6 +67,7 @@ describe('dailyProgressStore', () => {
       loading: false,
       error: null,
     })
+    useCelebrationStore.setState({ species: null })
   })
 
   it('refresh() falls back to stored progress when Health Connect is unavailable', async () => {
@@ -122,6 +125,7 @@ describe('dailyProgressStore', () => {
 
     expect(addCollectedEntry).not.toHaveBeenCalled()
     expect(markDrawCompleted).not.toHaveBeenCalled()
+    expect(useCelebrationStore.getState().species).toBeNull()
   })
 
   it('draw() is a no-op when today\'s draw is already completed', async () => {
@@ -144,5 +148,6 @@ describe('dailyProgressStore', () => {
     const state = useDailyProgressStore.getState()
     expect(state.resultSpecies).toEqual(mockSpecies)
     expect(state.progress).toEqual(afterDraw)
+    expect(useCelebrationStore.getState().species).toEqual(mockSpecies)
   })
 })
