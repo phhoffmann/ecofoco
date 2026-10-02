@@ -35,6 +35,9 @@ export function earnedPoints(completedFocusSessions: number, stepGoalDaysMet: nu
   return completedFocusSessions * FOCUS_SESSION_POINTS + stepGoalDaysMet * STEP_GOAL_POINTS
 }
 
+/** A detected home is where the user lives; a picked one is a stand-in that does not stay unlocked once replaced. */
+export type HomeBiomeSource = 'detected' | 'picked'
+
 /** Where the user stands with Biomes: home (detected or picked) plus Biomes bought with points. */
 export interface BiomeProgress {
   home: BiomeId

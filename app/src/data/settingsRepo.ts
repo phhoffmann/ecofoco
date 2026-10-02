@@ -1,4 +1,4 @@
-import { isBiomeId, type BiomeId } from '../domain/biome'
+import { isBiomeId, type BiomeId, type HomeBiomeSource } from '../domain/biome'
 import { DEFAULT_LOCALE, type Locale } from '../i18n/locale'
 import { DEFAULT_COLLECTION_VIEW, DEFAULT_STEP_GOAL, type CollectionView } from '../domain/types'
 import { getDb } from './db'
@@ -9,6 +9,7 @@ const STEP_GOAL_KEY = 'stepGoal'
 const COLLECTION_VIEW_KEY = 'collectionView'
 const HOME_BIOME_KEY = 'homeBiome'
 const CURRENT_BIOME_KEY = 'currentBiome'
+const HOME_BIOME_SOURCE_KEY = 'homeBiomeSource'
 
 async function getSetting(key: string): Promise<string | undefined> {
   const db = await getDb()
@@ -67,8 +68,14 @@ export async function getHomeBiome(): Promise<BiomeId | null> {
   return isBiomeId(value) ? value : null
 }
 
-export async function setHomeBiome(biome: BiomeId): Promise<void> {
+export async function setHomeBiome(biome: BiomeId, source: HomeBiomeSource): Promise<void> {
   await setSetting(HOME_BIOME_KEY, biome)
+  await setSetting(HOME_BIOME_SOURCE_KEY, source)
+}
+
+/** How the home Biome was set. Installs from before this setting count as 'picked'. */
+export async function getHomeBiomeSource(): Promise<HomeBiomeSource> {
+  return (await getSetting(HOME_BIOME_SOURCE_KEY)) === 'detected' ? 'detected' : 'picked'
 }
 
 export async function getCurrentBiome(): Promise<BiomeId | null> {

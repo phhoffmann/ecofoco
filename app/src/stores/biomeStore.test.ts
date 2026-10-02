@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 const mocks = vi.hoisted(() => ({
   getHomeBiome: vi.fn(),
   setHomeBiome: vi.fn().mockResolvedValue(undefined),
+  getHomeBiomeSource: vi.fn(),
   getCurrentBiome: vi.fn(),
   setCurrentBiome: vi.fn().mockResolvedValue(undefined),
   listBiomeUnlocks: vi.fn(),
@@ -16,6 +17,7 @@ const mocks = vi.hoisted(() => ({
 vi.mock('../data/settingsRepo', () => ({
   getHomeBiome: mocks.getHomeBiome,
   setHomeBiome: mocks.setHomeBiome,
+  getHomeBiomeSource: mocks.getHomeBiomeSource,
   getCurrentBiome: mocks.getCurrentBiome,
   setCurrentBiome: mocks.setCurrentBiome,
 }))
@@ -34,18 +36,21 @@ import { activeBiome, selectBiomeProgress, useBiomeStore } from './biomeStore'
 
 async function loadWith({
   home = 'atlantic-forest',
+  source = 'picked',
   current = null,
   unlocks = [],
   sessions = 0,
   goalDays = 0,
 }: {
   home?: string | null
+  source?: string
   current?: string | null
   unlocks?: { biomeId: string; cost: number }[]
   sessions?: number
   goalDays?: number
 } = {}) {
   mocks.getHomeBiome.mockResolvedValue(home)
+  mocks.getHomeBiomeSource.mockResolvedValue(source)
   mocks.getCurrentBiome.mockResolvedValue(current)
   mocks.listBiomeUnlocks.mockResolvedValue(unlocks.map((u) => ({ ...u, unlockedAt: '2026-10-01T00:00:00.000Z' })))
   mocks.countCompletedFocusSessions.mockResolvedValue(sessions)
@@ -56,7 +61,7 @@ async function loadWith({
 describe('biomeStore', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    useBiomeStore.setState({ homeBiome: null, currentBiome: null, purchased: [], earned: 0, spent: 0, loaded: false })
+    useBiomeStore.setState({ homeBiome: null, homeSource: 'picked', currentBiome: null, purchased: [], earned: 0, spent: 0, loaded: false })
   })
 
   describe('load', () => {
@@ -93,7 +98,7 @@ describe('biomeStore', () => {
       mocks.biomeAt.mockReturnValue('caatinga')
 
       expect(await useBiomeStore.getState().detectHome()).toEqual({ outcome: 'detected', biome: 'caatinga' })
-      expect(mocks.setHomeBiome).toHaveBeenCalledWith('caatinga')
+      expect(mocks.setHomeBiome).toHaveBeenCalledWith('caatinga', 'detected')
       expect(mocks.setCurrentBiome).toHaveBeenCalledWith('caatinga')
       expect(JSON.stringify(useBiomeStore.getState())).not.toContain('-9.39')
     })
@@ -127,9 +132,11 @@ describe('biomeStore', () => {
       expect(mocks.addBiomeUnlock).not.toHaveBeenCalled()
     })
 
-    it('keeps a former home unlocked as a free unlock and leaves the current biome unchanged', async () => {
-      await loadWith({ home: 'atlantic-forest' })
-      await useBiomeStore.getState().setHome('caatinga')
+    it('keeps a former detected home unlocked as a free unlock and leaves the current biome unchanged', async () => {
+      await loadWith({ home: 'atlantic-forest', source: 'detected' })
+      mocks.getApproximatePosition.mockResolvedValue({ lat: -8.05, lng: -34.9 })
+      mocks.biomeAt.mockReturnValue('caatinga')
+      await useBiomeStore.getState().detectHome()
 
       expect(mocks.addBiomeUnlock).toHaveBeenCalledWith('atlantic-forest', 0)
       expect(mocks.setCurrentBiome).not.toHaveBeenCalled()
@@ -144,11 +151,12 @@ describe('biomeStore', () => {
     it('does not refund or re-record a home that was already unlocked', async () => {
       await loadWith({
         home: 'atlantic-forest',
+        source: 'detected',
         sessions: 10,
         unlocks: [{ biomeId: 'caatinga', cost: 100 }],
       })
-      await useBiomeStore.getState().setHome('caatinga')
-      await useBiomeStore.getState().setHome('atlantic-forest')
+      await useBiomeStore.getState().setHome('caatinga', 'detected')
+      await useBiomeStore.getState().setHome('atlantic-forest', 'detected')
 
       expect(mocks.addBiomeUnlock).toHaveBeenCalledTimes(1)
       expect(mocks.addBiomeUnlock).toHaveBeenCalledWith('atlantic-forest', 0)
@@ -157,6 +165,34 @@ describe('biomeStore', () => {
         purchased: ['caatinga', 'atlantic-forest'],
         balance: 0,
       })
+    })
+
+    it('does not keep a picked home unlocked once replaced (coming-soon user in Brasília)', async () => {
+      mocks.getApproximatePosition.mockResolvedValue({ lat: -15.8, lng: -47.9 })
+      mocks.biomeAt.mockReturnValue('cerrado')
+      await loadWith({ home: null })
+
+      expect(await useBiomeStore.getState().detectHome()).toEqual({ outcome: 'coming-soon', biome: 'cerrado' })
+      await useBiomeStore.getState().setHome('atlantic-forest')
+      expect(await useBiomeStore.getState().detectHome()).toEqual({ outcome: 'coming-soon', biome: 'cerrado' })
+      await useBiomeStore.getState().setHome('caatinga')
+
+      expect(mocks.addBiomeUnlock).not.toHaveBeenCalled()
+      expect(mocks.setHomeBiome).toHaveBeenLastCalledWith('caatinga', 'picked')
+      expect(selectBiomeProgress(useBiomeStore.getState())).toEqual({
+        home: 'caatinga',
+        current: 'caatinga',
+        purchased: [],
+        balance: 0,
+      })
+    })
+
+    it('treats a home stored before its source was recorded as picked', async () => {
+      await loadWith({ home: 'atlantic-forest', current: 'atlantic-forest' })
+      await useBiomeStore.getState().setHome('caatinga', 'detected')
+
+      expect(mocks.addBiomeUnlock).not.toHaveBeenCalled()
+      expect(activeBiome()).toBe('caatinga')
     })
 
     it('ignores biomes without a catalog', async () => {

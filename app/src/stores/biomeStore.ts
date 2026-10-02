@@ -4,7 +4,7 @@ import { countStepGoalDaysMet } from '../data/dailyProgressRepo'
 import { loadEcoregionGrid } from '../data/ecoregionGrid'
 import { countCompletedFocusSessions } from '../data/focusSessionRepo'
 import { getApproximatePosition } from '../data/location'
-import { getCurrentBiome, getHomeBiome, setCurrentBiome, setHomeBiome } from '../data/settingsRepo'
+import { getCurrentBiome, getHomeBiome, getHomeBiomeSource, setCurrentBiome, setHomeBiome } from '../data/settingsRepo'
 import {
   FALLBACK_BIOME,
   NEIGHBOUR_UNLOCK_COST,
@@ -15,6 +15,7 @@ import {
   unlockedBiomes,
   type BiomeId,
   type BiomeProgress,
+  type HomeBiomeSource,
 } from '../domain/biome'
 import { biomeAt } from '../domain/biomeLookup'
 
@@ -26,6 +27,7 @@ export type DetectResult =
 
 interface BiomeState {
   homeBiome: BiomeId | null
+  homeSource: HomeBiomeSource
   currentBiome: BiomeId | null
   purchased: BiomeId[]
   earned: number
@@ -34,8 +36,8 @@ interface BiomeState {
   load: () => Promise<void>
   /** Coarse location → Biome. Sets it as home only when it is playable; otherwise the caller offers the picker. */
   detectHome: () => Promise<DetectResult>
-  /** Home from detection or the manual picker. Free and unlocked; the first home also becomes current. A former home stays unlocked. */
-  setHome: (biome: BiomeId) => Promise<void>
+  /** Home from detection or the manual picker. Free and unlocked; the first home also becomes current. A former detected home stays unlocked. */
+  setHome: (biome: BiomeId, source?: HomeBiomeSource) => Promise<void>
   unlock: (biome: BiomeId) => Promise<boolean>
   switchTo: (biome: BiomeId) => Promise<boolean>
 }
@@ -64,6 +66,7 @@ export function useActiveBiome(): BiomeId {
 
 export const useBiomeStore = create<BiomeState>((set, get) => ({
   homeBiome: null,
+  homeSource: 'picked',
   currentBiome: null,
   purchased: [],
   earned: 0,
@@ -71,8 +74,9 @@ export const useBiomeStore = create<BiomeState>((set, get) => ({
   loaded: false,
 
   load: async () => {
-    const [homeBiome, storedCurrent, unlocks, sessions, goalDays] = await Promise.all([
+    const [homeBiome, homeSource, storedCurrent, unlocks, sessions, goalDays] = await Promise.all([
       getHomeBiome(),
+      getHomeBiomeSource(),
       getCurrentBiome(),
       listBiomeUnlocks(),
       countCompletedFocusSessions(),
@@ -84,6 +88,7 @@ export const useBiomeStore = create<BiomeState>((set, get) => ({
       storedCurrent && unlocked.has(storedCurrent) && hasCatalog(storedCurrent) ? storedCurrent : homeBiome
     set({
       homeBiome,
+      homeSource,
       currentBiome,
       purchased,
       earned: earnedPoints(sessions, goalDays),
@@ -103,23 +108,24 @@ export const useBiomeStore = create<BiomeState>((set, get) => ({
     }
     if (biome === 'unsupported') return { outcome: 'unsupported' }
     if (!hasCatalog(biome)) return { outcome: 'coming-soon', biome }
-    await get().setHome(biome)
+    await get().setHome(biome, 'detected')
     return { outcome: 'detected', biome }
   },
 
-  setHome: async (biome) => {
+  setHome: async (biome, source = 'picked') => {
     if (!hasCatalog(biome)) return
-    const { homeBiome: previous, purchased } = get()
-    if (previous && previous !== biome && !purchased.includes(previous)) {
+    const { homeBiome: previous, homeSource, purchased, currentBiome } = get()
+    if (previous && previous !== biome && homeSource === 'detected' && !purchased.includes(previous)) {
       await addBiomeUnlock(previous, 0)
       set((s) => ({ purchased: [...s.purchased, previous] }))
     }
-    await setHomeBiome(biome)
-    if (!previous) {
-      await setCurrentBiome(biome)
-      set({ homeBiome: biome, currentBiome: biome })
+    await setHomeBiome(biome, source)
+    const keepsCurrent = currentBiome && unlockedBiomes({ home: biome, purchased: get().purchased }).has(currentBiome)
+    if (keepsCurrent) {
+      set({ homeBiome: biome, homeSource: source })
     } else {
-      set({ homeBiome: biome })
+      await setCurrentBiome(biome)
+      set({ homeBiome: biome, homeSource: source, currentBiome: biome })
     }
   },
 

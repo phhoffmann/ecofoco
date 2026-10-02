@@ -7,6 +7,7 @@ import {
   getCollectionView,
   getCurrentBiome,
   getHomeBiome,
+  getHomeBiomeSource,
   getNotificationsEnabled,
   getStepGoal,
   setCollectionView,
@@ -98,8 +99,18 @@ describe('settingsRepo', () => {
     expect(await getCurrentBiome()).toBe('caatinga')
   })
 
-  it('setHomeBiome persists only the biome id', async () => {
-    await setHomeBiome('caatinga')
-    expect(mockDb.run).toHaveBeenCalledWith(expect.stringContaining('INSERT INTO settings'), ['homeBiome', 'caatinga'])
+  it('setHomeBiome persists only the biome id and how it was set', async () => {
+    await setHomeBiome('caatinga', 'detected')
+    expect(mockDb.run.mock.calls.map(([, params]) => params)).toEqual([
+      ['homeBiome', 'caatinga'],
+      ['homeBiomeSource', 'detected'],
+    ])
+  })
+
+  it('getHomeBiomeSource counts a missing or unknown source as picked', async () => {
+    mockDb.query.mockResolvedValue({ values: [] })
+    expect(await getHomeBiomeSource()).toBe('picked')
+    mockDb.query.mockResolvedValue({ values: [{ value: 'detected' }] })
+    expect(await getHomeBiomeSource()).toBe('detected')
   })
 })
