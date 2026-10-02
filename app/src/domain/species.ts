@@ -1,3 +1,5 @@
+import type { CollectedEntry } from './types'
+
 export type SpeciesKind = 'plant' | 'animal'
 export type Rarity = 'common' | 'rare' | 'epic'
 export type Biome = 'atlantic-forest'
@@ -207,3 +209,11 @@ export const SPECIES_CATALOG: Species[] = [
     imageAttribution: 'Pablo Bombín via GBIF, CC-BY',
   },
 ]
+
+export function collectedCatalogSpeciesIds(
+  entries: CollectedEntry[],
+  catalog: Species[] = SPECIES_CATALOG,
+): Set<string> {
+  const catalogIds = new Set(catalog.map((s) => s.id))
+  return new Set(entries.map((e) => e.speciesId).filter((id) => catalogIds.has(id)))
+}
