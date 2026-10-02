@@ -17,7 +17,26 @@ export const ptBR: typeof en = {
     animal: 'Animal',
   },
   biome: {
+    amazon: 'Amazônia',
     'atlantic-forest': 'Mata Atlântica',
+    caatinga: 'Caatinga',
+    cerrado: 'Cerrado',
+    pantanal: 'Pantanal',
+    pampa: 'Pampa',
+  },
+  biomeSetup: {
+    title: 'Onde você mora?',
+    subtitle:
+      'O EcoFoco cultiva as plantas e os animais do seu bioma. Sua localização aproximada o encontra — só o bioma é salvo, nunca onde você está.',
+    useLocation: 'Usar minha localização aproximada',
+    detecting: 'Procurando seu bioma…',
+    pick: 'Ou escolha seu bioma',
+    result: {
+      detected: 'Bioma de casa: {{biome}}.',
+      'coming-soon': 'Seu bioma é {{biome}}, e as espécies dele chegam em breve. Escolha um bioma para começar:',
+      unsupported: 'Sua localização ainda não está em um bioma disponível. Escolha um:',
+      unavailable: 'Não foi possível obter sua localização. Escolha seu bioma:',
+    },
   },
   nav: {
     focus: 'Foco',
@@ -83,6 +102,24 @@ export const ptBR: typeof en = {
     stepGoal: 'Meta diária de passos',
     stepGoalHint: 'Passos necessários pra liberar o sorteio de animal do dia',
     stepGoalValue: '{{count}} passos',
+    biome: {
+      title: 'Bioma',
+      hint: 'As recompensas vêm do seu bioma atual. Ganhe pontos para desbloquear biomas vizinhos.',
+      points_one: '{{count}} ponto',
+      points_other: '{{count}} pontos',
+      pointsHint: '+{{session}} por sessão de foco, +{{goal}} por meta de passos batida. Um vizinho custa {{cost}}.',
+      home: 'Casa',
+      current: 'Atual',
+      switch: 'Trocar',
+      unlock: 'Desbloquear · {{cost}}',
+      locked: 'Bloqueado',
+      comingSoon: 'Em breve',
+      redetect: 'Detectar de novo pela localização',
+    },
+    credits: {
+      title: 'Créditos',
+      biomeMap: 'Mapa de biomas: RESOLVE Ecoregions 2017 (Dinerstein et al.), CC-BY 4.0',
+    },
   },
   celebration: {
     title: 'Você coletou!',
@@ -200,6 +237,106 @@ export const ptBR: typeof en = {
       name: 'Preá',
       description:
         'Parente selvagem do porquinho-da-índia, vive em áreas de vegetação rasteira em pequenos grupos familiares, mais ativo ao amanhecer e ao entardecer.',
+    },
+    mandacaru: {
+      name: 'Mandacaru',
+      description:
+        'Cacto colunar imponente e símbolo do sertão; o povo diz que, quando ele floresce, a chuva está para chegar.',
+    },
+    'xique-xique': {
+      name: 'Xique-xique',
+      description:
+        'Cacto espinhoso que se espalha sobre as rochas; nas secas longas, os espinhos são queimados para o gado comer os caules.',
+    },
+    'jurema-preta': {
+      name: 'Jurema-preta',
+      description:
+        'Arbusto pioneiro e espinhoso, um dos primeiros a ocupar áreas degradadas da Caatinga e enriquecer o solo com nitrogênio.',
+    },
+    catingueira: {
+      name: 'Catingueira',
+      description:
+        'Uma das árvores mais comuns da Caatinga, de folhas com cheiro forte que brotam poucos dias depois da primeira chuva.',
+    },
+    facheiro: {
+      name: 'Facheiro',
+      description:
+        'Cacto alto e azulado em forma de candelabro, com pontas lanosas onde abrem flores noturnas polinizadas por morcegos.',
+    },
+    'coroa-de-frade': {
+      name: 'Coroa-de-frade',
+      description:
+        'Pequeno cacto globoso coroado por um cefálio vermelho e lanoso, de onde saem suas flores e frutos.',
+    },
+    faveleira: {
+      name: 'Faveleira',
+      description:
+        'Árvore resistente à seca, coberta de pelos urticantes; suas sementes ricas em óleo alimentam gente e bichos no sertão.',
+    },
+    craibeira: {
+      name: 'Craibeira',
+      description:
+        'Acompanha os leitos de rios secos do sertão e os ilumina com flores douradas na estação seca.',
+    },
+    mulungu: {
+      name: 'Mulungu',
+      description:
+        'Explode em flores vermelho-coral nos galhos sem folhas da estação seca, atraindo beija-flores e periquitos.',
+    },
+    barriguda: {
+      name: 'Barriguda',
+      description:
+        'Parente da paineira com tronco dilatado que armazena água e a ajuda a atravessar meses sem chuva.',
+    },
+    'asa-branca': {
+      name: 'Asa-branca',
+      description:
+        'A ave da famosa canção de Luiz Gonzaga; seus bandos deixam o sertão na seca e voltam com as chuvas.',
+    },
+    carcara: {
+      name: 'Carcará',
+      description:
+        'Falcão ousado e oportunista que anda pelo chão tanto quanto voa, comendo de carniça a insetos.',
+    },
+    'galo-de-campina': {
+      name: 'Galo-de-campina',
+      description:
+        'Endêmico do Nordeste, de cabeça vermelho-viva, costuma ser visto aos pares na vegetação aberta.',
+    },
+    'sagui-de-tufo-branco': {
+      name: 'Sagui-de-tufo-branco',
+      description:
+        'Pequeno sagui de tufos brancos nas orelhas que rói a casca das árvores para comer goma; nativo do Nordeste.',
+    },
+    calango: {
+      name: 'Calango',
+      description:
+        'O lagarto que toma sol em toda pedra e muro do sertão, balançando a cabeça para afastar rivais.',
+    },
+    moco: {
+      name: 'Mocó',
+      description:
+        'Roedor que só existe na Caatinga, vive entre lajedos e sobe em árvores com agilidade surpreendente.',
+    },
+    'cachorro-do-mato': {
+      name: 'Cachorro-do-mato',
+      description:
+        'Canídeo silvestre de hábitos sobretudo noturnos que come frutos, insetos e pequenos animais, muitas vezes caçando aos pares.',
+    },
+    'periquito-da-caatinga': {
+      name: 'Periquito-da-caatinga',
+      description:
+        'Periquito verde e barulhento da Caatinga que se alimenta de frutos de cactos e sementes.',
+    },
+    'arara-azul-de-lear': {
+      name: 'Arara-azul-de-lear',
+      description:
+        'Arara azul ameaçada de extinção que só vive no norte da Bahia, faz ninhos em paredões de arenito e come coquinhos de licuri.',
+    },
+    'tatu-bola': {
+      name: 'Tatu-bola',
+      description:
+        'O único tatu que se fecha numa bola perfeita; só existe no Brasil e foi mascote da Copa do Mundo de 2014.',
     },
   },
 }

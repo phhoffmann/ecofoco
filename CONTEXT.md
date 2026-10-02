@@ -38,7 +38,7 @@ The full set of a user's CollectedEntry records across all Species. Permanent �
 A tier (Common, Rare, Epic) assigned to a Species that weights how likely it is to be selected in a Draw.
 
 **Biome**:
-A tag on a Species representing the real-world ecological region it belongs to (e.g. Cerrado, Atlantic Forest, Caatinga). Used today to build the initial catalog; not yet used to filter what a user can collect.
+A real-world ecological region (in Brazil, IBGE's six: Amazon, Atlantic Forest, Caatinga, Cerrado, Pantanal, Pampa), defined as a curated group of RESOLVE ecoregions and tagged on each Species. The user's **home** Biome comes from their location (or a manual pick) and starts unlocked; points from completed FocusSessions and met StepGoals unlock **neighbouring** Biomes. Everything the user collects — Sprouts, Draws, Manual Sightings — comes from their **current** Biome, which can be switched only to an unlocked one.
 
 **Manual Sighting**:
 A user-entered claim of having encountered a real Plant or Animal Species, added directly as a CollectedEntry with no automatic validation.

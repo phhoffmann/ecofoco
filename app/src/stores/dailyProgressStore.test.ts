@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { pickRandomSpecies } from '../domain/draw'
 import type { Species } from '../domain/species'
 
 const {
@@ -43,6 +44,7 @@ vi.mock('../data/stepProvider', () => ({
 }))
 vi.mock('../domain/draw', () => ({ pickRandomSpecies: vi.fn(() => mockSpecies) }))
 vi.mock('../data/haptics', () => ({ lightHaptic: vi.fn() }))
+vi.mock('./biomeStore', () => ({ activeBiome: () => 'caatinga' }))
 
 import { useCelebrationStore } from './celebrationStore'
 import { useDailyProgressStore } from './dailyProgressStore'
@@ -143,6 +145,7 @@ describe('dailyProgressStore', () => {
 
     await useDailyProgressStore.getState().draw()
 
+    expect(pickRandomSpecies).toHaveBeenCalledWith('animal', 'caatinga')
     expect(addCollectedEntry).toHaveBeenCalledWith('quati', 'draw')
     expect(markDrawCompleted).toHaveBeenCalled()
     const state = useDailyProgressStore.getState()

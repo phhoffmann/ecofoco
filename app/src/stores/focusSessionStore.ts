@@ -6,6 +6,7 @@ import { allowScreenSleep, keepScreenAwake } from '../data/screenWakeLock'
 import { pickRandomSpecies } from '../domain/draw'
 import { computeRemainingSeconds } from '../domain/focusSession'
 import type { Species } from '../domain/species'
+import { activeBiome } from './biomeStore'
 import { useCelebrationStore } from './celebrationStore'
 
 export type FocusSessionStatus = 'idle' | 'running' | 'completed' | 'failed'
@@ -54,7 +55,7 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => ({
       if (remaining === 0) {
         clearTick()
         void allowScreenSleep()
-        const species = pickRandomSpecies('plant')
+        const species = pickRandomSpecies('plant', activeBiome())
         await addCollectedEntry(species.id, 'focus_session')
         await recordFocusSession(new Date(startedAt).toISOString(), durationSeconds, 'completed')
         set({ status: 'completed', resultSpecies: species })

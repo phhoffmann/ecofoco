@@ -2,22 +2,26 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CelebrationOverlay } from './components/CelebrationOverlay'
 import { ActivityScreen } from './screens/ActivityScreen'
+import { BiomeSetupScreen } from './screens/BiomeSetupScreen'
 import { CollectionScreen } from './screens/CollectionScreen'
 import { FocusScreen } from './screens/FocusScreen'
 import { SettingsScreen } from './screens/SettingsScreen'
+import { useBiomeStore } from './stores/biomeStore'
 import { useSettingsStore } from './stores/settingsStore'
 
 const TABS = ['focus', 'activity', 'collection', 'settings'] as const
 type Tab = (typeof TABS)[number]
 
 function App() {
-  const [tab, setTab] = useState<Tab>('focus')
-  const { t } = useTranslation()
   const loadSettings = useSettingsStore((s) => s.load)
+  const loadBiomes = useBiomeStore((s) => s.load)
+  const biomesLoaded = useBiomeStore((s) => s.loaded)
+  const hasHomeBiome = useBiomeStore((s) => s.homeBiome !== null)
 
   useEffect(() => {
     void loadSettings()
-  }, [loadSettings])
+    void loadBiomes()
+  }, [loadSettings, loadBiomes])
 
   // The shell is exactly one viewport tall and only <main> scrolls, so the nav never leaves the screen.
   return (
@@ -26,6 +30,25 @@ function App() {
         EcoFoco
       </header>
 
+      {biomesLoaded &&
+        (hasHomeBiome ? (
+          <MainTabs />
+        ) : (
+          <main className="flex min-h-0 flex-1 flex-col overflow-y-auto pb-[var(--safe-bottom)]">
+            <BiomeSetupScreen />
+          </main>
+        ))}
+
+      <CelebrationOverlay />
+    </div>
+  )
+}
+
+function MainTabs() {
+  const [tab, setTab] = useState<Tab>('focus')
+  const { t } = useTranslation()
+  return (
+    <>
       <main key={tab} className="enter flex min-h-0 flex-1 flex-col overflow-y-auto">
         {tab === 'focus' && <FocusScreen />}
         {tab === 'activity' && <ActivityScreen />}
@@ -51,9 +74,7 @@ function App() {
           </button>
         ))}
       </nav>
-
-      <CelebrationOverlay />
-    </div>
+    </>
   )
 }
 

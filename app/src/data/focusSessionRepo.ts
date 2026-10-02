@@ -26,3 +26,9 @@ export async function listFocusSessions(): Promise<FocusSession[]> {
   const res = await db.query('SELECT * FROM focus_sessions ORDER BY startedAt DESC')
   return (res.values ?? []) as FocusSession[]
 }
+
+export async function countCompletedFocusSessions(): Promise<number> {
+  const db = await getDb()
+  const res = await db.query("SELECT COUNT(*) AS count FROM focus_sessions WHERE status = 'completed'")
+  return Number(res.values?.[0]?.count ?? 0)
+}

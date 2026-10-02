@@ -1,8 +1,8 @@
+import type { BiomeId } from './biome'
 import type { CollectedEntry } from './types'
 
 export type SpeciesKind = 'plant' | 'animal'
 export type Rarity = 'common' | 'rare' | 'epic'
-export type Biome = 'atlantic-forest'
 
 // Body-plan / growth-form archetype: garden sprites are chosen per archetype, not per species.
 export type PlantArchetype = 'flowering-tree' | 'broadleaf-tree' | 'emergent-tree' | 'pioneer-tree' | 'palm' | 'shrub'
@@ -30,7 +30,7 @@ export interface Species {
   scientificName: string
   type: SpeciesKind
   rarity: Rarity
-  biome: Biome[]
+  biome: BiomeId[]
   archetype: Archetype
   image: string
   imageLicense: 'CC0' | 'CC-BY'
@@ -38,7 +38,7 @@ export interface Species {
 }
 
 export const SPECIES_CATALOG: Species[] = [
-  // Plants
+  // Atlantic Forest plants
   {
     id: 'ipe-amarelo',
     scientificName: 'Handroanthus albus',
@@ -144,7 +144,7 @@ export const SPECIES_CATALOG: Species[] = [
     imageLicense: 'CC0',
   },
 
-  // Animals
+  // Atlantic Forest animals
   {
     id: 'sagui-de-tufo-preto',
     scientificName: 'Callithrix penicillata',
@@ -249,6 +249,222 @@ export const SPECIES_CATALOG: Species[] = [
     image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/605551029/original.jpg',
     imageLicense: 'CC-BY',
     imageAttribution: 'Pablo Bombín via GBIF, CC-BY',
+  },
+
+  // Caatinga plants (native per iNaturalist)
+  {
+    id: 'mandacaru',
+    scientificName: 'Cereus jamacaru',
+    type: 'plant',
+    rarity: 'common',
+    biome: ['caatinga'],
+    archetype: 'shrub',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/619337508/original.jpg',
+    imageLicense: 'CC0',
+  },
+  {
+    id: 'xique-xique',
+    scientificName: 'Xiquexique gounellei',
+    type: 'plant',
+    rarity: 'common',
+    biome: ['caatinga'],
+    archetype: 'shrub',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/728785590/original.jpg',
+    imageLicense: 'CC-BY',
+    imageAttribution: 'Celso Henrique Varela Rios via iNaturalist, CC-BY',
+  },
+  {
+    id: 'jurema-preta',
+    scientificName: 'Mimosa tenuiflora',
+    type: 'plant',
+    rarity: 'common',
+    biome: ['caatinga'],
+    archetype: 'pioneer-tree',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/372703745/original.jpeg',
+    imageLicense: 'CC0',
+  },
+  {
+    id: 'catingueira',
+    scientificName: 'Cenostigma pyramidale',
+    type: 'plant',
+    rarity: 'common',
+    biome: ['caatinga'],
+    archetype: 'broadleaf-tree',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/638115766/original.jpg',
+    imageLicense: 'CC-BY',
+    imageAttribution: 'Issao Shinobe via iNaturalist, CC-BY',
+  },
+  {
+    id: 'facheiro',
+    scientificName: 'Pilosocereus pachycladus',
+    type: 'plant',
+    rarity: 'common',
+    biome: ['caatinga'],
+    archetype: 'shrub',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/474529692/original.jpeg',
+    imageLicense: 'CC-BY',
+    imageAttribution: 'Renato Bandeira via iNaturalist, CC-BY',
+  },
+  {
+    id: 'coroa-de-frade',
+    scientificName: 'Melocactus zehntneri',
+    type: 'plant',
+    rarity: 'rare',
+    biome: ['caatinga'],
+    archetype: 'shrub',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/469175092/original.jpeg',
+    imageLicense: 'CC-BY',
+    imageAttribution: 'Renato Bandeira via iNaturalist, CC-BY',
+  },
+  {
+    id: 'faveleira',
+    scientificName: 'Cnidoscolus quercifolius',
+    type: 'plant',
+    rarity: 'rare',
+    biome: ['caatinga'],
+    archetype: 'pioneer-tree',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/592386668/original.jpg',
+    imageLicense: 'CC-BY',
+    imageAttribution: 'Carlos Otávio Gussoni via iNaturalist, CC-BY',
+  },
+  {
+    id: 'craibeira',
+    scientificName: 'Tabebuia aurea',
+    type: 'plant',
+    rarity: 'rare',
+    biome: ['caatinga'],
+    archetype: 'flowering-tree',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/476237138/original.jpeg',
+    imageLicense: 'CC-BY',
+    imageAttribution: 'Renato Bandeira via iNaturalist, CC-BY',
+  },
+  {
+    id: 'mulungu',
+    scientificName: 'Erythrina velutina',
+    type: 'plant',
+    rarity: 'epic',
+    biome: ['caatinga'],
+    archetype: 'flowering-tree',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/347925580/original.jpeg',
+    imageLicense: 'CC0',
+  },
+  {
+    id: 'barriguda',
+    scientificName: 'Ceiba glaziovii',
+    type: 'plant',
+    rarity: 'epic',
+    biome: ['caatinga'],
+    archetype: 'emergent-tree',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/593828200/original.jpg',
+    imageLicense: 'CC0',
+  },
+
+  // Caatinga animals (native per iNaturalist)
+  {
+    id: 'asa-branca',
+    scientificName: 'Patagioenas picazuro',
+    type: 'animal',
+    rarity: 'common',
+    biome: ['caatinga'],
+    archetype: 'songbird',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/343077528/original.jpeg',
+    imageLicense: 'CC-BY',
+    imageAttribution: 'Laura Gaudette via iNaturalist, CC-BY',
+  },
+  {
+    id: 'carcara',
+    scientificName: 'Caracara plancus',
+    type: 'animal',
+    rarity: 'common',
+    biome: ['caatinga'],
+    archetype: 'large-bird',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/462731923/original.jpg',
+    imageLicense: 'CC-BY',
+    imageAttribution: 'Zac Peterson via iNaturalist, CC-BY',
+  },
+  {
+    id: 'galo-de-campina',
+    scientificName: 'Paroaria dominicana',
+    type: 'animal',
+    rarity: 'common',
+    biome: ['caatinga'],
+    archetype: 'songbird',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/709018421/original.jpg',
+    imageLicense: 'CC-BY',
+    imageAttribution: 'Matheus Oliveira via iNaturalist, CC-BY',
+  },
+  {
+    id: 'sagui-de-tufo-branco',
+    scientificName: 'Callithrix jacchus',
+    type: 'animal',
+    rarity: 'common',
+    biome: ['caatinga'],
+    archetype: 'primate',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/390529770/original.jpg',
+    imageLicense: 'CC-BY',
+    imageAttribution: 'Fábio Olmos via iNaturalist, CC-BY',
+  },
+  {
+    id: 'calango',
+    scientificName: 'Tropidurus hispidus',
+    type: 'animal',
+    rarity: 'common',
+    biome: ['caatinga'],
+    archetype: 'reptile',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/395053616/original.jpeg',
+    imageLicense: 'CC0',
+  },
+  {
+    id: 'moco',
+    scientificName: 'Kerodon rupestris',
+    type: 'animal',
+    rarity: 'rare',
+    biome: ['caatinga'],
+    archetype: 'small-mammal',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/205623216/original.jpg',
+    imageLicense: 'CC0',
+  },
+  {
+    id: 'cachorro-do-mato',
+    scientificName: 'Cerdocyon thous',
+    type: 'animal',
+    rarity: 'rare',
+    biome: ['caatinga'],
+    archetype: 'mid-mammal',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/390529164/original.jpg',
+    imageLicense: 'CC-BY',
+    imageAttribution: 'Fábio Olmos via iNaturalist, CC-BY',
+  },
+  {
+    id: 'periquito-da-caatinga',
+    scientificName: 'Eupsittula cactorum',
+    type: 'animal',
+    rarity: 'rare',
+    biome: ['caatinga'],
+    archetype: 'songbird',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/334626357/original.jpg',
+    imageLicense: 'CC-BY',
+    imageAttribution: 'Reuber Brandão via iNaturalist, CC-BY',
+  },
+  {
+    id: 'arara-azul-de-lear',
+    scientificName: 'Anodorhynchus leari',
+    type: 'animal',
+    rarity: 'epic',
+    biome: ['caatinga'],
+    archetype: 'large-bird',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/417843744/original.jpg',
+    imageLicense: 'CC0',
+  },
+  {
+    id: 'tatu-bola',
+    scientificName: 'Tolypeutes tricinctus',
+    type: 'animal',
+    rarity: 'epic',
+    biome: ['caatinga'],
+    archetype: 'mid-mammal',
+    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/661540917/original.jpg',
+    imageLicense: 'CC0',
   },
 ]
 

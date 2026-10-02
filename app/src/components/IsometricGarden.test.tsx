@@ -2,8 +2,10 @@ import { act } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import '../i18n'
+import type { BiomeId } from '../domain/biome'
 import { tileCenter, tileFillOrder } from '../domain/iso'
 import type { CollectedEntry } from '../domain/types'
+import { BIOME_GROUND } from './biomeGround'
 import { IsometricGarden } from './IsometricGarden'
 
 declare global {
@@ -38,8 +40,8 @@ describe('IsometricGarden', () => {
     container.remove()
   })
 
-  function render(entries: CollectedEntry[], onSelectSpecies: (id: string) => void) {
-    act(() => root.render(<IsometricGarden entries={entries} onSelectSpecies={onSelectSpecies} />))
+  function render(entries: CollectedEntry[], onSelectSpecies: (id: string) => void, biome: BiomeId = 'atlantic-forest') {
+    act(() => root.render(<IsometricGarden entries={entries} biome={biome} onSelectSpecies={onSelectSpecies} />))
     const scene = container.querySelector<HTMLDivElement>('[role="group"]')!
     // Render the scene at its logical size so client coordinates equal scene coordinates.
     scene.getBoundingClientRect = () => ({ left: 0, top: 0, width: SCENE_WIDTH }) as DOMRect
@@ -118,5 +120,16 @@ describe('IsometricGarden', () => {
     expect(names).toHaveLength(64)
     expect(names).not.toContain('South American Coati')
     expect(container.textContent).toContain('+1 more not shown')
+  })
+
+  it('tints the ground with the biome palette', () => {
+    const fills = () => new Set([...container.querySelectorAll('polygon')].map((p) => p.getAttribute('fill')))
+
+    render([], vi.fn(), 'atlantic-forest')
+    expect(fills()).toContain(BIOME_GROUND['atlantic-forest'].tile[0])
+
+    render([], vi.fn(), 'caatinga')
+    expect(fills()).toContain(BIOME_GROUND.caatinga.tile[0])
+    expect(fills()).not.toContain(BIOME_GROUND['atlantic-forest'].tile[0])
   })
 })

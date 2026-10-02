@@ -31,6 +31,12 @@ const SCHEMA = `
     key TEXT PRIMARY KEY,
     value TEXT NOT NULL
   );
+
+  CREATE TABLE IF NOT EXISTS biome_unlocks (
+    biomeId TEXT PRIMARY KEY,
+    unlockedAt TEXT NOT NULL,
+    cost INTEGER NOT NULL
+  );
 `
 
 const connection = new SQLiteConnection(CapacitorSQLite)

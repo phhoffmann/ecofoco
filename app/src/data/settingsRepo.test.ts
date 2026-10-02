@@ -5,9 +5,12 @@ vi.mock('./db', () => ({ getDb: () => Promise.resolve(mockDb) }))
 
 import {
   getCollectionView,
+  getCurrentBiome,
+  getHomeBiome,
   getNotificationsEnabled,
   getStepGoal,
   setCollectionView,
+  setHomeBiome,
   setNotificationsEnabled,
   setStepGoal,
 } from './settingsRepo'
@@ -77,5 +80,26 @@ describe('settingsRepo', () => {
       'collectionView',
       'isometric',
     ])
+  })
+
+  it('getHomeBiome is null until onboarding stores one', async () => {
+    mockDb.query.mockResolvedValue({ values: [] })
+    expect(await getHomeBiome()).toBeNull()
+  })
+
+  it('getHomeBiome and getCurrentBiome ignore unknown biome ids', async () => {
+    mockDb.query.mockResolvedValue({ values: [{ value: 'tundra' }] })
+    expect(await getHomeBiome()).toBeNull()
+    expect(await getCurrentBiome()).toBeNull()
+  })
+
+  it('getCurrentBiome reflects a stored biome id', async () => {
+    mockDb.query.mockResolvedValue({ values: [{ value: 'caatinga' }] })
+    expect(await getCurrentBiome()).toBe('caatinga')
+  })
+
+  it('setHomeBiome persists only the biome id', async () => {
+    await setHomeBiome('caatinga')
+    expect(mockDb.run).toHaveBeenCalledWith(expect.stringContaining('INSERT INTO settings'), ['homeBiome', 'caatinga'])
   })
 })
