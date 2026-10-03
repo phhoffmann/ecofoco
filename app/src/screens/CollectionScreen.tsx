@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { CollectionGarden } from '../components/CollectionGarden'
 import { ManualSightingModal } from '../components/ManualSightingModal'
 import { SpeciesDetailSheet } from '../components/SpeciesDetailSheet'
-import { SPECIES_CATALOG, collectedCatalogSpeciesIds } from '../domain/species'
+import { SPECIES_CATALOG, collectedCatalogSpeciesIds, speciesName } from '../domain/species'
 import type { CollectionView } from '../domain/types'
 import { useActiveBiome } from '../stores/biomeStore'
 import { useCollectionStore } from '../stores/collectionStore'
@@ -12,7 +12,7 @@ import { useSettingsStore } from '../stores/settingsStore'
 const COLLECTION_VIEWS: CollectionView[] = ['grid', 'isometric']
 
 export function CollectionScreen() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { entries, loaded, refresh } = useCollectionStore()
   const collectionView = useSettingsStore((s) => s.collectionView)
   const setCollectionView = useSettingsStore((s) => s.setCollectionView)
@@ -65,7 +65,7 @@ export function CollectionScreen() {
         <div className="grid grid-cols-3 gap-3">
           {biomeSpecies.map((species, i) => {
             const isCollected = collectedSpeciesIds.has(species.id)
-            const name = t(`species.${species.id}.name`)
+            const name = speciesName(species, i18n.language)
             return (
               <button
                 key={species.id}

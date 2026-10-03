@@ -1,0 +1,1045 @@
+{
+  "biome": "atlantic-forest",
+  "species": [
+    {
+      "id": "bem-te-vi",
+      "scientificName": "Pitangus sulphuratus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Great Kiskadee",
+        "pt-BR": "Bem-te-vi"
+      },
+      "descriptions": {
+        "en": "A loud, bold yellow-bellied flycatcher whose call sounds like it's saying its own name — one of Brazil's most familiar birds.",
+        "pt-BR": "Ave insetívora barulhenta e destemida, de peito amarelo, cujo canto parece dizer o próprio nome — uma das aves mais conhecidas do Brasil."
+      },
+      "photo": {
+        "file": "bem-te-vi.webp",
+        "license": "CC-BY",
+        "credit": "Helio Lourencini",
+        "sourceUrl": "https://www.inaturalist.org/observations/62682207"
+      },
+      "source": {
+        "inatTaxonId": 16956,
+        "gbifTaxonKey": 2482755,
+        "observations": 823
+      }
+    },
+    {
+      "id": "canario-da-terra",
+      "scientificName": "Sicalis flaveola",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Saffron Finch",
+        "pt-BR": "Canário-da-terra"
+      },
+      "descriptions": {
+        "en": "A bright yellow finch with an orange forehead that sings from rooftops and feeds on seeds in open ground.",
+        "pt-BR": "Pássaro amarelo-vivo de testa alaranjada que canta dos telhados e come sementes em áreas abertas."
+      },
+      "photo": {
+        "file": "canario-da-terra.webp",
+        "license": "CC-BY",
+        "credit": "Jer Clarke",
+        "sourceUrl": "https://www.inaturalist.org/observations/303463866"
+      },
+      "source": {
+        "inatTaxonId": 9864,
+        "gbifTaxonKey": 2491862,
+        "observations": 801
+      }
+    },
+    {
+      "id": "sabia-laranjeira",
+      "scientificName": "Turdus rufiventris",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Rufous-bellied Thrush",
+        "pt-BR": "Sabiá-laranjeira"
+      },
+      "descriptions": {
+        "en": "Brazil's national bird, known for its rich, melodic song sung at dawn and dusk.",
+        "pt-BR": "Ave símbolo do Brasil, conhecida pelo canto rico e melodioso entoado ao amanhecer e ao entardecer."
+      },
+      "photo": {
+        "file": "sabia-laranjeira.webp",
+        "license": "CC-BY",
+        "credit": "Rodrigo Paiva Lázaro",
+        "sourceUrl": "https://www.inaturalist.org/observations/100166113"
+      },
+      "source": {
+        "inatTaxonId": 12738,
+        "gbifTaxonKey": 2490718,
+        "observations": 786
+      }
+    },
+    {
+      "id": "juriti-pupu",
+      "scientificName": "Leptotila verreauxi",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "White-tipped Dove",
+        "pt-BR": "Juriti-pupu"
+      },
+      "descriptions": {
+        "en": "A ground-feeding dove whose low, hollow \"hoo-oo\" call is heard from forest edges.",
+        "pt-BR": "Pomba que se alimenta no chão e cujo canto grave e oco ecoa nas bordas de mata."
+      },
+      "photo": {
+        "file": "juriti-pupu.webp",
+        "license": "CC-BY",
+        "credit": "Mariano Cosentino",
+        "sourceUrl": "https://www.inaturalist.org/observations/193600813"
+      },
+      "source": {
+        "inatTaxonId": 3280,
+        "gbifTaxonKey": 2496060,
+        "observations": 710
+      }
+    },
+    {
+      "id": "urubu-preto",
+      "scientificName": "Coragyps atratus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "large-bird",
+      "names": {
+        "en": "Black Vulture",
+        "pt-BR": "Urubu-preto"
+      },
+      "descriptions": {
+        "en": "Black vultures soar in groups and find carrion by watching each other, cleaning up cities and fields alike.",
+        "pt-BR": "O urubu plana em bandos e encontra carcaças observando os companheiros, fazendo a limpeza de cidades e campos."
+      },
+      "photo": {
+        "file": "urubu-preto.webp",
+        "license": "CC-BY",
+        "credit": "Donald Davesne",
+        "sourceUrl": "https://www.inaturalist.org/observations/49058999"
+      },
+      "source": {
+        "inatTaxonId": 4765,
+        "gbifTaxonKey": 2481942,
+        "observations": 693
+      }
+    },
+    {
+      "id": "macaco-prego-preto",
+      "scientificName": "Sapajus nigritus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "primate",
+      "names": {
+        "en": "Black Capuchin",
+        "pt-BR": "Macaco-prego-preto"
+      },
+      "descriptions": {
+        "en": "A dark capuchin with two tufts on its head, from the southern Atlantic Forest, that forages in groups for fruit, insects and palm hearts.",
+        "pt-BR": "Macaco-prego escuro com dois tufos na cabeça, do sul da Mata Atlântica, que procura em bando frutos, insetos e palmito."
+      },
+      "photo": {
+        "file": "macaco-prego-preto.webp",
+        "license": "CC-BY",
+        "credit": "liam1294",
+        "sourceUrl": "https://www.inaturalist.org/observations/286531200"
+      },
+      "source": {
+        "inatTaxonId": 410834,
+        "gbifTaxonKey": 7519053,
+        "observations": 676
+      }
+    },
+    {
+      "id": "tie-preto",
+      "scientificName": "Tachyphonus coronatus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Ruby-crowned Tanager",
+        "pt-BR": "Tiê-preto"
+      },
+      "descriptions": {
+        "en": "The glossy black male hides a red crown patch, while the female is reddish brown.",
+        "pt-BR": "O macho, preto e brilhante, esconde uma mancha vermelha no alto da cabeça; a fêmea é marrom-avermelhada."
+      },
+      "photo": {
+        "file": "tie-preto.webp",
+        "license": "CC-BY",
+        "credit": "Martin Vallejos",
+        "sourceUrl": "https://www.inaturalist.org/observations/148554326"
+      },
+      "source": {
+        "inatTaxonId": 10079,
+        "gbifTaxonKey": 2488590,
+        "observations": 660
+      }
+    },
+    {
+      "id": "irapua",
+      "scientificName": "Trigona spinipes",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "insect",
+      "names": {
+        "en": "Spiny-legged Stingless Bee",
+        "pt-BR": "Irapuã"
+      },
+      "descriptions": {
+        "en": "A black stingless bee that defends its nest by biting; it builds big, exposed nests of resin and plant fibre on branches.",
+        "pt-BR": "Abelha preta sem ferrão que defende o ninho com mordidas; constrói ninhos grandes e expostos de resina e fibras nos galhos."
+      },
+      "photo": {
+        "file": "irapua.webp",
+        "license": "CC-BY",
+        "credit": "Reinaldo de Oliveira Elias",
+        "sourceUrl": "https://www.inaturalist.org/observations/307363488"
+      },
+      "source": {
+        "inatTaxonId": 518869,
+        "gbifTaxonKey": 5040803,
+        "observations": 632
+      }
+    },
+    {
+      "id": "lagarto-teiu",
+      "scientificName": "Salvator merianae",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "reptile",
+      "names": {
+        "en": "Black-and-white Tegu",
+        "pt-BR": "Lagarto-teiú"
+      },
+      "descriptions": {
+        "en": "One of South America's largest lizards, an opportunistic omnivore that can grow over a meter long.",
+        "pt-BR": "Um dos maiores lagartos da América do Sul, onívoro oportunista que pode ultrapassar um metro de comprimento."
+      },
+      "photo": {
+        "file": "lagarto-teiu.webp",
+        "license": "CC0",
+        "credit": "Pedro T. Terres",
+        "sourceUrl": "https://www.inaturalist.org/observations/330909436"
+      },
+      "source": {
+        "inatTaxonId": 318758,
+        "gbifTaxonKey": 5227370,
+        "observations": 547
+      }
+    },
+    {
+      "id": "gamba-de-orelha-preta",
+      "scientificName": "Didelphis aurita",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "small-mammal",
+      "names": {
+        "en": "Black-eared Opossum",
+        "pt-BR": "Gambá-de-orelha-preta"
+      },
+      "descriptions": {
+        "en": "A nocturnal marsupial and one of Brazil's only native marsupial groups; it famously plays dead when threatened.",
+        "pt-BR": "Marsupial noturno e um dos poucos representantes nativos dos marsupiais no Brasil; conhecido por fingir de morto quando ameaçado."
+      },
+      "photo": {
+        "file": "gamba-de-orelha-preta.webp",
+        "license": "CC-BY",
+        "credit": "Fabrício Mil Homens Riella",
+        "sourceUrl": "https://www.inaturalist.org/observations/140573527"
+      },
+      "source": {
+        "inatTaxonId": 42657,
+        "gbifTaxonKey": 2439928,
+        "observations": 479
+      }
+    },
+    {
+      "id": "jatai",
+      "scientificName": "Tetragonisca angustula",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "insect",
+      "names": {
+        "en": "Narrow Stingless Bee",
+        "pt-BR": "Jataí"
+      },
+      "descriptions": {
+        "en": "A tiny stingless bee that builds a wax entrance tube to its nest and makes a prized honey.",
+        "pt-BR": "Abelha sem ferrão minúscula que constrói um tubinho de cera na entrada do ninho e produz um mel muito apreciado."
+      },
+      "photo": {
+        "file": "jatai.webp",
+        "license": "CC-BY",
+        "credit": "Carlos Alexandre Mattos Raposo",
+        "sourceUrl": "https://www.inaturalist.org/observations/93735785"
+      },
+      "source": {
+        "inatTaxonId": 344445,
+        "gbifTaxonKey": 1339480,
+        "observations": 473
+      }
+    },
+    {
+      "id": "jacu",
+      "scientificName": "Penelope obscura",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "large-bird",
+      "names": {
+        "en": "Dusky-legged Guan",
+        "pt-BR": "Jacu"
+      },
+      "descriptions": {
+        "en": "A large, turkey-like forest bird known for its loud dawn calls and an important seed disperser for the Atlantic Forest.",
+        "pt-BR": "Ave florestal grande, parecida com um peru, conhecida pelos cantos altos ao amanhecer e importante dispersora de sementes da Mata Atlântica."
+      },
+      "photo": {
+        "file": "jacu.webp",
+        "license": "CC-BY",
+        "credit": "Lucas Lopes",
+        "sourceUrl": "https://www.inaturalist.org/observations/333364301"
+      },
+      "source": {
+        "inatTaxonId": 2060,
+        "gbifTaxonKey": 2482212,
+        "observations": 399
+      }
+    },
+    {
+      "id": "borboleta-pavao-escarlate",
+      "scientificName": "Anartia amathea",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "insect",
+      "names": {
+        "en": "Red Peacock",
+        "pt-BR": "Borboleta-pavão-escarlate"
+      },
+      "descriptions": {
+        "en": "A dark butterfly with bold scarlet bands, often seen sipping nectar in gardens and pastures.",
+        "pt-BR": "Borboleta escura com faixas vermelho-vivas, vista com frequência tomando néctar em jardins e pastos."
+      },
+      "photo": {
+        "file": "borboleta-pavao-escarlate.webp",
+        "license": "CC-BY",
+        "credit": "Odebrecht, Clarisse",
+        "sourceUrl": "https://www.inaturalist.org/observations/349854762"
+      },
+      "source": {
+        "inatTaxonId": 83652,
+        "gbifTaxonKey": 5128011,
+        "observations": 368
+      }
+    },
+    {
+      "id": "quati",
+      "scientificName": "Nasua nasua",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "mid-mammal",
+      "names": {
+        "en": "South American Coati",
+        "pt-BR": "Quati"
+      },
+      "descriptions": {
+        "en": "A raccoon relative that forages in noisy troops during the day, using its long flexible snout to dig for insects and fruit.",
+        "pt-BR": "Parente do guaxinim que forrageia em bandos barulhentos durante o dia, usando o focinho longo e flexível para procurar insetos e frutas."
+      },
+      "photo": {
+        "file": "quati.webp",
+        "license": "CC-BY",
+        "credit": "Rodrigo Paiva Lázaro",
+        "sourceUrl": "https://www.inaturalist.org/observations/143679941"
+      },
+      "source": {
+        "inatTaxonId": 41670,
+        "gbifTaxonKey": 2433536,
+        "observations": 312
+      }
+    },
+    {
+      "id": "tucano-de-bico-verde",
+      "scientificName": "Ramphastos dicolorus",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "large-bird",
+      "names": {
+        "en": "Red-breasted Toucan",
+        "pt-BR": "Tucano-de-bico-verde"
+      },
+      "descriptions": {
+        "en": "A striking toucan with a green-and-orange bill, feeding mainly on fruit and playing a key role in dispersing forest seeds.",
+        "pt-BR": "Tucano marcante de bico verde e laranja, alimenta-se principalmente de frutas e tem papel importante na dispersão de sementes."
+      },
+      "photo": {
+        "file": "tucano-de-bico-verde.webp",
+        "license": "CC-BY",
+        "credit": "Cajá-manga",
+        "sourceUrl": "https://www.inaturalist.org/observations/256017821"
+      },
+      "source": {
+        "inatTaxonId": 18808,
+        "gbifTaxonKey": 2478770,
+        "observations": 306
+      }
+    },
+    {
+      "id": "teiniagua",
+      "scientificName": "Tropidurus catalanensis",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "reptile",
+      "names": {
+        "en": "Western Collared Spiny Lizard",
+        "pt-BR": "Teiniaguá"
+      },
+      "descriptions": {
+        "en": "A collared lizard of rocky outcrops in southern Brazil that basks on stones and walls.",
+        "pt-BR": "Lagarto de colar dos afloramentos rochosos do sul do Brasil, que toma sol em pedras e muros."
+      },
+      "photo": {
+        "file": "teiniagua.webp",
+        "license": "CC-BY",
+        "credit": "Carlos Otávio Gussoni",
+        "sourceUrl": "https://www.inaturalist.org/observations/38059765"
+      },
+      "source": {
+        "inatTaxonId": 38992,
+        "gbifTaxonKey": 5224877,
+        "observations": 252
+      }
+    },
+    {
+      "id": "tropiduro-comum",
+      "scientificName": "Tropidurus torquatus",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "reptile",
+      "names": {
+        "en": "Amazon Lava Lizard",
+        "pt-BR": "Tropiduro-comum"
+      },
+      "descriptions": {
+        "en": "A sturdy lizard with a black collar that is everywhere in sunny yards, sandy coasts and rocks.",
+        "pt-BR": "Lagarto robusto de colar preto, presente em quintais ensolarados, restingas e pedras."
+      },
+      "photo": {
+        "file": "tropiduro-comum.webp",
+        "license": "CC-BY",
+        "credit": "Peter Chen 2.0",
+        "sourceUrl": "https://www.inaturalist.org/observations/48450973"
+      },
+      "source": {
+        "inatTaxonId": 38961,
+        "gbifTaxonKey": 5224858,
+        "observations": 207
+      }
+    },
+    {
+      "id": "borboleta-azul",
+      "scientificName": "Morpho helenor",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "insect",
+      "names": {
+        "en": "Blue Morpho",
+        "pt-BR": "Borboleta-azul"
+      },
+      "descriptions": {
+        "en": "Famous for its dazzling iridescent blue wings, a shimmer caused by light-scattering scales rather than any actual pigment.",
+        "pt-BR": "Famosa pelas asas azuis iridescentes deslumbrantes, um brilho causado por escamas que dispersam a luz, e não por pigmento."
+      },
+      "photo": {
+        "file": "borboleta-azul.webp",
+        "license": "CC0",
+        "credit": "Amanda Montanhini",
+        "sourceUrl": "https://www.inaturalist.org/observations/69229043"
+      },
+      "source": {
+        "inatTaxonId": 81741,
+        "gbifTaxonKey": 5133265,
+        "observations": 139
+      }
+    },
+    {
+      "id": "sagui-de-tufo-preto",
+      "scientificName": "Callithrix penicillata",
+      "type": "animal",
+      "rarity": "epic",
+      "archetype": "primate",
+      "names": {
+        "en": "Black-tufted Marmoset",
+        "pt-BR": "Sagui-de-tufo-preto"
+      },
+      "descriptions": {
+        "en": "A small, highly social marmoset recognizable by the black tufts of fur around its ears, common in urban parks and forest edges.",
+        "pt-BR": "Um pequeno sagui muito social, reconhecível pelos tufos pretos de pelo ao redor das orelhas, comum em parques urbanos e bordas de mata."
+      },
+      "photo": {
+        "file": "sagui-de-tufo-preto.webp",
+        "license": "CC-BY",
+        "credit": "Cristina Sininho Sa",
+        "sourceUrl": "https://www.inaturalist.org/observations/295533935"
+      },
+      "source": {
+        "inatTaxonId": 43374,
+        "gbifTaxonKey": 5219541,
+        "observations": 98
+      }
+    },
+    {
+      "id": "prea",
+      "scientificName": "Cavia aperea",
+      "type": "animal",
+      "rarity": "epic",
+      "archetype": "small-mammal",
+      "names": {
+        "en": "Brazilian Guinea Pig",
+        "pt-BR": "Preá"
+      },
+      "descriptions": {
+        "en": "A wild relative of the guinea pig, living in grassy areas in small family groups and mostly active at dawn and dusk.",
+        "pt-BR": "Parente selvagem do porquinho-da-índia, vive em áreas de vegetação rasteira em pequenos grupos familiares, mais ativo ao amanhecer e ao entardecer."
+      },
+      "photo": {
+        "file": "prea.webp",
+        "license": "CC0",
+        "credit": "Fernando Sessegolo",
+        "sourceUrl": "https://www.inaturalist.org/observations/36144970"
+      },
+      "source": {
+        "inatTaxonId": 43813,
+        "gbifTaxonKey": 5219704,
+        "observations": 52
+      }
+    },
+    {
+      "id": "araucaria",
+      "scientificName": "Araucaria angustifolia",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "emergent-tree",
+      "names": {
+        "en": "Paraná Pine",
+        "pt-BR": "Araucária"
+      },
+      "descriptions": {
+        "en": "The candelabra-shaped conifer of Brazil’s southern highlands, whose pinhão seeds feed jays, parrots and people through the winter.",
+        "pt-BR": "A conífera em forma de candelabro do planalto sul, cujos pinhões alimentam gralhas, papagaios e pessoas durante o inverno."
+      },
+      "photo": {
+        "file": "araucaria.webp",
+        "license": "CC-BY",
+        "credit": "Pietro",
+        "sourceUrl": "https://www.inaturalist.org/observations/226993944"
+      },
+      "source": {
+        "inatTaxonId": 83168,
+        "gbifTaxonKey": 2684940,
+        "observations": 460
+      }
+    },
+    {
+      "id": "tillandsia-stricta",
+      "scientificName": "Tillandsia stricta",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Upright Airplant",
+        "pt-BR": "Cravo-do-mato"
+      },
+      "descriptions": {
+        "en": "A small air plant that clings to branches and wires, sending up pink bracts with violet flowers.",
+        "pt-BR": "Pequena bromélia que se prende a galhos e fios, soltando brácteas rosadas com flores violeta."
+      },
+      "photo": {
+        "file": "tillandsia-stricta.webp",
+        "license": "CC-BY",
+        "credit": "Martin Vallejos",
+        "sourceUrl": "https://www.inaturalist.org/observations/167775008"
+      },
+      "source": {
+        "inatTaxonId": 525575,
+        "gbifTaxonKey": 2695068,
+        "observations": 260
+      }
+    },
+    {
+      "id": "chupa-chupa",
+      "scientificName": "Aechmea nudicaulis",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Nakedstem Livingvase",
+        "pt-BR": "Chupa-chupa"
+      },
+      "descriptions": {
+        "en": "A tube-shaped bromeliad whose red flower stalk carries yellow flowers; rainwater in its cup shelters frogs and insects.",
+        "pt-BR": "Bromélia em forma de tubo com haste floral vermelha e flores amarelas; a água acumulada no copo abriga sapos e insetos."
+      },
+      "photo": {
+        "file": "chupa-chupa.webp",
+        "license": "CC-BY",
+        "credit": "Bruno Luka de Souza Bambirra Silveira",
+        "sourceUrl": "https://www.inaturalist.org/observations/230899334"
+      },
+      "source": {
+        "inatTaxonId": 273938,
+        "gbifTaxonKey": 2698486,
+        "observations": 208
+      }
+    },
+    {
+      "id": "embauba-vermelha",
+      "scientificName": "Cecropia glaziovii",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "pioneer-tree",
+      "names": {
+        "en": "Red Embaúba",
+        "pt-BR": "Embaúba-vermelha"
+      },
+      "descriptions": {
+        "en": "A pioneer of Atlantic Forest slopes with reddish leaf buds; sloths and many birds come for its leaves and fruit spikes.",
+        "pt-BR": "Pioneira das encostas da Mata Atlântica, de brotos avermelhados; preguiças e muitas aves vêm atrás de suas folhas e frutos."
+      },
+      "photo": {
+        "file": "embauba-vermelha.webp",
+        "license": "CC-BY",
+        "credit": "Carlos Otávio Gussoni",
+        "sourceUrl": "https://www.inaturalist.org/observations/231240738"
+      },
+      "source": {
+        "inatTaxonId": 83966,
+        "gbifTaxonKey": 7512929,
+        "observations": 192
+      }
+    },
+    {
+      "id": "aroeira-pimenteira",
+      "scientificName": "Schinus terebinthifolia",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Brazilian Pepper Tree",
+        "pt-BR": "Aroeira-pimenteira"
+      },
+      "descriptions": {
+        "en": "Produces small red berries resembling pink peppercorns; considered invasive outside Brazil, but native and ecologically important here.",
+        "pt-BR": "Produz pequenas bagas vermelhas parecidas com pimenta-rosa; considerada invasora fora do Brasil, mas nativa e ecologicamente importante aqui."
+      },
+      "photo": {
+        "file": "aroeira-pimenteira.webp",
+        "license": "CC-BY",
+        "credit": "Emma Walker",
+        "sourceUrl": "https://www.inaturalist.org/observations/272198719"
+      },
+      "source": {
+        "inatTaxonId": 130872,
+        "gbifTaxonKey": 3660419,
+        "observations": 179
+      }
+    },
+    {
+      "id": "campainha",
+      "scientificName": "Ipomoea cairica",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Mile-a-minute Vine",
+        "pt-BR": "Campainha"
+      },
+      "descriptions": {
+        "en": "A climbing morning glory with hand-shaped leaves and lilac funnel flowers that open in the morning.",
+        "pt-BR": "Trepadeira de folhas em forma de mão e flores lilás em funil que se abrem pela manhã."
+      },
+      "photo": {
+        "file": "campainha.webp",
+        "license": "CC-BY",
+        "credit": "B. Phalan",
+        "sourceUrl": "https://www.inaturalist.org/observations/36114535"
+      },
+      "source": {
+        "inatTaxonId": 77494,
+        "gbifTaxonKey": 2928531,
+        "observations": 151
+      }
+    },
+    {
+      "id": "oficial-de-sala",
+      "scientificName": "Asclepias curassavica",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Tropical Milkweed",
+        "pt-BR": "Oficial-de-sala"
+      },
+      "descriptions": {
+        "en": "A milkweed with red-and-orange flowers whose toxic sap protects the monarch caterpillars that feed on it.",
+        "pt-BR": "Planta de flores vermelhas e laranja cuja seiva tóxica protege as lagartas da borboleta-monarca que se alimentam dela."
+      },
+      "photo": {
+        "file": "oficial-de-sala.webp",
+        "license": "CC0",
+        "credit": "filipeprates",
+        "sourceUrl": "https://www.inaturalist.org/observations/361307286"
+      },
+      "source": {
+        "inatTaxonId": 75602,
+        "gbifTaxonKey": 3170241,
+        "observations": 144
+      }
+    },
+    {
+      "id": "embauba",
+      "scientificName": "Cecropia pachystachya",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "pioneer-tree",
+      "names": {
+        "en": "Cecropia",
+        "pt-BR": "Embaúba"
+      },
+      "descriptions": {
+        "en": "A fast-growing pioneer tree with distinctive umbrella-shaped leaves, an important food source for sloths and toucans alike.",
+        "pt-BR": "Árvore pioneira de crescimento rápido com folhas em formato de guarda-chuva, importante fonte de alimento para preguiças e tucanos."
+      },
+      "photo": {
+        "file": "embauba.webp",
+        "license": "CC-BY",
+        "credit": "Victor Farjalla Pontes",
+        "sourceUrl": "https://www.inaturalist.org/observations/89464322"
+      },
+      "source": {
+        "inatTaxonId": 126742,
+        "gbifTaxonKey": 4013385,
+        "observations": 144
+      }
+    },
+    {
+      "id": "banana-de-imbe",
+      "scientificName": "Thaumatophyllum bipinnatifidum",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Tree Philodendron",
+        "pt-BR": "Banana-de-imbé"
+      },
+      "descriptions": {
+        "en": "A large philodendron with deeply cut leaves that grows on rocks and trees and drops long aerial roots.",
+        "pt-BR": "Filodendro grande de folhas muito recortadas que cresce sobre pedras e árvores, soltando longas raízes aéreas."
+      },
+      "photo": {
+        "file": "banana-de-imbe.webp",
+        "license": "CC-BY",
+        "credit": "B. Phalan",
+        "sourceUrl": "https://www.inaturalist.org/observations/63017807"
+      },
+      "source": {
+        "inatTaxonId": 985710,
+        "gbifTaxonKey": 9689104,
+        "observations": 122
+      }
+    },
+    {
+      "id": "palmito-jucara",
+      "scientificName": "Euterpe edulis",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "palm",
+      "names": {
+        "en": "Juçara Palm",
+        "pt-BR": "Palmito-juçara"
+      },
+      "descriptions": {
+        "en": "A slow-growing palm whose heart is a prized delicacy; overharvesting for palm hearts has made it endangered in the wild.",
+        "pt-BR": "Uma palmeira de crescimento lento cujo palmito é uma iguaria valorizada; a extração excessiva a deixou ameaçada de extinção na natureza."
+      },
+      "photo": {
+        "file": "palmito-jucara.webp",
+        "license": "CC-BY",
+        "credit": "agujaceratops",
+        "sourceUrl": "https://www.inaturalist.org/observations/202764716"
+      },
+      "source": {
+        "inatTaxonId": 155135,
+        "gbifTaxonKey": 5293403,
+        "observations": 121
+      }
+    },
+    {
+      "id": "maria-pretinha",
+      "scientificName": "Solanum americanum",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "American Black Nightshade",
+        "pt-BR": "Maria-pretinha"
+      },
+      "descriptions": {
+        "en": "A small nightshade with white star-shaped flowers and clusters of shiny black berries.",
+        "pt-BR": "Pequena erva de flores brancas em forma de estrela e cachos de frutinhos pretos e brilhantes."
+      },
+      "photo": {
+        "file": "maria-pretinha.webp",
+        "license": "CC-BY",
+        "credit": "JG",
+        "sourceUrl": "https://www.inaturalist.org/observations/146977490"
+      },
+      "source": {
+        "inatTaxonId": 59035,
+        "gbifTaxonKey": 2930222,
+        "observations": 120
+      }
+    },
+    {
+      "id": "tillandsia-tricholepis",
+      "scientificName": "Tillandsia tricholepis",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Tillandsia tricholepis",
+        "pt-BR": "Tillandsia tricholepis"
+      },
+      "descriptions": {
+        "en": "A tiny, scaly air plant that forms moss-like mats on twigs and rocks.",
+        "pt-BR": "Bromélia minúscula e escamosa que forma tapetes parecidos com musgo sobre galhos e pedras."
+      },
+      "photo": {
+        "file": "tillandsia-tricholepis.webp",
+        "license": "CC-BY",
+        "credit": "Diogo Luiz",
+        "sourceUrl": "https://www.inaturalist.org/observations/277847917"
+      },
+      "source": {
+        "inatTaxonId": 706009,
+        "gbifTaxonKey": 2695104,
+        "observations": 119
+      }
+    },
+    {
+      "id": "tillandsia-recurvata",
+      "scientificName": "Tillandsia recurvata",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "Ball Moss",
+        "pt-BR": "Tillandsia recurvata"
+      },
+      "descriptions": {
+        "en": "Not a moss at all but a tiny bromeliad that forms grey balls on branches and power lines, living on air and rain.",
+        "pt-BR": "Pequena bromélia que forma bolinhas cinzentas em galhos e fios de luz, vivendo apenas de ar e chuva."
+      },
+      "photo": {
+        "file": "tillandsia-recurvata.webp",
+        "license": "CC-BY",
+        "credit": "Tom Field",
+        "sourceUrl": "https://www.inaturalist.org/observations/325169581"
+      },
+      "source": {
+        "inatTaxonId": 84002,
+        "gbifTaxonKey": 2695588,
+        "observations": 118
+      }
+    },
+    {
+      "id": "guapuruvu",
+      "scientificName": "Schizolobium parahyba",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "pioneer-tree",
+      "names": {
+        "en": "Brazilian Fern Tree",
+        "pt-BR": "Guapuruvu"
+      },
+      "descriptions": {
+        "en": "One of the fastest-growing native trees in Brazil, with huge fern-like leaves and bright yellow flower spikes.",
+        "pt-BR": "Uma das árvores nativas de crescimento mais rápido do Brasil, com folhas enormes parecidas com samambaia e espigas de flores amarelas."
+      },
+      "photo": {
+        "file": "guapuruvu.webp",
+        "license": "CC-BY",
+        "credit": "Victor Farjalla Pontes",
+        "sourceUrl": "https://www.inaturalist.org/observations/246412481"
+      },
+      "source": {
+        "inatTaxonId": 52443,
+        "gbifTaxonKey": 2945453,
+        "observations": 62
+      }
+    },
+    {
+      "id": "quaresmeira",
+      "scientificName": "Pleroma granulosum",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "flowering-tree",
+      "names": {
+        "en": "Glory Bush Tree",
+        "pt-BR": "Quaresmeira"
+      },
+      "descriptions": {
+        "en": "Atlantic Forest native that covers hillsides in vivid purple flowers around Lent, which gives it its Portuguese name.",
+        "pt-BR": "Nativa da Mata Atlântica, cobre as encostas de flores roxas vibrantes por volta da Quaresma, época que lhe dá o nome."
+      },
+      "photo": {
+        "file": "quaresmeira.webp",
+        "license": "CC-BY",
+        "credit": "Diogo Luiz",
+        "sourceUrl": "https://www.inaturalist.org/observations/137597331"
+      },
+      "source": {
+        "inatTaxonId": 1113012,
+        "gbifTaxonKey": 5601452,
+        "observations": 30
+      }
+    },
+    {
+      "id": "pau-brasil",
+      "scientificName": "Paubrasilia echinata",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "broadleaf-tree",
+      "names": {
+        "en": "Brazilwood",
+        "pt-BR": "Pau-brasil"
+      },
+      "descriptions": {
+        "en": "The tree that gave Brazil its name — its reddish heartwood was historically prized for dye and is still used today for violin bows.",
+        "pt-BR": "A árvore que deu nome ao Brasil — seu cerne avermelhado era historicamente usado como corante e ainda hoje é usado na fabricação de arcos de violino."
+      },
+      "photo": {
+        "file": "pau-brasil.webp",
+        "license": "CC0",
+        "credit": "Paula Romano",
+        "sourceUrl": "https://www.inaturalist.org/observations/130429723"
+      },
+      "source": {
+        "inatTaxonId": 874491,
+        "gbifTaxonKey": 9119360,
+        "observations": 29
+      }
+    },
+    {
+      "id": "canela-guaica",
+      "scientificName": "Ocotea puberula",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "broadleaf-tree",
+      "names": {
+        "en": "Guaicá Laurel",
+        "pt-BR": "Canela-guaicá"
+      },
+      "descriptions": {
+        "en": "A fast-growing native tree in the laurel family, often one of the first species to colonize forest clearings after disturbance.",
+        "pt-BR": "Árvore nativa de crescimento rápido da família das lauráceas, geralmente uma das primeiras a colonizar clareiras na floresta."
+      },
+      "photo": {
+        "file": "canela-guaica.webp",
+        "license": "CC-BY",
+        "credit": "André Ambrozio",
+        "sourceUrl": "https://www.inaturalist.org/observations/148380641"
+      },
+      "source": {
+        "inatTaxonId": 285224,
+        "gbifTaxonKey": 7304142,
+        "observations": 12
+      }
+    },
+    {
+      "id": "jequitiba-rosa",
+      "scientificName": "Cariniana legalis",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "emergent-tree",
+      "names": {
+        "en": "Giant Jequitibá",
+        "pt-BR": "Jequitibá-rosa"
+      },
+      "descriptions": {
+        "en": "One of the tallest trees in the Atlantic Forest, capable of living over a thousand years and towering well above the surrounding canopy.",
+        "pt-BR": "Uma das árvores mais altas da Mata Atlântica, capaz de viver mais de mil anos e se destacar bem acima do dossel da floresta."
+      },
+      "photo": {
+        "file": "jequitiba-rosa.webp",
+        "license": "CC-BY",
+        "credit": "Carlos Otávio Gussoni",
+        "sourceUrl": "https://www.inaturalist.org/observations/38344656"
+      },
+      "source": {
+        "inatTaxonId": 190294,
+        "gbifTaxonKey": 3083036,
+        "observations": 9
+      }
+    },
+    {
+      "id": "ipe-roxo",
+      "scientificName": "Handroanthus impetiginosus",
+      "type": "plant",
+      "rarity": "epic",
+      "archetype": "flowering-tree",
+      "names": {
+        "en": "Pink Trumpet Tree",
+        "pt-BR": "Ipê-roxo"
+      },
+      "descriptions": {
+        "en": "Blooms in vivid pink-purple in late winter; its dense, durable wood is also prized for flooring and heavy construction.",
+        "pt-BR": "Floresce em tons vibrantes de rosa-roxo no final do inverno; sua madeira densa e durável também é usada em pisos e construção pesada."
+      },
+      "photo": {
+        "file": "ipe-roxo.webp",
+        "license": "CC-BY",
+        "credit": "Miguel José Rangel Junior",
+        "sourceUrl": "https://www.inaturalist.org/observations/387855924"
+      },
+      "source": {
+        "inatTaxonId": 281274,
+        "gbifTaxonKey": 4092242,
+        "observations": 7
+      }
+    },
+    {
+      "id": "ipe-amarelo",
+      "scientificName": "Handroanthus albus",
+      "type": "plant",
+      "rarity": "epic",
+      "archetype": "flowering-tree",
+      "names": {
+        "en": "Yellow Trumpet Tree",
+        "pt-BR": "Ipê-amarelo"
+      },
+      "descriptions": {
+        "en": "Iconic Brazilian tree known for its brilliant yellow blooms in late winter, often flowering with almost no leaves on the branches.",
+        "pt-BR": "Árvore brasileira icônica, conhecida por suas flores amarelas vibrantes no final do inverno, muitas vezes florescendo quase sem folhas nos galhos."
+      },
+      "photo": {
+        "file": "ipe-amarelo.webp",
+        "license": "CC-BY",
+        "credit": "André Ambrozio",
+        "sourceUrl": "https://www.inaturalist.org/observations/144733212"
+      },
+      "source": {
+        "inatTaxonId": 733298,
+        "gbifTaxonKey": 4092630,
+        "observations": 4
+      }
+    }
+  ]
+}

@@ -24,7 +24,7 @@ vi.mock('@capacitor/app', () => ({
 }))
 
 const entries: CollectedEntry[] = [
-  { id: 'e1', speciesId: 'ipe-amarelo', collectedAt: new Date().toISOString(), method: 'focus_session' },
+  { id: 'e1', speciesId: 'quaresmeira', collectedAt: new Date().toISOString(), method: 'focus_session' },
 ]
 
 describe('CollectionScreen', () => {
@@ -70,11 +70,11 @@ describe('CollectionScreen', () => {
   })
 
   it('opens a collected grid tile as a species sheet and closes it again', () => {
-    const tile = [...container.querySelectorAll('button')].find((b) => b.textContent === 'Yellow Trumpet Tree')!
+    const tile = [...container.querySelectorAll('button')].find((b) => b.textContent === 'Glory Bush Tree')!
     act(() => tile.click())
 
     expect(dialog()).not.toBeNull()
-    expect(dialog()!.textContent).toContain('Handroanthus albus')
+    expect(dialog()!.textContent).toContain('Pleroma granulosum')
     expect(dialog()!.textContent).toContain('Focus session')
 
     const close = [...dialog()!.querySelectorAll('button')].find((b) => b.textContent === 'Close')!
@@ -87,10 +87,10 @@ describe('CollectionScreen', () => {
     await act(async () => toggleButton('Garden').click())
     // The garden's accessible list mirrors tile taps (see IsometricGarden tests for pointer picking).
     const plant = [...container.querySelectorAll('.sr-only button')].find(
-      (b) => b.textContent === 'Yellow Trumpet Tree',
+      (b) => b.textContent === 'Glory Bush Tree',
     ) as HTMLButtonElement
     act(() => plant.click())
 
-    expect(dialog()?.textContent).toContain('Handroanthus albus')
+    expect(dialog()?.textContent).toContain('Pleroma granulosum')
   })
 })

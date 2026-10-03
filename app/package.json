@@ -12,7 +12,8 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "test": "vitest run",
-    "build:biome-grid": "node scripts/build-biome-grid.ts"
+    "build:biome-grid": "node scripts/build-biome-grid.ts",
+    "build:catalog": "node scripts/build-species-catalog.ts"
   },
   "dependencies": {
     "@capacitor-community/keep-awake": "^8.0.1",
@@ -40,6 +41,7 @@
     "@vitejs/plugin-react": "^6.1.0",
     "jsdom": "^30.0.1",
     "oxlint": "^1.79.0",
+    "sharp": "^0.35.5",
     "typescript": "~6.0.2",
     "vite": "^8.2.2",
     "vitest": "^5.0.0"

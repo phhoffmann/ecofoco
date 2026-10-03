@@ -1,0 +1,1045 @@
+{
+  "biome": "cerrado",
+  "species": [
+    {
+      "id": "canario-da-terra",
+      "scientificName": "Sicalis flaveola",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Saffron Finch",
+        "pt-BR": "Canário-da-terra"
+      },
+      "descriptions": {
+        "en": "A bright yellow finch with an orange forehead that sings from rooftops and feeds on seeds in open ground.",
+        "pt-BR": "Pássaro amarelo-vivo de testa alaranjada que canta dos telhados e come sementes em áreas abertas."
+      },
+      "photo": {
+        "file": "canario-da-terra.webp",
+        "license": "CC-BY",
+        "credit": "Jer Clarke",
+        "sourceUrl": "https://www.inaturalist.org/observations/303463866"
+      },
+      "source": {
+        "inatTaxonId": 9864,
+        "gbifTaxonKey": 2491862,
+        "observations": 339
+      }
+    },
+    {
+      "id": "carcara",
+      "scientificName": "Caracara plancus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "large-bird",
+      "names": {
+        "en": "Southern Crested Caracara",
+        "pt-BR": "Carcará"
+      },
+      "descriptions": {
+        "en": "A bold, opportunistic falcon that walks the ground as often as it flies, eating anything from carrion to insects.",
+        "pt-BR": "Falcão ousado e oportunista que anda pelo chão tanto quanto voa, comendo de carniça a insetos."
+      },
+      "photo": {
+        "file": "carcara.webp",
+        "license": "CC-BY",
+        "credit": "Jean Martins",
+        "sourceUrl": "https://www.inaturalist.org/observations/109548994"
+      },
+      "source": {
+        "inatTaxonId": 4715,
+        "gbifTaxonKey": 2480989,
+        "observations": 178
+      }
+    },
+    {
+      "id": "bem-te-vi",
+      "scientificName": "Pitangus sulphuratus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Great Kiskadee",
+        "pt-BR": "Bem-te-vi"
+      },
+      "descriptions": {
+        "en": "A loud, bold yellow-bellied flycatcher whose call sounds like it's saying its own name — one of Brazil's most familiar birds.",
+        "pt-BR": "Ave insetívora barulhenta e destemida, de peito amarelo, cujo canto parece dizer o próprio nome — uma das aves mais conhecidas do Brasil."
+      },
+      "photo": {
+        "file": "bem-te-vi.webp",
+        "license": "CC-BY",
+        "credit": "Helio Lourencini",
+        "sourceUrl": "https://www.inaturalist.org/observations/62682207"
+      },
+      "source": {
+        "inatTaxonId": 16956,
+        "gbifTaxonKey": 2482755,
+        "observations": 175
+      }
+    },
+    {
+      "id": "sagui-de-tufo-preto",
+      "scientificName": "Callithrix penicillata",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "primate",
+      "names": {
+        "en": "Black-tufted Marmoset",
+        "pt-BR": "Sagui-de-tufo-preto"
+      },
+      "descriptions": {
+        "en": "A small, highly social marmoset recognizable by the black tufts of fur around its ears, common in urban parks and forest edges.",
+        "pt-BR": "Um pequeno sagui muito social, reconhecível pelos tufos pretos de pelo ao redor das orelhas, comum em parques urbanos e bordas de mata."
+      },
+      "photo": {
+        "file": "sagui-de-tufo-preto.webp",
+        "license": "CC-BY",
+        "credit": "Cristina Sininho Sa",
+        "sourceUrl": "https://www.inaturalist.org/observations/295533935"
+      },
+      "source": {
+        "inatTaxonId": 43374,
+        "gbifTaxonKey": 5219541,
+        "observations": 173
+      }
+    },
+    {
+      "id": "borboleta-oitenta",
+      "scientificName": "Callicore sorana",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "insect",
+      "names": {
+        "en": "Eighty Butterfly",
+        "pt-BR": "Borboleta-oitenta"
+      },
+      "descriptions": {
+        "en": "Its underside shows a pattern that reads like the number 80; the upperside is black with red and blue.",
+        "pt-BR": "A face de baixo das asas tem um desenho que lembra o número 80; a de cima é preta com vermelho e azul."
+      },
+      "photo": {
+        "file": "borboleta-oitenta.webp",
+        "license": "CC-BY",
+        "credit": "Pedro Sisnando Araújo dos Santos",
+        "sourceUrl": "https://www.inaturalist.org/observations/75088498"
+      },
+      "source": {
+        "inatTaxonId": 126389,
+        "gbifTaxonKey": 10401396,
+        "observations": 172
+      }
+    },
+    {
+      "id": "saira-amarela",
+      "scientificName": "Stilpnia cayana",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Burnished-buff Tanager",
+        "pt-BR": "Saíra-amarela"
+      },
+      "descriptions": {
+        "en": "A buff-gold tanager with a dark mask and turquoise wings, common in Cerrado woodland and city parks.",
+        "pt-BR": "Saíra dourada com máscara escura e asas azul-turquesa, comum no cerrado e em parques urbanos."
+      },
+      "photo": {
+        "file": "saira-amarela.webp",
+        "license": "CC-BY",
+        "credit": "Douglas",
+        "sourceUrl": "https://www.inaturalist.org/observations/15274643"
+      },
+      "source": {
+        "inatTaxonId": 979978,
+        "gbifTaxonKey": 10895981,
+        "observations": 168
+      }
+    },
+    {
+      "id": "joao-de-barro",
+      "scientificName": "Furnarius rufus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Rufous Hornero",
+        "pt-BR": "João-de-barro"
+      },
+      "descriptions": {
+        "en": "The ovenbird builds a domed clay nest like a little wood-fired oven on posts and branches.",
+        "pt-BR": "O joão-de-barro constrói um ninho de barro em forma de forninho sobre postes e galhos."
+      },
+      "photo": {
+        "file": "joao-de-barro.webp",
+        "license": "CC-BY",
+        "credit": "Donald Davesne",
+        "sourceUrl": "https://www.inaturalist.org/observations/317627547"
+      },
+      "source": {
+        "inatTaxonId": 11275,
+        "gbifTaxonKey": 2485821,
+        "observations": 167
+      }
+    },
+    {
+      "id": "beija-flor-tesoura",
+      "scientificName": "Eupetomena macroura",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Swallow-tailed Hummingbird",
+        "pt-BR": "Beija-flor-tesoura"
+      },
+      "descriptions": {
+        "en": "A large, shimmering blue-green hummingbird with a long forked tail that chases rivals away from flowers.",
+        "pt-BR": "Beija-flor grande, verde-azulado e brilhante, de cauda longa e bifurcada, que expulsa os rivais das flores."
+      },
+      "photo": {
+        "file": "beija-flor-tesoura.webp",
+        "license": "CC-BY",
+        "credit": "Douglas",
+        "sourceUrl": "https://www.inaturalist.org/observations/14460331"
+      },
+      "source": {
+        "inatTaxonId": 6065,
+        "gbifTaxonKey": 2476667,
+        "observations": 164
+      }
+    },
+    {
+      "id": "periquitao",
+      "scientificName": "Psittacara leucophthalmus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "White-eyed Parakeet",
+        "pt-BR": "Periquitão"
+      },
+      "descriptions": {
+        "en": "A green parakeet with red shoulder flecks that flies in loud flocks and roosts in palms and buildings.",
+        "pt-BR": "Periquito verde com pintas vermelhas nos ombros que voa em bandos barulhentos e dorme em palmeiras e prédios."
+      },
+      "photo": {
+        "file": "periquitao.webp",
+        "license": "CC-BY",
+        "credit": "Davidson Moreira",
+        "sourceUrl": "https://www.inaturalist.org/observations/210086162"
+      },
+      "source": {
+        "inatTaxonId": 367573,
+        "gbifTaxonKey": 2479115,
+        "observations": 164
+      }
+    },
+    {
+      "id": "sabia-do-campo",
+      "scientificName": "Mimus saturninus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Chalk-browed Mockingbird",
+        "pt-BR": "Sabiá-do-campo"
+      },
+      "descriptions": {
+        "en": "A grey-brown mockingbird with a white eyebrow that sings loudly and imitates other birds.",
+        "pt-BR": "Sabiá cinza-amarronzado de sobrancelha branca que canta alto e imita outras aves."
+      },
+      "photo": {
+        "file": "sabia-do-campo.webp",
+        "license": "CC0",
+        "credit": "Frank Thomas Sautter",
+        "sourceUrl": "https://www.inaturalist.org/observations/191089221"
+      },
+      "source": {
+        "inatTaxonId": 14878,
+        "gbifTaxonKey": 5231675,
+        "observations": 162
+      }
+    },
+    {
+      "id": "borboleta-pavao-branco",
+      "scientificName": "Anartia jatrophae",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "insect",
+      "names": {
+        "en": "White Peacock",
+        "pt-BR": "Borboleta-pavão-branco"
+      },
+      "descriptions": {
+        "en": "A pale butterfly with small eyespots that flutters low over weedy fields and lawns.",
+        "pt-BR": "Borboleta clara com pequenos ocelos que voa baixo sobre gramados e terrenos com mato."
+      },
+      "photo": {
+        "file": "borboleta-pavao-branco.webp",
+        "license": "CC-BY",
+        "credit": "Túllio",
+        "sourceUrl": "https://www.inaturalist.org/observations/264620688"
+      },
+      "source": {
+        "inatTaxonId": 49761,
+        "gbifTaxonKey": 5128007,
+        "observations": 110
+      }
+    },
+    {
+      "id": "lagarta-das-palmeiras",
+      "scientificName": "Brassolis sophorae",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "insect",
+      "names": {
+        "en": "Coconut Caterpillar",
+        "pt-BR": "Lagarta-das-palmeiras"
+      },
+      "descriptions": {
+        "en": "A big brown owl-like butterfly; its caterpillars live in silk shelters in palm crowns and eat the fronds.",
+        "pt-BR": "Borboleta marrom e grande; suas lagartas vivem em abrigos de seda na copa das palmeiras e comem as folhas."
+      },
+      "photo": {
+        "file": "lagarta-das-palmeiras.webp",
+        "license": "CC-BY",
+        "credit": "Douglas",
+        "sourceUrl": "https://www.inaturalist.org/observations/39474230"
+      },
+      "source": {
+        "inatTaxonId": 182482,
+        "gbifTaxonKey": 1903598,
+        "observations": 94
+      }
+    },
+    {
+      "id": "nhambikuara-cerradensis",
+      "scientificName": "Nhambikuara cerradensis",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "insect",
+      "names": {
+        "en": "Nhambikuara cerradensis",
+        "pt-BR": "Nhambikuara cerradensis"
+      },
+      "descriptions": {
+        "en": "A small brown satyr butterfly of the Cerrado grasslands, described by science only in recent years.",
+        "pt-BR": "Pequena borboleta marrom dos campos do Cerrado, descrita pela ciência há poucos anos."
+      },
+      "photo": {
+        "file": "nhambikuara-cerradensis.webp",
+        "license": "CC-BY",
+        "credit": "Parque Nacional da Serra do Cipó",
+        "sourceUrl": "https://www.inaturalist.org/observations/222435307"
+      },
+      "source": {
+        "inatTaxonId": 881672,
+        "gbifTaxonKey": 9745549,
+        "observations": 93
+      }
+    },
+    {
+      "id": "capivara",
+      "scientificName": "Hydrochoerus hydrochaeris",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "mid-mammal",
+      "names": {
+        "en": "Capybara",
+        "pt-BR": "Capivara"
+      },
+      "descriptions": {
+        "en": "The world’s largest rodent, a calm grazer that lives in groups near water and swims well.",
+        "pt-BR": "O maior roedor do mundo, um herbívoro tranquilo que vive em grupos perto da água e nada muito bem."
+      },
+      "photo": {
+        "file": "capivara.webp",
+        "license": "CC-BY",
+        "credit": "avocat",
+        "sourceUrl": "https://www.inaturalist.org/observations/8066919"
+      },
+      "source": {
+        "inatTaxonId": 74442,
+        "gbifTaxonKey": 5786666,
+        "observations": 87
+      }
+    },
+    {
+      "id": "gamba-de-orelha-branca",
+      "scientificName": "Didelphis albiventris",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "small-mammal",
+      "names": {
+        "en": "White-eared Opossum",
+        "pt-BR": "Gambá-de-orelha-branca"
+      },
+      "descriptions": {
+        "en": "An adaptable opossum with white ears that carries its young in a pouch and eats almost anything.",
+        "pt-BR": "Gambá adaptável de orelhas brancas que carrega os filhotes no marsúpio e come quase de tudo."
+      },
+      "photo": {
+        "file": "gamba-de-orelha-branca.webp",
+        "license": "CC0",
+        "credit": "Fernando Sessegolo",
+        "sourceUrl": "https://www.inaturalist.org/observations/40560026"
+      },
+      "source": {
+        "inatTaxonId": 42658,
+        "gbifTaxonKey": 2439930,
+        "observations": 74
+      }
+    },
+    {
+      "id": "calango-verde",
+      "scientificName": "Ameiva ameiva",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "reptile",
+      "names": {
+        "en": "Giant Ameiva",
+        "pt-BR": "Calango-verde"
+      },
+      "descriptions": {
+        "en": "A fast, green-backed lizard that forages actively in sunny clearings, flicking its tongue to find insects.",
+        "pt-BR": "Lagarto rápido de dorso verde que caça ativamente em clareiras ensolaradas, usando a língua para achar insetos."
+      },
+      "photo": {
+        "file": "calango-verde.webp",
+        "license": "CC0",
+        "credit": "Carlos Henrique Russi",
+        "sourceUrl": "https://www.inaturalist.org/observations/241923879"
+      },
+      "source": {
+        "inatTaxonId": 38913,
+        "gbifTaxonKey": 2472164,
+        "observations": 68
+      }
+    },
+    {
+      "id": "cascavel",
+      "scientificName": "Crotalus durissus",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "reptile",
+      "names": {
+        "en": "Neotropical Rattlesnake",
+        "pt-BR": "Cascavel"
+      },
+      "descriptions": {
+        "en": "A venomous rattlesnake of open country that warns intruders with the rattle at the tip of its tail.",
+        "pt-BR": "Serpente peçonhenta de áreas abertas que avisa os intrusos com o chocalho na ponta da cauda."
+      },
+      "photo": {
+        "file": "cascavel.webp",
+        "license": "CC-BY",
+        "credit": "Jean Martins",
+        "sourceUrl": "https://www.inaturalist.org/observations/338329643"
+      },
+      "source": {
+        "inatTaxonId": 30693,
+        "gbifTaxonKey": 2444433,
+        "observations": 53
+      }
+    },
+    {
+      "id": "jiboia",
+      "scientificName": "Boa constrictor",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "reptile",
+      "names": {
+        "en": "Boa Constrictor",
+        "pt-BR": "Jiboia"
+      },
+      "descriptions": {
+        "en": "A large, non-venomous snake that kills its prey by squeezing; it hunts at night by ambush.",
+        "pt-BR": "Serpente grande e sem peçonha que mata as presas por constrição; caça à noite, de tocaia."
+      },
+      "photo": {
+        "file": "jiboia.webp",
+        "license": "CC-BY",
+        "credit": "Reuber Brandão",
+        "sourceUrl": "https://www.inaturalist.org/observations/330226584"
+      },
+      "source": {
+        "inatTaxonId": 32093,
+        "gbifTaxonKey": 2464899,
+        "observations": 49
+      }
+    },
+    {
+      "id": "lobo-guara",
+      "scientificName": "Chrysocyon brachyurus",
+      "type": "animal",
+      "rarity": "epic",
+      "archetype": "mid-mammal",
+      "names": {
+        "en": "Maned Wolf",
+        "pt-BR": "Lobo-guará"
+      },
+      "descriptions": {
+        "en": "South America’s tallest wild canid, with long black legs for seeing over the grass; it eats both small animals and fruit.",
+        "pt-BR": "O maior canídeo da América do Sul, de pernas pretas e longas para enxergar acima do capim; come pequenos animais e frutos."
+      },
+      "photo": {
+        "file": "lobo-guara.webp",
+        "license": "CC0",
+        "credit": "Whaldener Endo",
+        "sourceUrl": "https://www.inaturalist.org/observations/121541639"
+      },
+      "source": {
+        "inatTaxonId": 42091,
+        "gbifTaxonKey": 2434450,
+        "observations": 45
+      }
+    },
+    {
+      "id": "macaco-prego-amarelo",
+      "scientificName": "Sapajus libidinosus",
+      "type": "animal",
+      "rarity": "epic",
+      "archetype": "primate",
+      "names": {
+        "en": "Black-striped Capuchin",
+        "pt-BR": "Macaco-prego-amarelo"
+      },
+      "descriptions": {
+        "en": "A capuchin of dry open country famous for cracking hard nuts with stones used as hammers.",
+        "pt-BR": "Macaco-prego de áreas secas e abertas, famoso por quebrar cocos duros usando pedras como martelo."
+      },
+      "photo": {
+        "file": "macaco-prego-amarelo.webp",
+        "license": "CC0",
+        "credit": "Machadoc",
+        "sourceUrl": "https://www.inaturalist.org/observations/336859302"
+      },
+      "source": {
+        "inatTaxonId": 516974,
+        "gbifTaxonKey": 7785578,
+        "observations": 36
+      }
+    },
+    {
+      "id": "pequi",
+      "scientificName": "Caryocar brasiliense",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "broadleaf-tree",
+      "names": {
+        "en": "Pequi",
+        "pt-BR": "Pequi"
+      },
+      "descriptions": {
+        "en": "The emblematic Cerrado tree: its strong-smelling yellow fruit is a regional staple, but the pit hides sharp spines.",
+        "pt-BR": "A árvore símbolo do Cerrado: seu fruto amarelo de cheiro forte é base da culinária regional, mas o caroço esconde espinhos."
+      },
+      "photo": {
+        "file": "pequi.webp",
+        "license": "CC-BY",
+        "credit": "Libris Simas Ferraz",
+        "sourceUrl": "https://www.inaturalist.org/observations/388803497"
+      },
+      "source": {
+        "inatTaxonId": 464113,
+        "gbifTaxonKey": 3189663,
+        "observations": 73
+      }
+    },
+    {
+      "id": "buriti",
+      "scientificName": "Mauritia flexuosa",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "palm",
+      "names": {
+        "en": "Moriche Palm",
+        "pt-BR": "Buriti"
+      },
+      "descriptions": {
+        "en": "A tall palm that grows in wet ground and swamps, where its scaly reddish fruits feed macaws, tapirs and people alike.",
+        "pt-BR": "Palmeira alta de áreas alagadas e veredas, cujos frutos escamosos e avermelhados alimentam araras, antas e pessoas."
+      },
+      "photo": {
+        "file": "buriti.webp",
+        "license": "CC-BY",
+        "credit": "Lucas Kaminski",
+        "sourceUrl": "https://www.inaturalist.org/observations/186416037"
+      },
+      "source": {
+        "inatTaxonId": 154979,
+        "gbifTaxonKey": 5294777,
+        "observations": 59
+      }
+    },
+    {
+      "id": "bate-caixa",
+      "scientificName": "Palicourea rigida",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Bate-caixa",
+        "pt-BR": "Bate-caixa"
+      },
+      "descriptions": {
+        "en": "A gnarled Cerrado shrub with stiff, leathery leaves and yellow-and-red tubular flowers loved by hummingbirds.",
+        "pt-BR": "Arbusto retorcido do Cerrado, de folhas duras e coriáceas e flores tubulares amarelas e vermelhas, adoradas pelos beija-flores."
+      },
+      "photo": {
+        "file": "bate-caixa.webp",
+        "license": "CC-BY",
+        "credit": "Davidson Moreira",
+        "sourceUrl": "https://www.inaturalist.org/observations/341659141"
+      },
+      "source": {
+        "inatTaxonId": 336439,
+        "gbifTaxonKey": 2898841,
+        "observations": 54
+      }
+    },
+    {
+      "id": "araucaria",
+      "scientificName": "Araucaria angustifolia",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "emergent-tree",
+      "names": {
+        "en": "Paraná Pine",
+        "pt-BR": "Araucária"
+      },
+      "descriptions": {
+        "en": "The candelabra-shaped conifer of Brazil’s southern highlands, whose pinhão seeds feed jays, parrots and people through the winter.",
+        "pt-BR": "A conífera em forma de candelabro do planalto sul, cujos pinhões alimentam gralhas, papagaios e pessoas durante o inverno."
+      },
+      "photo": {
+        "file": "araucaria.webp",
+        "license": "CC-BY",
+        "credit": "Pietro",
+        "sourceUrl": "https://www.inaturalist.org/observations/226993944"
+      },
+      "source": {
+        "inatTaxonId": 83168,
+        "gbifTaxonKey": 2684940,
+        "observations": 49
+      }
+    },
+    {
+      "id": "flor-do-cerrado",
+      "scientificName": "Calliandra dysantha",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Flor-do-cerrado",
+        "pt-BR": "Flor-do-cerrado"
+      },
+      "descriptions": {
+        "en": "A small shrub whose red, powder-puff flowers brighten burned and open Cerrado grasslands.",
+        "pt-BR": "Arbusto pequeno cujas flores vermelhas, como pompons, colorem os campos abertos e recém-queimados do Cerrado."
+      },
+      "photo": {
+        "file": "flor-do-cerrado.webp",
+        "license": "CC-BY",
+        "credit": "Arthur Bruck",
+        "sourceUrl": "https://www.inaturalist.org/observations/177738102"
+      },
+      "source": {
+        "inatTaxonId": 461331,
+        "gbifTaxonKey": 2982349,
+        "observations": 40
+      }
+    },
+    {
+      "id": "abacaxi-de-tingir",
+      "scientificName": "Aechmea bromeliifolia",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Abacaxi-de-tingir",
+        "pt-BR": "Abacaxi-de-tingir"
+      },
+      "descriptions": {
+        "en": "A ground bromeliad of savannas and dry forests with a woolly, cone-shaped flower spike that turns from white to yellow and black.",
+        "pt-BR": "Bromélia terrestre de cerrados e matas secas, com uma inflorescência lanosa em forma de cone que passa de branca a amarela e preta."
+      },
+      "photo": {
+        "file": "abacaxi-de-tingir.webp",
+        "license": "CC-BY",
+        "credit": "Luan Mazzeo",
+        "sourceUrl": "https://www.inaturalist.org/observations/185430861"
+      },
+      "source": {
+        "inatTaxonId": 276440,
+        "gbifTaxonKey": 8344737,
+        "observations": 39
+      }
+    },
+    {
+      "id": "pau-terra-grande",
+      "scientificName": "Qualea grandiflora",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "flowering-tree",
+      "names": {
+        "en": "Pau-terra-grande",
+        "pt-BR": "Pau-terra-grande"
+      },
+      "descriptions": {
+        "en": "A twisted Cerrado tree with corky bark and large yellow flowers.",
+        "pt-BR": "Árvore retorcida do Cerrado, de casca grossa e cortiçosa e grandes flores amarelas."
+      },
+      "photo": {
+        "file": "pau-terra-grande.webp",
+        "license": "CC-BY",
+        "credit": "João Arthur Rabello",
+        "sourceUrl": "https://www.inaturalist.org/observations/161669107"
+      },
+      "source": {
+        "inatTaxonId": 803563,
+        "gbifTaxonKey": 4030658,
+        "observations": 39
+      }
+    },
+    {
+      "id": "pau-terra-de-flor-miuda",
+      "scientificName": "Qualea parviflora",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "flowering-tree",
+      "names": {
+        "en": "Pau-terra-de-flor-miúda",
+        "pt-BR": "Pau-terra-de-flor-miúda"
+      },
+      "descriptions": {
+        "en": "A Cerrado tree that covers itself in small lilac flowers in the dry season.",
+        "pt-BR": "Árvore do Cerrado que se cobre de pequenas flores lilás na estação seca."
+      },
+      "photo": {
+        "file": "pau-terra-de-flor-miuda.webp",
+        "license": "CC-BY",
+        "credit": "Thomaz Ricardo Favreto Sinani",
+        "sourceUrl": "https://www.inaturalist.org/observations/188320806"
+      },
+      "source": {
+        "inatTaxonId": 153005,
+        "gbifTaxonKey": 7288348,
+        "observations": 36
+      }
+    },
+    {
+      "id": "alcacuz-do-cerrado",
+      "scientificName": "Periandra mediterranea",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Brazilian Licorice",
+        "pt-BR": "Alcaçuz-do-cerrado"
+      },
+      "descriptions": {
+        "en": "A small legume with blue-violet pea flowers and sweet-tasting roots, common in open Cerrado grassland.",
+        "pt-BR": "Pequena leguminosa de flores azul-violeta e raízes de sabor adocicado, comum nos campos abertos do Cerrado."
+      },
+      "photo": {
+        "file": "alcacuz-do-cerrado.webp",
+        "license": "CC-BY",
+        "credit": "Fabrício Mil Homens Riella",
+        "sourceUrl": "https://www.inaturalist.org/observations/299155067"
+      },
+      "source": {
+        "inatTaxonId": 84748,
+        "gbifTaxonKey": 5352500,
+        "observations": 35
+      }
+    },
+    {
+      "id": "lobeira",
+      "scientificName": "Solanum lycocarpum",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Wolf Apple",
+        "pt-BR": "Lobeira"
+      },
+      "descriptions": {
+        "en": "A spiny shrub with big green fruits that make up a large part of the maned wolf’s diet, which spreads its seeds.",
+        "pt-BR": "Arbusto espinhoso de frutos verdes e grandes que formam boa parte da dieta do lobo-guará, que espalha suas sementes."
+      },
+      "photo": {
+        "file": "lobeira.webp",
+        "license": "CC0",
+        "credit": "NINA WENÓLI",
+        "sourceUrl": "https://www.inaturalist.org/observations/82453880"
+      },
+      "source": {
+        "inatTaxonId": 347865,
+        "gbifTaxonKey": 2930421,
+        "observations": 35
+      }
+    },
+    {
+      "id": "canela-de-velho",
+      "scientificName": "Miconia albicans",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Canela-de-velho",
+        "pt-BR": "Canela-de-velho"
+      },
+      "descriptions": {
+        "en": "A Cerrado shrub with leaves white-felted underneath and small berries that many birds eat.",
+        "pt-BR": "Arbusto do Cerrado de folhas com a face de baixo branca e felpuda, e frutinhos que muitas aves comem."
+      },
+      "photo": {
+        "file": "canela-de-velho.webp",
+        "license": "CC-BY",
+        "credit": "Donald Davesne",
+        "sourceUrl": "https://www.inaturalist.org/observations/327308395"
+      },
+      "source": {
+        "inatTaxonId": 285566,
+        "gbifTaxonKey": 3860779,
+        "observations": 31
+      }
+    },
+    {
+      "id": "augusta-longifolia",
+      "scientificName": "Augusta longifolia",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Augusta longifolia",
+        "pt-BR": "Augusta longifolia"
+      },
+      "descriptions": {
+        "en": "A riverside shrub with narrow leaves and long white tubular flowers that grows among rocks in streams.",
+        "pt-BR": "Arbusto de beira de rio, de folhas estreitas e flores brancas, longas e tubulares, que cresce entre as pedras dos córregos."
+      },
+      "photo": {
+        "file": "augusta-longifolia.webp",
+        "license": "CC0",
+        "credit": "Tsssss",
+        "sourceUrl": "https://www.inaturalist.org/observations/62710126"
+      },
+      "source": {
+        "inatTaxonId": 569672,
+        "gbifTaxonKey": 5335699,
+        "observations": 30
+      }
+    },
+    {
+      "id": "embauba",
+      "scientificName": "Cecropia pachystachya",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "pioneer-tree",
+      "names": {
+        "en": "Cecropia",
+        "pt-BR": "Embaúba"
+      },
+      "descriptions": {
+        "en": "A fast-growing pioneer tree with distinctive umbrella-shaped leaves, an important food source for sloths and toucans alike.",
+        "pt-BR": "Árvore pioneira de crescimento rápido com folhas em formato de guarda-chuva, importante fonte de alimento para preguiças e tucanos."
+      },
+      "photo": {
+        "file": "embauba.webp",
+        "license": "CC-BY",
+        "credit": "Victor Farjalla Pontes",
+        "sourceUrl": "https://www.inaturalist.org/observations/89464322"
+      },
+      "source": {
+        "inatTaxonId": 126742,
+        "gbifTaxonKey": 4013385,
+        "observations": 30
+      }
+    },
+    {
+      "id": "macauba",
+      "scientificName": "Acrocomia aculeata",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "palm",
+      "names": {
+        "en": "Macaw Palm",
+        "pt-BR": "Macaúba"
+      },
+      "descriptions": {
+        "en": "A spiny-trunked palm of open country whose oily yellow fruits feed macaws, cattle and people.",
+        "pt-BR": "Palmeira de tronco espinhoso das áreas abertas, cujos frutos amarelos e oleosos alimentam araras, gado e gente."
+      },
+      "photo": {
+        "file": "macauba.webp",
+        "license": "CC-BY",
+        "credit": "agujaceratops",
+        "sourceUrl": "https://www.inaturalist.org/observations/191899574"
+      },
+      "source": {
+        "inatTaxonId": 244459,
+        "gbifTaxonKey": 7413879,
+        "observations": 27
+      }
+    },
+    {
+      "id": "cambessedesia-hilariana",
+      "scientificName": "Cambessedesia hilariana",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "Cambessedesia hilariana",
+        "pt-BR": "Cambessedesia hilariana"
+      },
+      "descriptions": {
+        "en": "A small shrub of rocky Cerrado highlands with bright red-and-yellow star-shaped flowers.",
+        "pt-BR": "Pequeno arbusto dos campos rochosos de altitude do Cerrado, com flores em estrela vermelhas e amarelas."
+      },
+      "photo": {
+        "file": "cambessedesia-hilariana.webp",
+        "license": "CC-BY",
+        "credit": "João D'Andretta",
+        "sourceUrl": "https://www.inaturalist.org/observations/89090068"
+      },
+      "source": {
+        "inatTaxonId": 627129,
+        "gbifTaxonKey": 3859473,
+        "observations": 27
+      }
+    },
+    {
+      "id": "gomeira",
+      "scientificName": "Vochysia thyrsoidea",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "flowering-tree",
+      "names": {
+        "en": "Gomeira",
+        "pt-BR": "Gomeira"
+      },
+      "descriptions": {
+        "en": "A Cerrado tree of rocky highlands with upright spikes of yellow flowers and a trunk that oozes gum.",
+        "pt-BR": "Árvore dos campos rochosos do Cerrado, com cachos eretos de flores amarelas e tronco que solta goma."
+      },
+      "photo": {
+        "file": "gomeira.webp",
+        "license": "CC-BY",
+        "credit": "Márcia Martins",
+        "sourceUrl": "https://www.inaturalist.org/observations/40057835"
+      },
+      "source": {
+        "inatTaxonId": 487526,
+        "gbifTaxonKey": 7288343,
+        "observations": 27
+      }
+    },
+    {
+      "id": "justicia-lanstyakii",
+      "scientificName": "Justicia lanstyakii",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "Justicia lanstyakii",
+        "pt-BR": "Justicia lanstyakii"
+      },
+      "descriptions": {
+        "en": "A small shrub of dry forests and Cerrado whose tubular flowers are visited by hummingbirds.",
+        "pt-BR": "Pequeno arbusto de matas secas e do Cerrado cujas flores tubulares são visitadas por beija-flores."
+      },
+      "photo": {
+        "file": "justicia-lanstyakii.webp",
+        "license": "CC-BY",
+        "credit": "João Arthur Rabello",
+        "sourceUrl": "https://www.inaturalist.org/observations/173240150"
+      },
+      "source": {
+        "inatTaxonId": 904316,
+        "gbifTaxonKey": 3776959,
+        "observations": 26
+      }
+    },
+    {
+      "id": "solanum-falciforme",
+      "scientificName": "Solanum falciforme",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "Solanum falciforme",
+        "pt-BR": "Solanum falciforme"
+      },
+      "descriptions": {
+        "en": "A prickly nightshade shrub of the Cerrado, a close relative of the wolf apple.",
+        "pt-BR": "Arbusto espinhento do Cerrado, parente próximo da lobeira."
+      },
+      "photo": {
+        "file": "solanum-falciforme.webp",
+        "license": "CC-BY",
+        "credit": "Mario Barroso",
+        "sourceUrl": "https://www.inaturalist.org/observations/192846627"
+      },
+      "source": {
+        "inatTaxonId": 909989,
+        "gbifTaxonKey": 8104212,
+        "observations": 25
+      }
+    },
+    {
+      "id": "pimenta-de-macaco",
+      "scientificName": "Xylopia aromatica",
+      "type": "plant",
+      "rarity": "epic",
+      "archetype": "broadleaf-tree",
+      "names": {
+        "en": "Monkey Pepper",
+        "pt-BR": "Pimenta-de-macaco"
+      },
+      "descriptions": {
+        "en": "A slender Cerrado tree whose small, peppery fruits open to show black seeds on a red lining.",
+        "pt-BR": "Árvore esguia do Cerrado cujos frutinhos picantes se abrem mostrando sementes pretas sobre um fundo vermelho."
+      },
+      "photo": {
+        "file": "pimenta-de-macaco.webp",
+        "license": "CC-BY",
+        "credit": "Fabrício Mil Homens Riella",
+        "sourceUrl": "https://www.inaturalist.org/observations/232662511"
+      },
+      "source": {
+        "inatTaxonId": 555893,
+        "gbifTaxonKey": 3157126,
+        "observations": 25
+      }
+    },
+    {
+      "id": "algodao-do-cerrado",
+      "scientificName": "Cochlospermum regium",
+      "type": "plant",
+      "rarity": "epic",
+      "archetype": "shrub",
+      "names": {
+        "en": "Algodão-do-cerrado",
+        "pt-BR": "Algodão-do-cerrado"
+      },
+      "descriptions": {
+        "en": "A low shrub that flowers bright yellow in the dry season; its fruits release seeds wrapped in cotton-like fibre.",
+        "pt-BR": "Arbusto baixo de flores amarelo-vivas na seca; seus frutos liberam sementes envoltas em uma fibra parecida com algodão."
+      },
+      "photo": {
+        "file": "algodao-do-cerrado.webp",
+        "license": "CC0",
+        "credit": "Tsssss",
+        "sourceUrl": "https://www.inaturalist.org/observations/59908259"
+      },
+      "source": {
+        "inatTaxonId": 430862,
+        "gbifTaxonKey": 3702412,
+        "observations": 23
+      }
+    }
+  ]
+}

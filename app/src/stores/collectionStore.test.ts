@@ -46,9 +46,9 @@ describe('collectionStore', () => {
   it('logManualSighting() celebrates the sighted catalog species', async () => {
     listCollectedEntries.mockResolvedValue([])
 
-    await useCollectionStore.getState().logManualSighting('ipe-amarelo')
+    await useCollectionStore.getState().logManualSighting('quaresmeira')
 
-    expect(useCelebrationStore.getState().species?.id).toBe('ipe-amarelo')
+    expect(useCelebrationStore.getState().species?.id).toBe('quaresmeira')
   })
 
   it('logManualSighting() skips the celebration for an id missing from the catalog', async () => {
