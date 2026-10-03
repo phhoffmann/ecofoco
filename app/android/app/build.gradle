@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     namespace = "com.paulohoffmann.ecofoco"
@@ -15,6 +16,10 @@ android {
              // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
+    }
+    // Match the Java 21 target set in capacitor.build.gradle
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_21.toString()
     }
     signingConfigs {
         // Committed debug-only key so CI and local debug builds share one signature

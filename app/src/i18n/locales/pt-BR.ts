@@ -47,7 +47,7 @@ export const ptBR: typeof en = {
   focus: {
     chooseDuration: 'Escolha a duração do foco',
     durationMinutes: '{{count}} min',
-    leaveWarning: 'Sair do app agora vai falhar essa sessão e descartar o broto.',
+    leaveWarning: 'Trocar para outro app vai falhar essa sessão e descartar o broto. Bloquear a tela não tem problema.',
     giveUp: 'Desistir',
     youCollected: 'Você coletou',
     sessionFailed: 'Sessão falhou',

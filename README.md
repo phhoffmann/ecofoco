@@ -28,7 +28,7 @@ EcoFoco is a personal project, built as a fullstack portfolio piece. It runs ent
 
 - **App:** Capacitor 8, Vite, React 19, TypeScript, Tailwind CSS 4, Zustand, i18next
 - **On-device data:** SQLite (`@capacitor-community/sqlite`; `jeep-sqlite`/sql.js in the browser)
-- **Native plugins:** Health Connect steps (`@capgo/capacitor-health`), coarse geolocation, keep-awake, app lifecycle, haptics
+- **Native plugins:** Health Connect steps (`@capgo/capacitor-health`), coarse geolocation, app lifecycle, haptics, local AwayTracker (Kotlin; time spent in other apps with the screen on)
 - **Tooling:** Vitest, Oxlint, GitHub Actions (lint, tests, build, debug APK, manifest permission checks)
 
 ## Quick start
@@ -60,7 +60,7 @@ Requires Android 8.0+, USB debugging, and Health Connect for step counts. To bui
 
 ## Roadmap
 
-What is shipped and what is planned — a native focus lock where turning the screen off still counts as focused, app-wide visual polish with baked art and motion — is in the [PRD](PRD.md#6-roadmap). Domain terms are defined in [`CONTEXT.md`](CONTEXT.md).
+What is shipped and what is planned — a native focus lock (screen overlay plus app-usage monitoring), app-wide visual polish with baked art and motion — is in the [PRD](PRD.md#6-roadmap). Domain terms are defined in [`CONTEXT.md`](CONTEXT.md).
 
 ## Credits and licenses
 

@@ -7,7 +7,7 @@ The core domain of a focus-lock app where staying off the phone grows plants, an
 ### Focus & growth
 
 **FocusSession**:
-A timed period where the user stays off the phone; completing it without leaving the app grows a Sprout into a permanent CollectedEntry, leaving early discards it. Today the app keeps the screen awake and any trip to the background fails the session; the planned native lock will let the screen turn off without failing (Forest-style).
+A timed period where the user stays off the phone; completing it without leaving the app grows a Sprout into a permanent CollectedEntry, leaving early discards it. Turning the screen off or locking the phone keeps the session running; only time spent in another app beyond a 5-second grace period fails it (Forest-style).
 _Avoid_: focus timer, lock session
 
 **Sprout**:
