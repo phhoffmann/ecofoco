@@ -16,7 +16,6 @@
     "build:catalog": "node scripts/build-species-catalog.ts"
   },
   "dependencies": {
-    "@capacitor-community/keep-awake": "^8.0.1",
     "@capacitor-community/sqlite": "^8.1.1",
     "@capacitor/android": "^8.5.1",
     "@capacitor/app": "^8.1.1",

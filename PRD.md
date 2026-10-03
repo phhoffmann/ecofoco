@@ -25,9 +25,9 @@ v1 is the MVP loop (focus → plants, steps → animals, one permanent Collectio
 - User picks a duration (3, 15, 25 or 45 minutes) and starts the session.
 - A Sprout grows visibly in the UI for the duration of the session.
 - If completed without leaving the app → the Sprout becomes a permanent collected Plant, drawn from the current biome (§4.5).
-- If the user leaves the app before it ends → the Sprout is discarded (session fails, nothing is collected).
-- **Shipped:** the app keeps the screen awake during a session, and the session fails as soon as the app goes to the background.
-- **Planned (native focus lock, §6):** a real lock — a screen overlay plus app-usage monitoring — where turning the screen off counts as staying focused (Forest-style), while opening another app still fails the session. Today, turning the screen off backgrounds the app and fails the session.
+- If the user leaves for another app before it ends (beyond a 5-second grace period) → the Sprout is discarded (session fails, nothing is collected).
+- **Shipped:** turning the screen off or locking the phone keeps the session running; switching to another app with the screen on fails it after a 5-second grace period. Web/dev builds without the native plugin still fail as soon as the app is backgrounded. The screen is no longer kept awake.
+- **Planned (native focus lock, §6):** a real lock — a screen overlay plus app-usage monitoring.
 
 ### 4.2 Animal collection
 - Daily step goal (default 6,000), read via Health Connect (Android). Configurable in Settings.
@@ -84,7 +84,7 @@ v1 is the MVP loop (focus → plants, steps → animals, one permanent Collectio
 
 Planned work, roughly in order of how much it unblocks:
 
-1. **Native focus lock.** Kotlin plugins for the screen-lock overlay and app-usage reading (Usage Stats API), so a session survives the screen being turned off (Forest-style) and fails only when another app is used. Replaces today's keep-awake + leave-the-app-and-fail behaviour (§4.1).
+1. **Native focus lock.** Kotlin plugins for the screen-lock overlay and app-usage reading (Usage Stats API).
 2. **App-wide visual polish.** Baked per-archetype garden art replacing the Kenney placeholders, richer per-biome ground (see `design-references/isometric-biome-example.png` for the target look), and motion/animation across the app, not only in the garden and celebrations.
 3. **Android 8–11 coarse location.** Devices below Android 12 (API < 31) may not grant coarse-only location, leaving only the manual picker. Not tested on a real device yet; verify and fix if needed.
 4. **Plugin permission trim.** `@capgo/capacitor-health` merges read + write permissions for every Health Connect type; the manifest strips all but steps, and CI fails if more come back. `WRITE_STEPS` exists only for the step simulator and goes away with it before a public release.
@@ -92,7 +92,7 @@ Planned work, roughly in order of how much it unblocks:
 ## 7. Technical requirements
 
 - **Mobile stack:** Capacitor + Vite + React + TypeScript + Tailwind + Zustand (the same everyday web stack, packaged as an Android app).
-- **Native capabilities today:** off-the-shelf Capacitor plugins only — SQLite, Health Connect steps (`@capgo/capacitor-health`), coarse geolocation, keep-awake, app lifecycle and haptics.
+- **Native capabilities today:** off-the-shelf Capacitor plugins only — SQLite, Health Connect steps (`@capgo/capacitor-health`), coarse geolocation, app lifecycle and haptics — plus a local Kotlin AwayTracker plugin that measures time spent in other apps with the screen on.
 - **Native plugins (Kotlin), isolated and minimal — planned (§6):**
   - Screen-lock overlay.
   - App usage reading (Usage Stats API).

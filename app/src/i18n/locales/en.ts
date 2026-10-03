@@ -45,7 +45,7 @@ export const en = {
   focus: {
     chooseDuration: 'Choose a focus duration',
     durationMinutes: '{{count}} min',
-    leaveWarning: 'Leaving the app now will fail this session and discard the sprout.',
+    leaveWarning: 'Switching to another app will fail this session and discard the sprout. Locking the screen is fine.',
     giveUp: 'Give up',
     youCollected: 'You collected',
     sessionFailed: 'Session failed',
