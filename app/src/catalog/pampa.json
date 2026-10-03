@@ -2,6 +2,32 @@
   "biome": "pampa",
   "species": [
     {
+      "id": "borboleta-pavao-escarlate",
+      "scientificName": "Anartia amathea",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "insect",
+      "names": {
+        "en": "Red Peacock",
+        "pt-BR": "Borboleta-pavão-escarlate"
+      },
+      "descriptions": {
+        "en": "A dark butterfly with bold scarlet bands, often seen sipping nectar in gardens and pastures.",
+        "pt-BR": "Borboleta escura com faixas vermelho-vivas, vista com frequência tomando néctar em jardins e pastos."
+      },
+      "photo": {
+        "file": "borboleta-pavao-escarlate.webp",
+        "license": "CC-BY",
+        "credit": "Odebrecht, Clarisse",
+        "sourceUrl": "https://www.inaturalist.org/observations/349854762"
+      },
+      "source": {
+        "inatTaxonId": 83652,
+        "gbifTaxonKey": 5128011,
+        "observations": 263
+      }
+    },
+    {
       "id": "borboleta-do-manaca",
       "scientificName": "Methona themisto",
       "type": "animal",
@@ -28,81 +54,55 @@
       }
     },
     {
-      "id": "burnsius-orcus",
-      "scientificName": "Burnsius orcus",
+      "id": "borboleta-paixao",
+      "scientificName": "Dione vanillae",
       "type": "animal",
       "rarity": "common",
       "archetype": "insect",
       "names": {
-        "en": "Orcus Checkered-Skipper",
-        "pt-BR": "Burnsius orcus"
+        "en": "Gulf Fritillary",
+        "pt-BR": "Borboleta-paixão"
       },
       "descriptions": {
-        "en": "A small black-and-white checkered skipper that darts low over weedy, open ground.",
-        "pt-BR": "Pequena borboleta quadriculada de preto e branco que voa rápido e baixo sobre terrenos abertos."
+        "en": "A bright orange butterfly with silver spots under its wings; its caterpillars feed on passionflower vines.",
+        "pt-BR": "Borboleta laranja-viva com manchas prateadas sob as asas; suas lagartas se alimentam de maracujazeiros."
       },
       "photo": {
-        "file": "burnsius-orcus.webp",
-        "license": "CC0",
-        "credit": "Frank Thomas Sautter",
-        "sourceUrl": "https://www.inaturalist.org/observations/208768296"
-      },
-      "source": {
-        "inatTaxonId": 1038410,
-        "gbifTaxonKey": 5142436,
-        "observations": 206
-      }
-    },
-    {
-      "id": "borboleta-pavao-escarlate",
-      "scientificName": "Anartia amathea",
-      "type": "animal",
-      "rarity": "common",
-      "archetype": "insect",
-      "names": {
-        "en": "Red Peacock",
-        "pt-BR": "Borboleta-pavão-escarlate"
-      },
-      "descriptions": {
-        "en": "A dark butterfly with bold scarlet bands, often seen sipping nectar in gardens and pastures.",
-        "pt-BR": "Borboleta escura com faixas vermelho-vivas, vista com frequência tomando néctar em jardins e pastos."
-      },
-      "photo": {
-        "file": "borboleta-pavao-escarlate.webp",
-        "license": "CC-BY",
-        "credit": "Odebrecht, Clarisse",
-        "sourceUrl": "https://www.inaturalist.org/observations/349854762"
-      },
-      "source": {
-        "inatTaxonId": 83652,
-        "gbifTaxonKey": 5128011,
-        "observations": 195
-      }
-    },
-    {
-      "id": "dama-brasileira",
-      "scientificName": "Vanessa braziliensis",
-      "type": "animal",
-      "rarity": "common",
-      "archetype": "insect",
-      "names": {
-        "en": "Brazilian Lady",
-        "pt-BR": "Dama-brasileira"
-      },
-      "descriptions": {
-        "en": "A fast, orange-and-black lady butterfly that visits flowers in open, sunny places.",
-        "pt-BR": "Borboleta veloz, laranja e preta, que visita flores em lugares abertos e ensolarados."
-      },
-      "photo": {
-        "file": "dama-brasileira.webp",
+        "file": "borboleta-paixao.webp",
         "license": "CC-BY",
         "credit": "André Nogueira Thomas",
-        "sourceUrl": "https://www.inaturalist.org/observations/276843239"
+        "sourceUrl": "https://www.inaturalist.org/observations/256433572"
       },
       "source": {
-        "inatTaxonId": 62502,
-        "gbifTaxonKey": 9563837,
-        "observations": 191
+        "inatTaxonId": 49150,
+        "gbifTaxonKey": 11701883,
+        "observations": 224
+      }
+    },
+    {
+      "id": "borboleta-flambeau",
+      "scientificName": "Dryas iulia",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "insect",
+      "names": {
+        "en": "Julia Heliconian",
+        "pt-BR": "Borboleta-flambeau"
+      },
+      "descriptions": {
+        "en": "A long-winged, flame-orange butterfly that visits flowers in sunny clearings; its caterpillars eat passionflower leaves.",
+        "pt-BR": "Borboleta de asas longas cor de fogo que visita flores em clareiras ensolaradas; suas lagartas comem folhas de maracujá."
+      },
+      "photo": {
+        "file": "borboleta-flambeau.webp",
+        "license": "CC-BY",
+        "credit": "Lucas Kaminski",
+        "sourceUrl": "https://www.inaturalist.org/observations/92852859"
+      },
+      "source": {
+        "inatTaxonId": 50073,
+        "gbifTaxonKey": 5128034,
+        "observations": 221
       }
     },
     {
@@ -199,14 +199,40 @@
       },
       "photo": {
         "file": "quero-quero.webp",
-        "license": "CC-BY",
-        "credit": "Donald Davesne",
-        "sourceUrl": "https://www.inaturalist.org/observations/403960963"
+        "license": "CC0",
+        "credit": "Frank Thomas Sautter",
+        "sourceUrl": "https://www.inaturalist.org/observations/315609401"
       },
       "source": {
         "inatTaxonId": 4867,
         "gbifTaxonKey": 5229146,
         "observations": 130
+      }
+    },
+    {
+      "id": "pica-pau-do-campo",
+      "scientificName": "Colaptes campestris",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Campo Flicker",
+        "pt-BR": "Pica-pau-do-campo"
+      },
+      "descriptions": {
+        "en": "A woodpecker of open country with a yellow face that often feeds on the ground, digging out ants and termites.",
+        "pt-BR": "Pica-pau de áreas abertas, de face amarela, que muitas vezes come no chão, cavando formigas e cupins."
+      },
+      "photo": {
+        "file": "pica-pau-do-campo.webp",
+        "license": "CC0",
+        "credit": "Frank Thomas Sautter",
+        "sourceUrl": "https://www.inaturalist.org/observations/402575051"
+      },
+      "source": {
+        "inatTaxonId": 18262,
+        "gbifTaxonKey": 2478233,
+        "observations": 115
       }
     },
     {
@@ -262,55 +288,29 @@
       }
     },
     {
-      "id": "avoante",
-      "scientificName": "Zenaida auriculata",
-      "type": "animal",
-      "rarity": "common",
-      "archetype": "songbird",
-      "names": {
-        "en": "Eared Dove",
-        "pt-BR": "Avoante"
-      },
-      "descriptions": {
-        "en": "A small dove with black spots on its wings that gathers in large flocks to feed on seeds in fields.",
-        "pt-BR": "Pomba pequena de pintas pretas nas asas que se junta em grandes bandos para comer sementes nos campos."
-      },
-      "photo": {
-        "file": "avoante.webp",
-        "license": "CC0",
-        "credit": "Frank Thomas Sautter",
-        "sourceUrl": "https://www.inaturalist.org/observations/235609705"
-      },
-      "source": {
-        "inatTaxonId": 3439,
-        "gbifTaxonKey": 2495358,
-        "observations": 106
-      }
-    },
-    {
-      "id": "garca-branca-grande",
-      "scientificName": "Ardea alba",
+      "id": "carcara",
+      "scientificName": "Caracara plancus",
       "type": "animal",
       "rarity": "common",
       "archetype": "large-bird",
       "names": {
-        "en": "Great Egret",
-        "pt-BR": "Garça-branca-grande"
+        "en": "Southern Crested Caracara",
+        "pt-BR": "Carcará"
       },
       "descriptions": {
-        "en": "A tall, all-white heron with a yellow bill that stands still in shallow water before spearing fish.",
-        "pt-BR": "Garça alta, toda branca e de bico amarelo, que fica imóvel na água rasa antes de arpoar peixes."
+        "en": "A bold, opportunistic falcon that walks the ground as often as it flies, eating anything from carrion to insects.",
+        "pt-BR": "Falcão ousado e oportunista que anda pelo chão tanto quanto voa, comendo de carniça a insetos."
       },
       "photo": {
-        "file": "garca-branca-grande.webp",
-        "license": "CC0",
-        "credit": "Whaldener Endo",
-        "sourceUrl": "https://www.inaturalist.org/observations/158177910"
+        "file": "carcara.webp",
+        "license": "CC-BY",
+        "credit": "Jean Martins",
+        "sourceUrl": "https://www.inaturalist.org/observations/109548994"
       },
       "source": {
-        "inatTaxonId": 144455,
-        "gbifTaxonKey": 9752617,
-        "observations": 101
+        "inatTaxonId": 4715,
+        "gbifTaxonKey": 2480989,
+        "observations": 106
       }
     },
     {
@@ -414,7 +414,33 @@
       "source": {
         "inatTaxonId": 43997,
         "gbifTaxonKey": 4264680,
-        "observations": 35
+        "observations": 39
+      }
+    },
+    {
+      "id": "graxaim-do-campo",
+      "scientificName": "Lycalopex gymnocerca",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "mid-mammal",
+      "names": {
+        "en": "Pampas Fox",
+        "pt-BR": "Graxaim-do-campo"
+      },
+      "descriptions": {
+        "en": "A grey fox of the southern grasslands that eats small animals, eggs and fruit.",
+        "pt-BR": "Raposa cinzenta dos campos sulinos que come pequenos animais, ovos e frutos."
+      },
+      "photo": {
+        "file": "graxaim-do-campo.webp",
+        "license": "CC-BY",
+        "credit": "Fernando Bondan",
+        "sourceUrl": "https://www.inaturalist.org/observations/200643941"
+      },
+      "source": {
+        "inatTaxonId": 423656,
+        "gbifTaxonKey": 2434333,
+        "observations": 37
       }
     },
     {
@@ -492,33 +518,7 @@
       "source": {
         "inatTaxonId": 43813,
         "gbifTaxonKey": 5219704,
-        "observations": 13
-      }
-    },
-    {
-      "id": "cachorro-do-mato",
-      "scientificName": "Cerdocyon thous",
-      "type": "animal",
-      "rarity": "rare",
-      "archetype": "mid-mammal",
-      "names": {
-        "en": "Crab-eating Fox",
-        "pt-BR": "Cachorro-do-mato"
-      },
-      "descriptions": {
-        "en": "A mostly nocturnal wild canid that eats fruit, insects and small animals, often hunting in pairs.",
-        "pt-BR": "Canídeo silvestre de hábitos sobretudo noturnos que come frutos, insetos e pequenos animais, muitas vezes caçando aos pares."
-      },
-      "photo": {
-        "file": "cachorro-do-mato.webp",
-        "license": "CC-BY",
-        "credit": "Fábio Olmos",
-        "sourceUrl": "https://www.inaturalist.org/observations/220571289"
-      },
-      "source": {
-        "inatTaxonId": 42087,
-        "gbifTaxonKey": 2434584,
-        "observations": 10
+        "observations": 25
       }
     },
     {
@@ -652,6 +652,32 @@
       }
     },
     {
+      "id": "aechmea-recurvata",
+      "scientificName": "Aechmea recurvata",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Aechmea recurvata",
+        "pt-BR": "Aechmea recurvata"
+      },
+      "descriptions": {
+        "en": "A compact bromeliad whose central leaves turn scarlet when it blooms.",
+        "pt-BR": "Bromélia compacta cujas folhas centrais ficam escarlates quando floresce."
+      },
+      "photo": {
+        "file": "aechmea-recurvata.webp",
+        "license": "CC-BY",
+        "credit": "Pablo G. Fernández",
+        "sourceUrl": "https://www.inaturalist.org/observations/178051290"
+      },
+      "source": {
+        "inatTaxonId": 564178,
+        "gbifTaxonKey": 2698386,
+        "observations": 28
+      }
+    },
+    {
       "id": "trapoeraba",
       "scientificName": "Commelina erecta",
       "type": "plant",
@@ -704,6 +730,32 @@
       }
     },
     {
+      "id": "mal-me-quer-do-campo",
+      "scientificName": "Aspilia montevidensis",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Mal-me-quer-do-campo",
+        "pt-BR": "Mal-me-quer-do-campo"
+      },
+      "descriptions": {
+        "en": "A rough-leaved daisy of the southern grasslands with bright yellow flower heads.",
+        "pt-BR": "Margarida de folhas ásperas dos campos sulinos, com flores amarelo-vivas."
+      },
+      "photo": {
+        "file": "mal-me-quer-do-campo.webp",
+        "license": "CC-BY",
+        "credit": "vinicius_s_domingues",
+        "sourceUrl": "https://www.inaturalist.org/observations/145790724"
+      },
+      "source": {
+        "inatTaxonId": 881522,
+        "gbifTaxonKey": 5698931,
+        "observations": 26
+      }
+    },
+    {
       "id": "aguape-flecha",
       "scientificName": "Sagittaria montevidensis",
       "type": "plant",
@@ -730,32 +782,6 @@
       }
     },
     {
-      "id": "mal-me-quer-do-campo",
-      "scientificName": "Aspilia montevidensis",
-      "type": "plant",
-      "rarity": "common",
-      "archetype": "shrub",
-      "names": {
-        "en": "Mal-me-quer-do-campo",
-        "pt-BR": "Mal-me-quer-do-campo"
-      },
-      "descriptions": {
-        "en": "A rough-leaved daisy of the southern grasslands with bright yellow flower heads.",
-        "pt-BR": "Margarida de folhas ásperas dos campos sulinos, com flores amarelo-vivas."
-      },
-      "photo": {
-        "file": "mal-me-quer-do-campo.webp",
-        "license": "CC-BY",
-        "credit": "vinicius_s_domingues",
-        "sourceUrl": "https://www.inaturalist.org/observations/145790724"
-      },
-      "source": {
-        "inatTaxonId": 881522,
-        "gbifTaxonKey": 5698931,
-        "observations": 25
-      }
-    },
-    {
       "id": "cambara",
       "scientificName": "Lantana camara",
       "type": "plant",
@@ -779,32 +805,6 @@
         "inatTaxonId": 50333,
         "gbifTaxonKey": 2925303,
         "observations": 25
-      }
-    },
-    {
-      "id": "aechmea-recurvata",
-      "scientificName": "Aechmea recurvata",
-      "type": "plant",
-      "rarity": "common",
-      "archetype": "shrub",
-      "names": {
-        "en": "Aechmea recurvata",
-        "pt-BR": "Aechmea recurvata"
-      },
-      "descriptions": {
-        "en": "A compact bromeliad whose central leaves turn scarlet when it blooms.",
-        "pt-BR": "Bromélia compacta cujas folhas centrais ficam escarlates quando floresce."
-      },
-      "photo": {
-        "file": "aechmea-recurvata.webp",
-        "license": "CC-BY",
-        "credit": "Pablo G. Fernández",
-        "sourceUrl": "https://www.inaturalist.org/observations/178051290"
-      },
-      "source": {
-        "inatTaxonId": 564178,
-        "gbifTaxonKey": 2698386,
-        "observations": 24
       }
     },
     {
@@ -857,6 +857,32 @@
         "inatTaxonId": 130872,
         "gbifTaxonKey": 3660419,
         "observations": 24
+      }
+    },
+    {
+      "id": "mandacaru-de-fruto-amarelo",
+      "scientificName": "Cereus hildmannianus",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "Hedge Cactus",
+        "pt-BR": "Mandacaru-de-fruto-amarelo"
+      },
+      "descriptions": {
+        "en": "A tall, branching cactus of southern Brazil whose large white flowers open at night.",
+        "pt-BR": "Cacto alto e ramificado do sul do Brasil, cujas grandes flores brancas abrem à noite."
+      },
+      "photo": {
+        "file": "mandacaru-de-fruto-amarelo.webp",
+        "license": "CC0",
+        "credit": "Frank Thomas Sautter",
+        "sourceUrl": "https://www.inaturalist.org/observations/339634829"
+      },
+      "source": {
+        "inatTaxonId": 327664,
+        "gbifTaxonKey": 5384000,
+        "observations": 23
       }
     },
     {
@@ -938,32 +964,6 @@
       }
     },
     {
-      "id": "mandacaru-de-fruto-amarelo",
-      "scientificName": "Cereus hildmannianus",
-      "type": "plant",
-      "rarity": "rare",
-      "archetype": "shrub",
-      "names": {
-        "en": "Hedge Cactus",
-        "pt-BR": "Mandacaru-de-fruto-amarelo"
-      },
-      "descriptions": {
-        "en": "A tall, branching cactus of southern Brazil whose large white flowers open at night.",
-        "pt-BR": "Cacto alto e ramificado do sul do Brasil, cujas grandes flores brancas abrem à noite."
-      },
-      "photo": {
-        "file": "mandacaru-de-fruto-amarelo.webp",
-        "license": "CC0",
-        "credit": "Frank Thomas Sautter",
-        "sourceUrl": "https://www.inaturalist.org/observations/339634829"
-      },
-      "source": {
-        "inatTaxonId": 327664,
-        "gbifTaxonKey": 5384000,
-        "observations": 21
-      }
-    },
-    {
       "id": "bons-dias",
       "scientificName": "Ipomoea indica",
       "type": "plant",
@@ -993,7 +993,7 @@
       "id": "tillandsia-recurvata",
       "scientificName": "Tillandsia recurvata",
       "type": "plant",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "shrub",
       "names": {
         "en": "Ball Moss",

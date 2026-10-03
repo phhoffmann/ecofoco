@@ -120,7 +120,7 @@ export const en = {
       biomeMap: 'Biome map: RESOLVE Ecoregions 2017 (Dinerstein et al.), CC-BY 4.0',
       speciesSummary: 'Species: iNaturalist and GBIF.org; photos CC0 / CC BY by their photographers',
       open: 'Photo and data credits',
-      speciesData: 'Species picked from research-grade, native observations on iNaturalist, with each biome confirmed by occurrence records on GBIF.org.',
+      speciesData: 'Species picked from research-grade observations on iNaturalist, leaving out species recorded as introduced, with each biome confirmed by occurrence records on GBIF.org.',
       gbifCitation: 'GBIF.org occurrence data: derived dataset of the records used.',
       doiPending: '(DOI pending registration)',
       photos: 'Photos · {{biome}}',

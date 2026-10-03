@@ -122,7 +122,7 @@ export const ptBR: typeof en = {
       biomeMap: 'Mapa de biomas: RESOLVE Ecoregions 2017 (Dinerstein et al.), CC-BY 4.0',
       speciesSummary: 'Espécies: iNaturalist e GBIF.org; fotos CC0 / CC BY de seus fotógrafos',
       open: 'Créditos de fotos e dados',
-      speciesData: 'Espécies escolhidas a partir de observações nativas de grau de pesquisa no iNaturalist, com cada bioma confirmado por registros de ocorrência no GBIF.org.',
+      speciesData: 'Espécies escolhidas a partir de observações de grau de pesquisa no iNaturalist, deixando de fora as registradas como introduzidas, com cada bioma confirmado por registros de ocorrência no GBIF.org.',
       gbifCitation: 'Dados de ocorrência do GBIF.org: conjunto de dados derivado dos registros usados.',
       doiPending: '(DOI aguardando registro)',
       photos: 'Fotos · {{biome}}',

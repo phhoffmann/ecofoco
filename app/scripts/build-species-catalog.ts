@@ -10,8 +10,8 @@
  * Raw API responses and photos are cached in app/.catalog-cache/ (git-ignored; override with CATALOG_CACHE_DIR),
  * so reruns are cheap. Delete the cache to pick up new observations.
  *
- * Per Biome and kind: candidates are iNaturalist species with research-grade, native observations carrying
- * CC0/CC-BY photos in the Biome's states (scripts/catalog/config.ts), ranked by observation count. A candidate
+ * Per Biome and kind: candidates are iNaturalist species not recorded as introduced there, with research-grade
+ * observations carrying CC0/CC-BY photos in the Biome's states (scripts/catalog/config.ts), ranked by observation count. A candidate
  * is kept when GBIF has CC0/CC-BY occurrences inside the Biome's RESOLVE ecoregions. Species already in the
  * catalog keep their slot while they pass. Hand-edited ids, names and descriptions live in
  * scripts/catalog/species-text.ts; a selected species without one stops the run and is listed in
@@ -49,6 +49,7 @@ import {
   pickName,
   rarityByRank,
   slugify,
+  speciesCountsQuery,
   type Candidate,
   type ChosenPhoto,
   type Observation,
@@ -117,14 +118,11 @@ function toCandidate(row: SpeciesCount): InatCandidate | null {
   }
 }
 
-/** Research-grade, native, CC0/CC-BY-photographed species in the Biome's states. */
+/** Research-grade, CC0/CC-BY-photographed species not recorded as introduced in the Biome's states. */
 async function speciesCounts(biome: BiomeId, filter: Record<string, string | number>): Promise<InatCandidate[]> {
   const res = await inat.json<{ results: SpeciesCount[] }>(
     url(`${INAT_API}/observations/species_counts`, {
-      place_id: placeIds([biome]),
-      quality_grade: 'research',
-      native: 'true',
-      photo_license: 'cc0,cc-by',
+      ...speciesCountsQuery(Object.values(BIOME_PLACES[biome])),
       locale: 'pt-BR',
       per_page: CANDIDATES_PER_TAXON,
       ...filter,
@@ -133,7 +131,7 @@ async function speciesCounts(biome: BiomeId, filter: Record<string, string | num
   return res.results.map(toCandidate).filter((c): c is InatCandidate => c !== null)
 }
 
-/** A species already in the catalog, as a candidate — or null when it no longer passes the native/licence filters. */
+/** A species already in the catalog, as a candidate — or null when it no longer passes the establishment/licence filters. */
 async function pinnedCandidate(biome: BiomeId, scientificName: string): Promise<InatCandidate | null> {
   const taxa = await inat.json<{ results: InatTaxon[] }>(
     url(`${INAT_API}/taxa`, { q: scientificName, rank: 'species', is_active: 'true', per_page: 10 }),
@@ -296,7 +294,7 @@ async function main() {
   // A pin dropped in one Biome may still be kept in another.
   const keptIds = new Set([...selected.keys()].map((name) => SPECIES_TEXT[name]?.id))
   const removed = [...droppedIds].filter((id) => !keptIds.has(id))
-  if (removed.length) console.log(`Removed (failed the native/licence/presence filters): ${removed.join(', ')}`)
+  if (removed.length) console.log(`Removed (failed the establishment/licence/presence filters): ${removed.join(', ')}`)
 
   const missing = [...selected.values()].filter((s) => !SPECIES_TEXT[s.candidate.scientificName])
   if (missing.length) {

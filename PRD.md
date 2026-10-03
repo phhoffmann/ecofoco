@@ -44,7 +44,7 @@ v1 is the MVP loop (focus → plants, steps → animals, one permanent Collectio
 - Every new CollectedEntry plays a short celebration showing the species just collected.
 
 ### 4.4 Species catalog
-- Static list of species (plants and animals), built at build time from **iNaturalist** and **GBIF** data (filtering to CC0/CC-BY licenses only, compatible with future commercial use): the most-observed native species per biome, with a bundled photo and its credit.
+- Static list of species (plants and animals), built at build time from **iNaturalist** and **GBIF** data (filtering to CC0/CC-BY licenses only, compatible with future commercial use): the most-observed species per biome, leaving out those recorded as introduced, with a bundled photo and its credit.
 - Every species is tagged with a **biome** (e.g. Cerrado, Atlantic Forest, Caatinga) and a garden **archetype**. Brazil's catalog is bundled in the app, photos included, and covers all six IBGE biomes (about 20 plants and 20 animals each, with English and Portuguese (Brazil) names and descriptions); a biome without species would show as "coming soon".
 
 ### 4.5 Biomes

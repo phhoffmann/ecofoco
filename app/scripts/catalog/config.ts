@@ -3,8 +3,8 @@ import type { BiomeId } from '../../src/domain/catalogSchema.ts'
 /**
  * iNaturalist standard places (Brazilian states) searched for each Biome's candidates.
  *
- * `native=true` only works on standard places, so each Biome takes the states that lie mostly inside
- * it. Mixed states bring in neighbouring species; the GBIF cross-check against the Biome's RESOLVE
+ * iNaturalist's establishment filters only work on standard places, so each Biome takes the states that lie
+ * mostly inside it. Mixed states bring in neighbouring species; the GBIF cross-check against the Biome's RESOLVE
  * ecoregions (see presence.ts) is what keeps a species in a Biome.
  */
 export const BIOME_PLACES: Record<BiomeId, Record<string, number>> = {

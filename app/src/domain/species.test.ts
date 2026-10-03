@@ -24,13 +24,13 @@ const LEGACY_IDS = [
   'barriguda', 'asa-branca', 'carcara', 'galo-de-campina', 'sagui-de-tufo-branco', 'calango', 'moco',
   'cachorro-do-mato', 'periquito-da-caatinga', 'arara-azul-de-lear', 'tatu-bola',
 ]
-// Dropped by the iNaturalist/GBIF catalog because iNaturalist does not list them as native in their biome's states.
-const REMOVED_IDS = ['ipe-amarelo', 'jacu']
+// Legacy ids the iNaturalist/GBIF catalog no longer has; collected entries for them are kept but hidden.
+const REMOVED_IDS: string[] = []
 
 describe('collectedCatalogSpeciesIds', () => {
   it('ignores entries whose species is no longer in the catalog', () => {
     const known = SPECIES_CATALOG[0].id
-    const ids = collectedCatalogSpeciesIds([entry(known), entry('jacaranda-mimoso'), ...REMOVED_IDS.map(entry)])
+    const ids = collectedCatalogSpeciesIds([entry(known), entry('jacaranda-mimoso')])
     expect([...ids]).toEqual([known])
   })
 
@@ -47,8 +47,8 @@ describe('legacy species ids', () => {
     expect(ids.has(id)).toBe(true)
   })
 
-  it.each(REMOVED_IDS)('no longer has %s', (id) => {
-    expect(ids.has(id)).toBe(false)
+  it('keeps every legacy id unless it is listed as removed', () => {
+    expect(LEGACY_IDS.filter((id) => !ids.has(id))).toEqual(REMOVED_IDS)
   })
 })
 

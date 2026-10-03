@@ -28,6 +28,32 @@
       }
     },
     {
+      "id": "carcara",
+      "scientificName": "Caracara plancus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "large-bird",
+      "names": {
+        "en": "Southern Crested Caracara",
+        "pt-BR": "Carcará"
+      },
+      "descriptions": {
+        "en": "A bold, opportunistic falcon that walks the ground as often as it flies, eating anything from carrion to insects.",
+        "pt-BR": "Falcão ousado e oportunista que anda pelo chão tanto quanto voa, comendo de carniça a insetos."
+      },
+      "photo": {
+        "file": "carcara.webp",
+        "license": "CC-BY",
+        "credit": "Jean Martins",
+        "sourceUrl": "https://www.inaturalist.org/observations/109548994"
+      },
+      "source": {
+        "inatTaxonId": 4715,
+        "gbifTaxonKey": 2480989,
+        "observations": 178
+      }
+    },
+    {
       "id": "bem-te-vi",
       "scientificName": "Pitangus sulphuratus",
       "type": "animal",
@@ -102,32 +128,6 @@
       "source": {
         "inatTaxonId": 126389,
         "gbifTaxonKey": 10401396,
-        "observations": 172
-      }
-    },
-    {
-      "id": "carcara",
-      "scientificName": "Caracara plancus",
-      "type": "animal",
-      "rarity": "common",
-      "archetype": "large-bird",
-      "names": {
-        "en": "Southern Crested Caracara",
-        "pt-BR": "Carcará"
-      },
-      "descriptions": {
-        "en": "A bold, opportunistic falcon that walks the ground as often as it flies, eating anything from carrion to insects.",
-        "pt-BR": "Falcão ousado e oportunista que anda pelo chão tanto quanto voa, comendo de carniça a insetos."
-      },
-      "photo": {
-        "file": "carcara.webp",
-        "license": "CC-BY",
-        "credit": "Jean Martins",
-        "sourceUrl": "https://www.inaturalist.org/observations/109548994"
-      },
-      "source": {
-        "inatTaxonId": 4715,
-        "gbifTaxonKey": 2480989,
         "observations": 172
       }
     },
@@ -232,7 +232,7 @@
       "source": {
         "inatTaxonId": 367573,
         "gbifTaxonKey": 2479115,
-        "observations": 163
+        "observations": 164
       }
     },
     {
@@ -278,20 +278,46 @@
       "photo": {
         "file": "borboleta-pavao-branco.webp",
         "license": "CC-BY",
-        "credit": "Carlos Alexandre Mattos Raposo",
-        "sourceUrl": "https://www.inaturalist.org/observations/206473174"
+        "credit": "Túllio",
+        "sourceUrl": "https://www.inaturalist.org/observations/264620688"
       },
       "source": {
         "inatTaxonId": 49761,
         "gbifTaxonKey": 5128007,
-        "observations": 104
+        "observations": 110
+      }
+    },
+    {
+      "id": "lagarta-das-palmeiras",
+      "scientificName": "Brassolis sophorae",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "insect",
+      "names": {
+        "en": "Coconut Caterpillar",
+        "pt-BR": "Lagarta-das-palmeiras"
+      },
+      "descriptions": {
+        "en": "A big brown owl-like butterfly; its caterpillars live in silk shelters in palm crowns and eat the fronds.",
+        "pt-BR": "Borboleta marrom e grande; suas lagartas vivem em abrigos de seda na copa das palmeiras e comem as folhas."
+      },
+      "photo": {
+        "file": "lagarta-das-palmeiras.webp",
+        "license": "CC-BY",
+        "credit": "Douglas",
+        "sourceUrl": "https://www.inaturalist.org/observations/39474230"
+      },
+      "source": {
+        "inatTaxonId": 182482,
+        "gbifTaxonKey": 1903598,
+        "observations": 94
       }
     },
     {
       "id": "nhambikuara-cerradensis",
       "scientificName": "Nhambikuara cerradensis",
       "type": "animal",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "insect",
       "names": {
         "en": "Nhambikuara cerradensis",
@@ -311,32 +337,6 @@
         "inatTaxonId": 881672,
         "gbifTaxonKey": 9745549,
         "observations": 93
-      }
-    },
-    {
-      "id": "lagarta-das-palmeiras",
-      "scientificName": "Brassolis sophorae",
-      "type": "animal",
-      "rarity": "rare",
-      "archetype": "insect",
-      "names": {
-        "en": "Coconut Caterpillar",
-        "pt-BR": "Lagarta-das-palmeiras"
-      },
-      "descriptions": {
-        "en": "A big brown owl-like butterfly; its caterpillars live in silk shelters in palm crowns and eat the fronds.",
-        "pt-BR": "Borboleta marrom e grande; suas lagartas vivem em abrigos de seda na copa das palmeiras e comem as folhas."
-      },
-      "photo": {
-        "file": "lagarta-das-palmeiras.webp",
-        "license": "CC-BY",
-        "credit": "Douglas",
-        "sourceUrl": "https://www.inaturalist.org/observations/39474230"
-      },
-      "source": {
-        "inatTaxonId": 182482,
-        "gbifTaxonKey": 1903598,
-        "observations": 92
       }
     },
     {
@@ -440,7 +440,7 @@
       "source": {
         "inatTaxonId": 30693,
         "gbifTaxonKey": 2444433,
-        "observations": 50
+        "observations": 53
       }
     },
     {
@@ -496,29 +496,55 @@
       }
     },
     {
-      "id": "quati",
-      "scientificName": "Nasua nasua",
+      "id": "macaco-prego-amarelo",
+      "scientificName": "Sapajus libidinosus",
       "type": "animal",
-      "rarity": "rare",
-      "archetype": "mid-mammal",
+      "rarity": "epic",
+      "archetype": "primate",
       "names": {
-        "en": "South American Coati",
-        "pt-BR": "Quati"
+        "en": "Black-striped Capuchin",
+        "pt-BR": "Macaco-prego-amarelo"
       },
       "descriptions": {
-        "en": "A raccoon relative that forages in noisy troops during the day, using its long flexible snout to dig for insects and fruit.",
-        "pt-BR": "Parente do guaxinim que forrageia em bandos barulhentos durante o dia, usando o focinho longo e flexível para procurar insetos e frutas."
+        "en": "A capuchin of dry open country famous for cracking hard nuts with stones used as hammers.",
+        "pt-BR": "Macaco-prego de áreas secas e abertas, famoso por quebrar cocos duros usando pedras como martelo."
       },
       "photo": {
-        "file": "quati.webp",
-        "license": "CC-BY",
-        "credit": "Rodrigo Paiva Lázaro",
-        "sourceUrl": "https://www.inaturalist.org/observations/143679941"
+        "file": "macaco-prego-amarelo.webp",
+        "license": "CC0",
+        "credit": "Machadoc",
+        "sourceUrl": "https://www.inaturalist.org/observations/336859302"
       },
       "source": {
-        "inatTaxonId": 41670,
-        "gbifTaxonKey": 2433536,
-        "observations": 26
+        "inatTaxonId": 516974,
+        "gbifTaxonKey": 7785578,
+        "observations": 36
+      }
+    },
+    {
+      "id": "pequi",
+      "scientificName": "Caryocar brasiliense",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "broadleaf-tree",
+      "names": {
+        "en": "Pequi",
+        "pt-BR": "Pequi"
+      },
+      "descriptions": {
+        "en": "The emblematic Cerrado tree: its strong-smelling yellow fruit is a regional staple, but the pit hides sharp spines.",
+        "pt-BR": "A árvore símbolo do Cerrado: seu fruto amarelo de cheiro forte é base da culinária regional, mas o caroço esconde espinhos."
+      },
+      "photo": {
+        "file": "pequi.webp",
+        "license": "CC-BY",
+        "credit": "Libris Simas Ferraz",
+        "sourceUrl": "https://www.inaturalist.org/observations/388803497"
+      },
+      "source": {
+        "inatTaxonId": 464113,
+        "gbifTaxonKey": 3189663,
+        "observations": 73
       }
     },
     {
@@ -600,6 +626,32 @@
       }
     },
     {
+      "id": "flor-do-cerrado",
+      "scientificName": "Calliandra dysantha",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Flor-do-cerrado",
+        "pt-BR": "Flor-do-cerrado"
+      },
+      "descriptions": {
+        "en": "A small shrub whose red, powder-puff flowers brighten burned and open Cerrado grasslands.",
+        "pt-BR": "Arbusto pequeno cujas flores vermelhas, como pompons, colorem os campos abertos e recém-queimados do Cerrado."
+      },
+      "photo": {
+        "file": "flor-do-cerrado.webp",
+        "license": "CC-BY",
+        "credit": "Arthur Bruck",
+        "sourceUrl": "https://www.inaturalist.org/observations/177738102"
+      },
+      "source": {
+        "inatTaxonId": 461331,
+        "gbifTaxonKey": 2982349,
+        "observations": 40
+      }
+    },
+    {
       "id": "abacaxi-de-tingir",
       "scientificName": "Aechmea bromeliifolia",
       "type": "plant",
@@ -622,7 +674,59 @@
       "source": {
         "inatTaxonId": 276440,
         "gbifTaxonKey": 8344737,
-        "observations": 37
+        "observations": 39
+      }
+    },
+    {
+      "id": "pau-terra-grande",
+      "scientificName": "Qualea grandiflora",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "flowering-tree",
+      "names": {
+        "en": "Pau-terra-grande",
+        "pt-BR": "Pau-terra-grande"
+      },
+      "descriptions": {
+        "en": "A twisted Cerrado tree with corky bark and large yellow flowers.",
+        "pt-BR": "Árvore retorcida do Cerrado, de casca grossa e cortiçosa e grandes flores amarelas."
+      },
+      "photo": {
+        "file": "pau-terra-grande.webp",
+        "license": "CC-BY",
+        "credit": "João Arthur Rabello",
+        "sourceUrl": "https://www.inaturalist.org/observations/161669107"
+      },
+      "source": {
+        "inatTaxonId": 803563,
+        "gbifTaxonKey": 4030658,
+        "observations": 39
+      }
+    },
+    {
+      "id": "pau-terra-de-flor-miuda",
+      "scientificName": "Qualea parviflora",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "flowering-tree",
+      "names": {
+        "en": "Pau-terra-de-flor-miúda",
+        "pt-BR": "Pau-terra-de-flor-miúda"
+      },
+      "descriptions": {
+        "en": "A Cerrado tree that covers itself in small lilac flowers in the dry season.",
+        "pt-BR": "Árvore do Cerrado que se cobre de pequenas flores lilás na estação seca."
+      },
+      "photo": {
+        "file": "pau-terra-de-flor-miuda.webp",
+        "license": "CC-BY",
+        "credit": "Thomaz Ricardo Favreto Sinani",
+        "sourceUrl": "https://www.inaturalist.org/observations/188320806"
+      },
+      "source": {
+        "inatTaxonId": 153005,
+        "gbifTaxonKey": 7288348,
+        "observations": 36
       }
     },
     {
@@ -759,7 +863,7 @@
       "id": "macauba",
       "scientificName": "Acrocomia aculeata",
       "type": "plant",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "palm",
       "names": {
         "en": "Macaw Palm",
@@ -785,7 +889,7 @@
       "id": "cambessedesia-hilariana",
       "scientificName": "Cambessedesia hilariana",
       "type": "plant",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "shrub",
       "names": {
         "en": "Cambessedesia hilariana",
@@ -808,10 +912,36 @@
       }
     },
     {
+      "id": "gomeira",
+      "scientificName": "Vochysia thyrsoidea",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "flowering-tree",
+      "names": {
+        "en": "Gomeira",
+        "pt-BR": "Gomeira"
+      },
+      "descriptions": {
+        "en": "A Cerrado tree of rocky highlands with upright spikes of yellow flowers and a trunk that oozes gum.",
+        "pt-BR": "Árvore dos campos rochosos do Cerrado, com cachos eretos de flores amarelas e tronco que solta goma."
+      },
+      "photo": {
+        "file": "gomeira.webp",
+        "license": "CC-BY",
+        "credit": "Márcia Martins",
+        "sourceUrl": "https://www.inaturalist.org/observations/40057835"
+      },
+      "source": {
+        "inatTaxonId": 487526,
+        "gbifTaxonKey": 7288343,
+        "observations": 27
+      }
+    },
+    {
       "id": "justicia-lanstyakii",
       "scientificName": "Justicia lanstyakii",
       "type": "plant",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "shrub",
       "names": {
         "en": "Justicia lanstyakii",
@@ -834,10 +964,36 @@
       }
     },
     {
+      "id": "solanum-falciforme",
+      "scientificName": "Solanum falciforme",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "Solanum falciforme",
+        "pt-BR": "Solanum falciforme"
+      },
+      "descriptions": {
+        "en": "A prickly nightshade shrub of the Cerrado, a close relative of the wolf apple.",
+        "pt-BR": "Arbusto espinhento do Cerrado, parente próximo da lobeira."
+      },
+      "photo": {
+        "file": "solanum-falciforme.webp",
+        "license": "CC-BY",
+        "credit": "Mario Barroso",
+        "sourceUrl": "https://www.inaturalist.org/observations/192846627"
+      },
+      "source": {
+        "inatTaxonId": 909989,
+        "gbifTaxonKey": 8104212,
+        "observations": 25
+      }
+    },
+    {
       "id": "pimenta-de-macaco",
       "scientificName": "Xylopia aromatica",
       "type": "plant",
-      "rarity": "rare",
+      "rarity": "epic",
       "archetype": "broadleaf-tree",
       "names": {
         "en": "Monkey Pepper",
@@ -860,185 +1016,29 @@
       }
     },
     {
-      "id": "flor-de-sao-joao",
-      "scientificName": "Pyrostegia venusta",
-      "type": "plant",
-      "rarity": "rare",
-      "archetype": "shrub",
-      "names": {
-        "en": "Flame Vine",
-        "pt-BR": "Flor-de-são-joão"
-      },
-      "descriptions": {
-        "en": "A climber that covers fences and trees in bright orange tubular flowers in winter, around the June festivals.",
-        "pt-BR": "Trepadeira que cobre cercas e árvores de flores tubulares laranja-vivo no inverno, na época das festas juninas."
-      },
-      "photo": {
-        "file": "flor-de-sao-joao.webp",
-        "license": "CC-BY",
-        "credit": "Josi Guimarães",
-        "sourceUrl": "https://www.inaturalist.org/observations/330533552"
-      },
-      "source": {
-        "inatTaxonId": 126634,
-        "gbifTaxonKey": 3172569,
-        "observations": 23
-      }
-    },
-    {
-      "id": "gomeirinha",
-      "scientificName": "Vochysia elliptica",
-      "type": "plant",
-      "rarity": "rare",
-      "archetype": "flowering-tree",
-      "names": {
-        "en": "Gomeirinha",
-        "pt-BR": "Gomeirinha"
-      },
-      "descriptions": {
-        "en": "A small Cerrado tree with yellow flower spikes, typical of rocky slopes and grasslands.",
-        "pt-BR": "Arvoreta do Cerrado com cachos de flores amarelas, típica de encostas pedregosas e campos."
-      },
-      "photo": {
-        "file": "gomeirinha.webp",
-        "license": "CC-BY",
-        "credit": "Leonardo Bergamini",
-        "sourceUrl": "https://www.inaturalist.org/observations/91254907"
-      },
-      "source": {
-        "inatTaxonId": 840224,
-        "gbifTaxonKey": 7288361,
-        "observations": 22
-      }
-    },
-    {
-      "id": "manihot-peltata",
-      "scientificName": "Manihot peltata",
-      "type": "plant",
-      "rarity": "rare",
-      "archetype": "shrub",
-      "names": {
-        "en": "Manihot peltata",
-        "pt-BR": "Manihot peltata"
-      },
-      "descriptions": {
-        "en": "A wild relative of cassava from the Cerrado, with round leaves attached to the stalk at their centre.",
-        "pt-BR": "Parente silvestre da mandioca no Cerrado, de folhas arredondadas presas ao pecíolo pelo centro."
-      },
-      "photo": {
-        "file": "manihot-peltata.webp",
-        "license": "CC-BY",
-        "credit": "Leonardo Bergamini",
-        "sourceUrl": "https://www.inaturalist.org/observations/40829599"
-      },
-      "source": {
-        "inatTaxonId": 1061459,
-        "gbifTaxonKey": 3060887,
-        "observations": 21
-      }
-    },
-    {
-      "id": "chuveirinho",
-      "scientificName": "Paepalanthus chiquitensis",
-      "type": "plant",
-      "rarity": "rare",
-      "archetype": "shrub",
-      "names": {
-        "en": "Chuveirinho",
-        "pt-BR": "Chuveirinho"
-      },
-      "descriptions": {
-        "en": "An \"everlasting\" with a spray of tiny white flower heads on thin stalks, like a little shower head, in wet Cerrado grasslands.",
-        "pt-BR": "Sempre-viva com um feixe de pequenas cabecinhas brancas em hastes finas, como um chuveirinho, nos campos úmidos do Cerrado."
-      },
-      "photo": {
-        "file": "chuveirinho.webp",
-        "license": "CC-BY",
-        "credit": "Thomaz Ricardo Favreto Sinani",
-        "sourceUrl": "https://www.inaturalist.org/observations/198593978"
-      },
-      "source": {
-        "inatTaxonId": 558378,
-        "gbifTaxonKey": 5286780,
-        "observations": 20
-      }
-    },
-    {
-      "id": "facheiro-do-cerrado",
-      "scientificName": "Pilosocereus machrisii",
-      "type": "plant",
-      "rarity": "rare",
-      "archetype": "shrub",
-      "names": {
-        "en": "Cerrado Facheiro",
-        "pt-BR": "Facheiro-do-cerrado"
-      },
-      "descriptions": {
-        "en": "A columnar cactus that grows among rocks in the Cerrado; its night-blooming flowers are pollinated by bats.",
-        "pt-BR": "Cacto colunar que cresce entre as pedras do Cerrado; suas flores noturnas são polinizadas por morcegos."
-      },
-      "photo": {
-        "file": "facheiro-do-cerrado.webp",
-        "license": "CC-BY",
-        "credit": "Leonardo Bergamini",
-        "sourceUrl": "https://www.inaturalist.org/observations/40757639"
-      },
-      "source": {
-        "inatTaxonId": 442103,
-        "gbifTaxonKey": 7284372,
-        "observations": 19
-      }
-    },
-    {
-      "id": "tillandsia-recurvata",
-      "scientificName": "Tillandsia recurvata",
-      "type": "plant",
-      "rarity": "common",
-      "archetype": "shrub",
-      "names": {
-        "en": "Ball Moss",
-        "pt-BR": "Tillandsia recurvata"
-      },
-      "descriptions": {
-        "en": "Not a moss at all but a tiny bromeliad that forms grey balls on branches and power lines, living on air and rain.",
-        "pt-BR": "Pequena bromélia que forma bolinhas cinzentas em galhos e fios de luz, vivendo apenas de ar e chuva."
-      },
-      "photo": {
-        "file": "tillandsia-recurvata.webp",
-        "license": "CC-BY",
-        "credit": "Tom Field",
-        "sourceUrl": "https://www.inaturalist.org/observations/325169581"
-      },
-      "source": {
-        "inatTaxonId": 84002,
-        "gbifTaxonKey": 2695588,
-        "observations": 19
-      }
-    },
-    {
-      "id": "roseta-do-diabo",
-      "scientificName": "Discocactus pseudoinsignis",
+      "id": "algodao-do-cerrado",
+      "scientificName": "Cochlospermum regium",
       "type": "plant",
       "rarity": "epic",
       "archetype": "shrub",
       "names": {
-        "en": "Roseta-do-diabo",
-        "pt-BR": "Roseta-do-diabo"
+        "en": "Algodão-do-cerrado",
+        "pt-BR": "Algodão-do-cerrado"
       },
       "descriptions": {
-        "en": "A flat, disc-shaped cactus of sandy Cerrado ground; its white, fragrant flowers open at night.",
-        "pt-BR": "Cacto achatado em forma de disco dos solos arenosos do Cerrado; suas flores brancas e perfumadas abrem à noite."
+        "en": "A low shrub that flowers bright yellow in the dry season; its fruits release seeds wrapped in cotton-like fibre.",
+        "pt-BR": "Arbusto baixo de flores amarelo-vivas na seca; seus frutos liberam sementes envoltas em uma fibra parecida com algodão."
       },
       "photo": {
-        "file": "roseta-do-diabo.webp",
-        "license": "CC-BY",
-        "credit": "Agente Itallo",
-        "sourceUrl": "https://www.inaturalist.org/observations/187370304"
+        "file": "algodao-do-cerrado.webp",
+        "license": "CC0",
+        "credit": "Tsssss",
+        "sourceUrl": "https://www.inaturalist.org/observations/59908259"
       },
       "source": {
-        "inatTaxonId": 191675,
-        "gbifTaxonKey": 3950225,
-        "observations": 18
+        "inatTaxonId": 430862,
+        "gbifTaxonKey": 3702412,
+        "observations": 23
       }
     }
   ]

@@ -21,6 +21,23 @@ export function isAllowedGbifLicense(url: string | null | undefined): boolean {
   return /\/publicdomain\/zero\/1\.0/.test(url) || /\/licenses\/by\/4\.0/.test(url)
 }
 
+/**
+ * species_counts filters for a Biome's candidates: research-grade observations with CC0/CC-BY photos of
+ * species not recorded as introduced in those places.
+ *
+ * `introduced=false` drops only species iNaturalist lists as introduced (invasive counts as introduced);
+ * `native=true` would also drop every species with no establishment record for the place, which
+ * excludes well-known natives such as Handroanthus albus and Penelope obscura in the Atlantic Forest.
+ */
+export function speciesCountsQuery(placeIds: number[]): Record<string, string> {
+  return {
+    place_id: placeIds.join(','),
+    quality_grade: 'research',
+    introduced: 'false',
+    photo_license: 'cc0,cc-by',
+  }
+}
+
 export interface Ranked {
   scientificName: string
   count: number

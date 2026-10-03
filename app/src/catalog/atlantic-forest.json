@@ -50,7 +50,7 @@
       "source": {
         "inatTaxonId": 9864,
         "gbifTaxonKey": 2491862,
-        "observations": 797
+        "observations": 801
       }
     },
     {
@@ -128,7 +128,7 @@
       "source": {
         "inatTaxonId": 4765,
         "gbifTaxonKey": 2481942,
-        "observations": 688
+        "observations": 693
       }
     },
     {
@@ -184,29 +184,29 @@
       }
     },
     {
-      "id": "quero-quero",
-      "scientificName": "Vanellus chilensis",
+      "id": "irapua",
+      "scientificName": "Trigona spinipes",
       "type": "animal",
       "rarity": "common",
-      "archetype": "songbird",
+      "archetype": "insect",
       "names": {
-        "en": "Southern Lapwing",
-        "pt-BR": "Quero-quero"
+        "en": "Spiny-legged Stingless Bee",
+        "pt-BR": "Irapuã"
       },
       "descriptions": {
-        "en": "A loud lapwing of lawns and fields that dives at anyone who comes near its nest on the ground.",
-        "pt-BR": "Ave barulhenta de gramados e campos que dá rasantes em quem se aproxima do seu ninho no chão."
+        "en": "A black stingless bee that defends its nest by biting; it builds big, exposed nests of resin and plant fibre on branches.",
+        "pt-BR": "Abelha preta sem ferrão que defende o ninho com mordidas; constrói ninhos grandes e expostos de resina e fibras nos galhos."
       },
       "photo": {
-        "file": "quero-quero.webp",
+        "file": "irapua.webp",
         "license": "CC-BY",
-        "credit": "Donald Davesne",
-        "sourceUrl": "https://www.inaturalist.org/observations/403960963"
+        "credit": "Reinaldo de Oliveira Elias",
+        "sourceUrl": "https://www.inaturalist.org/observations/307363488"
       },
       "source": {
-        "inatTaxonId": 4867,
-        "gbifTaxonKey": 5229146,
-        "observations": 660
+        "inatTaxonId": 518869,
+        "gbifTaxonKey": 5040803,
+        "observations": 632
       }
     },
     {
@@ -232,7 +232,7 @@
       "source": {
         "inatTaxonId": 318758,
         "gbifTaxonKey": 5227370,
-        "observations": 545
+        "observations": 547
       }
     },
     {
@@ -288,6 +288,32 @@
       }
     },
     {
+      "id": "jacu",
+      "scientificName": "Penelope obscura",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "large-bird",
+      "names": {
+        "en": "Dusky-legged Guan",
+        "pt-BR": "Jacu"
+      },
+      "descriptions": {
+        "en": "A large, turkey-like forest bird known for its loud dawn calls and an important seed disperser for the Atlantic Forest.",
+        "pt-BR": "Ave florestal grande, parecida com um peru, conhecida pelos cantos altos ao amanhecer e importante dispersora de sementes da Mata Atlântica."
+      },
+      "photo": {
+        "file": "jacu.webp",
+        "license": "CC-BY",
+        "credit": "Lucas Lopes",
+        "sourceUrl": "https://www.inaturalist.org/observations/333364301"
+      },
+      "source": {
+        "inatTaxonId": 2060,
+        "gbifTaxonKey": 2482212,
+        "observations": 399
+      }
+    },
+    {
       "id": "borboleta-pavao-escarlate",
       "scientificName": "Anartia amathea",
       "type": "animal",
@@ -310,33 +336,7 @@
       "source": {
         "inatTaxonId": 83652,
         "gbifTaxonKey": 5128011,
-        "observations": 362
-      }
-    },
-    {
-      "id": "borboleta-pavao-branco",
-      "scientificName": "Anartia jatrophae",
-      "type": "animal",
-      "rarity": "common",
-      "archetype": "insect",
-      "names": {
-        "en": "White Peacock",
-        "pt-BR": "Borboleta-pavão-branco"
-      },
-      "descriptions": {
-        "en": "A pale butterfly with small eyespots that flutters low over weedy fields and lawns.",
-        "pt-BR": "Borboleta clara com pequenos ocelos que voa baixo sobre gramados e terrenos com mato."
-      },
-      "photo": {
-        "file": "borboleta-pavao-branco.webp",
-        "license": "CC-BY",
-        "credit": "Carlos Alexandre Mattos Raposo",
-        "sourceUrl": "https://www.inaturalist.org/observations/206473174"
-      },
-      "source": {
-        "inatTaxonId": 49761,
-        "gbifTaxonKey": 5128007,
-        "observations": 312
+        "observations": 368
       }
     },
     {
@@ -362,7 +362,7 @@
       "source": {
         "inatTaxonId": 41670,
         "gbifTaxonKey": 2433536,
-        "observations": 306
+        "observations": 312
       }
     },
     {
@@ -466,7 +466,7 @@
       "source": {
         "inatTaxonId": 81741,
         "gbifTaxonKey": 5133265,
-        "observations": 119
+        "observations": 139
       }
     },
     {
@@ -518,7 +518,7 @@
       "source": {
         "inatTaxonId": 43813,
         "gbifTaxonKey": 5219704,
-        "observations": 29
+        "observations": 52
       }
     },
     {
@@ -596,7 +596,7 @@
       "source": {
         "inatTaxonId": 273938,
         "gbifTaxonKey": 2698486,
-        "observations": 192
+        "observations": 208
       }
     },
     {
@@ -622,7 +622,7 @@
       "source": {
         "inatTaxonId": 83966,
         "gbifTaxonKey": 7512929,
-        "observations": 191
+        "observations": 192
       }
     },
     {
@@ -808,10 +808,36 @@
       }
     },
     {
+      "id": "tillandsia-tricholepis",
+      "scientificName": "Tillandsia tricholepis",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Tillandsia tricholepis",
+        "pt-BR": "Tillandsia tricholepis"
+      },
+      "descriptions": {
+        "en": "A tiny, scaly air plant that forms moss-like mats on twigs and rocks.",
+        "pt-BR": "Bromélia minúscula e escamosa que forma tapetes parecidos com musgo sobre galhos e pedras."
+      },
+      "photo": {
+        "file": "tillandsia-tricholepis.webp",
+        "license": "CC-BY",
+        "credit": "Diogo Luiz",
+        "sourceUrl": "https://www.inaturalist.org/observations/277847917"
+      },
+      "source": {
+        "inatTaxonId": 706009,
+        "gbifTaxonKey": 2695104,
+        "observations": 119
+      }
+    },
+    {
       "id": "tillandsia-recurvata",
       "scientificName": "Tillandsia recurvata",
       "type": "plant",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "shrub",
       "names": {
         "en": "Ball Moss",
@@ -831,58 +857,6 @@
         "inatTaxonId": 84002,
         "gbifTaxonKey": 2695588,
         "observations": 118
-      }
-    },
-    {
-      "id": "tillandsia-tricholepis",
-      "scientificName": "Tillandsia tricholepis",
-      "type": "plant",
-      "rarity": "rare",
-      "archetype": "shrub",
-      "names": {
-        "en": "Tillandsia tricholepis",
-        "pt-BR": "Tillandsia tricholepis"
-      },
-      "descriptions": {
-        "en": "A tiny, scaly air plant that forms moss-like mats on twigs and rocks.",
-        "pt-BR": "Bromélia minúscula e escamosa que forma tapetes parecidos com musgo sobre galhos e pedras."
-      },
-      "photo": {
-        "file": "tillandsia-tricholepis.webp",
-        "license": "CC-BY",
-        "credit": "Diogo Luiz",
-        "sourceUrl": "https://www.inaturalist.org/observations/277847917"
-      },
-      "source": {
-        "inatTaxonId": 706009,
-        "gbifTaxonKey": 2695104,
-        "observations": 118
-      }
-    },
-    {
-      "id": "jeriva",
-      "scientificName": "Syagrus romanzoffiana",
-      "type": "plant",
-      "rarity": "rare",
-      "archetype": "palm",
-      "names": {
-        "en": "Queen Palm",
-        "pt-BR": "Jerivá"
-      },
-      "descriptions": {
-        "en": "A common native palm whose orange coconuts are a staple for parrots, squirrels and many other animals.",
-        "pt-BR": "Palmeira nativa comum cujos coquinhos alaranjados são alimento básico de papagaios, serelepes e muitos outros bichos."
-      },
-      "photo": {
-        "file": "jeriva.webp",
-        "license": "CC-BY",
-        "credit": "Rodrigo Paiva Lázaro",
-        "sourceUrl": "https://www.inaturalist.org/observations/84370285"
-      },
-      "source": {
-        "inatTaxonId": 79291,
-        "gbifTaxonKey": 5293897,
-        "observations": 116
       }
     },
     {
@@ -993,7 +967,7 @@
       "id": "jequitiba-rosa",
       "scientificName": "Cariniana legalis",
       "type": "plant",
-      "rarity": "epic",
+      "rarity": "rare",
       "archetype": "emergent-tree",
       "names": {
         "en": "Giant Jequitibá",
@@ -1039,6 +1013,32 @@
         "inatTaxonId": 281274,
         "gbifTaxonKey": 4092242,
         "observations": 7
+      }
+    },
+    {
+      "id": "ipe-amarelo",
+      "scientificName": "Handroanthus albus",
+      "type": "plant",
+      "rarity": "epic",
+      "archetype": "flowering-tree",
+      "names": {
+        "en": "Yellow Trumpet Tree",
+        "pt-BR": "Ipê-amarelo"
+      },
+      "descriptions": {
+        "en": "Iconic Brazilian tree known for its brilliant yellow blooms in late winter, often flowering with almost no leaves on the branches.",
+        "pt-BR": "Árvore brasileira icônica, conhecida por suas flores amarelas vibrantes no final do inverno, muitas vezes florescendo quase sem folhas nos galhos."
+      },
+      "photo": {
+        "file": "ipe-amarelo.webp",
+        "license": "CC-BY",
+        "credit": "André Ambrozio",
+        "sourceUrl": "https://www.inaturalist.org/observations/144733212"
+      },
+      "source": {
+        "inatTaxonId": 733298,
+        "gbifTaxonKey": 4092630,
+        "observations": 4
       }
     }
   ]

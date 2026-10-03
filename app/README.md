@@ -57,8 +57,10 @@ Regenerate it from `app/` with Node ≥ 22.18:
 npm run build:catalog
 ```
 
-- **Candidates:** iNaturalist species with research-grade, native observations that carry CC0/CC-BY photos, in
-  the Brazilian states listed per biome in `scripts/catalog/config.ts`, ranked by observation count: 20 plants
+- **Candidates:** iNaturalist species with research-grade observations that carry CC0/CC-BY photos, in the
+  Brazilian states listed per biome in `scripts/catalog/config.ts`, ranked by observation count. Species
+  iNaturalist records as introduced (or invasive) there are left out; species with no establishment record are
+  kept, since many well-known natives have none. 20 plants
   and 20 animals per biome (8 birds, 5 mammals, 3 reptiles, 4 insects).
 - **Biome check:** a candidate stays only if GBIF has CC0/CC-BY occurrences inside the biome's RESOLVE ecoregions
   (the same grid and ecoregion → biome table as location lookup).

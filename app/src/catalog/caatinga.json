@@ -54,6 +54,32 @@
       }
     },
     {
+      "id": "abracris-flavolineata",
+      "scientificName": "Abracris flavolineata",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "insect",
+      "names": {
+        "en": "Abracris flavolineata",
+        "pt-BR": "Abracris flavolineata"
+      },
+      "descriptions": {
+        "en": "A slender grasshopper with pale yellow lines along its body, common in grass and shrubs.",
+        "pt-BR": "Gafanhoto esguio com linhas amarelo-claras ao longo do corpo, comum no capim e nos arbustos."
+      },
+      "photo": {
+        "file": "abracris-flavolineata.webp",
+        "license": "CC-BY",
+        "credit": "Helio Lourencini",
+        "sourceUrl": "https://www.inaturalist.org/observations/67882607"
+      },
+      "source": {
+        "inatTaxonId": 119627,
+        "gbifTaxonKey": 1703595,
+        "observations": 196
+      }
+    },
+    {
       "id": "urubu-preto",
       "scientificName": "Coragyps atratus",
       "type": "animal",
@@ -95,9 +121,9 @@
       },
       "photo": {
         "file": "burnsius-orcus.webp",
-        "license": "CC0",
-        "credit": "Frank Thomas Sautter",
-        "sourceUrl": "https://www.inaturalist.org/observations/208768296"
+        "license": "CC-BY",
+        "credit": "Helio Lourencini",
+        "sourceUrl": "https://www.inaturalist.org/observations/65025091"
       },
       "source": {
         "inatTaxonId": 1038410,
@@ -154,7 +180,33 @@
       "source": {
         "inatTaxonId": 17278,
         "gbifTaxonKey": 5229568,
-        "observations": 154
+        "observations": 161
+      }
+    },
+    {
+      "id": "iguana-verde",
+      "scientificName": "Iguana iguana",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "reptile",
+      "names": {
+        "en": "Green Iguana",
+        "pt-BR": "Iguana-verde"
+      },
+      "descriptions": {
+        "en": "A large, plant-eating lizard with a spiny crest that basks in trees near water and drops in to escape danger.",
+        "pt-BR": "Lagarto grande e herbívoro, de crista espinhosa, que toma sol em árvores perto da água e mergulha para fugir do perigo."
+      },
+      "photo": {
+        "file": "iguana-verde.webp",
+        "license": "CC-BY",
+        "credit": "Carlos Alexandre Mattos Raposo",
+        "sourceUrl": "https://www.inaturalist.org/observations/251582416"
+      },
+      "source": {
+        "inatTaxonId": 35342,
+        "gbifTaxonKey": 2459658,
+        "observations": 149
       }
     },
     {
@@ -184,6 +236,32 @@
       }
     },
     {
+      "id": "borboleta-estaladeira",
+      "scientificName": "Hamadryas feronia",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "insect",
+      "names": {
+        "en": "Variable Cracker",
+        "pt-BR": "Borboleta-estaladeira"
+      },
+      "descriptions": {
+        "en": "A grey, bark-patterned butterfly that rests head-down on tree trunks and makes clicking sounds with its wings in flight.",
+        "pt-BR": "Borboleta cinza que imita a casca das árvores, pousa de cabeça para baixo nos troncos e estala as asas ao voar."
+      },
+      "photo": {
+        "file": "borboleta-estaladeira.webp",
+        "license": "CC-BY",
+        "credit": "Jonnas Costa",
+        "sourceUrl": "https://www.inaturalist.org/observations/208895312"
+      },
+      "source": {
+        "inatTaxonId": 83227,
+        "gbifTaxonKey": 5129496,
+        "observations": 138
+      }
+    },
+    {
       "id": "galo-de-campina",
       "scientificName": "Paroaria dominicana",
       "type": "animal",
@@ -210,32 +288,6 @@
       }
     },
     {
-      "id": "borboleta-estaladeira",
-      "scientificName": "Hamadryas feronia",
-      "type": "animal",
-      "rarity": "common",
-      "archetype": "insect",
-      "names": {
-        "en": "Variable Cracker",
-        "pt-BR": "Borboleta-estaladeira"
-      },
-      "descriptions": {
-        "en": "A grey, bark-patterned butterfly that rests head-down on tree trunks and makes clicking sounds with its wings in flight.",
-        "pt-BR": "Borboleta cinza que imita a casca das árvores, pousa de cabeça para baixo nos troncos e estala as asas ao voar."
-      },
-      "photo": {
-        "file": "borboleta-estaladeira.webp",
-        "license": "CC-BY",
-        "credit": "Jonnas Costa",
-        "sourceUrl": "https://www.inaturalist.org/observations/208895312"
-      },
-      "source": {
-        "inatTaxonId": 83227,
-        "gbifTaxonKey": 5129496,
-        "observations": 135
-      }
-    },
-    {
       "id": "carcara",
       "scientificName": "Caracara plancus",
       "type": "animal",
@@ -258,85 +310,33 @@
       "source": {
         "inatTaxonId": 4715,
         "gbifTaxonKey": 2480989,
-        "observations": 121
+        "observations": 125
       }
     },
     {
-      "id": "borboleta-pavao-branco",
-      "scientificName": "Anartia jatrophae",
+      "id": "irapua",
+      "scientificName": "Trigona spinipes",
       "type": "animal",
       "rarity": "common",
       "archetype": "insect",
       "names": {
-        "en": "White Peacock",
-        "pt-BR": "Borboleta-pavão-branco"
+        "en": "Spiny-legged Stingless Bee",
+        "pt-BR": "Irapuã"
       },
       "descriptions": {
-        "en": "A pale butterfly with small eyespots that flutters low over weedy fields and lawns.",
-        "pt-BR": "Borboleta clara com pequenos ocelos que voa baixo sobre gramados e terrenos com mato."
+        "en": "A black stingless bee that defends its nest by biting; it builds big, exposed nests of resin and plant fibre on branches.",
+        "pt-BR": "Abelha preta sem ferrão que defende o ninho com mordidas; constrói ninhos grandes e expostos de resina e fibras nos galhos."
       },
       "photo": {
-        "file": "borboleta-pavao-branco.webp",
+        "file": "irapua.webp",
         "license": "CC-BY",
-        "credit": "Carlos Alexandre Mattos Raposo",
-        "sourceUrl": "https://www.inaturalist.org/observations/206473174"
+        "credit": "Reinaldo de Oliveira Elias",
+        "sourceUrl": "https://www.inaturalist.org/observations/307363488"
       },
       "source": {
-        "inatTaxonId": 49761,
-        "gbifTaxonKey": 5128007,
-        "observations": 106
-      }
-    },
-    {
-      "id": "iguana-verde",
-      "scientificName": "Iguana iguana",
-      "type": "animal",
-      "rarity": "common",
-      "archetype": "reptile",
-      "names": {
-        "en": "Green Iguana",
-        "pt-BR": "Iguana-verde"
-      },
-      "descriptions": {
-        "en": "A large, plant-eating lizard with a spiny crest that basks in trees near water and drops in to escape danger.",
-        "pt-BR": "Lagarto grande e herbívoro, de crista espinhosa, que toma sol em árvores perto da água e mergulha para fugir do perigo."
-      },
-      "photo": {
-        "file": "iguana-verde.webp",
-        "license": "CC-BY",
-        "credit": "Thomaz de Carvalho Callado",
-        "sourceUrl": "https://www.inaturalist.org/observations/75399561"
-      },
-      "source": {
-        "inatTaxonId": 35342,
-        "gbifTaxonKey": 2459658,
-        "observations": 93
-      }
-    },
-    {
-      "id": "joaninha-sem-pintas",
-      "scientificName": "Cycloneda sanguinea",
-      "type": "animal",
-      "rarity": "rare",
-      "archetype": "insect",
-      "names": {
-        "en": "Spotless Lady Beetle",
-        "pt-BR": "Joaninha-sem-pintas"
-      },
-      "descriptions": {
-        "en": "A spotless red ladybird that hunts aphids on garden and crop plants.",
-        "pt-BR": "Joaninha vermelha sem pintas que caça pulgões em hortas e plantações."
-      },
-      "photo": {
-        "file": "joaninha-sem-pintas.webp",
-        "license": "CC-BY",
-        "credit": "Helio Lourencini",
-        "sourceUrl": "https://www.inaturalist.org/observations/93267336"
-      },
-      "source": {
-        "inatTaxonId": 124431,
-        "gbifTaxonKey": 1043105,
-        "observations": 86
+        "inatTaxonId": 518869,
+        "gbifTaxonKey": 5040803,
+        "observations": 123
       }
     },
     {
@@ -362,7 +362,7 @@
       "source": {
         "inatTaxonId": 367561,
         "gbifTaxonKey": 2479101,
-        "observations": 60
+        "observations": 61
       }
     },
     {
@@ -392,29 +392,29 @@
       }
     },
     {
-      "id": "capivara",
-      "scientificName": "Hydrochoerus hydrochaeris",
+      "id": "preguica-comum",
+      "scientificName": "Bradypus variegatus",
       "type": "animal",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "mid-mammal",
       "names": {
-        "en": "Capybara",
-        "pt-BR": "Capivara"
+        "en": "Brown-throated Three-toed Sloth",
+        "pt-BR": "Preguiça-comum"
       },
       "descriptions": {
-        "en": "The world’s largest rodent, a calm grazer that lives in groups near water and swims well.",
-        "pt-BR": "O maior roedor do mundo, um herbívoro tranquilo que vive em grupos perto da água e nada muito bem."
+        "en": "A three-toed sloth that moves so slowly algae grow in its fur, coming down only about once a week.",
+        "pt-BR": "Preguiça de três dedos tão lenta que algas crescem em seu pelo; desce da árvore só cerca de uma vez por semana."
       },
       "photo": {
-        "file": "capivara.webp",
+        "file": "preguica-comum.webp",
         "license": "CC-BY",
-        "credit": "avocat",
-        "sourceUrl": "https://www.inaturalist.org/observations/8066919"
+        "credit": "Thomaz de Carvalho Callado",
+        "sourceUrl": "https://www.inaturalist.org/observations/173122648"
       },
       "source": {
-        "inatTaxonId": 74442,
-        "gbifTaxonKey": 5786666,
-        "observations": 55
+        "inatTaxonId": 47067,
+        "gbifTaxonKey": 2436353,
+        "observations": 57
       }
     },
     {
@@ -522,6 +522,32 @@
       }
     },
     {
+      "id": "mandacaru",
+      "scientificName": "Cereus jamacaru",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Mandacaru Cactus",
+        "pt-BR": "Mandacaru"
+      },
+      "descriptions": {
+        "en": "A towering columnar cactus and symbol of the sertão; people say that when it blooms, rain is on the way.",
+        "pt-BR": "Cacto colunar imponente e símbolo do sertão; o povo diz que, quando ele floresce, a chuva está para chegar."
+      },
+      "photo": {
+        "file": "mandacaru.webp",
+        "license": "CC-BY",
+        "credit": "Carlos Otávio Gussoni",
+        "sourceUrl": "https://www.inaturalist.org/observations/38343862"
+      },
+      "source": {
+        "inatTaxonId": 418237,
+        "gbifTaxonKey": 7282182,
+        "observations": 104
+      }
+    },
+    {
       "id": "xanana",
       "scientificName": "Turnera subulata",
       "type": "plant",
@@ -626,6 +652,32 @@
       }
     },
     {
+      "id": "carnauba",
+      "scientificName": "Copernicia prunifera",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "palm",
+      "names": {
+        "en": "Carnaúba Palm",
+        "pt-BR": "Carnaúba"
+      },
+      "descriptions": {
+        "en": "The fan palm of the Northeast whose leaves are coated in a wax used in polishes and cosmetics.",
+        "pt-BR": "A palmeira de leque do Nordeste cujas folhas são cobertas por uma cera usada em polidores e cosméticos."
+      },
+      "photo": {
+        "file": "carnauba.webp",
+        "license": "CC0",
+        "credit": "Whaldener Endo",
+        "sourceUrl": "https://www.inaturalist.org/observations/261546837"
+      },
+      "source": {
+        "inatTaxonId": 155170,
+        "gbifTaxonKey": 2738262,
+        "observations": 43
+      }
+    },
+    {
       "id": "perpetua-do-mato",
       "scientificName": "Palicourea colorata",
       "type": "plant",
@@ -678,29 +730,29 @@
       }
     },
     {
-      "id": "mandacaru",
-      "scientificName": "Cereus jamacaru",
+      "id": "cecropia-palmata",
+      "scientificName": "Cecropia palmata",
       "type": "plant",
       "rarity": "common",
-      "archetype": "shrub",
+      "archetype": "pioneer-tree",
       "names": {
-        "en": "Mandacaru Cactus",
-        "pt-BR": "Mandacaru"
+        "en": "Snakewood",
+        "pt-BR": "Embaúba-vermelha"
       },
       "descriptions": {
-        "en": "A towering columnar cactus and symbol of the sertão; people say that when it blooms, rain is on the way.",
-        "pt-BR": "Cacto colunar imponente e símbolo do sertão; o povo diz que, quando ele floresce, a chuva está para chegar."
+        "en": "An embaúba of northeastern Brazil with deeply lobed leaves that are silvery-white underneath.",
+        "pt-BR": "Embaúba do Nordeste com folhas profundamente recortadas e esbranquiçadas na face de baixo."
       },
       "photo": {
-        "file": "mandacaru.webp",
+        "file": "cecropia-palmata.webp",
         "license": "CC-BY",
-        "credit": "Carlos Otávio Gussoni",
-        "sourceUrl": "https://www.inaturalist.org/observations/38343862"
+        "credit": "Helio Lourencini",
+        "sourceUrl": "https://www.inaturalist.org/observations/62651796"
       },
       "source": {
-        "inatTaxonId": 418237,
-        "gbifTaxonKey": 7282182,
-        "observations": 37
+        "inatTaxonId": 160256,
+        "gbifTaxonKey": 4013360,
+        "observations": 36
       }
     },
     {
@@ -726,6 +778,32 @@
       "source": {
         "inatTaxonId": 440351,
         "gbifTaxonKey": 7280846,
+        "observations": 35
+      }
+    },
+    {
+      "id": "facheiro-da-caatinga",
+      "scientificName": "Pilosocereus catingicola",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Caatinga Facheiro",
+        "pt-BR": "Facheiro-da-caatinga"
+      },
+      "descriptions": {
+        "en": "A tall, bluish columnar cactus whose night flowers are visited by bats.",
+        "pt-BR": "Cacto colunar alto e azulado cujas flores noturnas são visitadas por morcegos."
+      },
+      "photo": {
+        "file": "facheiro-da-caatinga.webp",
+        "license": "CC-BY",
+        "credit": "Matt Lavin",
+        "sourceUrl": "https://www.inaturalist.org/observations/183979374"
+      },
+      "source": {
+        "inatTaxonId": 418243,
+        "gbifTaxonKey": 7284499,
         "observations": 34
       }
     },
@@ -759,7 +837,7 @@
       "id": "quipa",
       "scientificName": "Tacinga inamoena",
       "type": "plant",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "shrub",
       "names": {
         "en": "Quipá",
@@ -779,110 +857,6 @@
         "inatTaxonId": 444203,
         "gbifTaxonKey": 7284042,
         "observations": 33
-      }
-    },
-    {
-      "id": "erva-de-touro",
-      "scientificName": "Tridax procumbens",
-      "type": "plant",
-      "rarity": "common",
-      "archetype": "shrub",
-      "names": {
-        "en": "Tridax Daisy",
-        "pt-BR": "Erva-de-touro"
-      },
-      "descriptions": {
-        "en": "A low, hairy daisy with cream flower heads on long stalks, common along paths and in open sunny ground.",
-        "pt-BR": "Pequena margarida rasteira e peluda, de flores creme em hastes longas, comum em beiras de caminho e terrenos abertos."
-      },
-      "photo": {
-        "file": "erva-de-touro.webp",
-        "license": "CC0",
-        "credit": "Whaldener Endo",
-        "sourceUrl": "https://www.inaturalist.org/observations/125174512"
-      },
-      "source": {
-        "inatTaxonId": 169944,
-        "gbifTaxonKey": 3149462,
-        "observations": 31
-      }
-    },
-    {
-      "id": "salsa-brava",
-      "scientificName": "Ipomoea asarifolia",
-      "type": "plant",
-      "rarity": "common",
-      "archetype": "shrub",
-      "names": {
-        "en": "Ginger-leaf Morning-glory",
-        "pt-BR": "Salsa-brava"
-      },
-      "descriptions": {
-        "en": "A creeping morning glory with round, leathery leaves and purple flowers, common on sandy ground; toxic to livestock.",
-        "pt-BR": "Trepadeira rasteira de folhas redondas e coriáceas e flores roxas, comum em solo arenoso; é tóxica para o gado."
-      },
-      "photo": {
-        "file": "salsa-brava.webp",
-        "license": "CC-BY",
-        "credit": "Helio Lourencini",
-        "sourceUrl": "https://www.inaturalist.org/observations/62576274"
-      },
-      "source": {
-        "inatTaxonId": 277748,
-        "gbifTaxonKey": 2928595,
-        "observations": 23
-      }
-    },
-    {
-      "id": "perpetua-roxa",
-      "scientificName": "Centratherum punctatum",
-      "type": "plant",
-      "rarity": "rare",
-      "archetype": "shrub",
-      "names": {
-        "en": "Brazilian Bachelor's Button",
-        "pt-BR": "Perpétua-roxa"
-      },
-      "descriptions": {
-        "en": "A small herb with fluffy lilac flower heads that last a long time, framed by leafy bracts.",
-        "pt-BR": "Erva pequena de inflorescências lilás e felpudas que duram bastante, rodeadas por brácteas verdes."
-      },
-      "photo": {
-        "file": "perpetua-roxa.webp",
-        "license": "CC-BY",
-        "credit": "Macelo Costa",
-        "sourceUrl": "https://www.inaturalist.org/observations/32795179"
-      },
-      "source": {
-        "inatTaxonId": 160297,
-        "gbifTaxonKey": 3090864,
-        "observations": 22
-      }
-    },
-    {
-      "id": "jurema-preta",
-      "scientificName": "Mimosa tenuiflora",
-      "type": "plant",
-      "rarity": "rare",
-      "archetype": "pioneer-tree",
-      "names": {
-        "en": "Black Jurema",
-        "pt-BR": "Jurema-preta"
-      },
-      "descriptions": {
-        "en": "A thorny pioneer shrub, among the first to reclaim degraded Caatinga and enrich poor soil with nitrogen.",
-        "pt-BR": "Arbusto pioneiro e espinhoso, um dos primeiros a ocupar áreas degradadas da Caatinga e enriquecer o solo com nitrogênio."
-      },
-      "photo": {
-        "file": "jurema-preta.webp",
-        "license": "CC-BY",
-        "credit": "Breno Figueiredo",
-        "sourceUrl": "https://www.inaturalist.org/observations/86705451"
-      },
-      "source": {
-        "inatTaxonId": 287688,
-        "gbifTaxonKey": 2969531,
-        "observations": 19
       }
     },
     {
@@ -908,7 +882,33 @@
       "source": {
         "inatTaxonId": 442108,
         "gbifTaxonKey": 7284328,
-        "observations": 15
+        "observations": 25
+      }
+    },
+    {
+      "id": "jurema-preta",
+      "scientificName": "Mimosa tenuiflora",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "pioneer-tree",
+      "names": {
+        "en": "Black Jurema",
+        "pt-BR": "Jurema-preta"
+      },
+      "descriptions": {
+        "en": "A thorny pioneer shrub, among the first to reclaim degraded Caatinga and enrich poor soil with nitrogen.",
+        "pt-BR": "Arbusto pioneiro e espinhoso, um dos primeiros a ocupar áreas degradadas da Caatinga e enriquecer o solo com nitrogênio."
+      },
+      "photo": {
+        "file": "jurema-preta.webp",
+        "license": "CC-BY",
+        "credit": "Breno Figueiredo",
+        "sourceUrl": "https://www.inaturalist.org/observations/86705451"
+      },
+      "source": {
+        "inatTaxonId": 287688,
+        "gbifTaxonKey": 2969531,
+        "observations": 22
       }
     },
     {
@@ -934,7 +934,7 @@
       "source": {
         "inatTaxonId": 327720,
         "gbifTaxonKey": 5349685,
-        "observations": 12
+        "observations": 15
       }
     },
     {
@@ -993,7 +993,7 @@
       "id": "craibeira",
       "scientificName": "Tabebuia aurea",
       "type": "plant",
-      "rarity": "common",
+      "rarity": "epic",
       "archetype": "flowering-tree",
       "names": {
         "en": "Silver Trumpet Tree",
@@ -1006,8 +1006,8 @@
       "photo": {
         "file": "craibeira.webp",
         "license": "CC-BY",
-        "credit": "Thomaz Ricardo Favreto Sinani",
-        "sourceUrl": "https://www.inaturalist.org/observations/207455033"
+        "credit": "Thomaz de Carvalho Callado",
+        "sourceUrl": "https://www.inaturalist.org/observations/98598366"
       },
       "source": {
         "inatTaxonId": 169520,

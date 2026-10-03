@@ -10,6 +10,7 @@ import {
   pickName,
   rarityByRank,
   slugify,
+  speciesCountsQuery,
   type Candidate,
   type Observation,
   type ObservationPhoto,
@@ -34,6 +35,19 @@ describe('licence filter', () => {
     [undefined, false],
   ])('GBIF %s → %s', (url, expected) => {
     expect(isAllowedGbifLicense(url)).toBe(expected)
+  })
+})
+
+describe('speciesCountsQuery', () => {
+  const query = speciesCountsQuery([13334, 7994])
+
+  it('asks for research-grade observations with CC0/CC-BY photos in the given places', () => {
+    expect(query).toMatchObject({ place_id: '13334,7994', quality_grade: 'research', photo_license: 'cc0,cc-by' })
+  })
+
+  it('excludes only species recorded as introduced, keeping those with no establishment record', () => {
+    expect(query.introduced).toBe('false')
+    expect(query).not.toHaveProperty('native')
   })
 })
 

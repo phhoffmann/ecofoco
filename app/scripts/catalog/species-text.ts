@@ -7,7 +7,7 @@
  *   names      display names (otherwise iNaturalist → GBIF vernacular → scientific name)
  *   archetype  garden sprite (otherwise mapped from taxonomy in archetype.ts)
  *   rarity     Rarity tier (otherwise from the observation-count ranking)
- *   keepIn     Biomes the species was already in: it keeps its slot there while it passes the native,
+ *   keepIn     Biomes the species was already in: it keeps its slot there while it passes the establishment,
  *              licence and presence filters, ahead of the ranking
  *   photoObservation  iNaturalist observation to take the photo from, when the automatic pick is poor
  */
@@ -26,6 +26,27 @@ export interface SpeciesText {
 
 export const SPECIES_TEXT: Record<string, SpeciesText> = {
   // From the first Atlantic Forest and Caatinga catalogs
+  'Handroanthus albus': {
+    id: 'ipe-amarelo',
+    photoObservation: 144733212,
+    keepIn: ['atlantic-forest'],
+    archetype: 'flowering-tree',
+    names: { en: 'Yellow Trumpet Tree', 'pt-BR': 'Ipê-amarelo' },
+    descriptions: {
+      en: 'Iconic Brazilian tree known for its brilliant yellow blooms in late winter, often flowering with almost no leaves on the branches.',
+      'pt-BR': 'Árvore brasileira icônica, conhecida por suas flores amarelas vibrantes no final do inverno, muitas vezes florescendo quase sem folhas nos galhos.',
+    },
+  },
+  'Penelope obscura': {
+    id: 'jacu',
+    keepIn: ['atlantic-forest'],
+    archetype: 'large-bird',
+    names: { en: 'Dusky-legged Guan', 'pt-BR': 'Jacu' },
+    descriptions: {
+      en: 'A large, turkey-like forest bird known for its loud dawn calls and an important seed disperser for the Atlantic Forest.',
+      'pt-BR': 'Ave florestal grande, parecida com um peru, conhecida pelos cantos altos ao amanhecer e importante dispersora de sementes da Mata Atlântica.',
+    },
+  },
   'Pleroma granulosum': {
     id: 'quaresmeira',
     keepIn: ['atlantic-forest'],
@@ -515,51 +536,6 @@ export const SPECIES_TEXT: Record<string, SpeciesText> = {
       'pt-BR': 'Pequena helicônia de brácteas laranja e verdes em forma de bico de papagaio, visitada por beija-flores.',
     },
   },
-  'Mimosa pudica': {
-    id: 'dormideira',
-    descriptions: {
-      en: 'Touch it and its leaflets fold up in seconds, a defence that makes grazing animals think twice.',
-      'pt-BR': 'Basta tocar para que seus folíolos se fechem em segundos, uma defesa que desanima os animais que tentam comê-la.',
-    },
-  },
-  'Socratea exorrhiza': {
-    id: 'paxiubinha',
-    descriptions: {
-      en: 'A palm that stands on a cone of stilt roots, lifting its trunk above the wet forest floor.',
-      'pt-BR': 'Palmeira que se apoia em um cone de raízes-escora, erguendo o tronco acima do chão úmido da floresta.',
-    },
-  },
-  'Cecropia latiloba': {
-    id: 'imbaubarana',
-    names: { en: 'Imbaubarana', 'pt-BR': 'Imbaubarana' },
-    descriptions: {
-      en: 'An embaúba of the várzea that withstands months of flooding, with huge leaves that are pale underneath.',
-      'pt-BR': 'Embaúba da várzea que suporta meses de cheia, com folhas enormes e esbranquiçadas na face de baixo.',
-    },
-  },
-  'Couroupita guianensis': {
-    id: 'abrico-de-macaco',
-    names: { en: 'Cannonball Tree' },
-    descriptions: {
-      en: 'Its fragrant pink flowers and heavy round fruits grow straight from the trunk, like cannonballs hanging on ropes.',
-      'pt-BR': 'Suas flores rosadas e perfumadas e seus frutos redondos e pesados nascem direto do tronco, como balas de canhão penduradas.',
-    },
-  },
-  'Montrichardia linifera': {
-    id: 'aninga',
-    descriptions: {
-      en: 'A tall aroid with arrow-shaped leaves that forms dense stands along muddy riverbanks of the lower Amazon.',
-      'pt-BR': 'Arácea alta de folhas em forma de seta que forma grandes moitas nas margens lamacentas dos rios do baixo Amazonas.',
-    },
-  },
-  'Phlebodium decumanum': {
-    id: 'rabo-de-guariba',
-    names: { en: 'Golden Polypody' },
-    descriptions: {
-      en: 'A big fern that creeps over tree trunks on thick rhizomes covered in golden-brown scales.',
-      'pt-BR': 'Samambaia grande que se espalha pelos troncos com rizomas grossos cobertos de escamas castanho-douradas.',
-    },
-  },
   'Coragyps atratus': {
     id: 'urubu-preto',
     descriptions: {
@@ -646,26 +622,11 @@ export const SPECIES_TEXT: Record<string, SpeciesText> = {
       'pt-BR': 'Macaco-prego esperto que quebra cocos e frutos duros batendo-os contra os galhos.',
     },
   },
-  'Saimiri sciureus': {
-    id: 'macaco-de-cheiro',
-    descriptions: {
-      en: 'A small, yellow-armed monkey that travels in large, chattering troops in search of insects and fruit.',
-      'pt-BR': 'Macaco pequeno de braços amarelados que anda em bandos grandes e falantes atrás de insetos e frutas.',
-    },
-  },
   'Ameiva ameiva': {
     id: 'calango-verde',
     descriptions: {
       en: 'A fast, green-backed lizard that forages actively in sunny clearings, flicking its tongue to find insects.',
       'pt-BR': 'Lagarto rápido de dorso verde que caça ativamente em clareiras ensolaradas, usando a língua para achar insetos.',
-    },
-  },
-  'Podocnemis expansa': {
-    id: 'tartaruga-da-amazonia',
-    names: { 'pt-BR': 'Tartaruga-da-amazônia' },
-    descriptions: {
-      en: 'South America’s largest river turtle; females gather by the thousands to lay eggs on sandbanks in the dry season.',
-      'pt-BR': 'A maior tartaruga de rio da América do Sul; as fêmeas se reúnem aos milhares para desovar nas praias de areia na seca.',
     },
   },
   'Caiman crocodilus': {
@@ -687,22 +648,6 @@ export const SPECIES_TEXT: Record<string, SpeciesText> = {
     descriptions: {
       en: 'A dark butterfly with bold scarlet bands, often seen sipping nectar in gardens and pastures.',
       'pt-BR': 'Borboleta escura com faixas vermelho-vivas, vista com frequência tomando néctar em jardins e pastos.',
-    },
-  },
-  'Marpesia chiron': {
-    id: 'marpesia-chiron',
-    names: { 'pt-BR': 'Marpesia chiron' },
-    descriptions: {
-      en: 'A brown, striped butterfly with long tails on its hindwings; groups drink minerals from wet sand by rivers.',
-      'pt-BR': 'Borboleta marrom e listrada com caudas longas nas asas posteriores; grupos bebem sais minerais na areia úmida dos rios.',
-    },
-  },
-  'Ascia monuste': {
-    id: 'borboleta-da-couve',
-    photoObservation: 186904817,
-    descriptions: {
-      en: 'A white butterfly with dark wing edges whose caterpillars feed on kale and other cabbage-family plants.',
-      'pt-BR': 'Borboleta branca de bordas escuras nas asas, cujas lagartas comem couve e outras plantas da família do repolho.',
     },
   },
   // Atlantic Forest
@@ -781,14 +726,6 @@ export const SPECIES_TEXT: Record<string, SpeciesText> = {
     descriptions: {
       en: 'A tiny, scaly air plant that forms moss-like mats on twigs and rocks.',
       'pt-BR': 'Bromélia minúscula e escamosa que forma tapetes parecidos com musgo sobre galhos e pedras.',
-    },
-  },
-  'Syagrus romanzoffiana': {
-    id: 'jeriva',
-    names: { en: 'Queen Palm' },
-    descriptions: {
-      en: 'A common native palm whose orange coconuts are a staple for parrots, squirrels and many other animals.',
-      'pt-BR': 'Palmeira nativa comum cujos coquinhos alaranjados são alimento básico de papagaios, serelepes e muitos outros bichos.',
     },
   },
   'Sicalis flaveola': {
@@ -884,20 +821,6 @@ export const SPECIES_TEXT: Record<string, SpeciesText> = {
       'pt-BR': 'Cacto baixo e rasteiro, parente da palma, de flores alaranjadas e frutos amarelos comidos pelos bichos do sertão.',
     },
   },
-  'Ipomoea asarifolia': {
-    id: 'salsa-brava',
-    descriptions: {
-      en: 'A creeping morning glory with round, leathery leaves and purple flowers, common on sandy ground; toxic to livestock.',
-      'pt-BR': 'Trepadeira rasteira de folhas redondas e coriáceas e flores roxas, comum em solo arenoso; é tóxica para o gado.',
-    },
-  },
-  'Centratherum punctatum': {
-    id: 'perpetua-roxa',
-    descriptions: {
-      en: 'A small herb with fluffy lilac flower heads that last a long time, framed by leafy bracts.',
-      'pt-BR': 'Erva pequena de inflorescências lilás e felpudas que duram bastante, rodeadas por brácteas verdes.',
-    },
-  },
   'Fluvicola nengeta': {
     id: 'lavadeira-mascarada',
     descriptions: {
@@ -941,13 +864,6 @@ export const SPECIES_TEXT: Record<string, SpeciesText> = {
     descriptions: {
       en: 'A grey, bark-patterned butterfly that rests head-down on tree trunks and makes clicking sounds with its wings in flight.',
       'pt-BR': 'Borboleta cinza que imita a casca das árvores, pousa de cabeça para baixo nos troncos e estala as asas ao voar.',
-    },
-  },
-  'Cycloneda sanguinea': {
-    id: 'joaninha-sem-pintas',
-    descriptions: {
-      en: 'A spotless red ladybird that hunts aphids on garden and crop plants.',
-      'pt-BR': 'Joaninha vermelha sem pintas que caça pulgões em hortas e plantações.',
     },
   },
   // Cerrado
@@ -1026,53 +942,6 @@ export const SPECIES_TEXT: Record<string, SpeciesText> = {
     descriptions: {
       en: 'A slender Cerrado tree whose small, peppery fruits open to show black seeds on a red lining.',
       'pt-BR': 'Árvore esguia do Cerrado cujos frutinhos picantes se abrem mostrando sementes pretas sobre um fundo vermelho.',
-    },
-  },
-  'Pyrostegia venusta': {
-    id: 'flor-de-sao-joao',
-    names: { en: 'Flame Vine' },
-    descriptions: {
-      en: 'A climber that covers fences and trees in bright orange tubular flowers in winter, around the June festivals.',
-      'pt-BR': 'Trepadeira que cobre cercas e árvores de flores tubulares laranja-vivo no inverno, na época das festas juninas.',
-    },
-  },
-  'Vochysia elliptica': {
-    id: 'gomeirinha',
-    names: { en: 'Gomeirinha' },
-    descriptions: {
-      en: 'A small Cerrado tree with yellow flower spikes, typical of rocky slopes and grasslands.',
-      'pt-BR': 'Arvoreta do Cerrado com cachos de flores amarelas, típica de encostas pedregosas e campos.',
-    },
-  },
-  'Manihot peltata': {
-    id: 'manihot-peltata',
-    descriptions: {
-      en: 'A wild relative of cassava from the Cerrado, with round leaves attached to the stalk at their centre.',
-      'pt-BR': 'Parente silvestre da mandioca no Cerrado, de folhas arredondadas presas ao pecíolo pelo centro.',
-    },
-  },
-  'Paepalanthus chiquitensis': {
-    id: 'chuveirinho',
-    names: { en: 'Chuveirinho' },
-    descriptions: {
-      en: 'An "everlasting" with a spray of tiny white flower heads on thin stalks, like a little shower head, in wet Cerrado grasslands.',
-      'pt-BR': 'Sempre-viva com um feixe de pequenas cabecinhas brancas em hastes finas, como um chuveirinho, nos campos úmidos do Cerrado.',
-    },
-  },
-  'Pilosocereus machrisii': {
-    id: 'facheiro-do-cerrado',
-    names: { en: 'Cerrado Facheiro' },
-    descriptions: {
-      en: 'A columnar cactus that grows among rocks in the Cerrado; its night-blooming flowers are pollinated by bats.',
-      'pt-BR': 'Cacto colunar que cresce entre as pedras do Cerrado; suas flores noturnas são polinizadas por morcegos.',
-    },
-  },
-  'Discocactus pseudoinsignis': {
-    id: 'roseta-do-diabo',
-    names: { en: 'Roseta-do-diabo', 'pt-BR': 'Roseta-do-diabo' },
-    descriptions: {
-      en: 'A flat, disc-shaped cactus of sandy Cerrado ground; its white, fragrant flowers open at night.',
-      'pt-BR': 'Cacto achatado em forma de disco dos solos arenosos do Cerrado; suas flores brancas e perfumadas abrem à noite.',
     },
   },
   'Stilpnia cayana': {
@@ -1231,58 +1100,12 @@ export const SPECIES_TEXT: Record<string, SpeciesText> = {
       'pt-BR': 'Cacto alto e ramificado das matas secas, com grandes flores brancas noturnas e frutos alaranjados.',
     },
   },
-  'Tillandsia loliacea': {
-    id: 'barba-de-bode',
-    names: { en: 'Barba-de-bode', 'pt-BR': 'Barba-de-bode' },
-    descriptions: {
-      en: 'A tiny grey air plant that grows in clumps on branches and cacti of dry forests.',
-      'pt-BR': 'Bromélia cinzenta minúscula que cresce em tufos sobre galhos e cactos das matas secas.',
-    },
-  },
-  'Tillandsia didisticha': {
-    id: 'tillandsia-didisticha',
-    descriptions: {
-      en: 'An air plant with silvery leaves and a flattened flower spike that grows on trees in dry forests.',
-      'pt-BR': 'Bromélia de folhas prateadas e inflorescência achatada, que cresce sobre árvores das matas secas.',
-    },
-  },
-  'Camonea umbellata': {
-    id: 'camonea-umbellata',
-    names: { en: 'Yellow Merremia' },
-    descriptions: {
-      en: 'A twining vine related to morning glories, with clusters of yellow funnel flowers.',
-      'pt-BR': 'Trepadeira parente das ipomeias, com cachos de flores amarelas em forma de funil.',
-    },
-  },
-  'Handroanthus heptaphyllus': {
-    id: 'ipe-roxo-de-sete-folhas',
-    names: { en: 'Pink Ipê' },
-    descriptions: {
-      en: 'A trumpet tree whose bare branches burst into pink flowers in the dry season, painting the Pantanal landscape.',
-      'pt-BR': 'Ipê cujos galhos sem folhas se cobrem de flores rosadas na seca, colorindo a paisagem do Pantanal.',
-    },
-  },
   'Ipomoea carnea': {
     id: 'algodao-bravo',
     names: { en: 'Bush Morning Glory' },
     descriptions: {
       en: 'A shrubby morning glory with pink funnel flowers that forms thickets in wetlands; poisonous to livestock.',
       'pt-BR': 'Ipomeia arbustiva de flores cor-de-rosa que forma moitas em áreas úmidas; é venenosa para o gado.',
-    },
-  },
-  'Langsdorffia hypogaea': {
-    id: 'erva-de-veado',
-    names: { en: 'Erva-de-veado' },
-    descriptions: {
-      en: 'A strange root parasite without leaves that only appears above ground as a red, fleshy flower head.',
-      'pt-BR': 'Planta parasita de raízes, sem folhas, que só aparece acima do solo como uma inflorescência vermelha e carnosa.',
-    },
-  },
-  'Tillandsia duratii': {
-    id: 'tillandsia-duratii',
-    descriptions: {
-      en: 'An air plant with curling grey leaves that wrap around twigs like tendrils, and fragrant lavender flowers.',
-      'pt-BR': 'Bromélia de folhas cinzentas e enroladas que se prendem aos galhos como gavinhas, com flores lilás perfumadas.',
     },
   },
   'Jabiru mycteria': {
@@ -1312,13 +1135,6 @@ export const SPECIES_TEXT: Record<string, SpeciesText> = {
     descriptions: {
       en: 'The largest toucan, with a huge orange bill that also helps it shed heat.',
       'pt-BR': 'O maior dos tucanos, de bico laranja enorme que também ajuda a dissipar o calor do corpo.',
-    },
-  },
-  'Crax fasciolata': {
-    id: 'mutum-de-penacho',
-    descriptions: {
-      en: 'A turkey-sized forest bird; the male is black with a curly crest and a yellow bill base, the female barred.',
-      'pt-BR': 'Ave florestal do tamanho de um peru; o macho é preto, de topete crespo e base do bico amarela, e a fêmea é barrada.',
     },
   },
   'Panthera onca': {
@@ -1486,14 +1302,6 @@ export const SPECIES_TEXT: Record<string, SpeciesText> = {
       'pt-BR': 'Pequena marreca marrom de pés vermelhos e espelho azul-esverdeado nas asas, vista aos pares em lagoas.',
     },
   },
-  'Zenaida auriculata': {
-    id: 'avoante',
-    photoObservation: 235609705,
-    descriptions: {
-      en: 'A small dove with black spots on its wings that gathers in large flocks to feed on seeds in fields.',
-      'pt-BR': 'Pomba pequena de pintas pretas nas asas que se junta em grandes bandos para comer sementes nos campos.',
-    },
-  },
   'Myocastor coypus': {
     id: 'ratao-do-banhado',
     names: { 'pt-BR': 'Ratão-do-banhado' },
@@ -1523,12 +1331,263 @@ export const SPECIES_TEXT: Record<string, SpeciesText> = {
       'pt-BR': 'Borboleta de asas transparentes contornadas de preto e laranja; suas lagartas se alimentam do manacá.',
     },
   },
-  'Vanessa braziliensis': {
-    id: 'dama-brasileira',
-    photoObservation: 276843239,
+
+  // Species with no establishment record (kept since the filter only drops introduced species)
+  'Victoria amazonica': {
+    id: 'vitoria-regia',
     descriptions: {
-      en: 'A fast, orange-and-black lady butterfly that visits flowers in open, sunny places.',
-      'pt-BR': 'Borboleta veloz, laranja e preta, que visita flores em lugares abertos e ensolarados.',
+      en: 'A giant water lily whose round floating leaves can grow wider than a person is tall; its flowers open white at night and turn pink the next.',
+      'pt-BR': 'Planta aquática gigante cujas folhas redondas e flutuantes passam da altura de uma pessoa; a flor abre branca à noite e fica rosa na seguinte.',
+    },
+  },
+  'Solanum stramoniifolium': {
+    id: 'solanum-stramoniifolium',
+    names: { en: 'Coconilla', 'pt-BR': 'Solanum stramoniifolium' },
+    descriptions: {
+      en: 'A prickly shrub of clearings and riverbanks with white star-shaped flowers and small orange fruits.',
+      'pt-BR': 'Arbusto espinhento de clareiras e beiras de rio, com flores brancas em forma de estrela e frutinhos alaranjados.',
+    },
+  },
+  'Philodendron hopkinsianum': {
+    id: 'philodendron-hopkinsianum',
+    descriptions: {
+      en: 'A climbing philodendron of the Amazon forest that clings to tree trunks with its roots.',
+      'pt-BR': 'Filodendro trepador da floresta amazônica que se prende aos troncos das árvores com suas raízes.',
+    },
+  },
+  'Theobroma speciosum': {
+    id: 'cacaui',
+    descriptions: {
+      en: 'A wild relative of cacao whose red flowers grow in clusters straight from the trunk.',
+      'pt-BR': 'Parente silvestre do cacau cujas flores vermelhas nascem em cachos direto do tronco.',
+    },
+  },
+  'Cecropia concolor': {
+    id: 'imbauba-branca',
+    names: { en: 'Imbaúba-branca' },
+    descriptions: {
+      en: 'An Amazonian embaúba with huge hand-shaped leaves that quickly fills gaps left by fallen trees.',
+      'pt-BR': 'Embaúba amazônica de folhas enormes em forma de mão que ocupa depressa as clareiras abertas pela queda de árvores.',
+    },
+  },
+  'Heliconia acuminata': {
+    id: 'heliconia-acuminata',
+    descriptions: {
+      en: 'A small heliconia of the Amazon understory whose colourful bracts shelter flowers visited by hummingbirds.',
+      'pt-BR': 'Pequena helicônia do sub-bosque amazônico, cujas brácteas coloridas abrigam flores visitadas por beija-flores.',
+    },
+  },
+  'Passiflora glandulosa': {
+    id: 'passiflora-glandulosa',
+    descriptions: {
+      en: 'A climbing passionflower with bright red flowers pollinated by hummingbirds.',
+      'pt-BR': 'Maracujá trepador de flores vermelho-vivas polinizadas por beija-flores.',
+    },
+  },
+  'Saguinus weddelli': {
+    id: 'sauim-de-cara-suja',
+    names: { 'pt-BR': 'Sauim-de-cara-suja' },
+    descriptions: {
+      en: 'A small tamarin that lives in family groups in the southern Amazon, feeding on fruit, insects and tree gum.',
+      'pt-BR': 'Pequeno sagui que vive em grupos familiares no sul da Amazônia e come frutos, insetos e goma de árvores.',
+    },
+  },
+  'Ectatomma brunneum': {
+    id: 'ectatomma-brunneum',
+    descriptions: {
+      en: 'A large ground ant of open areas that hunts small insects and collects sweet liquids from plants.',
+      'pt-BR': 'Formiga grande de áreas abertas que caça pequenos insetos e coleta líquidos açucarados das plantas.',
+    },
+  },
+  'Abracris flavolineata': {
+    id: 'abracris-flavolineata',
+    descriptions: {
+      en: 'A slender grasshopper with pale yellow lines along its body, common in grass and shrubs.',
+      'pt-BR': 'Gafanhoto esguio com linhas amarelo-claras ao longo do corpo, comum no capim e nos arbustos.',
+    },
+  },
+  'Trigona spinipes': {
+    id: 'irapua',
+    photoObservation: 307363488,
+    names: { 'pt-BR': 'Irapuã' },
+    descriptions: {
+      en: 'A black stingless bee that defends its nest by biting; it builds big, exposed nests of resin and plant fibre on branches.',
+      'pt-BR': 'Abelha preta sem ferrão que defende o ninho com mordidas; constrói ninhos grandes e expostos de resina e fibras nos galhos.',
+    },
+  },
+  'Copernicia prunifera': {
+    id: 'carnauba',
+    names: { en: 'Carnaúba Palm' },
+    descriptions: {
+      en: 'The fan palm of the Northeast whose leaves are coated in a wax used in polishes and cosmetics.',
+      'pt-BR': 'A palmeira de leque do Nordeste cujas folhas são cobertas por uma cera usada em polidores e cosméticos.',
+    },
+  },
+  'Cecropia palmata': {
+    id: 'cecropia-palmata',
+    names: { en: 'Snakewood' },
+    descriptions: {
+      en: 'An embaúba of northeastern Brazil with deeply lobed leaves that are silvery-white underneath.',
+      'pt-BR': 'Embaúba do Nordeste com folhas profundamente recortadas e esbranquiçadas na face de baixo.',
+    },
+  },
+  'Pilosocereus catingicola': {
+    id: 'facheiro-da-caatinga',
+    names: { en: 'Caatinga Facheiro', 'pt-BR': 'Facheiro-da-caatinga' },
+    descriptions: {
+      en: 'A tall, bluish columnar cactus whose night flowers are visited by bats.',
+      'pt-BR': 'Cacto colunar alto e azulado cujas flores noturnas são visitadas por morcegos.',
+    },
+  },
+  'Caryocar brasiliense': {
+    id: 'pequi',
+    names: { en: 'Pequi' },
+    descriptions: {
+      en: 'The emblematic Cerrado tree: its strong-smelling yellow fruit is a regional staple, but the pit hides sharp spines.',
+      'pt-BR': 'A árvore símbolo do Cerrado: seu fruto amarelo de cheiro forte é base da culinária regional, mas o caroço esconde espinhos.',
+    },
+  },
+  'Calliandra dysantha': {
+    id: 'flor-do-cerrado',
+    names: { en: 'Flor-do-cerrado' },
+    descriptions: {
+      en: 'A small shrub whose red, powder-puff flowers brighten burned and open Cerrado grasslands.',
+      'pt-BR': 'Arbusto pequeno cujas flores vermelhas, como pompons, colorem os campos abertos e recém-queimados do Cerrado.',
+    },
+  },
+  'Qualea grandiflora': {
+    id: 'pau-terra-grande',
+    names: { en: 'Pau-terra-grande', 'pt-BR': 'Pau-terra-grande' },
+    descriptions: {
+      en: 'A twisted Cerrado tree with corky bark and large yellow flowers.',
+      'pt-BR': 'Árvore retorcida do Cerrado, de casca grossa e cortiçosa e grandes flores amarelas.',
+    },
+  },
+  'Qualea parviflora': {
+    id: 'pau-terra-de-flor-miuda',
+    names: { en: 'Pau-terra-de-flor-miúda', 'pt-BR': 'Pau-terra-de-flor-miúda' },
+    descriptions: {
+      en: 'A Cerrado tree that covers itself in small lilac flowers in the dry season.',
+      'pt-BR': 'Árvore do Cerrado que se cobre de pequenas flores lilás na estação seca.',
+    },
+  },
+  'Vochysia thyrsoidea': {
+    id: 'gomeira',
+    names: { en: 'Gomeira' },
+    descriptions: {
+      en: 'A Cerrado tree of rocky highlands with upright spikes of yellow flowers and a trunk that oozes gum.',
+      'pt-BR': 'Árvore dos campos rochosos do Cerrado, com cachos eretos de flores amarelas e tronco que solta goma.',
+    },
+  },
+  'Solanum falciforme': {
+    id: 'solanum-falciforme',
+    names: { en: 'Solanum falciforme', 'pt-BR': 'Solanum falciforme' },
+    descriptions: {
+      en: 'A prickly nightshade shrub of the Cerrado, a close relative of the wolf apple.',
+      'pt-BR': 'Arbusto espinhento do Cerrado, parente próximo da lobeira.',
+    },
+  },
+  'Cochlospermum regium': {
+    id: 'algodao-do-cerrado',
+    names: { en: 'Algodão-do-cerrado' },
+    descriptions: {
+      en: 'A low shrub that flowers bright yellow in the dry season; its fruits release seeds wrapped in cotton-like fibre.',
+      'pt-BR': 'Arbusto baixo de flores amarelo-vivas na seca; seus frutos liberam sementes envoltas em uma fibra parecida com algodão.',
+    },
+  },
+  'Sapajus libidinosus': {
+    id: 'macaco-prego-amarelo',
+    descriptions: {
+      en: 'A capuchin of dry open country famous for cracking hard nuts with stones used as hammers.',
+      'pt-BR': 'Macaco-prego de áreas secas e abertas, famoso por quebrar cocos duros usando pedras como martelo.',
+    },
+  },
+  'Attalea phalerata': {
+    id: 'acuri',
+    names: { 'pt-BR': 'Acuri' },
+    descriptions: {
+      en: 'A stout palm of the Pantanal whose hard nuts are a key food for hyacinth macaws.',
+      'pt-BR': 'Palmeira robusta do Pantanal cujos cocos duros são alimento essencial da arara-azul.',
+    },
+  },
+  'Cereus bicolor': {
+    id: 'cereus-bicolor',
+    descriptions: {
+      en: 'A branching columnar cactus of the dry forests on the Pantanal’s edge, with large white flowers that open at night.',
+      'pt-BR': 'Cacto colunar ramificado das matas secas na borda do Pantanal, com grandes flores brancas que abrem à noite.',
+    },
+  },
+  'Mimosa debilis': {
+    id: 'mimosa-debilis',
+    descriptions: {
+      en: 'A low, prickly mimosa with feathery leaves and pink pom-pom flowers, common in open fields.',
+      'pt-BR': 'Mimosa baixa e espinhenta, de folhas delicadas e flores cor-de-rosa em pompom, comum em campos abertos.',
+    },
+  },
+  'Vochysia divergens': {
+    id: 'cambara-do-pantanal',
+    names: { en: 'Cambará' },
+    descriptions: {
+      en: 'A yellow-flowered tree that forms dense stands, the cambarazais, on the flooded plains of the Pantanal.',
+      'pt-BR': 'Árvore de flores amarelas que forma matas densas, os cambarazais, nas planícies alagáveis do Pantanal.',
+    },
+  },
+  'Duguetia furfuracea': {
+    id: 'marolinho-do-cerrado',
+    names: { en: 'Marolinho-do-cerrado' },
+    descriptions: {
+      en: 'A small shrub of the Cerrado whose leaves are covered in tiny rusty scales.',
+      'pt-BR': 'Arbusto pequeno do Cerrado cujas folhas são cobertas de minúsculas escamas cor de ferrugem.',
+    },
+  },
+  'Mimosa xanthocentra': {
+    id: 'mimosa-xanthocentra',
+    descriptions: {
+      en: 'A small mimosa of open savannas with fine leaves and pink pom-pom flowers.',
+      'pt-BR': 'Pequena mimosa dos campos abertos, de folhas finas e flores cor-de-rosa em pompom.',
+    },
+  },
+  'Anodorhynchus hyacinthinus': {
+    id: 'arara-azul-grande',
+    names: { 'pt-BR': 'Arara-azul-grande' },
+    descriptions: {
+      en: 'The largest flying parrot, cobalt blue with yellow eye rings; its powerful bill cracks palm nuts.',
+      'pt-BR': 'O maior papagaio que voa, azul-cobalto com anéis amarelos nos olhos; seu bico forte quebra cocos de palmeira.',
+    },
+  },
+  'Sapajus cay': {
+    id: 'macaco-prego-do-papo-amarelo',
+    descriptions: {
+      en: 'A capuchin of the Pantanal and nearby forests that forages in noisy groups for fruit, seeds and insects.',
+      'pt-BR': 'Macaco-prego do Pantanal e das matas vizinhas que procura em bandos barulhentos frutos, sementes e insetos.',
+    },
+  },
+  'Colaptes campestris': {
+    id: 'pica-pau-do-campo',
+    descriptions: {
+      en: 'A woodpecker of open country with a yellow face that often feeds on the ground, digging out ants and termites.',
+      'pt-BR': 'Pica-pau de áreas abertas, de face amarela, que muitas vezes come no chão, cavando formigas e cupins.',
+    },
+  },
+  'Lycalopex gymnocerca': {
+    id: 'graxaim-do-campo',
+    descriptions: {
+      en: 'A grey fox of the southern grasslands that eats small animals, eggs and fruit.',
+      'pt-BR': 'Raposa cinzenta dos campos sulinos que come pequenos animais, ovos e frutos.',
+    },
+  },
+  'Dione vanillae': {
+    id: 'borboleta-paixao',
+    descriptions: {
+      en: 'A bright orange butterfly with silver spots under its wings; its caterpillars feed on passionflower vines.',
+      'pt-BR': 'Borboleta laranja-viva com manchas prateadas sob as asas; suas lagartas se alimentam de maracujazeiros.',
+    },
+  },
+  'Dryas iulia': {
+    id: 'borboleta-flambeau',
+    descriptions: {
+      en: 'A long-winged, flame-orange butterfly that visits flowers in sunny clearings; its caterpillars eat passionflower leaves.',
+      'pt-BR': 'Borboleta de asas longas cor de fogo que visita flores em clareiras ensolaradas; suas lagartas comem folhas de maracujá.',
     },
   },
 }
