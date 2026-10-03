@@ -35,7 +35,7 @@ _Avoid_: catch, item
 The full set of a user's CollectedEntry records across all Species. Permanent — entries never decay or get removed.
 
 **Rarity**:
-A tier (Common, Rare, Epic) assigned to a Species that weights how likely it is to be selected in a Draw.
+A tier (Common, Rare, Epic) assigned to a Species in each of its Biomes that weights how likely it is to be selected in a Draw there.
 
 **Archetype**:
 The growth form (Plants) or body plan (Animals) of a Species — e.g. flowering tree, palm, songbird, primate. The Garden draws one sprite per Archetype, not per Species.

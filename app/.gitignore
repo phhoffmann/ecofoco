@@ -25,3 +25,6 @@ dist-ssr
 
 # Copied from node_modules/sql.js by the copy-sql-wasm script
 public/assets/sql-wasm.wasm
+
+# Raw iNaturalist/GBIF responses and photos cached by the build:catalog script
+.catalog-cache

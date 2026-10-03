@@ -60,7 +60,7 @@ describe('IsometricGarden', () => {
   it('opens the species placed on the tapped tile', () => {
     const onSelect = vi.fn()
     const scene = render(
-      [entry('a', 'ipe-amarelo', '2026-10-02T10:00:00.000Z'), entry('b', 'quati', '2026-10-02T11:00:00.000Z')],
+      [entry('a', 'quaresmeira', '2026-10-02T10:00:00.000Z'), entry('b', 'quati', '2026-10-02T11:00:00.000Z')],
       onSelect,
     )
     const [first, second] = tileFillOrder(6)
@@ -68,25 +68,25 @@ describe('IsometricGarden', () => {
     clickTile(scene, first.col, first.row)
     clickTile(scene, second.col, second.row)
 
-    expect(onSelect.mock.calls).toEqual([['ipe-amarelo'], ['quati']])
+    expect(onSelect.mock.calls).toEqual([['quaresmeira'], ['quati']])
   })
 
   it('places entries in collection order, regardless of input order', () => {
     const onSelect = vi.fn()
     const scene = render(
-      [entry('b', 'quati', '2026-10-02T11:00:00.000Z'), entry('a', 'ipe-amarelo', '2026-10-02T10:00:00.000Z')],
+      [entry('b', 'quati', '2026-10-02T11:00:00.000Z'), entry('a', 'quaresmeira', '2026-10-02T10:00:00.000Z')],
       onSelect,
     )
     const [first] = tileFillOrder(6)
 
     clickTile(scene, first.col, first.row)
 
-    expect(onSelect).toHaveBeenCalledWith('ipe-amarelo')
+    expect(onSelect).toHaveBeenCalledWith('quaresmeira')
   })
 
   it('ignores taps on empty tiles and off the plot', () => {
     const onSelect = vi.fn()
-    const scene = render([entry('a', 'ipe-amarelo', '2026-10-02T10:00:00.000Z')], onSelect)
+    const scene = render([entry('a', 'quaresmeira', '2026-10-02T10:00:00.000Z')], onSelect)
     const empty = tileFillOrder(6)[1]
 
     clickTile(scene, empty.col, empty.row)
@@ -112,7 +112,7 @@ describe('IsometricGarden', () => {
 
   it('keeps the newest entries when the plot overflows', () => {
     const later = Array.from({ length: 64 }, (_, i) =>
-      entry(`n${i}`, 'ipe-amarelo', new Date(Date.UTC(2026, 9, 2, 11, i)).toISOString()),
+      entry(`n${i}`, 'quaresmeira', new Date(Date.UTC(2026, 9, 2, 11, i)).toISOString()),
     )
     render([...later, entry('oldest', 'quati', '2026-10-02T10:00:00.000Z')], vi.fn())
 

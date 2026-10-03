@@ -1,473 +1,92 @@
-import type { BiomeId } from './biome'
+import amazon from '../catalog/amazon.json'
+import atlanticForest from '../catalog/atlantic-forest.json'
+import caatinga from '../catalog/caatinga.json'
+import cerrado from '../catalog/cerrado.json'
+import pampa from '../catalog/pampa.json'
+import pantanal from '../catalog/pantanal.json'
+import { toLocale } from '../i18n/locale'
+import {
+  BIOME_IDS,
+  type Archetype,
+  type BiomeId,
+  type CatalogFile,
+  type PhotoCredit,
+  type Rarity,
+  type SpeciesKind,
+} from './catalogSchema'
 import type { CollectedEntry } from './types'
 
-export type SpeciesKind = 'plant' | 'animal'
-export type Rarity = 'common' | 'rare' | 'epic'
-
-// Body-plan / growth-form archetype: garden sprites are chosen per archetype, not per species.
-export type PlantArchetype = 'flowering-tree' | 'broadleaf-tree' | 'emergent-tree' | 'pioneer-tree' | 'palm' | 'shrub'
-export type AnimalArchetype =
-  | 'primate'
-  | 'songbird'
-  | 'large-bird'
-  | 'small-mammal'
-  | 'mid-mammal'
-  | 'reptile'
-  | 'insect'
-export type Archetype = PlantArchetype | AnimalArchetype
-
-export const PLANT_ARCHETYPES: PlantArchetype[] = [
-  'flowering-tree',
-  'broadleaf-tree',
-  'emergent-tree',
-  'pioneer-tree',
-  'palm',
-  'shrub',
-]
+export {
+  ANIMAL_ARCHETYPES,
+  PLANT_ARCHETYPES,
+  type AnimalArchetype,
+  type Archetype,
+  type PlantArchetype,
+  type Rarity,
+  type SpeciesKind,
+} from './catalogSchema'
 
 export interface Species {
   id: string
   scientificName: string
   type: SpeciesKind
-  rarity: Rarity
+  /** Rarity in each Biome the species belongs to, ranked against that Biome's own species. */
+  rarityByBiome: Partial<Record<BiomeId, Rarity>>
   biome: BiomeId[]
   archetype: Archetype
+  names: CatalogFile['species'][number]['names']
+  descriptions: CatalogFile['species'][number]['descriptions']
+  /** Bundled photo URL. */
   image: string
-  imageLicense: 'CC0' | 'CC-BY'
-  imageAttribution?: string
+  photo: Omit<PhotoCredit, 'file'>
 }
 
-export const SPECIES_CATALOG: Species[] = [
-  // Atlantic Forest plants
-  {
-    id: 'ipe-amarelo',
-    scientificName: 'Handroanthus albus',
-    type: 'plant',
-    rarity: 'common',
-    biome: ['atlantic-forest'],
-    archetype: 'flowering-tree',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/351406107/original.jpeg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Fabrício Mil Homens Riella via GBIF, CC-BY',
-  },
-  {
-    id: 'quaresmeira',
-    scientificName: 'Pleroma granulosum',
-    type: 'plant',
-    rarity: 'common',
-    biome: ['atlantic-forest'],
-    archetype: 'flowering-tree',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/351559976/original.jpg',
-    imageLicense: 'CC0',
-  },
-  {
-    id: 'pau-brasil',
-    scientificName: 'Paubrasilia echinata',
-    type: 'plant',
-    rarity: 'epic',
-    biome: ['atlantic-forest'],
-    archetype: 'broadleaf-tree',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/608953236/original.jpg',
-    imageLicense: 'CC0',
-  },
-  {
-    id: 'jequitiba-rosa',
-    scientificName: 'Cariniana legalis',
-    type: 'plant',
-    rarity: 'epic',
-    biome: ['atlantic-forest'],
-    archetype: 'emergent-tree',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/693111344/original.jpg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Marcio Santos Ferreira via GBIF, CC-BY',
-  },
-  {
-    id: 'palmito-jucara',
-    scientificName: 'Euterpe edulis',
-    type: 'plant',
-    rarity: 'rare',
-    biome: ['atlantic-forest'],
-    archetype: 'palm',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/618457199/original.jpg',
-    imageLicense: 'CC0',
-  },
-  {
-    id: 'canela-guaica',
-    scientificName: 'Ocotea puberula',
-    type: 'plant',
-    rarity: 'rare',
-    biome: ['atlantic-forest'],
-    archetype: 'broadleaf-tree',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/637605683/original.jpg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Fabrício Mil Homens Riella via GBIF, CC-BY',
-  },
-  {
-    id: 'ipe-roxo',
-    scientificName: 'Handroanthus impetiginosus',
-    type: 'plant',
-    rarity: 'common',
-    biome: ['atlantic-forest'],
-    archetype: 'flowering-tree',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/610840682/original.jpg',
-    imageLicense: 'CC0',
-  },
-  {
-    id: 'embauba',
-    scientificName: 'Cecropia pachystachya',
-    type: 'plant',
-    rarity: 'common',
-    biome: ['atlantic-forest'],
-    archetype: 'pioneer-tree',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/604863863/original.jpg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Paulo C. O. Cunha via GBIF, CC-BY',
-  },
-  {
-    id: 'guapuruvu',
-    scientificName: 'Schizolobium parahyba',
-    type: 'plant',
-    rarity: 'rare',
-    biome: ['atlantic-forest'],
-    archetype: 'pioneer-tree',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/623371192/original.jpg',
-    imageLicense: 'CC0',
-  },
-  {
-    id: 'aroeira-pimenteira',
-    scientificName: 'Schinus terebinthifolia',
-    type: 'plant',
-    rarity: 'common',
-    biome: ['atlantic-forest'],
-    archetype: 'shrub',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/605176859/original.jpg',
-    imageLicense: 'CC0',
-  },
+// Generated by scripts/build-species-catalog.ts — regenerate rather than editing these files.
+export const CATALOG_FILES = [amazon, atlanticForest, caatinga, cerrado, pantanal, pampa] as CatalogFile[]
 
-  // Atlantic Forest animals
-  {
-    id: 'sagui-de-tufo-preto',
-    scientificName: 'Callithrix penicillata',
-    type: 'animal',
-    rarity: 'common',
-    biome: ['atlantic-forest'],
-    archetype: 'primate',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/605675307/original.jpg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Paulo Nogueira via GBIF, CC-BY',
-  },
-  {
-    id: 'bem-te-vi',
-    scientificName: 'Pitangus sulphuratus',
-    type: 'animal',
-    rarity: 'common',
-    biome: ['atlantic-forest'],
-    archetype: 'songbird',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/604606426/original.jpg',
-    imageLicense: 'CC0',
-  },
-  {
-    id: 'gamba-de-orelha-preta',
-    scientificName: 'Didelphis aurita',
-    type: 'animal',
-    rarity: 'common',
-    biome: ['atlantic-forest'],
-    archetype: 'small-mammal',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/609708102/original.jpg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Daniel Duarte via GBIF, CC-BY',
-  },
-  {
-    id: 'jacu',
-    scientificName: 'Penelope obscura',
-    type: 'animal',
-    rarity: 'rare',
-    biome: ['atlantic-forest'],
-    archetype: 'large-bird',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/610209843/original.jpg',
-    imageLicense: 'CC0',
-  },
-  {
-    id: 'tucano-de-bico-verde',
-    scientificName: 'Ramphastos dicolorus',
-    type: 'animal',
-    rarity: 'epic',
-    biome: ['atlantic-forest'],
-    archetype: 'large-bird',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/605144497/original.jpg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Lucas Lopes via GBIF, CC-BY',
-  },
-  {
-    id: 'quati',
-    scientificName: 'Nasua nasua',
-    type: 'animal',
-    rarity: 'rare',
-    biome: ['atlantic-forest'],
-    archetype: 'mid-mammal',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/605105456/original.jpg',
-    imageLicense: 'CC0',
-  },
-  {
-    id: 'lagarto-teiu',
-    scientificName: 'Salvator merianae',
-    type: 'animal',
-    rarity: 'rare',
-    biome: ['atlantic-forest'],
-    archetype: 'reptile',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/604868901/original.jpg',
-    imageLicense: 'CC0',
-  },
-  {
-    id: 'sabia-laranjeira',
-    scientificName: 'Turdus rufiventris',
-    type: 'animal',
-    rarity: 'common',
-    biome: ['atlantic-forest'],
-    archetype: 'songbird',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/605467269/original.jpg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Leonel Roget via GBIF, CC-BY',
-  },
-  {
-    id: 'borboleta-azul',
-    scientificName: 'Morpho helenor',
-    type: 'animal',
-    rarity: 'rare',
-    biome: ['atlantic-forest'],
-    archetype: 'insect',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/605967817/original.jpg',
-    imageLicense: 'CC0',
-  },
-  {
-    id: 'prea',
-    scientificName: 'Cavia aperea',
-    type: 'animal',
-    rarity: 'common',
-    biome: ['atlantic-forest'],
-    archetype: 'small-mammal',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/605551029/original.jpg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Pablo Bombín via GBIF, CC-BY',
-  },
+const PHOTO_URLS = import.meta.glob<string>('../assets/species/*.webp', { eager: true, query: '?url', import: 'default' })
 
-  // Caatinga plants (native per iNaturalist)
-  {
-    id: 'mandacaru',
-    scientificName: 'Cereus jamacaru',
-    type: 'plant',
-    rarity: 'common',
-    biome: ['caatinga'],
-    archetype: 'shrub',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/619337508/original.jpg',
-    imageLicense: 'CC0',
-  },
-  {
-    id: 'xique-xique',
-    scientificName: 'Xiquexique gounellei',
-    type: 'plant',
-    rarity: 'common',
-    biome: ['caatinga'],
-    archetype: 'shrub',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/728785590/original.jpg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Celso Henrique Varela Rios via iNaturalist, CC-BY',
-  },
-  {
-    id: 'jurema-preta',
-    scientificName: 'Mimosa tenuiflora',
-    type: 'plant',
-    rarity: 'common',
-    biome: ['caatinga'],
-    archetype: 'pioneer-tree',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/372703745/original.jpeg',
-    imageLicense: 'CC0',
-  },
-  {
-    id: 'catingueira',
-    scientificName: 'Cenostigma pyramidale',
-    type: 'plant',
-    rarity: 'common',
-    biome: ['caatinga'],
-    archetype: 'broadleaf-tree',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/638115766/original.jpg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Issao Shinobe via iNaturalist, CC-BY',
-  },
-  {
-    id: 'facheiro',
-    scientificName: 'Pilosocereus pachycladus',
-    type: 'plant',
-    rarity: 'common',
-    biome: ['caatinga'],
-    archetype: 'shrub',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/474529692/original.jpeg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Renato Bandeira via iNaturalist, CC-BY',
-  },
-  {
-    id: 'coroa-de-frade',
-    scientificName: 'Melocactus zehntneri',
-    type: 'plant',
-    rarity: 'rare',
-    biome: ['caatinga'],
-    archetype: 'shrub',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/469175092/original.jpeg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Renato Bandeira via iNaturalist, CC-BY',
-  },
-  {
-    id: 'faveleira',
-    scientificName: 'Cnidoscolus quercifolius',
-    type: 'plant',
-    rarity: 'rare',
-    biome: ['caatinga'],
-    archetype: 'pioneer-tree',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/592386668/original.jpg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Carlos Otávio Gussoni via iNaturalist, CC-BY',
-  },
-  {
-    id: 'craibeira',
-    scientificName: 'Tabebuia aurea',
-    type: 'plant',
-    rarity: 'rare',
-    biome: ['caatinga'],
-    archetype: 'flowering-tree',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/476237138/original.jpeg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Renato Bandeira via iNaturalist, CC-BY',
-  },
-  {
-    id: 'mulungu',
-    scientificName: 'Erythrina velutina',
-    type: 'plant',
-    rarity: 'epic',
-    biome: ['caatinga'],
-    archetype: 'flowering-tree',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/347925580/original.jpeg',
-    imageLicense: 'CC0',
-  },
-  {
-    id: 'barriguda',
-    scientificName: 'Ceiba glaziovii',
-    type: 'plant',
-    rarity: 'epic',
-    biome: ['caatinga'],
-    archetype: 'emergent-tree',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/593828200/original.jpg',
-    imageLicense: 'CC0',
-  },
+/** Merges the per-Biome files into one entry per species, tagged with every Biome it appears in. */
+export function buildCatalog(files: CatalogFile[], photoUrls: Record<string, string> = PHOTO_URLS): Species[] {
+  const byId = new Map<string, Species>()
+  const ordered = [...files].sort((a, b) => BIOME_IDS.indexOf(a.biome) - BIOME_IDS.indexOf(b.biome))
+  for (const { biome, species } of ordered) {
+    for (const { photo, source: _source, rarity, ...entry } of species) {
+      const known = byId.get(entry.id)
+      if (known) {
+        known.biome.push(biome)
+        known.rarityByBiome[biome] = rarity
+        continue
+      }
+      const { file, ...credit } = photo
+      byId.set(entry.id, {
+        ...entry,
+        rarityByBiome: { [biome]: rarity },
+        biome: [biome],
+        image: photoUrls[`../assets/species/${file}`] ?? '',
+        photo: credit,
+      })
+    }
+  }
+  return [...byId.values()]
+}
 
-  // Caatinga animals (native per iNaturalist)
-  {
-    id: 'asa-branca',
-    scientificName: 'Patagioenas picazuro',
-    type: 'animal',
-    rarity: 'common',
-    biome: ['caatinga'],
-    archetype: 'songbird',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/343077528/original.jpeg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Laura Gaudette via iNaturalist, CC-BY',
-  },
-  {
-    id: 'carcara',
-    scientificName: 'Caracara plancus',
-    type: 'animal',
-    rarity: 'common',
-    biome: ['caatinga'],
-    archetype: 'large-bird',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/462731923/original.jpg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Zac Peterson via iNaturalist, CC-BY',
-  },
-  {
-    id: 'galo-de-campina',
-    scientificName: 'Paroaria dominicana',
-    type: 'animal',
-    rarity: 'common',
-    biome: ['caatinga'],
-    archetype: 'songbird',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/709018421/original.jpg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Matheus Oliveira via iNaturalist, CC-BY',
-  },
-  {
-    id: 'sagui-de-tufo-branco',
-    scientificName: 'Callithrix jacchus',
-    type: 'animal',
-    rarity: 'common',
-    biome: ['caatinga'],
-    archetype: 'primate',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/390529770/original.jpg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Fábio Olmos via iNaturalist, CC-BY',
-  },
-  {
-    id: 'calango',
-    scientificName: 'Tropidurus hispidus',
-    type: 'animal',
-    rarity: 'common',
-    biome: ['caatinga'],
-    archetype: 'reptile',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/395053616/original.jpeg',
-    imageLicense: 'CC0',
-  },
-  {
-    id: 'moco',
-    scientificName: 'Kerodon rupestris',
-    type: 'animal',
-    rarity: 'rare',
-    biome: ['caatinga'],
-    archetype: 'small-mammal',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/205623216/original.jpg',
-    imageLicense: 'CC0',
-  },
-  {
-    id: 'cachorro-do-mato',
-    scientificName: 'Cerdocyon thous',
-    type: 'animal',
-    rarity: 'rare',
-    biome: ['caatinga'],
-    archetype: 'mid-mammal',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/390529164/original.jpg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Fábio Olmos via iNaturalist, CC-BY',
-  },
-  {
-    id: 'periquito-da-caatinga',
-    scientificName: 'Eupsittula cactorum',
-    type: 'animal',
-    rarity: 'rare',
-    biome: ['caatinga'],
-    archetype: 'songbird',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/334626357/original.jpg',
-    imageLicense: 'CC-BY',
-    imageAttribution: 'Reuber Brandão via iNaturalist, CC-BY',
-  },
-  {
-    id: 'arara-azul-de-lear',
-    scientificName: 'Anodorhynchus leari',
-    type: 'animal',
-    rarity: 'epic',
-    biome: ['caatinga'],
-    archetype: 'large-bird',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/417843744/original.jpg',
-    imageLicense: 'CC0',
-  },
-  {
-    id: 'tatu-bola',
-    scientificName: 'Tolypeutes tricinctus',
-    type: 'animal',
-    rarity: 'epic',
-    biome: ['caatinga'],
-    archetype: 'mid-mammal',
-    image: 'https://inaturalist-open-data.s3.amazonaws.com/photos/661540917/original.jpg',
-    imageLicense: 'CC0',
-  },
-]
+export const SPECIES_CATALOG: Species[] = buildCatalog(CATALOG_FILES)
 
+/** The species' Rarity in the given Biome, or in its first Biome when it does not belong to that one. */
+export function rarityIn(species: Pick<Species, 'rarityByBiome' | 'biome'>, biome: BiomeId): Rarity {
+  return species.rarityByBiome[biome] ?? species.rarityByBiome[species.biome[0]]!
+}
+
+export function speciesName(species: Pick<Species, 'names'>, language: string): string {
+  return species.names[toLocale(language)]
+}
+
+export function speciesDescription(species: Pick<Species, 'descriptions'>, language: string): string {
+  return species.descriptions[toLocale(language)]
+}
+
+/** Collected species ids that still exist in the catalog: entries for removed species are kept but not shown. */
 export function collectedCatalogSpeciesIds(
   entries: CollectedEntry[],
   catalog: Species[] = SPECIES_CATALOG,

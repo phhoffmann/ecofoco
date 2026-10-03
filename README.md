@@ -17,7 +17,7 @@ EcoFoco is a personal project, built as a fullstack portfolio piece. It runs ent
 - Species detail sheet with photo, description, photo credit and collection history; a celebration whenever something new is collected.
 - Location-based biomes for Brazil's six IBGE biomes: coarse location only, used once and never stored (only the biome id is kept), with a manual picker as fallback.
 - Points from completed sessions and met step goals (10 each); 100 points unlock a neighbouring biome, and you can switch to any unlocked one.
-- Bundled catalog: Atlantic Forest and Caatinga, 10 plants and 10 animals each. Amazon, Cerrado, Pantanal and Pampa are marked "coming soon".
+- Bundled catalog for all six biomes, about 20 plants and 20 animals each, photos included.
 - English and Portuguese (Brazil), including species names and descriptions.
 
 ## Screenshots
@@ -60,12 +60,12 @@ Requires Android 8.0+, USB debugging, and Health Connect for step counts. To bui
 
 ## Roadmap
 
-What is shipped and what is planned — a native focus lock where turning the screen off still counts as focused, catalogs for all six biomes, app-wide visual polish with baked art and motion — is in the [PRD](PRD.md#6-roadmap). Domain terms are defined in [`CONTEXT.md`](CONTEXT.md).
+What is shipped and what is planned — a native focus lock where turning the screen off still counts as focused, app-wide visual polish with baked art and motion — is in the [PRD](PRD.md#6-roadmap). Domain terms are defined in [`CONTEXT.md`](CONTEXT.md).
 
 ## Credits and licenses
 
 - **Biome map:** derived from RESOLVE Ecoregions 2017 (Dinerstein et al., 2017, *BioScience* 67(6)), licensed [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). Details and changes: [`app/src/assets/biomes/LICENSE.md`](app/src/assets/biomes/LICENSE.md).
-- **Species photos:** from iNaturalist observations via iNaturalist and GBIF, each licensed CC0 or CC-BY. CC-BY photos are credited to their authors in the catalog (`app/src/domain/species.ts`) and in the app's species detail sheet.
+- **Species photos:** from research-grade iNaturalist observations, each licensed CC0 or CC-BY and credited in the app (species detail sheet and Settings → Credits). Details: [`app/src/assets/species/LICENSE.md`](app/src/assets/species/LICENSE.md).
 - **Garden sprites:** placeholder art from [Kenney](https://www.kenney.nl) (Nature Kit, Cube Pets), licensed [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/). Details: [`app/src/assets/garden/LICENSE.md`](app/src/assets/garden/LICENSE.md).
 
 No license has been chosen for EcoFoco's own code yet.

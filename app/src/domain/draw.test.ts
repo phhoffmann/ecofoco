@@ -7,57 +7,82 @@ const { FIXTURE_CATALOG } = vi.hoisted(() => {
       id: 'common-plant',
       scientificName: 'Plantus communis',
       type: 'plant',
-      rarity: 'common',
+      rarityByBiome: { 'atlantic-forest': 'common' },
       biome: ['atlantic-forest'],
       archetype: 'broadleaf-tree',
       image: 'common-plant.jpg',
-      imageLicense: 'CC0',
+      names: { en: 'common-plant', 'pt-BR': 'common-plant' },
+      descriptions: { en: '', 'pt-BR': '' },
+      photo: { license: 'CC0', credit: 'Test', sourceUrl: 'https://www.inaturalist.org/observations/1' },
     },
     {
       id: 'rare-plant',
       scientificName: 'Plantus rarus',
       type: 'plant',
-      rarity: 'rare',
+      rarityByBiome: { 'atlantic-forest': 'rare' },
       biome: ['atlantic-forest'],
       archetype: 'broadleaf-tree',
       image: 'rare-plant.jpg',
-      imageLicense: 'CC0',
+      names: { en: 'rare-plant', 'pt-BR': 'rare-plant' },
+      descriptions: { en: '', 'pt-BR': '' },
+      photo: { license: 'CC0', credit: 'Test', sourceUrl: 'https://www.inaturalist.org/observations/1' },
     },
     {
       id: 'epic-plant',
       scientificName: 'Plantus epicus',
       type: 'plant',
-      rarity: 'epic',
+      rarityByBiome: { 'atlantic-forest': 'epic' },
       biome: ['atlantic-forest'],
       archetype: 'broadleaf-tree',
       image: 'epic-plant.jpg',
-      imageLicense: 'CC0',
+      names: { en: 'epic-plant', 'pt-BR': 'epic-plant' },
+      descriptions: { en: '', 'pt-BR': '' },
+      photo: { license: 'CC0', credit: 'Test', sourceUrl: 'https://www.inaturalist.org/observations/1' },
     },
     {
       id: 'common-animal',
       scientificName: 'Animalus communis',
       type: 'animal',
-      rarity: 'common',
+      rarityByBiome: { 'atlantic-forest': 'common' },
       biome: ['atlantic-forest'],
       archetype: 'small-mammal',
       image: 'common-animal.jpg',
-      imageLicense: 'CC0',
+      names: { en: 'common-animal', 'pt-BR': 'common-animal' },
+      descriptions: { en: '', 'pt-BR': '' },
+      photo: { license: 'CC0', credit: 'Test', sourceUrl: 'https://www.inaturalist.org/observations/1' },
     },
     {
       id: 'caatinga-animal',
       scientificName: 'Animalus siccus',
       type: 'animal',
-      rarity: 'epic',
-      biome: ['caatinga'],
+      rarityByBiome: { caatinga: 'epic', cerrado: 'common' },
+      biome: ['caatinga', 'cerrado'],
       archetype: 'reptile',
       image: 'caatinga-animal.jpg',
-      imageLicense: 'CC0',
+      names: { en: 'caatinga-animal', 'pt-BR': 'caatinga-animal' },
+      descriptions: { en: '', 'pt-BR': '' },
+      photo: { license: 'CC0', credit: 'Test', sourceUrl: 'https://www.inaturalist.org/observations/1' },
+    },
+    {
+      id: 'cerrado-animal',
+      scientificName: 'Animalus campestris',
+      type: 'animal',
+      rarityByBiome: { cerrado: 'epic' },
+      biome: ['cerrado'],
+      archetype: 'songbird',
+      image: 'cerrado-animal.jpg',
+      names: { en: 'cerrado-animal', 'pt-BR': 'cerrado-animal' },
+      descriptions: { en: '', 'pt-BR': '' },
+      photo: { license: 'CC0', credit: 'Test', sourceUrl: 'https://www.inaturalist.org/observations/1' },
     },
   ]
   return { FIXTURE_CATALOG }
 })
 
-vi.mock('./species', () => ({ SPECIES_CATALOG: FIXTURE_CATALOG }))
+vi.mock('./species', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('./species')>()),
+  SPECIES_CATALOG: FIXTURE_CATALOG,
+}))
 
 import { pickRandomSpecies } from './draw'
 
@@ -94,5 +119,11 @@ describe('pickRandomSpecies', () => {
 
     vi.spyOn(Math, 'random').mockReturnValue(0.95)
     expect(pickRandomSpecies('plant', 'atlantic-forest').id).toBe('epic-plant')
+  })
+
+  it('weights a shared species by its Rarity in the requested biome', () => {
+    // cerrado animal weights: caatinga-animal common=60, cerrado-animal epic=10 -> total 70
+    vi.spyOn(Math, 'random').mockReturnValue(0.8)
+    expect(pickRandomSpecies('animal', 'cerrado').id).toBe('caatinga-animal')
   })
 })

@@ -1,6 +1,6 @@
 import { useId, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { SPECIES_CATALOG } from '../domain/species'
+import { SPECIES_CATALOG, speciesName } from '../domain/species'
 import { useActiveBiome } from '../stores/biomeStore'
 import { useCollectionStore } from '../stores/collectionStore'
 import { BottomSheet } from './BottomSheet'
@@ -10,7 +10,7 @@ interface ManualSightingModalProps {
 }
 
 export function ManualSightingModal({ onClose }: ManualSightingModalProps) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const titleId = useId()
   const logManualSighting = useCollectionStore((s) => s.logManualSighting)
   const [saving, setSaving] = useState<string | null>(null)
@@ -33,7 +33,7 @@ export function ManualSightingModal({ onClose }: ManualSightingModalProps) {
           <p className="mb-4 text-center text-xs text-emerald-400">{t('manualSighting.subtitle')}</p>
           <div className="min-h-0 flex-1 space-y-2 overflow-y-auto overscroll-contain">
             {SPECIES_CATALOG.filter((s) => s.biome.includes(biome)).map((species) => {
-              const name = t(`species.${species.id}.name`)
+              const name = speciesName(species, i18n.language)
               return (
                 <button
                   key={species.id}
