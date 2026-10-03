@@ -1,0 +1,1045 @@
+{
+  "biome": "pantanal",
+  "species": [
+    {
+      "id": "jacare-do-pantanal",
+      "scientificName": "Caiman yacare",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "reptile",
+      "names": {
+        "en": "Yacare Caiman",
+        "pt-BR": "Jacaré-do-pantanal"
+      },
+      "descriptions": {
+        "en": "The caiman of the Pantanal gathers in great numbers in the shrinking pools of the dry season.",
+        "pt-BR": "O jacaré do Pantanal se concentra aos montes nas lagoas que encolhem durante a seca."
+      },
+      "photo": {
+        "file": "jacare-do-pantanal.webp",
+        "license": "CC-BY",
+        "credit": "Donald Davesne",
+        "sourceUrl": "https://www.inaturalist.org/observations/337670695"
+      },
+      "source": {
+        "inatTaxonId": 116570,
+        "gbifTaxonKey": 5220210,
+        "observations": 366
+      }
+    },
+    {
+      "id": "capivara",
+      "scientificName": "Hydrochoerus hydrochaeris",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "mid-mammal",
+      "names": {
+        "en": "Capybara",
+        "pt-BR": "Capivara"
+      },
+      "descriptions": {
+        "en": "The world’s largest rodent, a calm grazer that lives in groups near water and swims well.",
+        "pt-BR": "O maior roedor do mundo, um herbívoro tranquilo que vive em grupos perto da água e nada muito bem."
+      },
+      "photo": {
+        "file": "capivara.webp",
+        "license": "CC-BY",
+        "credit": "avocat",
+        "sourceUrl": "https://www.inaturalist.org/observations/8066919"
+      },
+      "source": {
+        "inatTaxonId": 74442,
+        "gbifTaxonKey": 5786666,
+        "observations": 284
+      }
+    },
+    {
+      "id": "tuiuiu",
+      "scientificName": "Jabiru mycteria",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "large-bird",
+      "names": {
+        "en": "Jabiru",
+        "pt-BR": "Tuiuiú"
+      },
+      "descriptions": {
+        "en": "The giant stork that symbolises the Pantanal, with a bare black head and a red band at the base of its neck.",
+        "pt-BR": "A cegonha gigante símbolo do Pantanal, de cabeça preta e pelada e uma faixa vermelha na base do pescoço."
+      },
+      "photo": {
+        "file": "tuiuiu.webp",
+        "license": "CC-BY",
+        "credit": "Dan Riley",
+        "sourceUrl": "https://www.inaturalist.org/observations/70230876"
+      },
+      "source": {
+        "inatTaxonId": 4773,
+        "gbifTaxonKey": 2481953,
+        "observations": 264
+      }
+    },
+    {
+      "id": "onca-pintada",
+      "scientificName": "Panthera onca",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "mid-mammal",
+      "names": {
+        "en": "Jaguar",
+        "pt-BR": "Onça-pintada"
+      },
+      "descriptions": {
+        "en": "The Americas’ biggest cat has a bite strong enough to crack turtle shells, and it swims well after caimans and capybaras.",
+        "pt-BR": "O maior felino das Américas tem mordida capaz de quebrar casco de tartaruga e nada bem atrás de jacarés e capivaras."
+      },
+      "photo": {
+        "file": "onca-pintada.webp",
+        "license": "CC-BY",
+        "credit": "avocat",
+        "sourceUrl": "https://www.inaturalist.org/observations/8748595"
+      },
+      "source": {
+        "inatTaxonId": 41970,
+        "gbifTaxonKey": 5219426,
+        "observations": 203
+      }
+    },
+    {
+      "id": "joao-de-barro",
+      "scientificName": "Furnarius rufus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Rufous Hornero",
+        "pt-BR": "João-de-barro"
+      },
+      "descriptions": {
+        "en": "The ovenbird builds a domed clay nest like a little wood-fired oven on posts and branches.",
+        "pt-BR": "O joão-de-barro constrói um ninho de barro em forma de forninho sobre postes e galhos."
+      },
+      "photo": {
+        "file": "joao-de-barro.webp",
+        "license": "CC-BY",
+        "credit": "Donald Davesne",
+        "sourceUrl": "https://www.inaturalist.org/observations/317627547"
+      },
+      "source": {
+        "inatTaxonId": 11275,
+        "gbifTaxonKey": 2485821,
+        "observations": 189
+      }
+    },
+    {
+      "id": "soco-boi",
+      "scientificName": "Tigrisoma lineatum",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "large-bird",
+      "names": {
+        "en": "Rufescent Tiger-Heron",
+        "pt-BR": "Socó-boi"
+      },
+      "descriptions": {
+        "en": "A heron with a rufous neck and finely barred plumage that stands motionless for long periods while hunting.",
+        "pt-BR": "Garça de pescoço ferrugíneo e plumagem finamente barrada que fica imóvel por muito tempo enquanto caça."
+      },
+      "photo": {
+        "file": "soco-boi.webp",
+        "license": "CC-BY",
+        "credit": "Millie Basden",
+        "sourceUrl": "https://www.inaturalist.org/observations/31204207"
+      },
+      "source": {
+        "inatTaxonId": 5048,
+        "gbifTaxonKey": 2480869,
+        "observations": 182
+      }
+    },
+    {
+      "id": "garca-moura",
+      "scientificName": "Ardea cocoi",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "large-bird",
+      "names": {
+        "en": "Cocoi Heron",
+        "pt-BR": "Garça-moura"
+      },
+      "descriptions": {
+        "en": "South America’s largest heron, grey with a black cap, that wades slowly after big fish.",
+        "pt-BR": "A maior garça da América do Sul, cinza de boné preto, que caminha devagar na água atrás de peixes grandes."
+      },
+      "photo": {
+        "file": "garca-moura.webp",
+        "license": "CC-BY",
+        "credit": "Donald Davesne",
+        "sourceUrl": "https://www.inaturalist.org/observations/336511868"
+      },
+      "source": {
+        "inatTaxonId": 4952,
+        "gbifTaxonKey": 2480951,
+        "observations": 171
+      }
+    },
+    {
+      "id": "bem-te-vi",
+      "scientificName": "Pitangus sulphuratus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Great Kiskadee",
+        "pt-BR": "Bem-te-vi"
+      },
+      "descriptions": {
+        "en": "A loud, bold yellow-bellied flycatcher whose call sounds like it's saying its own name — one of Brazil's most familiar birds.",
+        "pt-BR": "Ave insetívora barulhenta e destemida, de peito amarelo, cujo canto parece dizer o próprio nome — uma das aves mais conhecidas do Brasil."
+      },
+      "photo": {
+        "file": "bem-te-vi.webp",
+        "license": "CC-BY",
+        "credit": "Helio Lourencini",
+        "sourceUrl": "https://www.inaturalist.org/observations/62682207"
+      },
+      "source": {
+        "inatTaxonId": 16956,
+        "gbifTaxonKey": 2482755,
+        "observations": 171
+      }
+    },
+    {
+      "id": "carcara",
+      "scientificName": "Caracara plancus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "large-bird",
+      "names": {
+        "en": "Southern Crested Caracara",
+        "pt-BR": "Carcará"
+      },
+      "descriptions": {
+        "en": "A bold, opportunistic falcon that walks the ground as often as it flies, eating anything from carrion to insects.",
+        "pt-BR": "Falcão ousado e oportunista que anda pelo chão tanto quanto voa, comendo de carniça a insetos."
+      },
+      "photo": {
+        "file": "carcara.webp",
+        "license": "CC-BY",
+        "credit": "Jean Martins",
+        "sourceUrl": "https://www.inaturalist.org/observations/109548994"
+      },
+      "source": {
+        "inatTaxonId": 4715,
+        "gbifTaxonKey": 2480989,
+        "observations": 170
+      }
+    },
+    {
+      "id": "tucano-toco",
+      "scientificName": "Ramphastos toco",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "large-bird",
+      "names": {
+        "en": "Toco Toucan",
+        "pt-BR": "Tucano-toco"
+      },
+      "descriptions": {
+        "en": "The largest toucan, with a huge orange bill that also helps it shed heat.",
+        "pt-BR": "O maior dos tucanos, de bico laranja enorme que também ajuda a dissipar o calor do corpo."
+      },
+      "photo": {
+        "file": "tucano-toco.webp",
+        "license": "CC-BY",
+        "credit": "Miguel A. Paixão",
+        "sourceUrl": "https://www.inaturalist.org/observations/333796827"
+      },
+      "source": {
+        "inatTaxonId": 18793,
+        "gbifTaxonKey": 2478765,
+        "observations": 161
+      }
+    },
+    {
+      "id": "mutum-de-penacho",
+      "scientificName": "Crax fasciolata",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "large-bird",
+      "names": {
+        "en": "Bare-faced Curassow",
+        "pt-BR": "Mutum-de-penacho"
+      },
+      "descriptions": {
+        "en": "A turkey-sized forest bird; the male is black with a curly crest and a yellow bill base, the female barred.",
+        "pt-BR": "Ave florestal do tamanho de um peru; o macho é preto, de topete crespo e base do bico amarela, e a fêmea é barrada."
+      },
+      "photo": {
+        "file": "mutum-de-penacho.webp",
+        "license": "CC-BY",
+        "credit": "Donald Davesne",
+        "sourceUrl": "https://www.inaturalist.org/observations/317627536"
+      },
+      "source": {
+        "inatTaxonId": 2046,
+        "gbifTaxonKey": 2482174,
+        "observations": 158
+      }
+    },
+    {
+      "id": "cervo-do-pantanal",
+      "scientificName": "Blastocerus dichotomus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "mid-mammal",
+      "names": {
+        "en": "Marsh Deer",
+        "pt-BR": "Cervo-do-pantanal"
+      },
+      "descriptions": {
+        "en": "South America’s largest deer, with wide-splaying hooves for walking in marshes.",
+        "pt-BR": "O maior cervo da América do Sul, com cascos que se abrem bastante para andar em áreas alagadas."
+      },
+      "photo": {
+        "file": "cervo-do-pantanal.webp",
+        "license": "CC-BY",
+        "credit": "Donald Davesne",
+        "sourceUrl": "https://www.inaturalist.org/observations/329691903"
+      },
+      "source": {
+        "inatTaxonId": 42228,
+        "gbifTaxonKey": 2440963,
+        "observations": 127
+      }
+    },
+    {
+      "id": "ariranha",
+      "scientificName": "Pteronura brasiliensis",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "mid-mammal",
+      "names": {
+        "en": "Giant Otter",
+        "pt-BR": "Ariranha"
+      },
+      "descriptions": {
+        "en": "The world’s longest otter lives in noisy family groups that hunt fish together in rivers and lakes.",
+        "pt-BR": "A maior lontra do mundo vive em grupos familiares barulhentos que caçam peixes juntos em rios e lagos."
+      },
+      "photo": {
+        "file": "ariranha.webp",
+        "license": "CC-BY",
+        "credit": "avocat",
+        "sourceUrl": "https://www.inaturalist.org/observations/8049516"
+      },
+      "source": {
+        "inatTaxonId": 41845,
+        "gbifTaxonKey": 2433681,
+        "observations": 105
+      }
+    },
+    {
+      "id": "cachorro-do-mato",
+      "scientificName": "Cerdocyon thous",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "mid-mammal",
+      "names": {
+        "en": "Crab-eating Fox",
+        "pt-BR": "Cachorro-do-mato"
+      },
+      "descriptions": {
+        "en": "A mostly nocturnal wild canid that eats fruit, insects and small animals, often hunting in pairs.",
+        "pt-BR": "Canídeo silvestre de hábitos sobretudo noturnos que come frutos, insetos e pequenos animais, muitas vezes caçando aos pares."
+      },
+      "photo": {
+        "file": "cachorro-do-mato.webp",
+        "license": "CC-BY",
+        "credit": "Fábio Olmos",
+        "sourceUrl": "https://www.inaturalist.org/observations/220571289"
+      },
+      "source": {
+        "inatTaxonId": 42087,
+        "gbifTaxonKey": 2434584,
+        "observations": 102
+      }
+    },
+    {
+      "id": "calango-verde",
+      "scientificName": "Ameiva ameiva",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "reptile",
+      "names": {
+        "en": "Giant Ameiva",
+        "pt-BR": "Calango-verde"
+      },
+      "descriptions": {
+        "en": "A fast, green-backed lizard that forages actively in sunny clearings, flicking its tongue to find insects.",
+        "pt-BR": "Lagarto rápido de dorso verde que caça ativamente em clareiras ensolaradas, usando a língua para achar insetos."
+      },
+      "photo": {
+        "file": "calango-verde.webp",
+        "license": "CC0",
+        "credit": "Carlos Henrique Russi",
+        "sourceUrl": "https://www.inaturalist.org/observations/241923879"
+      },
+      "source": {
+        "inatTaxonId": 38913,
+        "gbifTaxonKey": 2472164,
+        "observations": 85
+      }
+    },
+    {
+      "id": "iguana-verde",
+      "scientificName": "Iguana iguana",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "reptile",
+      "names": {
+        "en": "Green Iguana",
+        "pt-BR": "Iguana-verde"
+      },
+      "descriptions": {
+        "en": "A large, plant-eating lizard with a spiny crest that basks in trees near water and drops in to escape danger.",
+        "pt-BR": "Lagarto grande e herbívoro, de crista espinhosa, que toma sol em árvores perto da água e mergulha para fugir do perigo."
+      },
+      "photo": {
+        "file": "iguana-verde.webp",
+        "license": "CC-BY",
+        "credit": "Thomaz de Carvalho Callado",
+        "sourceUrl": "https://www.inaturalist.org/observations/75399561"
+      },
+      "source": {
+        "inatTaxonId": 35342,
+        "gbifTaxonKey": 2459658,
+        "observations": 70
+      }
+    },
+    {
+      "id": "borboleta-pavao-branco",
+      "scientificName": "Anartia jatrophae",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "insect",
+      "names": {
+        "en": "White Peacock",
+        "pt-BR": "Borboleta-pavão-branco"
+      },
+      "descriptions": {
+        "en": "A pale butterfly with small eyespots that flutters low over weedy fields and lawns.",
+        "pt-BR": "Borboleta clara com pequenos ocelos que voa baixo sobre gramados e terrenos com mato."
+      },
+      "photo": {
+        "file": "borboleta-pavao-branco.webp",
+        "license": "CC-BY",
+        "credit": "Carlos Alexandre Mattos Raposo",
+        "sourceUrl": "https://www.inaturalist.org/observations/206473174"
+      },
+      "source": {
+        "inatTaxonId": 49761,
+        "gbifTaxonKey": 5128007,
+        "observations": 38
+      }
+    },
+    {
+      "id": "estaladeira-cinzenta",
+      "scientificName": "Hamadryas februa",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "insect",
+      "names": {
+        "en": "Gray Cracker",
+        "pt-BR": "Estaladeira-cinzenta"
+      },
+      "descriptions": {
+        "en": "A grey cracker butterfly that blends in with bark and snaps its wings with an audible click.",
+        "pt-BR": "Borboleta estaladeira cinzenta que se camufla na casca das árvores e estala as asas fazendo um clique audível."
+      },
+      "photo": {
+        "file": "estaladeira-cinzenta.webp",
+        "license": "CC-BY",
+        "credit": "Josh Noseworthy",
+        "sourceUrl": "https://www.inaturalist.org/observations/317101207"
+      },
+      "source": {
+        "inatTaxonId": 148742,
+        "gbifTaxonKey": 5129481,
+        "observations": 29
+      }
+    },
+    {
+      "id": "gafanhoto-soldadinho",
+      "scientificName": "Tropidacris collaris",
+      "type": "animal",
+      "rarity": "epic",
+      "archetype": "insect",
+      "names": {
+        "en": "Violet-winged Grasshopper",
+        "pt-BR": "Gafanhoto-soldadinho"
+      },
+      "descriptions": {
+        "en": "One of the world’s largest grasshoppers, with bright violet-blue hindwings that flash in flight.",
+        "pt-BR": "Um dos maiores gafanhotos do mundo, com asas posteriores azul-violeta que brilham ao voar."
+      },
+      "photo": {
+        "file": "gafanhoto-soldadinho.webp",
+        "license": "CC0",
+        "credit": "lallen",
+        "sourceUrl": "https://www.inaturalist.org/observations/324729173"
+      },
+      "source": {
+        "inatTaxonId": 487164,
+        "gbifTaxonKey": 1715314,
+        "observations": 24
+      }
+    },
+    {
+      "id": "burnsius-orcus",
+      "scientificName": "Burnsius orcus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "insect",
+      "names": {
+        "en": "Orcus Checkered-Skipper",
+        "pt-BR": "Burnsius orcus"
+      },
+      "descriptions": {
+        "en": "A small black-and-white checkered skipper that darts low over weedy, open ground.",
+        "pt-BR": "Pequena borboleta quadriculada de preto e branco que voa rápido e baixo sobre terrenos abertos."
+      },
+      "photo": {
+        "file": "burnsius-orcus.webp",
+        "license": "CC0",
+        "credit": "Frank Thomas Sautter",
+        "sourceUrl": "https://www.inaturalist.org/observations/208768296"
+      },
+      "source": {
+        "inatTaxonId": 1038410,
+        "gbifTaxonKey": 5142436,
+        "observations": 23
+      }
+    },
+    {
+      "id": "caranda",
+      "scientificName": "Copernicia alba",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "palm",
+      "names": {
+        "en": "Caranday Palm",
+        "pt-BR": "Carandá"
+      },
+      "descriptions": {
+        "en": "A fan palm that forms vast groves on the seasonally flooded plains of the Pantanal.",
+        "pt-BR": "Palmeira de folhas em leque que forma grandes carandazais nas planícies alagáveis do Pantanal."
+      },
+      "photo": {
+        "file": "caranda.webp",
+        "license": "CC0",
+        "credit": "Fernando Sessegolo",
+        "sourceUrl": "https://www.inaturalist.org/observations/120803500"
+      },
+      "source": {
+        "inatTaxonId": 346357,
+        "gbifTaxonKey": 2738280,
+        "observations": 52
+      }
+    },
+    {
+      "id": "aguape-de-cordao",
+      "scientificName": "Pontederia azurea",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Anchored Water Hyacinth",
+        "pt-BR": "Aguapé-de-cordão"
+      },
+      "descriptions": {
+        "en": "A water hyacinth rooted in the mud whose long stems float out over the water, with blue-violet fringed flowers.",
+        "pt-BR": "Aguapé enraizado no lodo cujos ramos longos flutuam sobre a água, com flores azul-violeta franjadas."
+      },
+      "photo": {
+        "file": "aguape-de-cordao.webp",
+        "license": "CC-BY",
+        "credit": "Donald Davesne",
+        "sourceUrl": "https://www.inaturalist.org/observations/337670696"
+      },
+      "source": {
+        "inatTaxonId": 962649,
+        "gbifTaxonKey": 7494501,
+        "observations": 46
+      }
+    },
+    {
+      "id": "aguape",
+      "scientificName": "Pontederia crassipes",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Water Hyacinth",
+        "pt-BR": "Aguapé"
+      },
+      "descriptions": {
+        "en": "A floating plant with swollen leaf stalks that act as buoys; its lilac flowers carpet calm rivers and lagoons.",
+        "pt-BR": "Planta flutuante com pecíolos inchados que funcionam como boias; suas flores lilás cobrem rios e lagoas de águas calmas."
+      },
+      "photo": {
+        "file": "aguape.webp",
+        "license": "CC-BY",
+        "credit": "Donald Davesne",
+        "sourceUrl": "https://www.inaturalist.org/observations/336572847"
+      },
+      "source": {
+        "inatTaxonId": 962637,
+        "gbifTaxonKey": 2765942,
+        "observations": 42
+      }
+    },
+    {
+      "id": "bocaiuva",
+      "scientificName": "Acrocomia totai",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "palm",
+      "names": {
+        "en": "Totai Palm",
+        "pt-BR": "Bocaiúva"
+      },
+      "descriptions": {
+        "en": "A spiny palm whose sweet, oily fruits are eaten fresh or made into flour in Mato Grosso do Sul.",
+        "pt-BR": "Palmeira espinhosa de frutos doces e oleosos, comidos frescos ou transformados em farinha no Mato Grosso do Sul."
+      },
+      "photo": {
+        "file": "bocaiuva.webp",
+        "license": "CC-BY",
+        "credit": "Thomaz Ricardo Favreto Sinani",
+        "sourceUrl": "https://www.inaturalist.org/observations/198145441"
+      },
+      "source": {
+        "inatTaxonId": 364167,
+        "gbifTaxonKey": 2739153,
+        "observations": 38
+      }
+    },
+    {
+      "id": "canela-de-velho",
+      "scientificName": "Miconia albicans",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Canela-de-velho",
+        "pt-BR": "Canela-de-velho"
+      },
+      "descriptions": {
+        "en": "A Cerrado shrub with leaves white-felted underneath and small berries that many birds eat.",
+        "pt-BR": "Arbusto do Cerrado de folhas com a face de baixo branca e felpuda, e frutinhos que muitas aves comem."
+      },
+      "photo": {
+        "file": "canela-de-velho.webp",
+        "license": "CC-BY",
+        "credit": "Donald Davesne",
+        "sourceUrl": "https://www.inaturalist.org/observations/327308395"
+      },
+      "source": {
+        "inatTaxonId": 285566,
+        "gbifTaxonKey": 3860779,
+        "observations": 32
+      }
+    },
+    {
+      "id": "caraguata",
+      "scientificName": "Bromelia balansae",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Heart Of Flame",
+        "pt-BR": "Caraguatá"
+      },
+      "descriptions": {
+        "en": "A spiny ground bromeliad whose inner leaves turn bright red when it flowers.",
+        "pt-BR": "Bromélia terrestre espinhosa cujas folhas centrais ficam vermelho-vivas quando floresce."
+      },
+      "photo": {
+        "file": "caraguata.webp",
+        "license": "CC-BY",
+        "credit": "Thomaz Ricardo Favreto Sinani",
+        "sourceUrl": "https://www.inaturalist.org/observations/200774238"
+      },
+      "source": {
+        "inatTaxonId": 482839,
+        "gbifTaxonKey": 5287939,
+        "observations": 30
+      }
+    },
+    {
+      "id": "lixeira",
+      "scientificName": "Curatella americana",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "broadleaf-tree",
+      "names": {
+        "en": "Sandpaper Tree",
+        "pt-BR": "Lixeira"
+      },
+      "descriptions": {
+        "en": "A twisted savanna tree whose leaves are so rough they were once used as sandpaper.",
+        "pt-BR": "Árvore retorcida do cerrado cujas folhas são tão ásperas que já foram usadas como lixa."
+      },
+      "photo": {
+        "file": "lixeira.webp",
+        "license": "CC-BY",
+        "credit": "Chris Kirby-Lambert",
+        "sourceUrl": "https://www.inaturalist.org/observations/333892748"
+      },
+      "source": {
+        "inatTaxonId": 84585,
+        "gbifTaxonKey": 7304064,
+        "observations": 26
+      }
+    },
+    {
+      "id": "alface-d-agua",
+      "scientificName": "Pistia stratiotes",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Water Lettuce",
+        "pt-BR": "Alface-d'água"
+      },
+      "descriptions": {
+        "en": "A floating rosette of velvety leaves, like a head of lettuce, drifting on calm waters.",
+        "pt-BR": "Roseta flutuante de folhas aveludadas, como um pé de alface, que deriva em águas calmas."
+      },
+      "photo": {
+        "file": "alface-d-agua.webp",
+        "license": "CC-BY",
+        "credit": "Thomaz Ricardo Favreto Sinani",
+        "sourceUrl": "https://www.inaturalist.org/observations/256775418"
+      },
+      "source": {
+        "inatTaxonId": 78589,
+        "gbifTaxonKey": 2870583,
+        "observations": 26
+      }
+    },
+    {
+      "id": "embauba",
+      "scientificName": "Cecropia pachystachya",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "pioneer-tree",
+      "names": {
+        "en": "Cecropia",
+        "pt-BR": "Embaúba"
+      },
+      "descriptions": {
+        "en": "A fast-growing pioneer tree with distinctive umbrella-shaped leaves, an important food source for sloths and toucans alike.",
+        "pt-BR": "Árvore pioneira de crescimento rápido com folhas em formato de guarda-chuva, importante fonte de alimento para preguiças e tucanos."
+      },
+      "photo": {
+        "file": "embauba.webp",
+        "license": "CC-BY",
+        "credit": "Victor Farjalla Pontes",
+        "sourceUrl": "https://www.inaturalist.org/observations/89464322"
+      },
+      "source": {
+        "inatTaxonId": 126742,
+        "gbifTaxonKey": 4013385,
+        "observations": 20
+      }
+    },
+    {
+      "id": "trapoeraba",
+      "scientificName": "Commelina erecta",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Whitemouth Dayflower",
+        "pt-BR": "Trapoeraba"
+      },
+      "descriptions": {
+        "en": "A dayflower with two sky-blue petals; each flower opens for just one morning.",
+        "pt-BR": "Erva de duas pétalas azul-celeste; cada flor abre por uma única manhã."
+      },
+      "photo": {
+        "file": "trapoeraba.webp",
+        "license": "CC0",
+        "credit": "Fernando Sessegolo",
+        "sourceUrl": "https://www.inaturalist.org/observations/62963939"
+      },
+      "source": {
+        "inatTaxonId": 53478,
+        "gbifTaxonKey": 2764389,
+        "observations": 20
+      }
+    },
+    {
+      "id": "mandacaru-de-fruto-alaranjado",
+      "scientificName": "Cereus stenogonus",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Orange-fruited Mandacaru",
+        "pt-BR": "Mandacaru-de-fruto-alaranjado"
+      },
+      "descriptions": {
+        "en": "A tall, branching cactus of dry woodlands with big white night flowers and orange fruits.",
+        "pt-BR": "Cacto alto e ramificado das matas secas, com grandes flores brancas noturnas e frutos alaranjados."
+      },
+      "photo": {
+        "file": "mandacaru-de-fruto-alaranjado.webp",
+        "license": "CC-BY",
+        "credit": "Thomaz Ricardo Favreto Sinani",
+        "sourceUrl": "https://www.inaturalist.org/observations/198163369"
+      },
+      "source": {
+        "inatTaxonId": 438225,
+        "gbifTaxonKey": 5621415,
+        "observations": 17
+      }
+    },
+    {
+      "id": "craibeira",
+      "scientificName": "Tabebuia aurea",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "flowering-tree",
+      "names": {
+        "en": "Silver Trumpet Tree",
+        "pt-BR": "Craibeira"
+      },
+      "descriptions": {
+        "en": "Lines the dry riverbeds of the sertão and lights them up with golden flowers in the dry season.",
+        "pt-BR": "Acompanha os leitos de rios secos do sertão e os ilumina com flores douradas na estação seca."
+      },
+      "photo": {
+        "file": "craibeira.webp",
+        "license": "CC-BY",
+        "credit": "Thomaz Ricardo Favreto Sinani",
+        "sourceUrl": "https://www.inaturalist.org/observations/207455033"
+      },
+      "source": {
+        "inatTaxonId": 169520,
+        "gbifTaxonKey": 4091191,
+        "observations": 16
+      }
+    },
+    {
+      "id": "barba-de-bode",
+      "scientificName": "Tillandsia loliacea",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "Barba-de-bode",
+        "pt-BR": "Barba-de-bode"
+      },
+      "descriptions": {
+        "en": "A tiny grey air plant that grows in clumps on branches and cacti of dry forests.",
+        "pt-BR": "Bromélia cinzenta minúscula que cresce em tufos sobre galhos e cactos das matas secas."
+      },
+      "photo": {
+        "file": "barba-de-bode.webp",
+        "license": "CC-BY",
+        "credit": "Thomaz Ricardo Favreto Sinani",
+        "sourceUrl": "https://www.inaturalist.org/observations/172786463"
+      },
+      "source": {
+        "inatTaxonId": 542011,
+        "gbifTaxonKey": 2695286,
+        "observations": 15
+      }
+    },
+    {
+      "id": "tillandsia-didisticha",
+      "scientificName": "Tillandsia didisticha",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "Tillandsia didisticha",
+        "pt-BR": "Tillandsia didisticha"
+      },
+      "descriptions": {
+        "en": "An air plant with silvery leaves and a flattened flower spike that grows on trees in dry forests.",
+        "pt-BR": "Bromélia de folhas prateadas e inflorescência achatada, que cresce sobre árvores das matas secas."
+      },
+      "photo": {
+        "file": "tillandsia-didisticha.webp",
+        "license": "CC-BY",
+        "credit": "Thomaz Ricardo Favreto Sinani",
+        "sourceUrl": "https://www.inaturalist.org/observations/258758050"
+      },
+      "source": {
+        "inatTaxonId": 488468,
+        "gbifTaxonKey": 2695963,
+        "observations": 14
+      }
+    },
+    {
+      "id": "camonea-umbellata",
+      "scientificName": "Camonea umbellata",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "Yellow Merremia",
+        "pt-BR": "Camonea umbellata"
+      },
+      "descriptions": {
+        "en": "A twining vine related to morning glories, with clusters of yellow funnel flowers.",
+        "pt-BR": "Trepadeira parente das ipomeias, com cachos de flores amarelas em forma de funil."
+      },
+      "photo": {
+        "file": "camonea-umbellata.webp",
+        "license": "CC-BY",
+        "credit": "Thomaz Ricardo Favreto Sinani",
+        "sourceUrl": "https://www.inaturalist.org/observations/291014717"
+      },
+      "source": {
+        "inatTaxonId": 945625,
+        "gbifTaxonKey": 9452352,
+        "observations": 13
+      }
+    },
+    {
+      "id": "ipe-roxo-de-sete-folhas",
+      "scientificName": "Handroanthus heptaphyllus",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "flowering-tree",
+      "names": {
+        "en": "Pink Ipê",
+        "pt-BR": "Ipê-roxo-de-sete-folhas"
+      },
+      "descriptions": {
+        "en": "A trumpet tree whose bare branches burst into pink flowers in the dry season, painting the Pantanal landscape.",
+        "pt-BR": "Ipê cujos galhos sem folhas se cobrem de flores rosadas na seca, colorindo a paisagem do Pantanal."
+      },
+      "photo": {
+        "file": "ipe-roxo-de-sete-folhas.webp",
+        "license": "CC-BY",
+        "credit": "Thomaz Ricardo Favreto Sinani",
+        "sourceUrl": "https://www.inaturalist.org/observations/316518189"
+      },
+      "source": {
+        "inatTaxonId": 808333,
+        "gbifTaxonKey": 4092253,
+        "observations": 13
+      }
+    },
+    {
+      "id": "algodao-bravo",
+      "scientificName": "Ipomoea carnea",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "Bush Morning Glory",
+        "pt-BR": "Algodão-bravo"
+      },
+      "descriptions": {
+        "en": "A shrubby morning glory with pink funnel flowers that forms thickets in wetlands; poisonous to livestock.",
+        "pt-BR": "Ipomeia arbustiva de flores cor-de-rosa que forma moitas em áreas úmidas; é venenosa para o gado."
+      },
+      "photo": {
+        "file": "algodao-bravo.webp",
+        "license": "CC-BY",
+        "credit": "B. Phalan",
+        "sourceUrl": "https://www.inaturalist.org/observations/66776429"
+      },
+      "source": {
+        "inatTaxonId": 164081,
+        "gbifTaxonKey": 2928590,
+        "observations": 13
+      }
+    },
+    {
+      "id": "erva-de-veado",
+      "scientificName": "Langsdorffia hypogaea",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "Erva-de-veado",
+        "pt-BR": "Erva-de-veado"
+      },
+      "descriptions": {
+        "en": "A strange root parasite without leaves that only appears above ground as a red, fleshy flower head.",
+        "pt-BR": "Planta parasita de raízes, sem folhas, que só aparece acima do solo como uma inflorescência vermelha e carnosa."
+      },
+      "photo": {
+        "file": "erva-de-veado.webp",
+        "license": "CC-BY",
+        "credit": "Alessandher Piva",
+        "sourceUrl": "https://www.inaturalist.org/observations/244941138"
+      },
+      "source": {
+        "inatTaxonId": 210458,
+        "gbifTaxonKey": 5687191,
+        "observations": 13
+      }
+    },
+    {
+      "id": "bate-caixa",
+      "scientificName": "Palicourea rigida",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Bate-caixa",
+        "pt-BR": "Bate-caixa"
+      },
+      "descriptions": {
+        "en": "A gnarled Cerrado shrub with stiff, leathery leaves and yellow-and-red tubular flowers loved by hummingbirds.",
+        "pt-BR": "Arbusto retorcido do Cerrado, de folhas duras e coriáceas e flores tubulares amarelas e vermelhas, adoradas pelos beija-flores."
+      },
+      "photo": {
+        "file": "bate-caixa.webp",
+        "license": "CC-BY",
+        "credit": "Davidson Moreira",
+        "sourceUrl": "https://www.inaturalist.org/observations/341659141"
+      },
+      "source": {
+        "inatTaxonId": 336439,
+        "gbifTaxonKey": 2898841,
+        "observations": 12
+      }
+    },
+    {
+      "id": "tillandsia-duratii",
+      "scientificName": "Tillandsia duratii",
+      "type": "plant",
+      "rarity": "epic",
+      "archetype": "shrub",
+      "names": {
+        "en": "Tillandsia duratii",
+        "pt-BR": "Tillandsia duratii"
+      },
+      "descriptions": {
+        "en": "An air plant with curling grey leaves that wrap around twigs like tendrils, and fragrant lavender flowers.",
+        "pt-BR": "Bromélia de folhas cinzentas e enroladas que se prendem aos galhos como gavinhas, com flores lilás perfumadas."
+      },
+      "photo": {
+        "file": "tillandsia-duratii.webp",
+        "license": "CC-BY",
+        "credit": "Thomaz Ricardo Favreto Sinani",
+        "sourceUrl": "https://www.inaturalist.org/observations/169524689"
+      },
+      "source": {
+        "inatTaxonId": 528742,
+        "gbifTaxonKey": 2694895,
+        "observations": 12
+      }
+    }
+  ]
+}

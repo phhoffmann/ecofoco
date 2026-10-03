@@ -1,5 +1,6 @@
 import { useEffect, type CSSProperties } from 'react'
 import { useTranslation } from 'react-i18next'
+import { speciesName } from '../domain/species'
 import { useCelebrationStore } from '../stores/celebrationStore'
 import { RARITY_STYLES } from './rarity'
 
@@ -23,7 +24,7 @@ const SPARKLES = Array.from({ length: SPARKLE_COUNT }, (_, i) => {
 
 /** Sparkle burst and species reveal shown whenever a CollectedEntry is created. Tap to dismiss. */
 export function CelebrationOverlay() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const species = useCelebrationStore((s) => s.species)
   const seq = useCelebrationStore((s) => s.seq)
   const dismiss = useCelebrationStore((s) => s.dismiss)
@@ -37,7 +38,7 @@ export function CelebrationOverlay() {
   if (!species) return null
 
   const rarity = RARITY_STYLES[species.rarity]
-  const name = t(`species.${species.id}.name`)
+  const name = speciesName(species, i18n.language)
 
   return (
     <div

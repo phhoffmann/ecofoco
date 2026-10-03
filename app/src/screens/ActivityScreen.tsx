@@ -1,12 +1,13 @@
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { RARITY_STYLES } from '../components/rarity'
+import { speciesName } from '../domain/species'
 import { useCollectionStore } from '../stores/collectionStore'
 import { useDailyProgressStore } from '../stores/dailyProgressStore'
 import { useSettingsStore } from '../stores/settingsStore'
 
 export function ActivityScreen() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const stepGoal = useSettingsStore((s) => s.stepGoal)
   const {
     healthAvailable,
@@ -44,10 +45,10 @@ export function ActivityScreen() {
         <p className="text-emerald-200">{t('focus.youCollected')}</p>
         <img
           src={resultSpecies.image}
-          alt={t(`species.${resultSpecies.id}.name`)}
+          alt={speciesName(resultSpecies, i18n.language)}
           className={`size-40 rounded-2xl object-cover shadow-xl ring-4 ${RARITY_STYLES[resultSpecies.rarity].ring}`}
         />
-        <p className="text-2xl font-semibold text-emerald-50">{t(`species.${resultSpecies.id}.name`)}</p>
+        <p className="text-2xl font-semibold text-emerald-50">{speciesName(resultSpecies, i18n.language)}</p>
         <span className={`rounded-full px-3 py-1 text-xs font-semibold ${RARITY_STYLES[resultSpecies.rarity].badge}`}>
           {t(`rarity.${resultSpecies.rarity}`)}
         </span>

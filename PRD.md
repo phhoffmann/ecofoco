@@ -44,9 +44,8 @@ v1 is the MVP loop (focus → plants, steps → animals, one permanent Collectio
 - Every new CollectedEntry plays a short celebration showing the species just collected.
 
 ### 4.4 Species catalog
-- Static list of species (plants and animals), built from GBIF / iNaturalist data, keeping only CC0/CC-BY photos (compatible with future commercial use), each with its license and credit.
-- Every species is tagged with a **biome** and a garden **archetype**. Brazil's catalog is bundled in the app; only the species photos are loaded from iNaturalist's open-data bucket.
-- **Shipped:** Atlantic Forest and Caatinga, 10 plants + 10 animals each, with English and Portuguese (Brazil) names and descriptions. The other four IBGE biomes (Amazon, Cerrado, Pantanal, Pampa) show as "coming soon".
+- Static list of species (plants and animals), built at build time from **iNaturalist** and **GBIF** data (filtering to CC0/CC-BY licenses only, compatible with future commercial use): the most-observed native species per biome, with a bundled photo and its credit.
+- Every species is tagged with a **biome** (e.g. Cerrado, Atlantic Forest, Caatinga) and a garden **archetype**. Brazil's catalog is bundled in the app, photos included, and covers all six IBGE biomes (about 20 plants and 20 animals each, with English and Portuguese (Brazil) names and descriptions); a biome without species would show as "coming soon".
 
 ### 4.5 Biomes
 - The six biomes are IBGE's for Brazil. A biome is playable once the catalog has plants and animals for it.
@@ -70,7 +69,7 @@ v1 is the MVP loop (focus → plants, steps → animals, one permanent Collectio
 
 | Feature | Reason to defer |
 |---|---|
-| Biomes outside Brazil | v1 proves location-based biomes inside Brazil; the bundled grid already covers the world, but no catalog exists outside Brazil |
+| Biomes outside Brazil | v1 covers Brazil's six biomes; other countries need their own places and ecoregion groups in the catalog pipeline |
 | Real species recognition via photo (AI) | Depends on the backend; uses the iNaturalist Computer Vision API. Open to both plants and animals from the start; the entry created must match the real identified species, never a random Draw |
 | Own backend (Node/NestJS + Prisma + PostgreSQL) | MVP runs 100% locally; backend comes once the app is validated (also doubles as a fullstack portfolio piece) |
 | Real notifications (reminders, celebrations) | Reduce MVP technical scope |

@@ -13,7 +13,7 @@ globalThis.IS_REACT_ACT_ENVIRONMENT = true
 
 vi.mock('../data/haptics', () => ({ lightHaptic: vi.fn() }))
 
-const species = SPECIES_CATALOG.find((s) => s.id === 'ipe-amarelo')!
+const species = SPECIES_CATALOG.find((s) => s.id === 'quaresmeira')!
 
 describe('CelebrationOverlay', () => {
   let container: HTMLDivElement
@@ -44,8 +44,8 @@ describe('CelebrationOverlay', () => {
     act(() => useCelebrationStore.getState().celebrate(species))
 
     expect(overlay()).not.toBeNull()
-    expect(container.querySelector('img')?.getAttribute('alt')).toBe('Yellow Trumpet Tree')
-    expect(overlay()?.textContent).toContain('Common')
+    expect(container.querySelector('img')?.getAttribute('alt')).toBe('Glory Bush Tree')
+    expect(overlay()?.textContent).toContain({ common: 'Common', rare: 'Rare', epic: 'Epic' }[species.rarity])
   })
 
   it('dismisses on tap', () => {

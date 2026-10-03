@@ -2,7 +2,7 @@ import { useMemo, useState, type MouseEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { BiomeId } from '../domain/biome'
 import { depthSort, pickTile, placeOnPlot, tileCenter, tileNoise, tileToScreen, type TilePos } from '../domain/iso'
-import { SPECIES_CATALOG, type Species } from '../domain/species'
+import { SPECIES_CATALOG, speciesName, type Species } from '../domain/species'
 import type { CollectedEntry } from '../domain/types'
 import { BIOME_GROUND } from './biomeGround'
 import { ARCHETYPE_SPRITES, GRASS_SPRITE, type GardenSprite } from './gardenSprites'
@@ -40,7 +40,7 @@ interface IsometricGardenProps {
 }
 
 export function IsometricGarden({ entries, biome, onSelectSpecies }: IsometricGardenProps) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [poppedKey, setPoppedKey] = useState<string | null>(null)
   const ground = BIOME_GROUND[biome]
 
@@ -183,7 +183,7 @@ export function IsometricGarden({ entries, biome, onSelectSpecies }: IsometricGa
       <ul className="sr-only">
         {layout.placements.map((p) => (
           <li key={p.item.entry.id}>
-            <button onClick={() => onSelectSpecies(p.item.species.id)}>{t(`species.${p.item.species.id}.name`)}</button>
+            <button onClick={() => onSelectSpecies(p.item.species.id)}>{speciesName(p.item.species, i18n.language)}</button>
           </li>
         ))}
       </ul>

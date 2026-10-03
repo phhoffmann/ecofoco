@@ -1,7 +1,7 @@
 import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { CollectedEntry, CollectionMethod } from '../domain/types'
-import type { Species } from '../domain/species'
+import { speciesDescription, speciesName, type Species } from '../domain/species'
 import { BottomSheet } from './BottomSheet'
 import { RARITY_STYLES } from './rarity'
 
@@ -23,7 +23,7 @@ export function SpeciesDetailSheet({ species, entries, onClose }: SpeciesDetailS
   const titleId = useId()
   const sortedEntries = [...entries].sort((a, b) => b.collectedAt.localeCompare(a.collectedAt))
   const firstEntry = sortedEntries.at(-1)
-  const name = t(`species.${species.id}.name`)
+  const name = speciesName(species, i18n.language)
   const formatDate = (iso: string) =>
     new Date(iso).toLocaleDateString(i18n.language, { day: 'numeric', month: 'short', year: 'numeric' })
   const formatTime = (iso: string) =>
@@ -44,11 +44,9 @@ export function SpeciesDetailSheet({ species, entries, onClose }: SpeciesDetailS
                   {t(`rarity.${species.rarity}`)}
                 </span>
               </div>
-              {species.imageAttribution && (
-                <figcaption className="mt-1.5 text-right text-[10px] text-emerald-600">
-                  {t('speciesDetail.photoCredit', { credit: species.imageAttribution })}
-                </figcaption>
-              )}
+              <figcaption className="mt-1.5 text-right text-[10px] text-emerald-600">
+                {t('speciesDetail.photoCredit', { credit: species.photo.credit, license: species.photo.license })}
+              </figcaption>
             </figure>
 
             <h2 id={titleId} className="mt-3 text-2xl font-semibold text-emerald-50">
@@ -67,7 +65,7 @@ export function SpeciesDetailSheet({ species, entries, onClose }: SpeciesDetailS
               ))}
             </div>
 
-            <p className="mt-4 text-sm leading-relaxed text-emerald-200">{t(`species.${species.id}.description`)}</p>
+            <p className="mt-4 text-sm leading-relaxed text-emerald-200">{speciesDescription(species, i18n.language)}</p>
 
             {firstEntry && (
               <section className="mt-5">

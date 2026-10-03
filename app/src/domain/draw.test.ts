@@ -11,7 +11,9 @@ const { FIXTURE_CATALOG } = vi.hoisted(() => {
       biome: ['atlantic-forest'],
       archetype: 'broadleaf-tree',
       image: 'common-plant.jpg',
-      imageLicense: 'CC0',
+      names: { en: 'common-plant', 'pt-BR': 'common-plant' },
+      descriptions: { en: '', 'pt-BR': '' },
+      photo: { license: 'CC0', credit: 'Test', sourceUrl: 'https://www.inaturalist.org/observations/1' },
     },
     {
       id: 'rare-plant',
@@ -21,7 +23,9 @@ const { FIXTURE_CATALOG } = vi.hoisted(() => {
       biome: ['atlantic-forest'],
       archetype: 'broadleaf-tree',
       image: 'rare-plant.jpg',
-      imageLicense: 'CC0',
+      names: { en: 'rare-plant', 'pt-BR': 'rare-plant' },
+      descriptions: { en: '', 'pt-BR': '' },
+      photo: { license: 'CC0', credit: 'Test', sourceUrl: 'https://www.inaturalist.org/observations/1' },
     },
     {
       id: 'epic-plant',
@@ -31,7 +35,9 @@ const { FIXTURE_CATALOG } = vi.hoisted(() => {
       biome: ['atlantic-forest'],
       archetype: 'broadleaf-tree',
       image: 'epic-plant.jpg',
-      imageLicense: 'CC0',
+      names: { en: 'epic-plant', 'pt-BR': 'epic-plant' },
+      descriptions: { en: '', 'pt-BR': '' },
+      photo: { license: 'CC0', credit: 'Test', sourceUrl: 'https://www.inaturalist.org/observations/1' },
     },
     {
       id: 'common-animal',
@@ -41,7 +47,9 @@ const { FIXTURE_CATALOG } = vi.hoisted(() => {
       biome: ['atlantic-forest'],
       archetype: 'small-mammal',
       image: 'common-animal.jpg',
-      imageLicense: 'CC0',
+      names: { en: 'common-animal', 'pt-BR': 'common-animal' },
+      descriptions: { en: '', 'pt-BR': '' },
+      photo: { license: 'CC0', credit: 'Test', sourceUrl: 'https://www.inaturalist.org/observations/1' },
     },
     {
       id: 'caatinga-animal',
@@ -51,7 +59,9 @@ const { FIXTURE_CATALOG } = vi.hoisted(() => {
       biome: ['caatinga'],
       archetype: 'reptile',
       image: 'caatinga-animal.jpg',
-      imageLicense: 'CC0',
+      names: { en: 'caatinga-animal', 'pt-BR': 'caatinga-animal' },
+      descriptions: { en: '', 'pt-BR': '' },
+      photo: { license: 'CC0', credit: 'Test', sourceUrl: 'https://www.inaturalist.org/observations/1' },
     },
   ]
   return { FIXTURE_CATALOG }

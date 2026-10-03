@@ -1,8 +1,7 @@
+import { BIOME_IDS, type BiomeId } from './catalogSchema'
 import { SPECIES_CATALOG, type Species } from './species'
 
-// IBGE's six Brazilian biomes. Which of them are playable comes from the catalog, not from this list.
-export const BIOME_IDS = ['amazon', 'atlantic-forest', 'caatinga', 'cerrado', 'pantanal', 'pampa'] as const
-export type BiomeId = (typeof BIOME_IDS)[number]
+export { BIOME_IDS, type BiomeId } from './catalogSchema'
 
 /** Biomes that share a land border inside Brazil. Symmetric. */
 export const BIOME_NEIGHBOURS: Readonly<Record<BiomeId, readonly BiomeId[]>> = {

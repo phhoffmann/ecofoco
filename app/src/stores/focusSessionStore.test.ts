@@ -12,7 +12,9 @@ const { appListeners, addCollectedEntry, recordFocusSession, keepScreenAwake, al
       biome: ['atlantic-forest'],
       archetype: 'broadleaf-tree',
       image: 'jatoba.jpg',
-      imageLicense: 'CC0',
+      names: { en: 'jatoba', 'pt-BR': 'jatoba' },
+      descriptions: { en: '', 'pt-BR': '' },
+      photo: { license: 'CC0', credit: 'Test', sourceUrl: 'https://www.inaturalist.org/observations/1' },
     }
     return {
       appListeners: [] as Array<() => void>,
