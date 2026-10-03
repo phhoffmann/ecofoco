@@ -6,6 +6,7 @@ import {
   SPECIES_CATALOG,
   buildCatalog,
   collectedCatalogSpeciesIds,
+  rarityIn,
   speciesDescription,
   speciesName,
 } from './species'
@@ -63,10 +64,19 @@ describe('catalog files', () => {
     expect(new Set(species.map((s) => s.id)).size).toBe(species.length)
   })
 
-  it('describes a species shared by several Biomes identically in each file', () => {
+  it.each(CATALOG_FILES)('$biome splits its plants and its animals 60/30/10 by Rarity', ({ species }) => {
+    for (const kind of ['plant', 'animal'] as const) {
+      const ofKind = species.filter((s) => s.type === kind)
+      const counts = RARITIES.map((r) => ofKind.filter((s) => s.rarity === r).length)
+      const expected = [Math.round(ofKind.length * 0.6), Math.round(ofKind.length * 0.9) - Math.round(ofKind.length * 0.6)]
+      expect(counts).toEqual([...expected, ofKind.length - expected[0] - expected[1]])
+    }
+  })
+
+  it('describes a species shared by several Biomes identically in each file, apart from its Rarity', () => {
     const seen = new Map<string, string>()
     for (const { species } of CATALOG_FILES) {
-      for (const { source: _source, ...s } of species) {
+      for (const { source: _source, rarity: _rarity, ...s } of species) {
         const json = JSON.stringify(s)
         expect(seen.get(s.id) ?? json).toBe(json)
         seen.set(s.id, json)
@@ -137,6 +147,20 @@ describe('buildCatalog', () => {
       image: '/assets/quero-quero.webp',
       photo: { license: 'CC-BY', credit: 'Ana', sourceUrl: 'https://www.inaturalist.org/observations/1' },
     })
+  })
+
+  it('keeps the Rarity each Biome gives a shared species', () => {
+    const [s] = buildCatalog(
+      [
+        { biome: 'pampa', species: [{ ...species('quero-quero'), rarity: 'epic' }] },
+        { biome: 'atlantic-forest', species: [species('quero-quero')] },
+      ],
+      {},
+    )
+    expect(s.rarityByBiome).toEqual({ 'atlantic-forest': 'common', pampa: 'epic' })
+    expect(rarityIn(s, 'pampa')).toBe('epic')
+    expect(rarityIn(s, 'atlantic-forest')).toBe('common')
+    expect(rarityIn(s, 'cerrado')).toBe('common')
   })
 
   it('resolves names and descriptions for the current language', () => {

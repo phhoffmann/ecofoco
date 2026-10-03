@@ -343,7 +343,7 @@
       "id": "capivara",
       "scientificName": "Hydrochoerus hydrochaeris",
       "type": "animal",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "mid-mammal",
       "names": {
         "en": "Capybara",
@@ -395,7 +395,7 @@
       "id": "calango-verde",
       "scientificName": "Ameiva ameiva",
       "type": "animal",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "reptile",
       "names": {
         "en": "Giant Ameiva",
@@ -837,7 +837,7 @@
       "id": "embauba",
       "scientificName": "Cecropia pachystachya",
       "type": "plant",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "pioneer-tree",
       "names": {
         "en": "Cecropia",

@@ -6,7 +6,6 @@ import {
   fillQuotas,
   inatLicense,
   isAllowedGbifLicense,
-  mostCommon,
   pickName,
   rarityByRank,
   slugify,
@@ -77,11 +76,6 @@ describe('rarityByRank', () => {
   it('does not depend on input order', () => {
     const shuffled = species(10).reverse()
     expect(rarityByRank(shuffled)).toEqual(rarityByRank(species(10)))
-  })
-
-  it('keeps the most common tier of a species ranked in several Biomes', () => {
-    expect(mostCommon(['epic', 'rare'])).toBe('rare')
-    expect(mostCommon(['epic', 'common', 'rare'])).toBe('common')
   })
 })
 

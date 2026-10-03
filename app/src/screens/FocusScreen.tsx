@@ -2,7 +2,8 @@ import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { RARITY_STYLES } from '../components/rarity'
 import { Sprout } from '../components/Sprout'
-import { speciesName } from '../domain/species'
+import { rarityIn, speciesName } from '../domain/species'
+import { useActiveBiome } from '../stores/biomeStore'
 import { useCollectionStore } from '../stores/collectionStore'
 import { useFocusSessionStore } from '../stores/focusSessionStore'
 
@@ -20,6 +21,7 @@ export function FocusScreen() {
   const { status, plannedDurationSeconds, remainingSeconds, resultSpecies, start, fail, reset } =
     useFocusSessionStore()
   const refreshCollection = useCollectionStore((s) => s.refresh)
+  const biome = useActiveBiome()
 
   useEffect(() => {
     if (status === 'completed') void refreshCollection()
@@ -67,11 +69,11 @@ export function FocusScreen() {
             <img
               src={resultSpecies.image}
               alt={speciesName(resultSpecies, i18n.language)}
-              className={`size-40 rounded-2xl object-cover shadow-xl ring-4 ${RARITY_STYLES[resultSpecies.rarity].ring}`}
+              className={`size-40 rounded-2xl object-cover shadow-xl ring-4 ${RARITY_STYLES[rarityIn(resultSpecies, biome)].ring}`}
             />
             <p className="text-2xl font-semibold text-emerald-50">{speciesName(resultSpecies, i18n.language)}</p>
-            <span className={`rounded-full px-3 py-1 text-xs font-semibold ${RARITY_STYLES[resultSpecies.rarity].badge}`}>
-              {t(`rarity.${resultSpecies.rarity}`)}
+            <span className={`rounded-full px-3 py-1 text-xs font-semibold ${RARITY_STYLES[rarityIn(resultSpecies, biome)].badge}`}>
+              {t(`rarity.${rarityIn(resultSpecies, biome)}`)}
             </span>
           </>
         )}

@@ -2,7 +2,8 @@ import { act } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import '../i18n'
-import { SPECIES_CATALOG } from '../domain/species'
+import { SPECIES_CATALOG, rarityIn } from '../domain/species'
+import { activeBiome } from '../stores/biomeStore'
 import { useCelebrationStore } from '../stores/celebrationStore'
 import { CELEBRATION_MS, CelebrationOverlay } from './CelebrationOverlay'
 
@@ -45,7 +46,7 @@ describe('CelebrationOverlay', () => {
 
     expect(overlay()).not.toBeNull()
     expect(container.querySelector('img')?.getAttribute('alt')).toBe('Glory Bush Tree')
-    expect(overlay()?.textContent).toContain({ common: 'Common', rare: 'Rare', epic: 'Epic' }[species.rarity])
+    expect(overlay()?.textContent).toContain({ common: 'Common', rare: 'Rare', epic: 'Epic' }[rarityIn(species, activeBiome())])
   })
 
   it('dismisses on tap', () => {

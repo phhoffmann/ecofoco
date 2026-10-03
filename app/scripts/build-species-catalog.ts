@@ -45,7 +45,6 @@ import {
   choosePhoto,
   fillQuotas,
   isAllowedGbifLicense,
-  mostCommon,
   pickName,
   rarityByRank,
   slugify,
@@ -322,7 +321,7 @@ async function main() {
 
   mkdirSync(PHOTO_DIR, { recursive: true })
   mkdirSync(CATALOG_DIR, { recursive: true })
-  const entries: { biomes: Selected['biomes']; species: CatalogSpecies }[] = []
+  const entries: { biomes: Selected['biomes']; species: Omit<CatalogSpecies, 'rarity'> }[] = []
   for (const [name, { candidate: c, biomes }] of selected) {
     const text = SPECIES_TEXT[name]
     const match = await gbifMatch(c)
@@ -349,7 +348,6 @@ async function main() {
         id: text.id,
         scientificName: name,
         type: c.kind,
-        rarity: text.rarity ?? mostCommon([...biomes.values()].map((b) => b.rarity)),
         archetype: text.archetype ?? archetypeFor(taxonomyOf(c, match)),
         names,
         descriptions: text.descriptions,
@@ -362,7 +360,11 @@ async function main() {
   for (const biome of BIOME_IDS) {
     const species = entries
       .filter((e) => e.biomes.has(biome))
-      .map((e) => ({ ...e.species, source: { ...e.species.source, observations: e.biomes.get(biome)!.count } }))
+      .map(({ biomes, species: { id, scientificName, type, ...rest } }) => {
+        const inBiome = biomes.get(biome)!
+        const rarity = SPECIES_TEXT[scientificName].rarity ?? inBiome.rarity
+        return { id, scientificName, type, rarity, ...rest, source: { ...rest.source, observations: inBiome.count } }
+      })
       .sort(
         (a, b) =>
           a.type.localeCompare(b.type) ||

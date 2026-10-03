@@ -8,7 +8,7 @@ const { appListeners, addCollectedEntry, recordFocusSession, keepScreenAwake, al
       id: 'jatoba',
       scientificName: 'Hymenaea courbaril',
       type: 'plant',
-      rarity: 'common',
+      rarityByBiome: { 'atlantic-forest': 'common' },
       biome: ['atlantic-forest'],
       archetype: 'broadleaf-tree',
       image: 'jatoba.jpg',

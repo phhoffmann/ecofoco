@@ -369,7 +369,7 @@
       "id": "calango-verde",
       "scientificName": "Ameiva ameiva",
       "type": "animal",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "reptile",
       "names": {
         "en": "Giant Ameiva",
@@ -395,7 +395,7 @@
       "id": "iguana-verde",
       "scientificName": "Iguana iguana",
       "type": "animal",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "reptile",
       "names": {
         "en": "Green Iguana",
@@ -421,7 +421,7 @@
       "id": "borboleta-pavao-branco",
       "scientificName": "Anartia jatrophae",
       "type": "animal",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "insect",
       "names": {
         "en": "White Peacock",
@@ -499,7 +499,7 @@
       "id": "burnsius-orcus",
       "scientificName": "Burnsius orcus",
       "type": "animal",
-      "rarity": "common",
+      "rarity": "epic",
       "archetype": "insect",
       "names": {
         "en": "Orcus Checkered-Skipper",
@@ -863,7 +863,7 @@
       "id": "pau-terra-grande",
       "scientificName": "Qualea grandiflora",
       "type": "plant",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "flowering-tree",
       "names": {
         "en": "Pau-terra-grande",
@@ -889,7 +889,7 @@
       "id": "embauba",
       "scientificName": "Cecropia pachystachya",
       "type": "plant",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "pioneer-tree",
       "names": {
         "en": "Cecropia",
@@ -915,7 +915,7 @@
       "id": "trapoeraba",
       "scientificName": "Commelina erecta",
       "type": "plant",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "shrub",
       "names": {
         "en": "Whitemouth Dayflower",
@@ -941,7 +941,7 @@
       "id": "pau-terra-de-flor-miuda",
       "scientificName": "Qualea parviflora",
       "type": "plant",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "flowering-tree",
       "names": {
         "en": "Pau-terra-de-flor-miúda",

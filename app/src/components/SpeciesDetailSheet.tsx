@@ -1,7 +1,8 @@
 import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { CollectedEntry, CollectionMethod } from '../domain/types'
-import { speciesDescription, speciesName, type Species } from '../domain/species'
+import { rarityIn, speciesDescription, speciesName, type Species } from '../domain/species'
+import { useActiveBiome } from '../stores/biomeStore'
 import { BottomSheet } from './BottomSheet'
 import { RARITY_STYLES } from './rarity'
 
@@ -21,6 +22,7 @@ interface SpeciesDetailSheetProps {
 export function SpeciesDetailSheet({ species, entries, onClose }: SpeciesDetailSheetProps) {
   const { t, i18n } = useTranslation()
   const titleId = useId()
+  const rarity = rarityIn(species, useActiveBiome())
   const sortedEntries = [...entries].sort((a, b) => b.collectedAt.localeCompare(a.collectedAt))
   const firstEntry = sortedEntries.at(-1)
   const name = speciesName(species, i18n.language)
@@ -39,9 +41,9 @@ export function SpeciesDetailSheet({ species, entries, onClose }: SpeciesDetailS
                 <img src={species.image} alt={name} className="enter aspect-[4/3] w-full object-cover" />
                 <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/50 to-transparent" />
                 <span
-                  className={`absolute bottom-3 left-3 rounded-full px-3 py-1 text-xs font-semibold shadow ${RARITY_STYLES[species.rarity].badge}`}
+                  className={`absolute bottom-3 left-3 rounded-full px-3 py-1 text-xs font-semibold shadow ${RARITY_STYLES[rarity].badge}`}
                 >
-                  {t(`rarity.${species.rarity}`)}
+                  {t(`rarity.${rarity}`)}
                 </span>
               </div>
               <figcaption className="mt-1.5 text-right text-[10px] text-emerald-600">

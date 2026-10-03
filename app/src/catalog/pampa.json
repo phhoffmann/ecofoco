@@ -317,7 +317,7 @@
       "id": "lagarto-teiu",
       "scientificName": "Salvator merianae",
       "type": "animal",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "reptile",
       "names": {
         "en": "Black-and-white Tegu",
@@ -369,7 +369,7 @@
       "id": "capivara",
       "scientificName": "Hydrochoerus hydrochaeris",
       "type": "animal",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "mid-mammal",
       "names": {
         "en": "Capybara",
@@ -473,7 +473,7 @@
       "id": "gamba-de-orelha-branca",
       "scientificName": "Didelphis albiventris",
       "type": "animal",
-      "rarity": "rare",
+      "rarity": "epic",
       "archetype": "small-mammal",
       "names": {
         "en": "White-eared Opossum",
@@ -837,7 +837,7 @@
       "id": "aroeira-pimenteira",
       "scientificName": "Schinus terebinthifolia",
       "type": "plant",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "shrub",
       "names": {
         "en": "Brazilian Pepper Tree",
@@ -941,7 +941,7 @@
       "id": "oficial-de-sala",
       "scientificName": "Asclepias curassavica",
       "type": "plant",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "shrub",
       "names": {
         "en": "Tropical Milkweed",
@@ -993,7 +993,7 @@
       "id": "tillandsia-recurvata",
       "scientificName": "Tillandsia recurvata",
       "type": "plant",
-      "rarity": "rare",
+      "rarity": "epic",
       "archetype": "shrub",
       "names": {
         "en": "Ball Moss",
@@ -1019,7 +1019,7 @@
       "id": "tillandsia-stricta",
       "scientificName": "Tillandsia stricta",
       "type": "plant",
-      "rarity": "common",
+      "rarity": "epic",
       "archetype": "shrub",
       "names": {
         "en": "Upright Airplant",

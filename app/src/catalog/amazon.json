@@ -317,7 +317,7 @@
       "id": "abracris-flavolineata",
       "scientificName": "Abracris flavolineata",
       "type": "animal",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "insect",
       "names": {
         "en": "Abracris flavolineata",
@@ -473,7 +473,7 @@
       "id": "ariranha",
       "scientificName": "Pteronura brasiliensis",
       "type": "animal",
-      "rarity": "rare",
+      "rarity": "epic",
       "archetype": "mid-mammal",
       "names": {
         "en": "Giant Otter",

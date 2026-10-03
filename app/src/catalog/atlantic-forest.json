@@ -317,7 +317,7 @@
       "id": "borboleta-pavao-escarlate",
       "scientificName": "Anartia amathea",
       "type": "animal",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "insect",
       "names": {
         "en": "Red Peacock",
@@ -473,7 +473,7 @@
       "id": "sagui-de-tufo-preto",
       "scientificName": "Callithrix penicillata",
       "type": "animal",
-      "rarity": "common",
+      "rarity": "epic",
       "archetype": "primate",
       "names": {
         "en": "Black-tufted Marmoset",
@@ -915,7 +915,7 @@
       "id": "pau-brasil",
       "scientificName": "Paubrasilia echinata",
       "type": "plant",
-      "rarity": "common",
+      "rarity": "rare",
       "archetype": "broadleaf-tree",
       "names": {
         "en": "Brazilwood",

@@ -30,7 +30,8 @@ export interface Species {
   id: string
   scientificName: string
   type: SpeciesKind
-  rarity: Rarity
+  /** Rarity in each Biome the species belongs to, ranked against that Biome's own species. */
+  rarityByBiome: Partial<Record<BiomeId, Rarity>>
   biome: BiomeId[]
   archetype: Archetype
   names: CatalogFile['species'][number]['names']
@@ -50,20 +51,32 @@ export function buildCatalog(files: CatalogFile[], photoUrls: Record<string, str
   const byId = new Map<string, Species>()
   const ordered = [...files].sort((a, b) => BIOME_IDS.indexOf(a.biome) - BIOME_IDS.indexOf(b.biome))
   for (const { biome, species } of ordered) {
-    for (const { photo, source: _source, ...entry } of species) {
+    for (const { photo, source: _source, rarity, ...entry } of species) {
       const known = byId.get(entry.id)
       if (known) {
         known.biome.push(biome)
+        known.rarityByBiome[biome] = rarity
         continue
       }
       const { file, ...credit } = photo
-      byId.set(entry.id, { ...entry, biome: [biome], image: photoUrls[`../assets/species/${file}`] ?? '', photo: credit })
+      byId.set(entry.id, {
+        ...entry,
+        rarityByBiome: { [biome]: rarity },
+        biome: [biome],
+        image: photoUrls[`../assets/species/${file}`] ?? '',
+        photo: credit,
+      })
     }
   }
   return [...byId.values()]
 }
 
 export const SPECIES_CATALOG: Species[] = buildCatalog(CATALOG_FILES)
+
+/** The species' Rarity in the given Biome, or in its first Biome when it does not belong to that one. */
+export function rarityIn(species: Pick<Species, 'rarityByBiome' | 'biome'>, biome: BiomeId): Rarity {
+  return species.rarityByBiome[biome] ?? species.rarityByBiome[species.biome[0]]!
+}
 
 export function speciesName(species: Pick<Species, 'names'>, language: string): string {
   return species.names[toLocale(language)]

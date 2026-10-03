@@ -1,6 +1,5 @@
 // Pure selection rules of the catalog pipeline: licence filter, ranking, quotas, Rarity, names and photo choice.
 import type { PhotoLicense, Rarity } from '../../src/domain/catalogSchema.ts'
-import { RARITIES } from '../../src/domain/catalogSchema.ts'
 import { MIN_PHOTO_EDGE, RARITY_SHARES } from './config.ts'
 
 /** iNaturalist licence code → bundled licence, or null when the licence is not allowed (NC, ND, SA, all rights reserved). */
@@ -59,11 +58,6 @@ export function rarityByRank<T extends Ranked>(species: T[]): Map<string, Rarity
   return new Map(
     ranked.map((s, i) => [s.scientificName, i < commonCut ? 'common' : i < rareCut ? 'rare' : 'epic'] as const),
   )
-}
-
-/** A species ranked in several Biomes keeps the most common of its tiers. */
-export function mostCommon(tiers: Rarity[]): Rarity {
-  return RARITIES.find((r) => tiers.includes(r)) ?? 'common'
 }
 
 export interface Candidate extends Ranked {

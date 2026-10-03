@@ -65,6 +65,7 @@ npm run build:catalog
 - **Biome check:** a candidate stays only if GBIF has CC0/CC-BY occurrences inside the biome's RESOLVE ecoregions
   (the same grid and ecoregion → biome table as location lookup).
 - **Rarity:** the most-observed 60% of a biome's plants (and animals) are common, the next 30% rare, the rest epic.
+  Rarity is per biome: a species shared by several biomes can have a different tier in each.
 - **Photos:** a CC0/CC-BY observation photo (not the taxon's default photo), iNaturalist's medium size re-encoded
   as WebP; the photographer is credited in the app's Settings → Credits.
 - **Hand-edited data:** `scripts/catalog/species-text.ts` holds each species' stable id, short original

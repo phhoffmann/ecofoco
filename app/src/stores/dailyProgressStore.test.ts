@@ -17,7 +17,7 @@ const {
     id: 'quati',
     scientificName: 'Nasua nasua',
     type: 'animal',
-    rarity: 'rare',
+    rarityByBiome: { 'atlantic-forest': 'rare' },
     biome: ['atlantic-forest'],
     archetype: 'small-mammal',
     image: 'quati.jpg',

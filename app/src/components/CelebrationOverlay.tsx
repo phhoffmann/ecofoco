@@ -1,6 +1,7 @@
 import { useEffect, type CSSProperties } from 'react'
 import { useTranslation } from 'react-i18next'
-import { speciesName } from '../domain/species'
+import { rarityIn, speciesName } from '../domain/species'
+import { useActiveBiome } from '../stores/biomeStore'
 import { useCelebrationStore } from '../stores/celebrationStore'
 import { RARITY_STYLES } from './rarity'
 
@@ -28,6 +29,7 @@ export function CelebrationOverlay() {
   const species = useCelebrationStore((s) => s.species)
   const seq = useCelebrationStore((s) => s.seq)
   const dismiss = useCelebrationStore((s) => s.dismiss)
+  const biome = useActiveBiome()
 
   useEffect(() => {
     if (!species) return
@@ -37,7 +39,8 @@ export function CelebrationOverlay() {
 
   if (!species) return null
 
-  const rarity = RARITY_STYLES[species.rarity]
+  const tier = rarityIn(species, biome)
+  const rarity = RARITY_STYLES[tier]
   const name = speciesName(species, i18n.language)
 
   return (
@@ -85,7 +88,7 @@ export function CelebrationOverlay() {
       </p>
       <p className="celebrate-reveal text-center text-2xl font-semibold text-emerald-50">{name}</p>
       <span className={`celebrate-reveal rounded-full px-3 py-1 text-xs font-semibold ${rarity.badge}`}>
-        {t(`rarity.${species.rarity}`)}
+        {t(`rarity.${tier}`)}
       </span>
       <p className="text-xs text-emerald-400">{t('celebration.tapToContinue')}</p>
     </div>
