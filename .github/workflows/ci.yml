@@ -89,3 +89,6 @@ jobs:
 
       - name: Check location permissions
         run: python3 ../.github/scripts/check-location-permissions.py "../${{ steps.manifest.outputs.path }}"
+
+      - name: Check unused plugin permissions
+        run: python3 ../.github/scripts/check-unused-permissions.py "../${{ steps.manifest.outputs.path }}"
