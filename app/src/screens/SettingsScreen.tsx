@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import type { CollectionView } from '../domain/types'
 import { SUPPORTED_LOCALES, type Locale } from '../i18n/locale'
 import { useSettingsStore } from '../stores/settingsStore'
 
@@ -8,8 +7,6 @@ const LANGUAGE_LABELS: Record<Locale, string> = {
   en: 'English',
   'pt-BR': 'Português',
 }
-
-const COLLECTION_VIEWS: CollectionView[] = ['grid', 'isometric']
 
 const STEP_GOAL_INCREMENT = 500
 const STEP_GOAL_MIN = 1000
@@ -20,13 +17,11 @@ export function SettingsScreen() {
     notificationsEnabled,
     language,
     stepGoal,
-    collectionView,
     loaded,
     load,
     setNotificationsEnabled,
     setLanguage,
     setStepGoal,
-    setCollectionView,
   } = useSettingsStore()
 
   useEffect(() => {
@@ -42,7 +37,7 @@ export function SettingsScreen() {
   }
 
   return (
-    <div className="flex-1 space-y-4 px-6 py-6">
+    <div className="space-y-4 px-6 py-6">
       <div className="flex items-center justify-between rounded-xl bg-emerald-900/50 px-4 py-3">
         <div>
           <p className="font-medium text-emerald-50">{t('settings.notifications')}</p>
@@ -52,7 +47,7 @@ export function SettingsScreen() {
           role="switch"
           aria-checked={notificationsEnabled}
           onClick={() => void setNotificationsEnabled(!notificationsEnabled)}
-          className={`h-7 w-12 shrink-0 rounded-full transition-colors ${
+          className={`press h-7 w-12 shrink-0 rounded-full transition-colors ${
             notificationsEnabled ? 'bg-emerald-500' : 'bg-emerald-800'
           }`}
         >
@@ -71,30 +66,11 @@ export function SettingsScreen() {
             <button
               key={locale}
               onClick={() => void setLanguage(locale)}
-              className={`flex-1 rounded-lg px-3 py-2 text-sm font-medium ${
+              className={`press flex-1 rounded-lg px-3 py-2 text-sm font-medium ${
                 language === locale ? 'bg-emerald-500 text-emerald-950' : 'bg-emerald-800 text-emerald-100'
               }`}
             >
               {LANGUAGE_LABELS[locale]}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="rounded-xl bg-emerald-900/50 px-4 py-3">
-        <p className="font-medium text-emerald-50">{t('settings.collectionView')}</p>
-        <p className="mb-3 text-xs text-emerald-400">{t('settings.collectionViewHint')}</p>
-        <div className="flex gap-2">
-          {COLLECTION_VIEWS.map((view) => (
-            <button
-              key={view}
-              aria-pressed={collectionView === view}
-              onClick={() => void setCollectionView(view)}
-              className={`flex-1 rounded-lg px-3 py-2 text-sm font-medium ${
-                collectionView === view ? 'bg-emerald-500 text-emerald-950' : 'bg-emerald-800 text-emerald-100'
-              }`}
-            >
-              {t(`settings.collectionViewOptions.${view}`)}
             </button>
           ))}
         </div>
@@ -106,7 +82,7 @@ export function SettingsScreen() {
         <div className="flex items-center justify-between gap-3">
           <button
             onClick={() => void setStepGoal(Math.max(STEP_GOAL_MIN, stepGoal - STEP_GOAL_INCREMENT))}
-            className="size-9 rounded-lg bg-emerald-800 font-semibold text-emerald-100 active:bg-emerald-700"
+            className="press size-9 rounded-lg bg-emerald-800 font-semibold text-emerald-100 active:bg-emerald-700"
           >
             −
           </button>
@@ -115,7 +91,7 @@ export function SettingsScreen() {
           </p>
           <button
             onClick={() => void setStepGoal(stepGoal + STEP_GOAL_INCREMENT)}
-            className="size-9 rounded-lg bg-emerald-800 font-semibold text-emerald-100 active:bg-emerald-700"
+            className="press size-9 rounded-lg bg-emerald-800 font-semibold text-emerald-100 active:bg-emerald-700"
           >
             +
           </button>

@@ -33,7 +33,9 @@ vi.mock('../data/screenWakeLock', () => ({ keepScreenAwake, allowScreenSleep }))
 vi.mock('../domain/draw', () => ({ pickRandomSpecies: vi.fn(() => mockSpecies) }))
 vi.mock('../data/collectionRepo', () => ({ addCollectedEntry }))
 vi.mock('../data/focusSessionRepo', () => ({ recordFocusSession }))
+vi.mock('../data/haptics', () => ({ lightHaptic: vi.fn() }))
 
+import { useCelebrationStore } from './celebrationStore'
 import { useFocusSessionStore } from './focusSessionStore'
 
 function triggerBackground() {
@@ -48,6 +50,7 @@ describe('focusSessionStore', () => {
     keepScreenAwake.mockClear()
     allowScreenSleep.mockClear()
     useFocusSessionStore.getState().reset()
+    useCelebrationStore.setState({ species: null })
   })
 
   afterEach(() => {
@@ -67,6 +70,7 @@ describe('focusSessionStore', () => {
     expect(addCollectedEntry).toHaveBeenCalledWith('jatoba', 'focus_session')
     expect(recordFocusSession).toHaveBeenCalledWith(expect.any(String), 3, 'completed')
     expect(allowScreenSleep).toHaveBeenCalled()
+    expect(useCelebrationStore.getState().species).toEqual(mockSpecies)
   })
 
   it('fails the session if the app is backgrounded before completion (e.g. the screen auto-locks)', async () => {
@@ -81,6 +85,7 @@ describe('focusSessionStore', () => {
     expect(addCollectedEntry).not.toHaveBeenCalled()
     expect(allowScreenSleep).toHaveBeenCalled()
 
+    expect(useCelebrationStore.getState().species).toBeNull()
     // the interval must actually be cleared — advancing further must not flip it to 'completed'
     await vi.advanceTimersByTimeAsync(60_000)
     expect(useFocusSessionStore.getState().status).toBe('failed')

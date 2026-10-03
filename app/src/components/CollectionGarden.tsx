@@ -61,7 +61,7 @@ export function CollectionGarden({ entries, onSelectSpecies }: CollectionGardenP
               setPeriod(p)
               setAnchor(new Date())
             }}
-            className={`flex-1 rounded-lg px-3 py-1.5 text-sm font-medium ${
+            className={`press flex-1 rounded-lg px-3 py-1.5 text-sm font-medium ${
               period === p ? 'bg-emerald-500 text-emerald-950' : 'bg-emerald-800 text-emerald-100'
             }`}
           >
@@ -74,7 +74,7 @@ export function CollectionGarden({ entries, onSelectSpecies }: CollectionGardenP
         <button
           aria-label={t('collection.garden.previous')}
           onClick={() => setAnchor(shiftPeriod(period, anchor, -1))}
-          className="size-9 rounded-lg bg-emerald-800 font-semibold text-emerald-100 active:bg-emerald-700"
+          className="press size-9 rounded-lg bg-emerald-800 font-semibold text-emerald-100 active:bg-emerald-700"
         >
           ‹
         </button>
@@ -88,7 +88,7 @@ export function CollectionGarden({ entries, onSelectSpecies }: CollectionGardenP
           aria-label={t('collection.garden.next')}
           disabled={isCurrentPeriod}
           onClick={() => setAnchor(shiftPeriod(period, anchor, 1))}
-          className="size-9 rounded-lg bg-emerald-800 font-semibold text-emerald-100 active:bg-emerald-700 disabled:opacity-30"
+          className="press size-9 rounded-lg bg-emerald-800 font-semibold text-emerald-100 active:bg-emerald-700 disabled:opacity-30"
         >
           ›
         </button>

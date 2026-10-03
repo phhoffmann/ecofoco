@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { RARITY_STYLES } from '../components/rarity'
 import { useCollectionStore } from '../stores/collectionStore'
 import { useDailyProgressStore } from '../stores/dailyProgressStore'
 import { useSettingsStore } from '../stores/settingsStore'
@@ -44,16 +45,18 @@ export function ActivityScreen() {
         <img
           src={resultSpecies.image}
           alt={t(`species.${resultSpecies.id}.name`)}
-          className="size-40 rounded-2xl object-cover"
+          className={`size-40 rounded-2xl object-cover shadow-xl ring-4 ${RARITY_STYLES[resultSpecies.rarity].ring}`}
         />
         <p className="text-2xl font-semibold text-emerald-50">{t(`species.${resultSpecies.id}.name`)}</p>
-        <p className="text-sm text-emerald-400">{t(`rarity.${resultSpecies.rarity}`)}</p>
+        <span className={`rounded-full px-3 py-1 text-xs font-semibold ${RARITY_STYLES[resultSpecies.rarity].badge}`}>
+          {t(`rarity.${resultSpecies.rarity}`)}
+        </span>
         <button
           onClick={() => {
             clearResult()
             void refreshCollection()
           }}
-          className="rounded-xl bg-emerald-800 px-5 py-3 font-medium text-emerald-50 active:bg-emerald-700"
+          className="press rounded-xl bg-emerald-800 px-5 py-3 font-medium text-emerald-50 active:bg-emerald-700"
         >
           {t('common.done')}
         </button>
@@ -76,7 +79,7 @@ export function ActivityScreen() {
         <p className="text-sm text-emerald-400">{t('activity.installHint')}</p>
         <button
           onClick={() => void refresh()}
-          className="rounded-xl bg-emerald-800 px-5 py-3 font-medium text-emerald-50 active:bg-emerald-700"
+          className="press rounded-xl bg-emerald-800 px-5 py-3 font-medium text-emerald-50 active:bg-emerald-700"
         >
           {t('common.tryAgain')}
         </button>
@@ -91,7 +94,7 @@ export function ActivityScreen() {
         <button
           onClick={() => void connect()}
           disabled={loading}
-          className="rounded-xl bg-emerald-800 px-5 py-3 font-medium text-emerald-50 active:bg-emerald-700"
+          className="press rounded-xl bg-emerald-800 px-5 py-3 font-medium text-emerald-50 active:bg-emerald-700"
         >
           {loading ? t('activity.connecting') : t('activity.connect')}
         </button>
@@ -116,7 +119,7 @@ export function ActivityScreen() {
       {progress.goalMet && !progress.drawCompleted && (
         <button
           onClick={() => void draw()}
-          className="rounded-xl bg-emerald-800 px-5 py-3 font-medium text-emerald-50 active:bg-emerald-700"
+          className="press rounded-xl bg-emerald-800 px-5 py-3 font-medium text-emerald-50 active:bg-emerald-700"
         >
           {t('activity.drawButton')}
         </button>

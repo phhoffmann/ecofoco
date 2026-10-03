@@ -50,6 +50,11 @@ export const en = {
     discovered: '{{count}} / {{total}} species discovered',
     logSighting: '+ Log sighting',
     unknown: '???',
+    view: {
+      label: 'Collection view',
+      grid: 'Grid',
+      isometric: 'Garden',
+    },
     empty: 'Complete a focus session to collect your first species.',
     garden: {
       periods: {
@@ -76,12 +81,10 @@ export const en = {
     stepGoal: 'Daily step goal',
     stepGoalHint: 'Steps needed to unlock the daily animal draw',
     stepGoalValue: '{{count}} steps',
-    collectionView: 'Collection view',
-    collectionViewHint: 'The full species grid, or a garden of what you collected in a period',
-    collectionViewOptions: {
-      grid: 'Grid',
-      isometric: 'Garden',
-    },
+  },
+  celebration: {
+    title: 'You collected!',
+    tapToContinue: 'Tap to continue',
   },
   speciesDetail: {
     method: {
@@ -91,6 +94,7 @@ export const en = {
       photo_ai: 'Photo identification',
     },
     history: 'Collection history ({{count}})',
+    firstCollected: 'First collected on {{date}}',
     photoCredit: 'Photo: {{credit}}',
   },
   manualSighting: {

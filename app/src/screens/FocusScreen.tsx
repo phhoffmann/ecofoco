@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { RARITY_STYLES } from '../components/rarity'
 import { Sprout } from '../components/Sprout'
 import { useCollectionStore } from '../stores/collectionStore'
 import { useFocusSessionStore } from '../stores/focusSessionStore'
@@ -32,7 +33,7 @@ export function FocusScreen() {
             <button
               key={min}
               onClick={() => start(min * 60)}
-              className="rounded-xl bg-emerald-800 px-5 py-3 font-medium text-emerald-50 active:bg-emerald-700"
+              className="press rounded-xl bg-emerald-800 px-5 py-3 font-medium text-emerald-50 active:bg-emerald-700"
             >
               {t('focus.durationMinutes', { count: min })}
             </button>
@@ -65,15 +66,17 @@ export function FocusScreen() {
             <img
               src={resultSpecies.image}
               alt={t(`species.${resultSpecies.id}.name`)}
-              className="size-40 rounded-2xl object-cover"
+              className={`size-40 rounded-2xl object-cover shadow-xl ring-4 ${RARITY_STYLES[resultSpecies.rarity].ring}`}
             />
             <p className="text-2xl font-semibold text-emerald-50">{t(`species.${resultSpecies.id}.name`)}</p>
-            <p className="text-sm text-emerald-400">{t(`rarity.${resultSpecies.rarity}`)}</p>
+            <span className={`rounded-full px-3 py-1 text-xs font-semibold ${RARITY_STYLES[resultSpecies.rarity].badge}`}>
+              {t(`rarity.${resultSpecies.rarity}`)}
+            </span>
           </>
         )}
         <button
           onClick={reset}
-          className="rounded-xl bg-emerald-800 px-5 py-3 font-medium text-emerald-50 active:bg-emerald-700"
+          className="press rounded-xl bg-emerald-800 px-5 py-3 font-medium text-emerald-50 active:bg-emerald-700"
         >
           {t('common.done')}
         </button>
@@ -87,7 +90,7 @@ export function FocusScreen() {
       <p className="text-center text-sm text-emerald-300">{t('focus.leftEarly')}</p>
       <button
         onClick={reset}
-        className="rounded-xl bg-emerald-800 px-5 py-3 font-medium text-emerald-50 active:bg-emerald-700"
+        className="press rounded-xl bg-emerald-800 px-5 py-3 font-medium text-emerald-50 active:bg-emerald-700"
       >
         {t('common.tryAgain')}
       </button>
