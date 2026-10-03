@@ -67,11 +67,17 @@ class AwayTrackerPlugin : Plugin() {
         call.resolve(JSObject().apply { put("otherAppMs", ms) })
     }
 
-    /** Credits the time since the last sample to other apps if the screen is on and unlocked now. */
+    /**
+     * Credits the time since the last sample to other apps if the screen is on and unlocked now.
+     * A gap far longer than the sample interval means the sampler was suspended — deep sleep or a
+     * frozen process, which happen with the screen off — so that gap is never credited; otherwise
+     * waking the phone to come back after a long lock would count the whole lock as leaving.
+     */
     private fun sample() {
         if (!paused) return
         val now = SystemClock.elapsedRealtime()
-        if (isScreenInUse()) otherAppMs += now - lastSampleAt
+        val gap = now - lastSampleAt
+        if (gap <= MAX_SAMPLE_GAP_MS && isScreenInUse()) otherAppMs += gap
         lastSampleAt = now
     }
 
@@ -83,5 +89,6 @@ class AwayTrackerPlugin : Plugin() {
 
     private companion object {
         const val SAMPLE_INTERVAL_MS = 250L
+        const val MAX_SAMPLE_GAP_MS = 1_000L
     }
 }
