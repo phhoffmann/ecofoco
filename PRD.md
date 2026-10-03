@@ -85,10 +85,9 @@ v1 is the MVP loop (focus → plants, steps → animals, one permanent Collectio
 Planned work, roughly in order of how much it unblocks:
 
 1. **Native focus lock.** Kotlin plugins for the screen-lock overlay and app-usage reading (Usage Stats API), so a session survives the screen being turned off (Forest-style) and fails only when another app is used. Replaces today's keep-awake + leave-the-app-and-fail behaviour (§4.1).
-2. **Catalog pipeline for Brazil's six biomes.** A repeatable way to pick native species from GBIF / iNaturalist with CC0/CC-BY photos, archetypes and en + pt-BR text, then fill Amazon, Cerrado, Pantanal and Pampa so no biome is "coming soon". The catalog stays bundled.
-3. **App-wide visual polish.** Baked per-archetype garden art replacing the Kenney placeholders, richer per-biome ground (see `design-references/isometric-biome-example.png` for the target look), and motion/animation across the app, not only in the garden and celebrations.
-4. **Android 8–11 coarse location.** Devices below Android 12 (API < 31) may not grant coarse-only location, leaving only the manual picker. Not tested on a real device yet; verify and fix if needed.
-5. **Plugin permission trim.** `@capgo/capacitor-health` merges read + write permissions for every Health Connect type; the manifest strips all but steps, and CI fails if more come back. `WRITE_STEPS` exists only for the step simulator and goes away with it before a public release.
+2. **App-wide visual polish.** Baked per-archetype garden art replacing the Kenney placeholders, richer per-biome ground (see `design-references/isometric-biome-example.png` for the target look), and motion/animation across the app, not only in the garden and celebrations.
+3. **Android 8–11 coarse location.** Devices below Android 12 (API < 31) may not grant coarse-only location, leaving only the manual picker. Not tested on a real device yet; verify and fix if needed.
+4. **Plugin permission trim.** `@capgo/capacitor-health` merges read + write permissions for every Health Connect type; the manifest strips all but steps, and CI fails if more come back. `WRITE_STEPS` exists only for the step simulator and goes away with it before a public release.
 
 ## 7. Technical requirements
 
