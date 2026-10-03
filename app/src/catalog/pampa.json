@@ -1,0 +1,1045 @@
+{
+  "biome": "pampa",
+  "species": [
+    {
+      "id": "borboleta-pavao-escarlate",
+      "scientificName": "Anartia amathea",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "insect",
+      "names": {
+        "en": "Red Peacock",
+        "pt-BR": "Borboleta-pavão-escarlate"
+      },
+      "descriptions": {
+        "en": "A dark butterfly with bold scarlet bands, often seen sipping nectar in gardens and pastures.",
+        "pt-BR": "Borboleta escura com faixas vermelho-vivas, vista com frequência tomando néctar em jardins e pastos."
+      },
+      "photo": {
+        "file": "borboleta-pavao-escarlate.webp",
+        "license": "CC-BY",
+        "credit": "Odebrecht, Clarisse",
+        "sourceUrl": "https://www.inaturalist.org/observations/349854762"
+      },
+      "source": {
+        "inatTaxonId": 83652,
+        "gbifTaxonKey": 5128011,
+        "observations": 263
+      }
+    },
+    {
+      "id": "borboleta-do-manaca",
+      "scientificName": "Methona themisto",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "insect",
+      "names": {
+        "en": "Themisto Amberwing",
+        "pt-BR": "Borboleta-do-manacá"
+      },
+      "descriptions": {
+        "en": "A glasswing butterfly with see-through wings edged in black and orange; its caterpillars feed on manacá shrubs.",
+        "pt-BR": "Borboleta de asas transparentes contornadas de preto e laranja; suas lagartas se alimentam do manacá."
+      },
+      "photo": {
+        "file": "borboleta-do-manaca.webp",
+        "license": "CC-BY",
+        "credit": "André Nogueira Thomas",
+        "sourceUrl": "https://www.inaturalist.org/observations/211292532"
+      },
+      "source": {
+        "inatTaxonId": 119084,
+        "gbifTaxonKey": 1898858,
+        "observations": 227
+      }
+    },
+    {
+      "id": "borboleta-paixao",
+      "scientificName": "Dione vanillae",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "insect",
+      "names": {
+        "en": "Gulf Fritillary",
+        "pt-BR": "Borboleta-paixão"
+      },
+      "descriptions": {
+        "en": "A bright orange butterfly with silver spots under its wings; its caterpillars feed on passionflower vines.",
+        "pt-BR": "Borboleta laranja-viva com manchas prateadas sob as asas; suas lagartas se alimentam de maracujazeiros."
+      },
+      "photo": {
+        "file": "borboleta-paixao.webp",
+        "license": "CC-BY",
+        "credit": "André Nogueira Thomas",
+        "sourceUrl": "https://www.inaturalist.org/observations/256433572"
+      },
+      "source": {
+        "inatTaxonId": 49150,
+        "gbifTaxonKey": 11701883,
+        "observations": 224
+      }
+    },
+    {
+      "id": "borboleta-flambeau",
+      "scientificName": "Dryas iulia",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "insect",
+      "names": {
+        "en": "Julia Heliconian",
+        "pt-BR": "Borboleta-flambeau"
+      },
+      "descriptions": {
+        "en": "A long-winged, flame-orange butterfly that visits flowers in sunny clearings; its caterpillars eat passionflower leaves.",
+        "pt-BR": "Borboleta de asas longas cor de fogo que visita flores em clareiras ensolaradas; suas lagartas comem folhas de maracujá."
+      },
+      "photo": {
+        "file": "borboleta-flambeau.webp",
+        "license": "CC-BY",
+        "credit": "Lucas Kaminski",
+        "sourceUrl": "https://www.inaturalist.org/observations/92852859"
+      },
+      "source": {
+        "inatTaxonId": 50073,
+        "gbifTaxonKey": 5128034,
+        "observations": 221
+      }
+    },
+    {
+      "id": "cardeal",
+      "scientificName": "Paroaria coronata",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Red-crested Cardinal",
+        "pt-BR": "Cardeal"
+      },
+      "descriptions": {
+        "en": "A grey-and-white songbird with a bright red crested head, common in the open country of the south.",
+        "pt-BR": "Pássaro cinza e branco de cabeça vermelha com topete, comum nas áreas abertas do sul."
+      },
+      "photo": {
+        "file": "cardeal.webp",
+        "license": "CC0",
+        "credit": "Frank Thomas Sautter",
+        "sourceUrl": "https://www.inaturalist.org/observations/311785547"
+      },
+      "source": {
+        "inatTaxonId": 10254,
+        "gbifTaxonKey": 2492081,
+        "observations": 145
+      }
+    },
+    {
+      "id": "marreca-ananai",
+      "scientificName": "Amazonetta brasiliensis",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "large-bird",
+      "names": {
+        "en": "Brazilian Teal",
+        "pt-BR": "Marreca-ananaí"
+      },
+      "descriptions": {
+        "en": "A small brown duck with red legs and shiny blue-green wing patches, often seen in pairs on ponds.",
+        "pt-BR": "Pequena marreca marrom de pés vermelhos e espelho azul-esverdeado nas asas, vista aos pares em lagoas."
+      },
+      "photo": {
+        "file": "marreca-ananai.webp",
+        "license": "CC0",
+        "credit": "Frank Thomas Sautter",
+        "sourceUrl": "https://www.inaturalist.org/observations/99628509"
+      },
+      "source": {
+        "inatTaxonId": 7182,
+        "gbifTaxonKey": 2498411,
+        "observations": 139
+      }
+    },
+    {
+      "id": "bem-te-vi",
+      "scientificName": "Pitangus sulphuratus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Great Kiskadee",
+        "pt-BR": "Bem-te-vi"
+      },
+      "descriptions": {
+        "en": "A loud, bold yellow-bellied flycatcher whose call sounds like it's saying its own name — one of Brazil's most familiar birds.",
+        "pt-BR": "Ave insetívora barulhenta e destemida, de peito amarelo, cujo canto parece dizer o próprio nome — uma das aves mais conhecidas do Brasil."
+      },
+      "photo": {
+        "file": "bem-te-vi.webp",
+        "license": "CC-BY",
+        "credit": "Helio Lourencini",
+        "sourceUrl": "https://www.inaturalist.org/observations/62682207"
+      },
+      "source": {
+        "inatTaxonId": 16956,
+        "gbifTaxonKey": 2482755,
+        "observations": 131
+      }
+    },
+    {
+      "id": "quero-quero",
+      "scientificName": "Vanellus chilensis",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Southern Lapwing",
+        "pt-BR": "Quero-quero"
+      },
+      "descriptions": {
+        "en": "A loud lapwing of lawns and fields that dives at anyone who comes near its nest on the ground.",
+        "pt-BR": "Ave barulhenta de gramados e campos que dá rasantes em quem se aproxima do seu ninho no chão."
+      },
+      "photo": {
+        "file": "quero-quero.webp",
+        "license": "CC0",
+        "credit": "Frank Thomas Sautter",
+        "sourceUrl": "https://www.inaturalist.org/observations/315609401"
+      },
+      "source": {
+        "inatTaxonId": 4867,
+        "gbifTaxonKey": 5229146,
+        "observations": 130
+      }
+    },
+    {
+      "id": "pica-pau-do-campo",
+      "scientificName": "Colaptes campestris",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Campo Flicker",
+        "pt-BR": "Pica-pau-do-campo"
+      },
+      "descriptions": {
+        "en": "A woodpecker of open country with a yellow face that often feeds on the ground, digging out ants and termites.",
+        "pt-BR": "Pica-pau de áreas abertas, de face amarela, que muitas vezes come no chão, cavando formigas e cupins."
+      },
+      "photo": {
+        "file": "pica-pau-do-campo.webp",
+        "license": "CC0",
+        "credit": "Frank Thomas Sautter",
+        "sourceUrl": "https://www.inaturalist.org/observations/402575051"
+      },
+      "source": {
+        "inatTaxonId": 18262,
+        "gbifTaxonKey": 2478233,
+        "observations": 115
+      }
+    },
+    {
+      "id": "canario-da-terra",
+      "scientificName": "Sicalis flaveola",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Saffron Finch",
+        "pt-BR": "Canário-da-terra"
+      },
+      "descriptions": {
+        "en": "A bright yellow finch with an orange forehead that sings from rooftops and feeds on seeds in open ground.",
+        "pt-BR": "Pássaro amarelo-vivo de testa alaranjada que canta dos telhados e come sementes em áreas abertas."
+      },
+      "photo": {
+        "file": "canario-da-terra.webp",
+        "license": "CC-BY",
+        "credit": "Jer Clarke",
+        "sourceUrl": "https://www.inaturalist.org/observations/303463866"
+      },
+      "source": {
+        "inatTaxonId": 9864,
+        "gbifTaxonKey": 2491862,
+        "observations": 113
+      }
+    },
+    {
+      "id": "sabia-do-campo",
+      "scientificName": "Mimus saturninus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Chalk-browed Mockingbird",
+        "pt-BR": "Sabiá-do-campo"
+      },
+      "descriptions": {
+        "en": "A grey-brown mockingbird with a white eyebrow that sings loudly and imitates other birds.",
+        "pt-BR": "Sabiá cinza-amarronzado de sobrancelha branca que canta alto e imita outras aves."
+      },
+      "photo": {
+        "file": "sabia-do-campo.webp",
+        "license": "CC0",
+        "credit": "Frank Thomas Sautter",
+        "sourceUrl": "https://www.inaturalist.org/observations/191089221"
+      },
+      "source": {
+        "inatTaxonId": 14878,
+        "gbifTaxonKey": 5231675,
+        "observations": 111
+      }
+    },
+    {
+      "id": "carcara",
+      "scientificName": "Caracara plancus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "large-bird",
+      "names": {
+        "en": "Southern Crested Caracara",
+        "pt-BR": "Carcará"
+      },
+      "descriptions": {
+        "en": "A bold, opportunistic falcon that walks the ground as often as it flies, eating anything from carrion to insects.",
+        "pt-BR": "Falcão ousado e oportunista que anda pelo chão tanto quanto voa, comendo de carniça a insetos."
+      },
+      "photo": {
+        "file": "carcara.webp",
+        "license": "CC-BY",
+        "credit": "Jean Martins",
+        "sourceUrl": "https://www.inaturalist.org/observations/109548994"
+      },
+      "source": {
+        "inatTaxonId": 4715,
+        "gbifTaxonKey": 2480989,
+        "observations": 106
+      }
+    },
+    {
+      "id": "lagarto-teiu",
+      "scientificName": "Salvator merianae",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "reptile",
+      "names": {
+        "en": "Black-and-white Tegu",
+        "pt-BR": "Lagarto-teiú"
+      },
+      "descriptions": {
+        "en": "One of South America's largest lizards, an opportunistic omnivore that can grow over a meter long.",
+        "pt-BR": "Um dos maiores lagartos da América do Sul, onívoro oportunista que pode ultrapassar um metro de comprimento."
+      },
+      "photo": {
+        "file": "lagarto-teiu.webp",
+        "license": "CC0",
+        "credit": "Pedro T. Terres",
+        "sourceUrl": "https://www.inaturalist.org/observations/330909436"
+      },
+      "source": {
+        "inatTaxonId": 318758,
+        "gbifTaxonKey": 5227370,
+        "observations": 51
+      }
+    },
+    {
+      "id": "tigre-d-agua",
+      "scientificName": "Trachemys dorbigni",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "reptile",
+      "names": {
+        "en": "Black-bellied Slider",
+        "pt-BR": "Tigre-d'água"
+      },
+      "descriptions": {
+        "en": "A freshwater turtle of southern Brazil with orange stripes on its head; it basks in groups on logs.",
+        "pt-BR": "Tartaruga de água doce do sul do Brasil com listras laranja na cabeça; toma sol em grupo sobre troncos."
+      },
+      "photo": {
+        "file": "tigre-d-agua.webp",
+        "license": "CC0",
+        "credit": "NINA WENÓLI",
+        "sourceUrl": "https://www.inaturalist.org/observations/104003064"
+      },
+      "source": {
+        "inatTaxonId": 39797,
+        "gbifTaxonKey": 2442977,
+        "observations": 49
+      }
+    },
+    {
+      "id": "capivara",
+      "scientificName": "Hydrochoerus hydrochaeris",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "mid-mammal",
+      "names": {
+        "en": "Capybara",
+        "pt-BR": "Capivara"
+      },
+      "descriptions": {
+        "en": "The world’s largest rodent, a calm grazer that lives in groups near water and swims well.",
+        "pt-BR": "O maior roedor do mundo, um herbívoro tranquilo que vive em grupos perto da água e nada muito bem."
+      },
+      "photo": {
+        "file": "capivara.webp",
+        "license": "CC-BY",
+        "credit": "avocat",
+        "sourceUrl": "https://www.inaturalist.org/observations/8066919"
+      },
+      "source": {
+        "inatTaxonId": 74442,
+        "gbifTaxonKey": 5786666,
+        "observations": 45
+      }
+    },
+    {
+      "id": "ratao-do-banhado",
+      "scientificName": "Myocastor coypus",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "small-mammal",
+      "names": {
+        "en": "Coypu",
+        "pt-BR": "Ratão-do-banhado"
+      },
+      "descriptions": {
+        "en": "A large aquatic rodent with orange front teeth and webbed hind feet that grazes on marsh plants.",
+        "pt-BR": "Roedor aquático grande, de dentes da frente alaranjados e pés traseiros com membranas, que come plantas do banhado."
+      },
+      "photo": {
+        "file": "ratao-do-banhado.webp",
+        "license": "CC-BY",
+        "credit": "vinicius_s_domingues",
+        "sourceUrl": "https://www.inaturalist.org/observations/189807595"
+      },
+      "source": {
+        "inatTaxonId": 43997,
+        "gbifTaxonKey": 4264680,
+        "observations": 39
+      }
+    },
+    {
+      "id": "graxaim-do-campo",
+      "scientificName": "Lycalopex gymnocerca",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "mid-mammal",
+      "names": {
+        "en": "Pampas Fox",
+        "pt-BR": "Graxaim-do-campo"
+      },
+      "descriptions": {
+        "en": "A grey fox of the southern grasslands that eats small animals, eggs and fruit.",
+        "pt-BR": "Raposa cinzenta dos campos sulinos que come pequenos animais, ovos e frutos."
+      },
+      "photo": {
+        "file": "graxaim-do-campo.webp",
+        "license": "CC-BY",
+        "credit": "Fernando Bondan",
+        "sourceUrl": "https://www.inaturalist.org/observations/200643941"
+      },
+      "source": {
+        "inatTaxonId": 423656,
+        "gbifTaxonKey": 2434333,
+        "observations": 37
+      }
+    },
+    {
+      "id": "cagado-da-lagoa",
+      "scientificName": "Phrynops hilarii",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "reptile",
+      "names": {
+        "en": "Hilaire’s Side-necked Turtle",
+        "pt-BR": "Cágado-da-lagoa"
+      },
+      "descriptions": {
+        "en": "A side-necked turtle that tucks its head sideways under its shell, with two small barbels under its chin.",
+        "pt-BR": "Cágado que dobra o pescoço de lado para esconder a cabeça sob o casco, com duas pequenas barbelas no queixo."
+      },
+      "photo": {
+        "file": "cagado-da-lagoa.webp",
+        "license": "CC-BY",
+        "credit": "PampaSorro",
+        "sourceUrl": "https://www.inaturalist.org/observations/303211724"
+      },
+      "source": {
+        "inatTaxonId": 39626,
+        "gbifTaxonKey": 2442089,
+        "observations": 28
+      }
+    },
+    {
+      "id": "gamba-de-orelha-branca",
+      "scientificName": "Didelphis albiventris",
+      "type": "animal",
+      "rarity": "epic",
+      "archetype": "small-mammal",
+      "names": {
+        "en": "White-eared Opossum",
+        "pt-BR": "Gambá-de-orelha-branca"
+      },
+      "descriptions": {
+        "en": "An adaptable opossum with white ears that carries its young in a pouch and eats almost anything.",
+        "pt-BR": "Gambá adaptável de orelhas brancas que carrega os filhotes no marsúpio e come quase de tudo."
+      },
+      "photo": {
+        "file": "gamba-de-orelha-branca.webp",
+        "license": "CC0",
+        "credit": "Fernando Sessegolo",
+        "sourceUrl": "https://www.inaturalist.org/observations/40560026"
+      },
+      "source": {
+        "inatTaxonId": 42658,
+        "gbifTaxonKey": 2439930,
+        "observations": 26
+      }
+    },
+    {
+      "id": "prea",
+      "scientificName": "Cavia aperea",
+      "type": "animal",
+      "rarity": "epic",
+      "archetype": "small-mammal",
+      "names": {
+        "en": "Brazilian Guinea Pig",
+        "pt-BR": "Preá"
+      },
+      "descriptions": {
+        "en": "A wild relative of the guinea pig, living in grassy areas in small family groups and mostly active at dawn and dusk.",
+        "pt-BR": "Parente selvagem do porquinho-da-índia, vive em áreas de vegetação rasteira em pequenos grupos familiares, mais ativo ao amanhecer e ao entardecer."
+      },
+      "photo": {
+        "file": "prea.webp",
+        "license": "CC0",
+        "credit": "Fernando Sessegolo",
+        "sourceUrl": "https://www.inaturalist.org/observations/36144970"
+      },
+      "source": {
+        "inatTaxonId": 43813,
+        "gbifTaxonKey": 5219704,
+        "observations": 25
+      }
+    },
+    {
+      "id": "tillandsia-geminiflora",
+      "scientificName": "Tillandsia geminiflora",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Tillandsia geminiflora",
+        "pt-BR": "Tillandsia geminiflora"
+      },
+      "descriptions": {
+        "en": "An air plant with soft green rosettes and a pink spike of tiny violet flowers, common on trees in the south.",
+        "pt-BR": "Bromélia de rosetas verdes e macias e inflorescência rosada de florzinhas violeta, comum nas árvores do sul."
+      },
+      "photo": {
+        "file": "tillandsia-geminiflora.webp",
+        "license": "CC-BY",
+        "credit": "Néri Henrique Andrades",
+        "sourceUrl": "https://www.inaturalist.org/observations/189240227"
+      },
+      "source": {
+        "inatTaxonId": 141278,
+        "gbifTaxonKey": 2694812,
+        "observations": 68
+      }
+    },
+    {
+      "id": "cravo-do-ar",
+      "scientificName": "Tillandsia aeranthos",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Cravo-do-ar",
+        "pt-BR": "Cravo-do-ar"
+      },
+      "descriptions": {
+        "en": "A stiff, spiky air plant with deep pink bracts and blue-violet flowers that grows on trees, rocks and fences.",
+        "pt-BR": "Bromélia rígida e pontuda, de brácteas rosa-escuras e flores azul-violeta, que cresce em árvores, pedras e cercas."
+      },
+      "photo": {
+        "file": "cravo-do-ar.webp",
+        "license": "CC-BY",
+        "credit": "André Nogueira Thomas",
+        "sourceUrl": "https://www.inaturalist.org/observations/392268428"
+      },
+      "source": {
+        "inatTaxonId": 370737,
+        "gbifTaxonKey": 7843252,
+        "observations": 44
+      }
+    },
+    {
+      "id": "araucaria",
+      "scientificName": "Araucaria angustifolia",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "emergent-tree",
+      "names": {
+        "en": "Paraná Pine",
+        "pt-BR": "Araucária"
+      },
+      "descriptions": {
+        "en": "The candelabra-shaped conifer of Brazil’s southern highlands, whose pinhão seeds feed jays, parrots and people through the winter.",
+        "pt-BR": "A conífera em forma de candelabro do planalto sul, cujos pinhões alimentam gralhas, papagaios e pessoas durante o inverno."
+      },
+      "photo": {
+        "file": "araucaria.webp",
+        "license": "CC-BY",
+        "credit": "Pietro",
+        "sourceUrl": "https://www.inaturalist.org/observations/226993944"
+      },
+      "source": {
+        "inatTaxonId": 83168,
+        "gbifTaxonKey": 2684940,
+        "observations": 41
+      }
+    },
+    {
+      "id": "corticeira-do-banhado",
+      "scientificName": "Erythrina crista-galli",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "flowering-tree",
+      "names": {
+        "en": "Cockspur Coral Tree",
+        "pt-BR": "Corticeira-do-banhado"
+      },
+      "descriptions": {
+        "en": "A riverside tree with corky bark and crimson flowers; it is the national flower of Argentina and Uruguay.",
+        "pt-BR": "Árvore de beira de rio com casca de cortiça e flores vermelho-carmim; é a flor nacional da Argentina e do Uruguai."
+      },
+      "photo": {
+        "file": "corticeira-do-banhado.webp",
+        "license": "CC-BY",
+        "credit": "vinicius_s_domingues",
+        "sourceUrl": "https://www.inaturalist.org/observations/149772692"
+      },
+      "source": {
+        "inatTaxonId": 162718,
+        "gbifTaxonKey": 5349719,
+        "observations": 29
+      }
+    },
+    {
+      "id": "pitangueira",
+      "scientificName": "Eugenia uniflora",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "broadleaf-tree",
+      "names": {
+        "en": "Pitanga",
+        "pt-BR": "Pitangueira"
+      },
+      "descriptions": {
+        "en": "A shrub with ribbed red cherries that taste sweet and tangy; its leaves smell spicy when crushed.",
+        "pt-BR": "Arbusto de frutinhos vermelhos e gomados, de sabor doce e azedinho; as folhas têm cheiro forte quando amassadas."
+      },
+      "photo": {
+        "file": "pitangueira.webp",
+        "license": "CC-BY",
+        "credit": "Lucas Kaminski",
+        "sourceUrl": "https://www.inaturalist.org/observations/99559956"
+      },
+      "source": {
+        "inatTaxonId": 83642,
+        "gbifTaxonKey": 5416458,
+        "observations": 29
+      }
+    },
+    {
+      "id": "aechmea-recurvata",
+      "scientificName": "Aechmea recurvata",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Aechmea recurvata",
+        "pt-BR": "Aechmea recurvata"
+      },
+      "descriptions": {
+        "en": "A compact bromeliad whose central leaves turn scarlet when it blooms.",
+        "pt-BR": "Bromélia compacta cujas folhas centrais ficam escarlates quando floresce."
+      },
+      "photo": {
+        "file": "aechmea-recurvata.webp",
+        "license": "CC-BY",
+        "credit": "Pablo G. Fernández",
+        "sourceUrl": "https://www.inaturalist.org/observations/178051290"
+      },
+      "source": {
+        "inatTaxonId": 564178,
+        "gbifTaxonKey": 2698386,
+        "observations": 28
+      }
+    },
+    {
+      "id": "trapoeraba",
+      "scientificName": "Commelina erecta",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Whitemouth Dayflower",
+        "pt-BR": "Trapoeraba"
+      },
+      "descriptions": {
+        "en": "A dayflower with two sky-blue petals; each flower opens for just one morning.",
+        "pt-BR": "Erva de duas pétalas azul-celeste; cada flor abre por uma única manhã."
+      },
+      "photo": {
+        "file": "trapoeraba.webp",
+        "license": "CC0",
+        "credit": "Fernando Sessegolo",
+        "sourceUrl": "https://www.inaturalist.org/observations/62963939"
+      },
+      "source": {
+        "inatTaxonId": 53478,
+        "gbifTaxonKey": 2764389,
+        "observations": 27
+      }
+    },
+    {
+      "id": "canchalagua",
+      "scientificName": "Sisyrinchium micranthum",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Blue-eyed Grass",
+        "pt-BR": "Canchalágua"
+      },
+      "descriptions": {
+        "en": "A grass-like iris with tiny flowers, white to lilac with a yellow eye, that dot the grasslands in spring.",
+        "pt-BR": "Pequena irídea parecida com capim, de florzinhas brancas a lilás com centro amarelo, que pontilham os campos na primavera."
+      },
+      "photo": {
+        "file": "canchalagua.webp",
+        "license": "CC-BY",
+        "credit": "Vitoria Fortes",
+        "sourceUrl": "https://www.inaturalist.org/observations/199468687"
+      },
+      "source": {
+        "inatTaxonId": 284004,
+        "gbifTaxonKey": 5296278,
+        "observations": 27
+      }
+    },
+    {
+      "id": "mal-me-quer-do-campo",
+      "scientificName": "Aspilia montevidensis",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Mal-me-quer-do-campo",
+        "pt-BR": "Mal-me-quer-do-campo"
+      },
+      "descriptions": {
+        "en": "A rough-leaved daisy of the southern grasslands with bright yellow flower heads.",
+        "pt-BR": "Margarida de folhas ásperas dos campos sulinos, com flores amarelo-vivas."
+      },
+      "photo": {
+        "file": "mal-me-quer-do-campo.webp",
+        "license": "CC-BY",
+        "credit": "vinicius_s_domingues",
+        "sourceUrl": "https://www.inaturalist.org/observations/145790724"
+      },
+      "source": {
+        "inatTaxonId": 881522,
+        "gbifTaxonKey": 5698931,
+        "observations": 26
+      }
+    },
+    {
+      "id": "aguape-flecha",
+      "scientificName": "Sagittaria montevidensis",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Aztec Arrowhead",
+        "pt-BR": "Aguapé-flecha"
+      },
+      "descriptions": {
+        "en": "A marsh plant with arrow-shaped leaves and white flowers with a dark purple spot at the base of each petal.",
+        "pt-BR": "Planta de banhado com folhas em forma de flecha e flores brancas com uma mancha roxo-escura na base de cada pétala."
+      },
+      "photo": {
+        "file": "aguape-flecha.webp",
+        "license": "CC0",
+        "credit": "Frank Thomas Sautter",
+        "sourceUrl": "https://www.inaturalist.org/observations/196043999"
+      },
+      "source": {
+        "inatTaxonId": 1506725,
+        "gbifTaxonKey": 5329111,
+        "observations": 26
+      }
+    },
+    {
+      "id": "cambara",
+      "scientificName": "Lantana camara",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Lantana",
+        "pt-BR": "Cambará"
+      },
+      "descriptions": {
+        "en": "A shrub whose flower clusters change colour from yellow to orange and red, guiding butterflies to fresh nectar.",
+        "pt-BR": "Arbusto cujos buquês de flores mudam de amarelo para laranja e vermelho, guiando as borboletas até o néctar fresco."
+      },
+      "photo": {
+        "file": "cambara.webp",
+        "license": "CC0",
+        "credit": "Bruno R. Giozza",
+        "sourceUrl": "https://www.inaturalist.org/observations/40084413"
+      },
+      "source": {
+        "inatTaxonId": 50333,
+        "gbifTaxonKey": 2925303,
+        "observations": 25
+      }
+    },
+    {
+      "id": "estrela-branca",
+      "scientificName": "Nymphoides humboldtiana",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Water Snowflake",
+        "pt-BR": "Estrela-branca"
+      },
+      "descriptions": {
+        "en": "A floating-leaved water plant with small white flowers whose petals are fringed like snowflakes.",
+        "pt-BR": "Planta aquática de folhas flutuantes e pequenas flores brancas com pétalas franjadas como flocos de neve."
+      },
+      "photo": {
+        "file": "estrela-branca.webp",
+        "license": "CC0",
+        "credit": "Fernando Sessegolo",
+        "sourceUrl": "https://www.inaturalist.org/observations/150123481"
+      },
+      "source": {
+        "inatTaxonId": 807297,
+        "gbifTaxonKey": 5341504,
+        "observations": 24
+      }
+    },
+    {
+      "id": "aroeira-pimenteira",
+      "scientificName": "Schinus terebinthifolia",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "Brazilian Pepper Tree",
+        "pt-BR": "Aroeira-pimenteira"
+      },
+      "descriptions": {
+        "en": "Produces small red berries resembling pink peppercorns; considered invasive outside Brazil, but native and ecologically important here.",
+        "pt-BR": "Produz pequenas bagas vermelhas parecidas com pimenta-rosa; considerada invasora fora do Brasil, mas nativa e ecologicamente importante aqui."
+      },
+      "photo": {
+        "file": "aroeira-pimenteira.webp",
+        "license": "CC-BY",
+        "credit": "Emma Walker",
+        "sourceUrl": "https://www.inaturalist.org/observations/272198719"
+      },
+      "source": {
+        "inatTaxonId": 130872,
+        "gbifTaxonKey": 3660419,
+        "observations": 24
+      }
+    },
+    {
+      "id": "mandacaru-de-fruto-amarelo",
+      "scientificName": "Cereus hildmannianus",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "Hedge Cactus",
+        "pt-BR": "Mandacaru-de-fruto-amarelo"
+      },
+      "descriptions": {
+        "en": "A tall, branching cactus of southern Brazil whose large white flowers open at night.",
+        "pt-BR": "Cacto alto e ramificado do sul do Brasil, cujas grandes flores brancas abrem à noite."
+      },
+      "photo": {
+        "file": "mandacaru-de-fruto-amarelo.webp",
+        "license": "CC0",
+        "credit": "Frank Thomas Sautter",
+        "sourceUrl": "https://www.inaturalist.org/observations/339634829"
+      },
+      "source": {
+        "inatTaxonId": 327664,
+        "gbifTaxonKey": 5384000,
+        "observations": 23
+      }
+    },
+    {
+      "id": "herbertia",
+      "scientificName": "Herbertia lahue",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "Prairie Nymph",
+        "pt-BR": "Herbértia"
+      },
+      "descriptions": {
+        "en": "A small bulb of the grasslands with violet, three-petalled flowers that appear in spring.",
+        "pt-BR": "Pequena planta bulbosa dos campos, de flores violeta com três pétalas maiores, que aparecem na primavera."
+      },
+      "photo": {
+        "file": "herbertia.webp",
+        "license": "CC-BY",
+        "credit": "André Nogueira Thomas",
+        "sourceUrl": "https://www.inaturalist.org/observations/256535426"
+      },
+      "source": {
+        "inatTaxonId": 163683,
+        "gbifTaxonKey": 5297486,
+        "observations": 23
+      }
+    },
+    {
+      "id": "maracuja-azul",
+      "scientificName": "Passiflora caerulea",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "Blue Passionflower",
+        "pt-BR": "Maracujá-azul"
+      },
+      "descriptions": {
+        "en": "A climbing passionflower with a crown of blue-and-white filaments; its orange fruit is edible but bland.",
+        "pt-BR": "Maracujá trepador com uma coroa de filamentos azuis e brancos; seu fruto alaranjado é comestível, mas sem graça."
+      },
+      "photo": {
+        "file": "maracuja-azul.webp",
+        "license": "CC0",
+        "credit": "Frank Thomas Sautter",
+        "sourceUrl": "https://www.inaturalist.org/observations/131819923"
+      },
+      "source": {
+        "inatTaxonId": 51454,
+        "gbifTaxonKey": 2874199,
+        "observations": 23
+      }
+    },
+    {
+      "id": "oficial-de-sala",
+      "scientificName": "Asclepias curassavica",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "Tropical Milkweed",
+        "pt-BR": "Oficial-de-sala"
+      },
+      "descriptions": {
+        "en": "A milkweed with red-and-orange flowers whose toxic sap protects the monarch caterpillars that feed on it.",
+        "pt-BR": "Planta de flores vermelhas e laranja cuja seiva tóxica protege as lagartas da borboleta-monarca que se alimentam dela."
+      },
+      "photo": {
+        "file": "oficial-de-sala.webp",
+        "license": "CC0",
+        "credit": "filipeprates",
+        "sourceUrl": "https://www.inaturalist.org/observations/361307286"
+      },
+      "source": {
+        "inatTaxonId": 75602,
+        "gbifTaxonKey": 3170241,
+        "observations": 21
+      }
+    },
+    {
+      "id": "bons-dias",
+      "scientificName": "Ipomoea indica",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "Blue Morning Glory",
+        "pt-BR": "Bons-dias"
+      },
+      "descriptions": {
+        "en": "A vigorous climber whose blue flowers open in the morning and fade to pink by afternoon.",
+        "pt-BR": "Trepadeira vigorosa de flores azuis que abrem pela manhã e ficam rosadas à tarde."
+      },
+      "photo": {
+        "file": "bons-dias.webp",
+        "license": "CC0",
+        "credit": "Frank Thomas Sautter",
+        "sourceUrl": "https://www.inaturalist.org/observations/208776806"
+      },
+      "source": {
+        "inatTaxonId": 77496,
+        "gbifTaxonKey": 2928598,
+        "observations": 21
+      }
+    },
+    {
+      "id": "tillandsia-recurvata",
+      "scientificName": "Tillandsia recurvata",
+      "type": "plant",
+      "rarity": "epic",
+      "archetype": "shrub",
+      "names": {
+        "en": "Ball Moss",
+        "pt-BR": "Tillandsia recurvata"
+      },
+      "descriptions": {
+        "en": "Not a moss at all but a tiny bromeliad that forms grey balls on branches and power lines, living on air and rain.",
+        "pt-BR": "Pequena bromélia que forma bolinhas cinzentas em galhos e fios de luz, vivendo apenas de ar e chuva."
+      },
+      "photo": {
+        "file": "tillandsia-recurvata.webp",
+        "license": "CC-BY",
+        "credit": "Tom Field",
+        "sourceUrl": "https://www.inaturalist.org/observations/325169581"
+      },
+      "source": {
+        "inatTaxonId": 84002,
+        "gbifTaxonKey": 2695588,
+        "observations": 21
+      }
+    },
+    {
+      "id": "tillandsia-stricta",
+      "scientificName": "Tillandsia stricta",
+      "type": "plant",
+      "rarity": "epic",
+      "archetype": "shrub",
+      "names": {
+        "en": "Upright Airplant",
+        "pt-BR": "Cravo-do-mato"
+      },
+      "descriptions": {
+        "en": "A small air plant that clings to branches and wires, sending up pink bracts with violet flowers.",
+        "pt-BR": "Pequena bromélia que se prende a galhos e fios, soltando brácteas rosadas com flores violeta."
+      },
+      "photo": {
+        "file": "tillandsia-stricta.webp",
+        "license": "CC-BY",
+        "credit": "Martin Vallejos",
+        "sourceUrl": "https://www.inaturalist.org/observations/167775008"
+      },
+      "source": {
+        "inatTaxonId": 525575,
+        "gbifTaxonKey": 2695068,
+        "observations": 21
+      }
+    }
+  ]
+}

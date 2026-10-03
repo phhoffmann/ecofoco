@@ -15,6 +15,12 @@ import {
 } from './biome'
 import { SPECIES_CATALOG } from './species'
 
+// The catalog as if Cerrado and the Amazon had no species yet.
+const WITHOUT_CERRADO_AND_AMAZON = SPECIES_CATALOG.map((s) => ({
+  ...s,
+  biome: s.biome.filter((b) => b !== 'cerrado' && b !== 'amazon'),
+}))
+
 const progress = (overrides: Partial<BiomeProgress> = {}): BiomeProgress => ({
   home: 'atlantic-forest',
   current: 'atlantic-forest',
@@ -57,8 +63,12 @@ describe('isBiomeId', () => {
 })
 
 describe('hasCatalog', () => {
-  it('is true only for biomes with both plants and animals in the catalog', () => {
-    expect(BIOME_IDS.filter((b) => hasCatalog(b))).toEqual(['atlantic-forest', 'caatinga'])
+  it('is true for every Brazilian biome now that each has a catalog', () => {
+    expect(BIOME_IDS.filter((b) => hasCatalog(b))).toEqual([...BIOME_IDS])
+  })
+
+  it('is false for a biome with no species', () => {
+    expect(hasCatalog('cerrado', WITHOUT_CERRADO_AND_AMAZON)).toBe(false)
   })
 
   it('needs both kinds, since focus rewards draw plants and step draws draw animals', () => {
@@ -90,18 +100,15 @@ describe('biomeStatus', () => {
   })
 
   it('shows biomes without a catalog as coming soon, even when they are neighbours', () => {
-    expect(biomeStatus('cerrado', progress())).toBe('coming-soon')
-    expect(biomeStatus('amazon', progress())).toBe('coming-soon')
+    expect(biomeStatus('cerrado', progress(), WITHOUT_CERRADO_AND_AMAZON)).toBe('coming-soon')
+    expect(biomeStatus('amazon', progress(), WITHOUT_CERRADO_AND_AMAZON)).toBe('coming-soon')
   })
 
   it('locks catalog biomes that do not border an unlocked one', () => {
-    // pretend Pampa had species: it only borders Atlantic Forest
-    const catalog = [
-      ...SPECIES_CATALOG,
-      ...SPECIES_CATALOG.filter((s) => s.biome.includes('caatinga')).map((s) => ({ ...s, biome: ['pampa' as const] })),
-    ]
-    expect(biomeStatus('pampa', progress({ home: 'caatinga', current: 'caatinga' }), catalog)).toBe('locked')
-    expect(biomeStatus('pampa', progress(), catalog)).toBe('unlockable')
+    // Pampa only borders Atlantic Forest
+    expect(biomeStatus('pampa', progress({ home: 'caatinga', current: 'caatinga' }))).toBe('locked')
+    expect(biomeStatus('pampa', progress())).toBe('unlockable')
+    expect(biomeStatus('amazon', progress())).toBe('locked')
   })
 
   it('reports a purchased biome that is not current as unlocked', () => {
@@ -119,7 +126,7 @@ describe('canUnlock', () => {
     const rich = NEIGHBOUR_UNLOCK_COST * 10
     expect(canUnlock('atlantic-forest', progress({ balance: rich }))).toBe(false)
     expect(canUnlock('caatinga', progress({ balance: rich, purchased: ['caatinga'] }))).toBe(false)
-    expect(canUnlock('cerrado', progress({ balance: rich }))).toBe(false)
+    expect(canUnlock('cerrado', progress({ balance: rich }), WITHOUT_CERRADO_AND_AMAZON)).toBe(false)
   })
 })
 
@@ -132,6 +139,6 @@ describe('canSwitchTo', () => {
   })
 
   it('never allows a biome without a catalog', () => {
-    expect(canSwitchTo('cerrado', progress({ purchased: ['cerrado'] }))).toBe(false)
+    expect(canSwitchTo('cerrado', progress({ purchased: ['cerrado'] }), WITHOUT_CERRADO_AND_AMAZON)).toBe(false)
   })
 })

@@ -22,6 +22,7 @@ npm run dev
 | `npm run preview` | Serves the built `dist/`. |
 | `npm run copy-sql-wasm` | Copies `sql-wasm.wasm` into `public/assets/` (see below). |
 | `npm run build:biome-grid -- <path/to/Ecoregions2017.shp>` | Regenerates the location → biome lookup (see below). |
+| `npm run build:catalog` | Regenerates the species catalog and photos (see below). |
 
 CI (`.github/workflows/ci.yml`) runs `npm ci`, `lint`, `test` and `build` on every push and pull request to `main`.
 
@@ -45,6 +46,39 @@ npm run build:biome-grid -- /tmp/resolve/Ecoregions2017.shp
 ```
 
 The output is deterministic, so an unchanged source and table produce no diff. Edit `scripts/brazil-biome-ecoregions.ts` to change which ecoregions belong to which biome. Attribution and the changes made to the source data: [`src/assets/biomes/LICENSE.md`](src/assets/biomes/LICENSE.md).
+
+## Species catalog
+
+The bundled catalog — `src/catalog/<biome>.json` for Brazil's six biomes plus one WebP photo per species in
+`src/assets/species/` — is generated at build time from iNaturalist and GBIF. The app never calls either API.
+Regenerate it from `app/` with Node ≥ 22.18:
+
+```sh
+npm run build:catalog
+```
+
+- **Candidates:** iNaturalist species with research-grade observations that carry CC0/CC-BY photos, in the
+  Brazilian states listed per biome in `scripts/catalog/config.ts`, ranked by observation count. Species
+  iNaturalist records as introduced (or invasive) there are left out; species with no establishment record are
+  kept, since many well-known natives have none. 20 plants
+  and 20 animals per biome (8 birds, 5 mammals, 3 reptiles, 4 insects).
+- **Biome check:** a candidate stays only if GBIF has CC0/CC-BY occurrences inside the biome's RESOLVE ecoregions
+  (the same grid and ecoregion → biome table as location lookup).
+- **Rarity:** the most-observed 60% of a biome's plants (and animals) are common, the next 30% rare, the rest epic.
+  Rarity is per biome: a species shared by several biomes can have a different tier in each.
+- **Photos:** a CC0/CC-BY observation photo (not the taxon's default photo), iNaturalist's medium size re-encoded
+  as WebP; the photographer is credited in the app's Settings → Credits.
+- **Hand-edited data:** `scripts/catalog/species-text.ts` holds each species' stable id, short original
+  descriptions (never Wikipedia text) and optional overrides for names, archetype and rarity. When the pipeline
+  selects a species with no entry there, it stops and lists them in `.catalog-cache/missing-text.json`.
+- **Cache:** raw API responses and photos are cached in `.catalog-cache/` (git-ignored; set `CATALOG_CACHE_DIR`
+  to move it), so reruns are fast and reproducible. Delete it to pick up new observations.
+- **GBIF citation:** `src/catalog/gbif-derived-dataset.csv` lists the GBIF datasets behind the biome check, ready
+  to register as a derived dataset at https://www.gbif.org/derived-dataset/register; put the DOI in
+  `src/components/CreditsSheet.tsx`.
+
+Removing a species from the catalog is safe: collected entries for ids that no longer exist are kept in the
+database but not shown.
 
 ## Android
 

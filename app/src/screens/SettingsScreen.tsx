@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { BiomeSettings } from '../components/BiomeSettings'
+import { CreditsSheet } from '../components/CreditsSheet'
 import { SUPPORTED_LOCALES, type Locale } from '../i18n/locale'
 import { useSettingsStore } from '../stores/settingsStore'
 
@@ -24,6 +25,7 @@ export function SettingsScreen() {
     setLanguage,
     setStepGoal,
   } = useSettingsStore()
+  const [showCredits, setShowCredits] = useState(false)
 
   useEffect(() => {
     void load()
@@ -104,7 +106,12 @@ export function SettingsScreen() {
       <div className="px-1 text-[10px] text-emerald-600">
         <p className="font-medium">{t('settings.credits.title')}</p>
         <p>{t('settings.credits.biomeMap')}</p>
+        <p>{t('settings.credits.speciesSummary')}</p>
+        <button onClick={() => setShowCredits(true)} className="mt-1 text-emerald-400 underline underline-offset-2">
+          {t('settings.credits.open')}
+        </button>
       </div>
+      {showCredits && <CreditsSheet onClose={() => setShowCredits(false)} />}
     </div>
   )
 }

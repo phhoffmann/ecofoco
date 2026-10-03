@@ -1,0 +1,1045 @@
+{
+  "biome": "amazon",
+  "species": [
+    {
+      "id": "borboleta-pavao-branco",
+      "scientificName": "Anartia jatrophae",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "insect",
+      "names": {
+        "en": "White Peacock",
+        "pt-BR": "Borboleta-pavão-branco"
+      },
+      "descriptions": {
+        "en": "A pale butterfly with small eyespots that flutters low over weedy fields and lawns.",
+        "pt-BR": "Borboleta clara com pequenos ocelos que voa baixo sobre gramados e terrenos com mato."
+      },
+      "photo": {
+        "file": "borboleta-pavao-branco.webp",
+        "license": "CC-BY",
+        "credit": "Túllio",
+        "sourceUrl": "https://www.inaturalist.org/observations/264620688"
+      },
+      "source": {
+        "inatTaxonId": 49761,
+        "gbifTaxonKey": 5128007,
+        "observations": 112
+      }
+    },
+    {
+      "id": "urubu-preto",
+      "scientificName": "Coragyps atratus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "large-bird",
+      "names": {
+        "en": "Black Vulture",
+        "pt-BR": "Urubu-preto"
+      },
+      "descriptions": {
+        "en": "Black vultures soar in groups and find carrion by watching each other, cleaning up cities and fields alike.",
+        "pt-BR": "O urubu plana em bandos e encontra carcaças observando os companheiros, fazendo a limpeza de cidades e campos."
+      },
+      "photo": {
+        "file": "urubu-preto.webp",
+        "license": "CC-BY",
+        "credit": "Donald Davesne",
+        "sourceUrl": "https://www.inaturalist.org/observations/49058999"
+      },
+      "source": {
+        "inatTaxonId": 4765,
+        "gbifTaxonKey": 2481942,
+        "observations": 61
+      }
+    },
+    {
+      "id": "sanhaco-da-amazonia",
+      "scientificName": "Thraupis episcopus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Blue-gray Tanager",
+        "pt-BR": "Sanhaço-da-amazônia"
+      },
+      "descriptions": {
+        "en": "A pale blue-grey tanager with brighter wing patches, common in gardens and forest edges.",
+        "pt-BR": "Sanhaço azul-acinzentado com manchas mais vivas nas asas, comum em quintais e bordas de mata."
+      },
+      "photo": {
+        "file": "sanhaco-da-amazonia.webp",
+        "license": "CC0",
+        "credit": "NINA WENÓLI",
+        "sourceUrl": "https://www.inaturalist.org/observations/291177935"
+      },
+      "source": {
+        "inatTaxonId": 10295,
+        "gbifTaxonKey": 2488602,
+        "observations": 61
+      }
+    },
+    {
+      "id": "calango-verde",
+      "scientificName": "Ameiva ameiva",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "reptile",
+      "names": {
+        "en": "Giant Ameiva",
+        "pt-BR": "Calango-verde"
+      },
+      "descriptions": {
+        "en": "A fast, green-backed lizard that forages actively in sunny clearings, flicking its tongue to find insects.",
+        "pt-BR": "Lagarto rápido de dorso verde que caça ativamente em clareiras ensolaradas, usando a língua para achar insetos."
+      },
+      "photo": {
+        "file": "calango-verde.webp",
+        "license": "CC0",
+        "credit": "Carlos Henrique Russi",
+        "sourceUrl": "https://www.inaturalist.org/observations/241923879"
+      },
+      "source": {
+        "inatTaxonId": 38913,
+        "gbifTaxonKey": 2472164,
+        "observations": 59
+      }
+    },
+    {
+      "id": "iguana-verde",
+      "scientificName": "Iguana iguana",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "reptile",
+      "names": {
+        "en": "Green Iguana",
+        "pt-BR": "Iguana-verde"
+      },
+      "descriptions": {
+        "en": "A large, plant-eating lizard with a spiny crest that basks in trees near water and drops in to escape danger.",
+        "pt-BR": "Lagarto grande e herbívoro, de crista espinhosa, que toma sol em árvores perto da água e mergulha para fugir do perigo."
+      },
+      "photo": {
+        "file": "iguana-verde.webp",
+        "license": "CC-BY",
+        "credit": "Carlos Alexandre Mattos Raposo",
+        "sourceUrl": "https://www.inaturalist.org/observations/251582416"
+      },
+      "source": {
+        "inatTaxonId": 35342,
+        "gbifTaxonKey": 2459658,
+        "observations": 58
+      }
+    },
+    {
+      "id": "borboleta-pavao-escarlate",
+      "scientificName": "Anartia amathea",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "insect",
+      "names": {
+        "en": "Red Peacock",
+        "pt-BR": "Borboleta-pavão-escarlate"
+      },
+      "descriptions": {
+        "en": "A dark butterfly with bold scarlet bands, often seen sipping nectar in gardens and pastures.",
+        "pt-BR": "Borboleta escura com faixas vermelho-vivas, vista com frequência tomando néctar em jardins e pastos."
+      },
+      "photo": {
+        "file": "borboleta-pavao-escarlate.webp",
+        "license": "CC-BY",
+        "credit": "Odebrecht, Clarisse",
+        "sourceUrl": "https://www.inaturalist.org/observations/349854762"
+      },
+      "source": {
+        "inatTaxonId": 83652,
+        "gbifTaxonKey": 5128011,
+        "observations": 56
+      }
+    },
+    {
+      "id": "jacaretinga",
+      "scientificName": "Caiman crocodilus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "reptile",
+      "names": {
+        "en": "Spectacled Caiman",
+        "pt-BR": "Jacaretinga"
+      },
+      "descriptions": {
+        "en": "A medium-sized caiman named for the bony ridge between its eyes, like the bridge of a pair of glasses.",
+        "pt-BR": "Jacaré de porte médio com uma crista óssea entre os olhos que lembra a ponte de um par de óculos."
+      },
+      "photo": {
+        "file": "jacaretinga.webp",
+        "license": "CC0",
+        "credit": "Arthur 🕷 Bitar 🐌 Marinho 🦈 Colares 🐛",
+        "sourceUrl": "https://www.inaturalist.org/observations/340485531"
+      },
+      "source": {
+        "inatTaxonId": 116517,
+        "gbifTaxonKey": 8953936,
+        "observations": 56
+      }
+    },
+    {
+      "id": "sanhaco-do-coqueiro",
+      "scientificName": "Thraupis palmarum",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Palm Tanager",
+        "pt-BR": "Sanhaço-do-coqueiro"
+      },
+      "descriptions": {
+        "en": "An olive-grey tanager that often feeds and nests in the crowns of palm trees.",
+        "pt-BR": "Sanhaço verde-acinzentado que costuma se alimentar e fazer ninho na copa de palmeiras."
+      },
+      "photo": {
+        "file": "sanhaco-do-coqueiro.webp",
+        "license": "CC0",
+        "credit": "Manuel Roncal",
+        "sourceUrl": "https://www.inaturalist.org/observations/105728790"
+      },
+      "source": {
+        "inatTaxonId": 10297,
+        "gbifTaxonKey": 9436876,
+        "observations": 56
+      }
+    },
+    {
+      "id": "garca-branca-grande",
+      "scientificName": "Ardea alba",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "large-bird",
+      "names": {
+        "en": "Great Egret",
+        "pt-BR": "Garça-branca-grande"
+      },
+      "descriptions": {
+        "en": "A tall, all-white heron with a yellow bill that stands still in shallow water before spearing fish.",
+        "pt-BR": "Garça alta, toda branca e de bico amarelo, que fica imóvel na água rasa antes de arpoar peixes."
+      },
+      "photo": {
+        "file": "garca-branca-grande.webp",
+        "license": "CC0",
+        "credit": "Whaldener Endo",
+        "sourceUrl": "https://www.inaturalist.org/observations/158177910"
+      },
+      "source": {
+        "inatTaxonId": 144455,
+        "gbifTaxonKey": 9752617,
+        "observations": 55
+      }
+    },
+    {
+      "id": "suiriri",
+      "scientificName": "Tyrannus melancholicus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "songbird",
+      "names": {
+        "en": "Tropical Kingbird",
+        "pt-BR": "Suiriri"
+      },
+      "descriptions": {
+        "en": "A yellow-bellied flycatcher that sits on exposed perches and sallies out to snatch insects in mid-air.",
+        "pt-BR": "Papa-moscas de barriga amarela que pousa em galhos expostos e sai em voos curtos para capturar insetos no ar."
+      },
+      "photo": {
+        "file": "suiriri.webp",
+        "license": "CC-BY",
+        "credit": "portioid",
+        "sourceUrl": "https://www.inaturalist.org/observations/333026461"
+      },
+      "source": {
+        "inatTaxonId": 16787,
+        "gbifTaxonKey": 5229662,
+        "observations": 53
+      }
+    },
+    {
+      "id": "tucano-de-peito-branco",
+      "scientificName": "Ramphastos tucanus",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "large-bird",
+      "names": {
+        "en": "White-throated Toucan",
+        "pt-BR": "Tucano-de-peito-branco"
+      },
+      "descriptions": {
+        "en": "A large toucan with a white throat and a huge dark bill; its yelping call carries far over the Amazon canopy.",
+        "pt-BR": "Tucano grande de garganta branca e bico enorme e escuro; seu canto em ganidos ecoa longe sobre a copa da floresta."
+      },
+      "photo": {
+        "file": "tucano-de-peito-branco.webp",
+        "license": "CC-BY",
+        "credit": "Charlotte Kirchner",
+        "sourceUrl": "https://www.inaturalist.org/observations/337127243"
+      },
+      "source": {
+        "inatTaxonId": 18799,
+        "gbifTaxonKey": 2478774,
+        "observations": 51
+      }
+    },
+    {
+      "id": "ectatomma-brunneum",
+      "scientificName": "Ectatomma brunneum",
+      "type": "animal",
+      "rarity": "common",
+      "archetype": "insect",
+      "names": {
+        "en": "Ectatomma brunneum",
+        "pt-BR": "Ectatomma brunneum"
+      },
+      "descriptions": {
+        "en": "A large ground ant of open areas that hunts small insects and collects sweet liquids from plants.",
+        "pt-BR": "Formiga grande de áreas abertas que caça pequenos insetos e coleta líquidos açucarados das plantas."
+      },
+      "photo": {
+        "file": "ectatomma-brunneum.webp",
+        "license": "CC-BY",
+        "credit": "Lucas Kaminski",
+        "sourceUrl": "https://www.inaturalist.org/observations/228382029"
+      },
+      "source": {
+        "inatTaxonId": 569506,
+        "gbifTaxonKey": 1314146,
+        "observations": 50
+      }
+    },
+    {
+      "id": "abracris-flavolineata",
+      "scientificName": "Abracris flavolineata",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "insect",
+      "names": {
+        "en": "Abracris flavolineata",
+        "pt-BR": "Abracris flavolineata"
+      },
+      "descriptions": {
+        "en": "A slender grasshopper with pale yellow lines along its body, common in grass and shrubs.",
+        "pt-BR": "Gafanhoto esguio com linhas amarelo-claras ao longo do corpo, comum no capim e nos arbustos."
+      },
+      "photo": {
+        "file": "abracris-flavolineata.webp",
+        "license": "CC-BY",
+        "credit": "Helio Lourencini",
+        "sourceUrl": "https://www.inaturalist.org/observations/67882607"
+      },
+      "source": {
+        "inatTaxonId": 119627,
+        "gbifTaxonKey": 1703595,
+        "observations": 47
+      }
+    },
+    {
+      "id": "chora-chuva-preto",
+      "scientificName": "Monasa nigrifrons",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "songbird",
+      "names": {
+        "en": "Black-fronted Nunbird",
+        "pt-BR": "Chora-chuva-preto"
+      },
+      "descriptions": {
+        "en": "A dark grey bird with a coral-red bill that lives in noisy groups along forest rivers.",
+        "pt-BR": "Ave cinza-escura de bico vermelho-coral que vive em grupos barulhentos nas matas ao longo dos rios."
+      },
+      "photo": {
+        "file": "chora-chuva-preto.webp",
+        "license": "CC-BY",
+        "credit": "Lindolfo Souto",
+        "sourceUrl": "https://www.inaturalist.org/observations/337872976"
+      },
+      "source": {
+        "inatTaxonId": 1559,
+        "gbifTaxonKey": 2475187,
+        "observations": 46
+      }
+    },
+    {
+      "id": "pipira-vermelha",
+      "scientificName": "Ramphocelus carbo",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "songbird",
+      "names": {
+        "en": "Silver-beaked Tanager",
+        "pt-BR": "Pipira-vermelha"
+      },
+      "descriptions": {
+        "en": "The male looks black until the light reveals deep crimson, set off by a gleaming silver lower bill.",
+        "pt-BR": "O macho parece preto até a luz revelar o vermelho-escuro, realçado pela base do bico branco-prateada."
+      },
+      "photo": {
+        "file": "pipira-vermelha.webp",
+        "license": "CC-BY",
+        "credit": "agujaceratops",
+        "sourceUrl": "https://www.inaturalist.org/observations/232405688"
+      },
+      "source": {
+        "inatTaxonId": 10056,
+        "gbifTaxonKey": 2488442,
+        "observations": 46
+      }
+    },
+    {
+      "id": "preguica-comum",
+      "scientificName": "Bradypus variegatus",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "mid-mammal",
+      "names": {
+        "en": "Brown-throated Three-toed Sloth",
+        "pt-BR": "Preguiça-comum"
+      },
+      "descriptions": {
+        "en": "A three-toed sloth that moves so slowly algae grow in its fur, coming down only about once a week.",
+        "pt-BR": "Preguiça de três dedos tão lenta que algas crescem em seu pelo; desce da árvore só cerca de uma vez por semana."
+      },
+      "photo": {
+        "file": "preguica-comum.webp",
+        "license": "CC-BY",
+        "credit": "Thomaz de Carvalho Callado",
+        "sourceUrl": "https://www.inaturalist.org/observations/173122648"
+      },
+      "source": {
+        "inatTaxonId": 47067,
+        "gbifTaxonKey": 2436353,
+        "observations": 32
+      }
+    },
+    {
+      "id": "cutia-de-crista",
+      "scientificName": "Dasyprocta leporina",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "mid-mammal",
+      "names": {
+        "en": "Red-rumped Agouti",
+        "pt-BR": "Cutia-de-crista"
+      },
+      "descriptions": {
+        "en": "A long-legged rodent that buries seeds to eat later and forgets some, planting new trees.",
+        "pt-BR": "Roedor de pernas longas que enterra sementes para comer depois e esquece algumas, plantando novas árvores."
+      },
+      "photo": {
+        "file": "cutia-de-crista.webp",
+        "license": "CC-BY",
+        "credit": "Conrado Pável de Oliveira",
+        "sourceUrl": "https://www.inaturalist.org/observations/331144684"
+      },
+      "source": {
+        "inatTaxonId": 852338,
+        "gbifTaxonKey": 2437577,
+        "observations": 31
+      }
+    },
+    {
+      "id": "sauim-de-cara-suja",
+      "scientificName": "Saguinus weddelli",
+      "type": "animal",
+      "rarity": "rare",
+      "archetype": "primate",
+      "names": {
+        "en": "White-mantled Tamarin",
+        "pt-BR": "Sauim-de-cara-suja"
+      },
+      "descriptions": {
+        "en": "A small tamarin that lives in family groups in the southern Amazon, feeding on fruit, insects and tree gum.",
+        "pt-BR": "Pequeno sagui que vive em grupos familiares no sul da Amazônia e come frutos, insetos e goma de árvores."
+      },
+      "photo": {
+        "file": "sauim-de-cara-suja.webp",
+        "license": "CC-BY",
+        "credit": "Fábio Olmos",
+        "sourceUrl": "https://www.inaturalist.org/observations/265572603"
+      },
+      "source": {
+        "inatTaxonId": 1368626,
+        "gbifTaxonKey": 9530430,
+        "observations": 25
+      }
+    },
+    {
+      "id": "ariranha",
+      "scientificName": "Pteronura brasiliensis",
+      "type": "animal",
+      "rarity": "epic",
+      "archetype": "mid-mammal",
+      "names": {
+        "en": "Giant Otter",
+        "pt-BR": "Ariranha"
+      },
+      "descriptions": {
+        "en": "The world’s longest otter lives in noisy family groups that hunt fish together in rivers and lakes.",
+        "pt-BR": "A maior lontra do mundo vive em grupos familiares barulhentos que caçam peixes juntos em rios e lagos."
+      },
+      "photo": {
+        "file": "ariranha.webp",
+        "license": "CC-BY",
+        "credit": "avocat",
+        "sourceUrl": "https://www.inaturalist.org/observations/8049516"
+      },
+      "source": {
+        "inatTaxonId": 41845,
+        "gbifTaxonKey": 2433681,
+        "observations": 24
+      }
+    },
+    {
+      "id": "macaco-prego-castanho",
+      "scientificName": "Sapajus apella",
+      "type": "animal",
+      "rarity": "epic",
+      "archetype": "primate",
+      "names": {
+        "en": "Brown Capuchin",
+        "pt-BR": "Macaco-prego-castanho"
+      },
+      "descriptions": {
+        "en": "A clever capuchin that cracks hard nuts and fruits by banging them against branches.",
+        "pt-BR": "Macaco-prego esperto que quebra cocos e frutos duros batendo-os contra os galhos."
+      },
+      "photo": {
+        "file": "macaco-prego-castanho.webp",
+        "license": "CC-BY",
+        "credit": "agujaceratops",
+        "sourceUrl": "https://www.inaturalist.org/observations/232004156"
+      },
+      "source": {
+        "inatTaxonId": 496700,
+        "gbifTaxonKey": 7477334,
+        "observations": 21
+      }
+    },
+    {
+      "id": "vitoria-regia",
+      "scientificName": "Victoria amazonica",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Amazon Giant Waterlily",
+        "pt-BR": "Vitória-régia"
+      },
+      "descriptions": {
+        "en": "A giant water lily whose round floating leaves can grow wider than a person is tall; its flowers open white at night and turn pink the next.",
+        "pt-BR": "Planta aquática gigante cujas folhas redondas e flutuantes passam da altura de uma pessoa; a flor abre branca à noite e fica rosa na seguinte."
+      },
+      "photo": {
+        "file": "vitoria-regia.webp",
+        "license": "CC0",
+        "credit": "David Bird",
+        "sourceUrl": "https://www.inaturalist.org/observations/42986245"
+      },
+      "source": {
+        "inatTaxonId": 179027,
+        "gbifTaxonKey": 5553148,
+        "observations": 32
+      }
+    },
+    {
+      "id": "buriti",
+      "scientificName": "Mauritia flexuosa",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "palm",
+      "names": {
+        "en": "Moriche Palm",
+        "pt-BR": "Buriti"
+      },
+      "descriptions": {
+        "en": "A tall palm that grows in wet ground and swamps, where its scaly reddish fruits feed macaws, tapirs and people alike.",
+        "pt-BR": "Palmeira alta de áreas alagadas e veredas, cujos frutos escamosos e avermelhados alimentam araras, antas e pessoas."
+      },
+      "photo": {
+        "file": "buriti.webp",
+        "license": "CC-BY",
+        "credit": "Lucas Kaminski",
+        "sourceUrl": "https://www.inaturalist.org/observations/186416037"
+      },
+      "source": {
+        "inatTaxonId": 154979,
+        "gbifTaxonKey": 5294777,
+        "observations": 24
+      }
+    },
+    {
+      "id": "aguape",
+      "scientificName": "Pontederia crassipes",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Water Hyacinth",
+        "pt-BR": "Aguapé"
+      },
+      "descriptions": {
+        "en": "A floating plant with swollen leaf stalks that act as buoys; its lilac flowers carpet calm rivers and lagoons.",
+        "pt-BR": "Planta flutuante com pecíolos inchados que funcionam como boias; suas flores lilás cobrem rios e lagoas de águas calmas."
+      },
+      "photo": {
+        "file": "aguape.webp",
+        "license": "CC-BY",
+        "credit": "Donald Davesne",
+        "sourceUrl": "https://www.inaturalist.org/observations/336572847"
+      },
+      "source": {
+        "inatTaxonId": 962637,
+        "gbifTaxonKey": 2765942,
+        "observations": 20
+      }
+    },
+    {
+      "id": "palicourea-tomentosa",
+      "scientificName": "Palicourea tomentosa",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Hot Lips",
+        "pt-BR": "Palicourea tomentosa"
+      },
+      "descriptions": {
+        "en": "An understory shrub famous for its bright red bracts shaped like a pair of lips, which draw hummingbirds to the small flowers inside.",
+        "pt-BR": "Arbusto do sub-bosque famoso pelas brácteas vermelhas em forma de lábios, que atraem beija-flores para as pequenas flores do meio."
+      },
+      "photo": {
+        "file": "palicourea-tomentosa.webp",
+        "license": "CC-BY",
+        "credit": "Fernando Bondan",
+        "sourceUrl": "https://www.inaturalist.org/observations/329507270"
+      },
+      "source": {
+        "inatTaxonId": 1145089,
+        "gbifTaxonKey": 7866160,
+        "observations": 13
+      }
+    },
+    {
+      "id": "solanum-stramoniifolium",
+      "scientificName": "Solanum stramoniifolium",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Coconilla",
+        "pt-BR": "Solanum stramoniifolium"
+      },
+      "descriptions": {
+        "en": "A prickly shrub of clearings and riverbanks with white star-shaped flowers and small orange fruits.",
+        "pt-BR": "Arbusto espinhento de clareiras e beiras de rio, com flores brancas em forma de estrela e frutinhos alaranjados."
+      },
+      "photo": {
+        "file": "solanum-stramoniifolium.webp",
+        "license": "CC-BY",
+        "credit": "Diogo Luiz",
+        "sourceUrl": "https://www.inaturalist.org/observations/106696423"
+      },
+      "source": {
+        "inatTaxonId": 135252,
+        "gbifTaxonKey": 2928997,
+        "observations": 12
+      }
+    },
+    {
+      "id": "philodendron-hopkinsianum",
+      "scientificName": "Philodendron hopkinsianum",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Philodendron hopkinsianum",
+        "pt-BR": "Philodendron hopkinsianum"
+      },
+      "descriptions": {
+        "en": "A climbing philodendron of the Amazon forest that clings to tree trunks with its roots.",
+        "pt-BR": "Filodendro trepador da floresta amazônica que se prende aos troncos das árvores com suas raízes."
+      },
+      "photo": {
+        "file": "philodendron-hopkinsianum.webp",
+        "license": "CC-BY",
+        "credit": "Diogo Luiz",
+        "sourceUrl": "https://www.inaturalist.org/observations/106570372"
+      },
+      "source": {
+        "inatTaxonId": 570515,
+        "gbifTaxonKey": 2870710,
+        "observations": 11
+      }
+    },
+    {
+      "id": "cacaui",
+      "scientificName": "Theobroma speciosum",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "broadleaf-tree",
+      "names": {
+        "en": "Cacaui",
+        "pt-BR": "Cacauí"
+      },
+      "descriptions": {
+        "en": "A wild relative of cacao whose red flowers grow in clusters straight from the trunk.",
+        "pt-BR": "Parente silvestre do cacau cujas flores vermelhas nascem em cachos direto do tronco."
+      },
+      "photo": {
+        "file": "cacaui.webp",
+        "license": "CC-BY",
+        "credit": "Márcia Martins",
+        "sourceUrl": "https://www.inaturalist.org/observations/191197761"
+      },
+      "source": {
+        "inatTaxonId": 563926,
+        "gbifTaxonKey": 7657303,
+        "observations": 11
+      }
+    },
+    {
+      "id": "erva-de-touro",
+      "scientificName": "Tridax procumbens",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Tridax Daisy",
+        "pt-BR": "Erva-de-touro"
+      },
+      "descriptions": {
+        "en": "A low, hairy daisy with cream flower heads on long stalks, common along paths and in open sunny ground.",
+        "pt-BR": "Pequena margarida rasteira e peluda, de flores creme em hastes longas, comum em beiras de caminho e terrenos abertos."
+      },
+      "photo": {
+        "file": "erva-de-touro.webp",
+        "license": "CC0",
+        "credit": "Whaldener Endo",
+        "sourceUrl": "https://www.inaturalist.org/observations/125174512"
+      },
+      "source": {
+        "inatTaxonId": 169944,
+        "gbifTaxonKey": 3149462,
+        "observations": 11
+      }
+    },
+    {
+      "id": "xanana",
+      "scientificName": "Turnera subulata",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "shrub",
+      "names": {
+        "en": "Cuban Buttercup",
+        "pt-BR": "Xanana"
+      },
+      "descriptions": {
+        "en": "A small shrub whose cream flowers with a dark centre open in the morning and close by midday.",
+        "pt-BR": "Pequeno arbusto de flores creme com centro escuro, que abrem pela manhã e se fecham perto do meio-dia."
+      },
+      "photo": {
+        "file": "xanana.webp",
+        "license": "CC-BY",
+        "credit": "Breno Figueiredo",
+        "sourceUrl": "https://www.inaturalist.org/observations/288876582"
+      },
+      "source": {
+        "inatTaxonId": 327909,
+        "gbifTaxonKey": 4161154,
+        "observations": 11
+      }
+    },
+    {
+      "id": "caju",
+      "scientificName": "Anacardium occidentale",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "broadleaf-tree",
+      "names": {
+        "en": "Cashew",
+        "pt-BR": "Caju"
+      },
+      "descriptions": {
+        "en": "The cashew tree: the juicy \"fruit\" is a swollen stalk, and the real fruit is the kidney-shaped nut hanging below it.",
+        "pt-BR": "O cajueiro: a parte suculenta é um pedúnculo inchado, e o fruto verdadeiro é a castanha em forma de rim pendurada embaixo."
+      },
+      "photo": {
+        "file": "caju.webp",
+        "license": "CC-BY",
+        "credit": "portioid",
+        "sourceUrl": "https://www.inaturalist.org/observations/332318408"
+      },
+      "source": {
+        "inatTaxonId": 122988,
+        "gbifTaxonKey": 5421368,
+        "observations": 10
+      }
+    },
+    {
+      "id": "acai",
+      "scientificName": "Euterpe oleracea",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "palm",
+      "names": {
+        "en": "Açaí Palm",
+        "pt-BR": "Açaí"
+      },
+      "descriptions": {
+        "en": "A slender, clump-forming palm of flooded forests whose dark purple berries become the famous açaí pulp.",
+        "pt-BR": "Palmeira fina que cresce em touceiras nas matas de várzea; seus frutos roxo-escuros viram a famosa polpa de açaí."
+      },
+      "photo": {
+        "file": "acai.webp",
+        "license": "CC-BY",
+        "credit": "Lucas Kaminski",
+        "sourceUrl": "https://www.inaturalist.org/observations/186415829"
+      },
+      "source": {
+        "inatTaxonId": 365244,
+        "gbifTaxonKey": 5293398,
+        "observations": 10
+      }
+    },
+    {
+      "id": "imbauba-branca",
+      "scientificName": "Cecropia concolor",
+      "type": "plant",
+      "rarity": "common",
+      "archetype": "pioneer-tree",
+      "names": {
+        "en": "Imbaúba-branca",
+        "pt-BR": "Imbaúba-branca"
+      },
+      "descriptions": {
+        "en": "An Amazonian embaúba with huge hand-shaped leaves that quickly fills gaps left by fallen trees.",
+        "pt-BR": "Embaúba amazônica de folhas enormes em forma de mão que ocupa depressa as clareiras abertas pela queda de árvores."
+      },
+      "photo": {
+        "file": "imbauba-branca.webp",
+        "license": "CC-BY",
+        "credit": "Emerson Neves Batista",
+        "sourceUrl": "https://www.inaturalist.org/observations/347084002"
+      },
+      "source": {
+        "inatTaxonId": 840117,
+        "gbifTaxonKey": 7316398,
+        "observations": 9
+      }
+    },
+    {
+      "id": "imbauba-verde",
+      "scientificName": "Cecropia membranacea",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "pioneer-tree",
+      "names": {
+        "en": "Imbaúba-verde",
+        "pt-BR": "Imbaúba-verde"
+      },
+      "descriptions": {
+        "en": "A fast-growing pioneer of riverbanks and clearings, with huge hand-shaped leaves and hollow stems often home to ants.",
+        "pt-BR": "Pioneira de crescimento rápido em margens de rio e clareiras, com folhas enormes em forma de mão e caule oco, muitas vezes habitado por formigas."
+      },
+      "photo": {
+        "file": "imbauba-verde.webp",
+        "license": "CC-BY",
+        "credit": "Diogo Luiz",
+        "sourceUrl": "https://www.inaturalist.org/observations/106696363"
+      },
+      "source": {
+        "inatTaxonId": 705529,
+        "gbifTaxonKey": 4013609,
+        "observations": 9
+      }
+    },
+    {
+      "id": "mafumeira",
+      "scientificName": "Ceiba pentandra",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "emergent-tree",
+      "names": {
+        "en": "Kapok Tree",
+        "pt-BR": "Mafumeira"
+      },
+      "descriptions": {
+        "en": "A giant with buttressed roots that rises above the canopy; its pods release seeds wrapped in silky fibre.",
+        "pt-BR": "Gigante de raízes tabulares que se ergue acima da copa da floresta; seus frutos liberam sementes envoltas em uma paina sedosa."
+      },
+      "photo": {
+        "file": "mafumeira.webp",
+        "license": "CC0",
+        "credit": "Whaldener Endo",
+        "sourceUrl": "https://www.inaturalist.org/observations/121164928"
+      },
+      "source": {
+        "inatTaxonId": 62809,
+        "gbifTaxonKey": 5406697,
+        "observations": 9
+      }
+    },
+    {
+      "id": "heliconia-acuminata",
+      "scientificName": "Heliconia acuminata",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "False Bird-of-paradise",
+        "pt-BR": "Heliconia acuminata"
+      },
+      "descriptions": {
+        "en": "A small heliconia of the Amazon understory whose colourful bracts shelter flowers visited by hummingbirds.",
+        "pt-BR": "Pequena helicônia do sub-bosque amazônico, cujas brácteas coloridas abrigam flores visitadas por beija-flores."
+      },
+      "photo": {
+        "file": "heliconia-acuminata.webp",
+        "license": "CC-BY",
+        "credit": "Enrique Salazar",
+        "sourceUrl": "https://www.inaturalist.org/observations/159638231"
+      },
+      "source": {
+        "inatTaxonId": 84963,
+        "gbifTaxonKey": 2760947,
+        "observations": 9
+      }
+    },
+    {
+      "id": "urupe",
+      "scientificName": "Helosis cayennensis",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "Spike-of-dragon",
+        "pt-BR": "Urupé"
+      },
+      "descriptions": {
+        "en": "A parasitic plant with no green leaves that lives on tree roots and only shows itself as small red, club-shaped flower heads on the forest floor.",
+        "pt-BR": "Planta parasita sem folhas verdes que vive nas raízes das árvores e só aparece como pequenas inflorescências vermelhas em forma de clava no chão da mata."
+      },
+      "photo": {
+        "file": "urupe.webp",
+        "license": "CC-BY",
+        "credit": "Enrique Salazar",
+        "sourceUrl": "https://www.inaturalist.org/observations/346855823"
+      },
+      "source": {
+        "inatTaxonId": 277623,
+        "gbifTaxonKey": 2889925,
+        "observations": 9
+      }
+    },
+    {
+      "id": "pixirica",
+      "scientificName": "Miconia crenata",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "Soapbush",
+        "pt-BR": "Pixirica"
+      },
+      "descriptions": {
+        "en": "A hairy shrub of disturbed ground with deeply veined leaves and small blue-black berries eaten by birds.",
+        "pt-BR": "Arbusto peludo de áreas abertas, com folhas de nervuras marcadas e pequenos frutos negro-azulados comidos por aves."
+      },
+      "photo": {
+        "file": "pixirica.webp",
+        "license": "CC-BY",
+        "credit": "Diogo Luiz",
+        "sourceUrl": "https://www.inaturalist.org/observations/331480972"
+      },
+      "source": {
+        "inatTaxonId": 1293231,
+        "gbifTaxonKey": 9404220,
+        "observations": 9
+      }
+    },
+    {
+      "id": "passiflora-glandulosa",
+      "scientificName": "Passiflora glandulosa",
+      "type": "plant",
+      "rarity": "rare",
+      "archetype": "shrub",
+      "names": {
+        "en": "Passiflora glandulosa",
+        "pt-BR": "Passiflora glandulosa"
+      },
+      "descriptions": {
+        "en": "A climbing passionflower with bright red flowers pollinated by hummingbirds.",
+        "pt-BR": "Maracujá trepador de flores vermelho-vivas polinizadas por beija-flores."
+      },
+      "photo": {
+        "file": "passiflora-glandulosa.webp",
+        "license": "CC-BY",
+        "credit": "Jean Jacques Godon",
+        "sourceUrl": "https://www.inaturalist.org/observations/194357392"
+      },
+      "source": {
+        "inatTaxonId": 541884,
+        "gbifTaxonKey": 7313343,
+        "observations": 9
+      }
+    },
+    {
+      "id": "pupunheira",
+      "scientificName": "Bactris gasipaes",
+      "type": "plant",
+      "rarity": "epic",
+      "archetype": "palm",
+      "names": {
+        "en": "Peach Palm",
+        "pt-BR": "Pupunheira"
+      },
+      "descriptions": {
+        "en": "A spiny palm domesticated by Amazonian peoples thousands of years ago for its starchy orange fruit and its palm heart.",
+        "pt-BR": "Palmeira espinhosa domesticada por povos amazônicos há milhares de anos pelos frutos alaranjados e pelo palmito."
+      },
+      "photo": {
+        "file": "pupunheira.webp",
+        "license": "CC-BY",
+        "credit": "Marcio Santos Ferreira",
+        "sourceUrl": "https://www.inaturalist.org/observations/341189810"
+      },
+      "source": {
+        "inatTaxonId": 85315,
+        "gbifTaxonKey": 2733060,
+        "observations": 8
+      }
+    },
+    {
+      "id": "urucum",
+      "scientificName": "Bixa orellana",
+      "type": "plant",
+      "rarity": "epic",
+      "archetype": "shrub",
+      "names": {
+        "en": "Annatto",
+        "pt-BR": "Urucum"
+      },
+      "descriptions": {
+        "en": "A shrub with spiky red pods full of seeds coated in a bright red dye, used as body paint and as a food colouring.",
+        "pt-BR": "Arbusto de frutos vermelhos e espinhentos cheios de sementes cobertas por um corante vermelho, usado como pintura corporal e como colorau."
+      },
+      "photo": {
+        "file": "urucum.webp",
+        "license": "CC-BY",
+        "credit": "Riccardo Rocca",
+        "sourceUrl": "https://www.inaturalist.org/observations/135968606"
+      },
+      "source": {
+        "inatTaxonId": 127676,
+        "gbifTaxonKey": 2874863,
+        "observations": 8
+      }
+    }
+  ]
+}

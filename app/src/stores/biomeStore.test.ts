@@ -13,6 +13,8 @@ const mocks = vi.hoisted(() => ({
   getApproximatePosition: vi.fn(),
   loadEcoregionGrid: vi.fn().mockResolvedValue({}),
   biomeAt: vi.fn(),
+  // Every Biome has a catalog now; tests add one here to cover a Biome whose species are still coming.
+  comingSoon: new Set<string>(),
 }))
 vi.mock('../data/settingsRepo', () => ({
   getHomeBiome: mocks.getHomeBiome,
@@ -30,6 +32,13 @@ vi.mock('../data/dailyProgressRepo', () => ({ countStepGoalDaysMet: mocks.countS
 vi.mock('../data/location', () => ({ getApproximatePosition: mocks.getApproximatePosition }))
 vi.mock('../data/ecoregionGrid', () => ({ loadEcoregionGrid: mocks.loadEcoregionGrid }))
 vi.mock('../domain/biomeLookup', () => ({ biomeAt: mocks.biomeAt }))
+vi.mock('../domain/biome', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../domain/biome')>()
+  return {
+    ...actual,
+    hasCatalog: (biome: Parameters<typeof actual.hasCatalog>[0]) => !mocks.comingSoon.has(biome) && actual.hasCatalog(biome),
+  }
+})
 
 import { NEIGHBOUR_UNLOCK_COST } from '../domain/biome'
 import { activeBiome, selectBiomeProgress, useBiomeStore } from './biomeStore'
@@ -61,6 +70,7 @@ async function loadWith({
 describe('biomeStore', () => {
   beforeEach(() => {
     vi.clearAllMocks()
+    mocks.comingSoon.clear()
     useBiomeStore.setState({ homeBiome: null, homeSource: 'picked', currentBiome: null, purchased: [], earned: 0, spent: 0, loaded: false })
   })
 
@@ -115,6 +125,7 @@ describe('biomeStore', () => {
       mocks.biomeAt.mockReturnValue('unsupported')
       expect(await useBiomeStore.getState().detectHome()).toEqual({ outcome: 'unsupported' })
 
+      mocks.comingSoon.add('cerrado')
       mocks.biomeAt.mockReturnValue('cerrado')
       expect(await useBiomeStore.getState().detectHome()).toEqual({ outcome: 'coming-soon', biome: 'cerrado' })
 
@@ -168,6 +179,7 @@ describe('biomeStore', () => {
     })
 
     it('does not keep a picked home unlocked once replaced (coming-soon user in Brasília)', async () => {
+      mocks.comingSoon.add('cerrado')
       mocks.getApproximatePosition.mockResolvedValue({ lat: -15.8, lng: -47.9 })
       mocks.biomeAt.mockReturnValue('cerrado')
       await loadWith({ home: null })
@@ -196,6 +208,7 @@ describe('biomeStore', () => {
     })
 
     it('ignores biomes without a catalog', async () => {
+      mocks.comingSoon.add('pampa')
       await useBiomeStore.getState().setHome('pampa')
       expect(mocks.setHomeBiome).not.toHaveBeenCalled()
     })
