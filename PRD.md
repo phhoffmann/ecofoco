@@ -38,18 +38,24 @@ Personal use by the creator. Validate the mechanic before thinking about externa
 
 ### 4.4 Species catalog
 - Static list of species (plants and animals), built from **GBIF** data (filtering to CC0/CC-BY licenses only, compatible with future commercial use).
-- Every species is tagged with a **biome** from day one (e.g. Cerrado, Atlantic Forest, Caatinga), even though the MVP doesn't filter by biome yet.
+- Every species is tagged with a **biome** (e.g. Cerrado, Atlantic Forest, Caatinga). Brazil's catalog is bundled in the app; v1 ships Atlantic Forest and Caatinga, the other IBGE biomes show as "coming soon".
 
-### 4.5 Settings
+### 4.5 Biomes
+- The home biome comes from the user's location: coarse location only, asked once at onboarding (plus a re-detect action in Settings), looked up in a bundled grid built from RESOLVE Ecoregions 2017. Only the biome id is stored, never coordinates. A manual picker is the fallback (permission denied, no fix, or a biome without species yet).
+- Focus rewards, step-goal Draws and manual sightings come from the **current** biome.
+- Completed focus sessions and met step goals earn points; points unlock **neighbouring** biomes (no travel needed). The user can switch only to an unlocked biome.
+
+### 4.6 Settings
 - Notifications **off by default**, with an option to enable them (structure in place, no real notifications implemented in the MVP).
 - Language selector: English or Portuguese (Brazil), applied to both UI chrome and species names/descriptions.
 - Daily step goal is editable (default 6,000, adjustable in increments of 500).
+- Biome: current biome, point balance, unlocking neighbours, switching, and re-detecting the home biome.
 
 ## 5. Out of scope (v1, but mapped for later)
 
 | Feature | Reason to defer |
 |---|---|
-| User-switchable biome (e.g. moved to a new city) | Needs a mature multi-biome catalog first |
+| Biomes beyond Atlantic Forest and Caatinga, and outside Brazil | v1 proves location-based biomes with two catalogs; the rest need the full catalog pipeline |
 | Real species recognition via photo (AI) | Depends on the backend; uses the iNaturalist Computer Vision API. Open to both plants and animals from the start; the entry created must match the real identified species, never a random Draw |
 | Own backend (Node/NestJS + Prisma + PostgreSQL) | MVP runs 100% locally; backend comes once the app is validated (also doubles as a fullstack portfolio piece) |
 | Real notifications (reminders, celebrations) | Reduce MVP technical scope |

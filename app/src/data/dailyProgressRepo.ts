@@ -36,3 +36,9 @@ export async function markDrawCompleted(): Promise<void> {
   const db = await getDb()
   await db.run('UPDATE daily_progress SET drawCompleted = 1 WHERE date = ?', [todayKey()])
 }
+
+export async function countStepGoalDaysMet(): Promise<number> {
+  const db = await getDb()
+  const res = await db.query('SELECT COUNT(*) AS count FROM daily_progress WHERE goalMet = 1')
+  return Number(res.values?.[0]?.count ?? 0)
+}

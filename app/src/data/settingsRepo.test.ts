@@ -5,9 +5,13 @@ vi.mock('./db', () => ({ getDb: () => Promise.resolve(mockDb) }))
 
 import {
   getCollectionView,
+  getCurrentBiome,
+  getHomeBiome,
+  getHomeBiomeSource,
   getNotificationsEnabled,
   getStepGoal,
   setCollectionView,
+  setHomeBiome,
   setNotificationsEnabled,
   setStepGoal,
 } from './settingsRepo'
@@ -77,5 +81,36 @@ describe('settingsRepo', () => {
       'collectionView',
       'isometric',
     ])
+  })
+
+  it('getHomeBiome is null until onboarding stores one', async () => {
+    mockDb.query.mockResolvedValue({ values: [] })
+    expect(await getHomeBiome()).toBeNull()
+  })
+
+  it('getHomeBiome and getCurrentBiome ignore unknown biome ids', async () => {
+    mockDb.query.mockResolvedValue({ values: [{ value: 'tundra' }] })
+    expect(await getHomeBiome()).toBeNull()
+    expect(await getCurrentBiome()).toBeNull()
+  })
+
+  it('getCurrentBiome reflects a stored biome id', async () => {
+    mockDb.query.mockResolvedValue({ values: [{ value: 'caatinga' }] })
+    expect(await getCurrentBiome()).toBe('caatinga')
+  })
+
+  it('setHomeBiome persists only the biome id and how it was set', async () => {
+    await setHomeBiome('caatinga', 'detected')
+    expect(mockDb.run.mock.calls.map(([, params]) => params)).toEqual([
+      ['homeBiome', 'caatinga'],
+      ['homeBiomeSource', 'detected'],
+    ])
+  })
+
+  it('getHomeBiomeSource counts a missing or unknown source as picked', async () => {
+    mockDb.query.mockResolvedValue({ values: [] })
+    expect(await getHomeBiomeSource()).toBe('picked')
+    mockDb.query.mockResolvedValue({ values: [{ value: 'detected' }] })
+    expect(await getHomeBiomeSource()).toBe('detected')
   })
 })

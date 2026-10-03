@@ -40,6 +40,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- Biome detection only needs the city-level fix. Declaring coarse alone makes
+         @capacitor/geolocation request coarse only; strip fine if any dependency adds it. -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" tools:node="remove" />
+
     <!-- @capgo/capacitor-health declares READ+WRITE for every Health Connect type.
          EcoFoco only reads steps (and writes steps for the dev step simulator). -->
     <uses-permission android:name="android.permission.health.READ_DISTANCE" tools:node="remove" />

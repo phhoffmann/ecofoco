@@ -12,6 +12,7 @@ import { canDraw } from '../domain/dailyProgress'
 import { pickRandomSpecies } from '../domain/draw'
 import type { Species } from '../domain/species'
 import type { DailyProgress } from '../domain/types'
+import { activeBiome } from './biomeStore'
 import { useCelebrationStore } from './celebrationStore'
 import { useSettingsStore } from './settingsStore'
 
@@ -71,7 +72,7 @@ export const useDailyProgressStore = create<DailyProgressState>((set, get) => ({
   draw: async () => {
     const { progress } = get()
     if (!canDraw(progress)) return
-    const species = pickRandomSpecies('animal')
+    const species = pickRandomSpecies('animal', activeBiome())
     await addCollectedEntry(species.id, 'draw')
     await markDrawCompleted()
     const updated = await getTodayProgress()

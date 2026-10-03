@@ -5,6 +5,8 @@ import { defineConfig } from 'vitest/config'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  // The bundled biome lookup grid (src/assets/biomes) is binary.
+  assetsInclude: ['**/*.bin'],
   test: {
     environment: 'jsdom',
   },

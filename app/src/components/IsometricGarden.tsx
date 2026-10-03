@@ -1,8 +1,10 @@
 import { useMemo, useState, type MouseEvent } from 'react'
 import { useTranslation } from 'react-i18next'
+import type { BiomeId } from '../domain/biome'
 import { depthSort, pickTile, placeOnPlot, tileCenter, tileNoise, tileToScreen, type TilePos } from '../domain/iso'
 import { SPECIES_CATALOG, type Species } from '../domain/species'
 import type { CollectedEntry } from '../domain/types'
+import { BIOME_GROUND } from './biomeGround'
 import { ARCHETYPE_SPRITES, GRASS_SPRITE, type GardenSprite } from './gardenSprites'
 
 // Scene geometry in logical units. The scene scales to its container width, so everything is
@@ -32,12 +34,15 @@ interface SceneSprite extends TilePos {
 interface IsometricGardenProps {
   /** Entries to show, already scoped to a period. */
   entries: CollectedEntry[]
+  /** Tints the ground. */
+  biome: BiomeId
   onSelectSpecies: (speciesId: string) => void
 }
 
-export function IsometricGarden({ entries, onSelectSpecies }: IsometricGardenProps) {
+export function IsometricGarden({ entries, biome, onSelectSpecies }: IsometricGardenProps) {
   const { t } = useTranslation()
   const [poppedKey, setPoppedKey] = useState<string | null>(null)
+  const ground = BIOME_GROUND[biome]
 
   const layout = useMemo(() => {
     const items = [...entries]
@@ -118,10 +123,10 @@ export function IsometricGarden({ entries, onSelectSpecies }: IsometricGardenPro
             fill="black"
             opacity={0.3}
           />
-          <polygon points={face(left, bottom, SOIL_DEPTH)} fill="#8b5a2b" />
-          <polygon points={face(bottom, right, SOIL_DEPTH)} fill="#6e4421" />
-          <polygon points={face(left, bottom, GRASS_LIP)} fill="#3fae80" />
-          <polygon points={face(bottom, right, GRASS_LIP)} fill="#34996f" />
+          <polygon points={face(left, bottom, SOIL_DEPTH)} fill={ground.soil[0]} />
+          <polygon points={face(bottom, right, SOIL_DEPTH)} fill={ground.soil[1]} />
+          <polygon points={face(left, bottom, GRASS_LIP)} fill={ground.lip[0]} />
+          <polygon points={face(bottom, right, GRASS_LIP)} fill={ground.lip[1]} />
           {Array.from({ length: size * size }, (_, i) => {
             const pos = { col: i % size, row: Math.floor(i / size) }
             const top = tileToScreen(pos, TILE)
@@ -131,7 +136,7 @@ export function IsometricGarden({ entries, onSelectSpecies }: IsometricGardenPro
               at(top.x, top.y + TILE.height),
               at(top.x - TILE.width / 2, top.y + TILE.height / 2),
             ].join(' ')
-            return <polygon key={i} points={points} fill={(pos.col + pos.row) % 2 ? '#5cc995' : '#66d39e'} />
+            return <polygon key={i} points={points} fill={ground.tile[(pos.col + pos.row) % 2]} />
           })}
         </svg>
 

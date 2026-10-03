@@ -81,3 +81,6 @@ jobs:
 
       - name: Check health permissions
         run: python3 ../.github/scripts/check-health-permissions.py "../${{ steps.manifest.outputs.path }}"
+
+      - name: Check location permissions
+        run: python3 ../.github/scripts/check-location-permissions.py "../${{ steps.manifest.outputs.path }}"

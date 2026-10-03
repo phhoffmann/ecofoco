@@ -2,6 +2,7 @@ import { act } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import '../i18n'
+import { useBiomeStore } from '../stores/biomeStore'
 import { useSettingsStore } from '../stores/settingsStore'
 import { SettingsScreen } from './SettingsScreen'
 
@@ -18,6 +19,7 @@ describe('SettingsScreen', () => {
 
   beforeEach(() => {
     useSettingsStore.setState({ loaded: true, load: vi.fn().mockResolvedValue(undefined) })
+    useBiomeStore.setState({ load: vi.fn().mockResolvedValue(undefined) })
     container = document.createElement('div')
     document.body.appendChild(container)
     root = createRoot(container)

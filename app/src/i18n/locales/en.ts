@@ -15,7 +15,26 @@ export const en = {
     animal: 'Animal',
   },
   biome: {
+    amazon: 'Amazon',
     'atlantic-forest': 'Atlantic Forest',
+    caatinga: 'Caatinga',
+    cerrado: 'Cerrado',
+    pantanal: 'Pantanal',
+    pampa: 'Pampa',
+  },
+  biomeSetup: {
+    title: 'Where do you live?',
+    subtitle:
+      'EcoFoco grows the plants and animals of your biome. Your approximate location finds it — only the biome is saved, never where you are.',
+    useLocation: 'Use my approximate location',
+    detecting: 'Finding your biome…',
+    pick: 'Or choose your biome',
+    result: {
+      detected: 'Home biome: {{biome}}.',
+      'coming-soon': 'Your biome is {{biome}}, and its species are coming soon. Choose a biome to start with:',
+      unsupported: "Your location isn't in a supported biome yet. Choose one:",
+      unavailable: "Couldn't get your location. Choose your biome:",
+    },
   },
   nav: {
     focus: 'Focus',
@@ -81,6 +100,25 @@ export const en = {
     stepGoal: 'Daily step goal',
     stepGoalHint: 'Steps needed to unlock the daily animal draw',
     stepGoalValue: '{{count}} steps',
+    biome: {
+      title: 'Biome',
+      hint: 'Rewards come from your current biome. Earn points to unlock neighbouring biomes.',
+      points_one: '{{count}} point',
+      points_other: '{{count}} points',
+      pointsHint: '+{{session}} per focus session, +{{goal}} per step goal met. A neighbour costs {{cost}}.',
+      home: 'Home',
+      current: 'Current',
+      switch: 'Switch',
+      unlock: 'Unlock · {{cost}}',
+      locked: 'Locked',
+      comingSoon: 'Coming soon',
+      redetect: 'Re-detect from location',
+      redetectUnavailable: "Couldn't get your location. Your home biome is unchanged.",
+    },
+    credits: {
+      title: 'Credits',
+      biomeMap: 'Biome map: RESOLVE Ecoregions 2017 (Dinerstein et al.), CC-BY 4.0',
+    },
   },
   celebration: {
     title: 'You collected!',
@@ -197,6 +235,106 @@ export const en = {
       name: 'Brazilian Guinea Pig',
       description:
         'A wild relative of the guinea pig, living in grassy areas in small family groups and mostly active at dawn and dusk.',
+    },
+    mandacaru: {
+      name: 'Mandacaru Cactus',
+      description:
+        'A towering columnar cactus and symbol of the sertão; people say that when it blooms, rain is on the way.',
+    },
+    'xique-xique': {
+      name: 'Xique-xique Cactus',
+      description:
+        'A spiny cactus that sprawls over bare rock; in long droughts its spines are singed off so cattle can eat the stems.',
+    },
+    'jurema-preta': {
+      name: 'Black Jurema',
+      description:
+        'A thorny pioneer shrub, among the first to reclaim degraded Caatinga and enrich poor soil with nitrogen.',
+    },
+    catingueira: {
+      name: 'Catingueira',
+      description:
+        'One of the most common Caatinga trees, with strong-smelling leaves that sprout within days of the first rain.',
+    },
+    facheiro: {
+      name: 'Facheiro Cactus',
+      description:
+        'A tall, bluish candelabra cactus whose woolly tips open night flowers pollinated by bats.',
+    },
+    'coroa-de-frade': {
+      name: "Turk's Cap Cactus",
+      description:
+        'A small globe cactus crowned by a red, woolly cap where its flowers and fruits appear.',
+    },
+    faveleira: {
+      name: 'Faveleira',
+      description:
+        'A drought-hardy tree covered in stinging hairs; its oil-rich seeds feed people and wildlife in the sertão.',
+    },
+    craibeira: {
+      name: 'Silver Trumpet Tree',
+      description:
+        'Lines the dry riverbeds of the sertão and lights them up with golden flowers in the dry season.',
+    },
+    mulungu: {
+      name: 'Mulungu Coral Tree',
+      description:
+        'Bursts into coral-red flowers on bare branches in the dry season, drawing hummingbirds and parakeets.',
+    },
+    barriguda: {
+      name: 'Bottle Tree',
+      description:
+        'A kapok relative with a swollen, water-storing trunk that carries it through months without rain.',
+    },
+    'asa-branca': {
+      name: 'Picazuro Pigeon',
+      description:
+        "The bird of Luiz Gonzaga's famous song; its flocks leave the sertão in droughts and return with the rains.",
+    },
+    carcara: {
+      name: 'Southern Crested Caracara',
+      description:
+        'A bold, opportunistic falcon that walks the ground as often as it flies, eating anything from carrion to insects.',
+    },
+    'galo-de-campina': {
+      name: 'Red-cowled Cardinal',
+      description:
+        'A Northeast Brazil endemic with a bright red head, usually seen in pairs in open scrub.',
+    },
+    'sagui-de-tufo-branco': {
+      name: 'Common Marmoset',
+      description:
+        'A small marmoset with white ear tufts that gnaws tree bark to feed on gum, native to the Northeast.',
+    },
+    calango: {
+      name: "Peters' Lava Lizard",
+      description:
+        'The lizard basking on every rock and wall of the sertão, bobbing its head to warn off rivals.',
+    },
+    moco: {
+      name: 'Rock Cavy',
+      description:
+        'A rodent found only in the Caatinga, living among rocky outcrops and climbing trees with surprising agility.',
+    },
+    'cachorro-do-mato': {
+      name: 'Crab-eating Fox',
+      description:
+        'A mostly nocturnal wild canid that eats fruit, insects and small animals, often hunting in pairs.',
+    },
+    'periquito-da-caatinga': {
+      name: 'Cactus Parakeet',
+      description:
+        'A noisy green parakeet of the Caatinga that feeds on cactus fruit and seeds.',
+    },
+    'arara-azul-de-lear': {
+      name: "Lear's Macaw",
+      description:
+        'An endangered indigo macaw found only in northern Bahia, nesting in sandstone cliffs and feeding on licuri palm nuts.',
+    },
+    'tatu-bola': {
+      name: 'Brazilian Three-banded Armadillo',
+      description:
+        'The only armadillo that rolls into a perfect ball; found only in Brazil and the mascot of the 2014 World Cup.',
     },
   },
 }

@@ -5,6 +5,7 @@ import { ManualSightingModal } from '../components/ManualSightingModal'
 import { SpeciesDetailSheet } from '../components/SpeciesDetailSheet'
 import { SPECIES_CATALOG, collectedCatalogSpeciesIds } from '../domain/species'
 import type { CollectionView } from '../domain/types'
+import { useActiveBiome } from '../stores/biomeStore'
 import { useCollectionStore } from '../stores/collectionStore'
 import { useSettingsStore } from '../stores/settingsStore'
 
@@ -22,7 +23,9 @@ export function CollectionScreen() {
     void refresh()
   }, [refresh])
 
-  const collectedSpeciesIds = collectedCatalogSpeciesIds(entries)
+  const biome = useActiveBiome()
+  const biomeSpecies = SPECIES_CATALOG.filter((s) => s.biome.includes(biome))
+  const collectedSpeciesIds = collectedCatalogSpeciesIds(entries, biomeSpecies)
   const selectedSpecies = SPECIES_CATALOG.find((s) => s.id === selectedSpeciesId) ?? null
 
   return (
@@ -43,9 +46,12 @@ export function CollectionScreen() {
       </div>
 
       <div className="mb-4 flex items-center justify-between">
-        <p className="text-emerald-200">
-          {t('collection.discovered', { count: collectedSpeciesIds.size, total: SPECIES_CATALOG.length })}
-        </p>
+        <div>
+          <p className="text-xs text-emerald-400">{t(`biome.${biome}`)}</p>
+          <p className="text-emerald-200">
+            {t('collection.discovered', { count: collectedSpeciesIds.size, total: biomeSpecies.length })}
+          </p>
+        </div>
         <button
           onClick={() => setShowManualSighting(true)}
           className="press rounded-lg bg-emerald-800 px-3 py-1.5 text-sm font-medium text-emerald-50 active:bg-emerald-700"
@@ -54,10 +60,10 @@ export function CollectionScreen() {
         </button>
       </div>
       {collectionView === 'isometric' ? (
-        <CollectionGarden entries={entries} onSelectSpecies={setSelectedSpeciesId} />
+        <CollectionGarden entries={entries} biome={biome} onSelectSpecies={setSelectedSpeciesId} />
       ) : (
         <div className="grid grid-cols-3 gap-3">
-          {SPECIES_CATALOG.map((species, i) => {
+          {biomeSpecies.map((species, i) => {
             const isCollected = collectedSpeciesIds.has(species.id)
             const name = t(`species.${species.id}.name`)
             return (

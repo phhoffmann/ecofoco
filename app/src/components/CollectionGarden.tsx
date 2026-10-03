@@ -9,6 +9,7 @@ import {
   type DateRange,
   type GardenPeriod,
 } from '../domain/period'
+import type { BiomeId } from '../domain/biome'
 import { SPECIES_CATALOG } from '../domain/species'
 import type { CollectedEntry } from '../domain/types'
 import { IsometricGarden } from './IsometricGarden'
@@ -35,11 +36,12 @@ function formatRange(period: GardenPeriod, range: DateRange, locale: string): st
 
 interface CollectionGardenProps {
   entries: CollectedEntry[]
+  biome: BiomeId
   onSelectSpecies: (speciesId: string) => void
 }
 
 /** Forest-style garden of what was collected in one day / week / month. */
-export function CollectionGarden({ entries, onSelectSpecies }: CollectionGardenProps) {
+export function CollectionGarden({ entries, biome, onSelectSpecies }: CollectionGardenProps) {
   const { t, i18n } = useTranslation()
   const [period, setPeriod] = useState<GardenPeriod>('day')
   const [anchor, setAnchor] = useState(() => new Date())
@@ -94,7 +96,7 @@ export function CollectionGarden({ entries, onSelectSpecies }: CollectionGardenP
         </button>
       </div>
 
-      <IsometricGarden entries={periodEntries} onSelectSpecies={onSelectSpecies} />
+      <IsometricGarden entries={periodEntries} biome={biome} onSelectSpecies={onSelectSpecies} />
 
       {plants + animals === 0 && (
         <p className="text-center text-sm text-emerald-400">{t('collection.garden.empty')}</p>

@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { pickRandomSpecies } from '../domain/draw'
 import type { Species } from '../domain/species'
 
 const { appListeners, addCollectedEntry, recordFocusSession, keepScreenAwake, allowScreenSleep, mockSpecies } =
@@ -31,6 +32,7 @@ vi.mock('../data/appLifecycle', () => ({
 
 vi.mock('../data/screenWakeLock', () => ({ keepScreenAwake, allowScreenSleep }))
 vi.mock('../domain/draw', () => ({ pickRandomSpecies: vi.fn(() => mockSpecies) }))
+vi.mock('./biomeStore', () => ({ activeBiome: () => 'caatinga' }))
 vi.mock('../data/collectionRepo', () => ({ addCollectedEntry }))
 vi.mock('../data/focusSessionRepo', () => ({ recordFocusSession }))
 vi.mock('../data/haptics', () => ({ lightHaptic: vi.fn() }))
@@ -67,6 +69,7 @@ describe('focusSessionStore', () => {
     const state = useFocusSessionStore.getState()
     expect(state.status).toBe('completed')
     expect(state.resultSpecies).toEqual(mockSpecies)
+    expect(pickRandomSpecies).toHaveBeenCalledWith('plant', 'caatinga')
     expect(addCollectedEntry).toHaveBeenCalledWith('jatoba', 'focus_session')
     expect(recordFocusSession).toHaveBeenCalledWith(expect.any(String), 3, 'completed')
     expect(allowScreenSleep).toHaveBeenCalled()
