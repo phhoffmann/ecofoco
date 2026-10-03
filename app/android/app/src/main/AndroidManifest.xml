@@ -45,6 +45,11 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" tools:node="remove" />
 
+    <!-- @capacitor-community/sqlite depends on androidx.biometric for encrypted-DB unlock.
+         EcoFoco opens its database with 'no-encryption' and has no biometric config. -->
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" tools:node="remove" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" tools:node="remove" />
+
     <!-- @capgo/capacitor-health declares READ+WRITE for every Health Connect type.
          EcoFoco only reads steps (and writes steps for the dev step simulator). -->
     <uses-permission android:name="android.permission.health.READ_DISTANCE" tools:node="remove" />
