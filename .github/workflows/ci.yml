@@ -60,6 +60,9 @@ jobs:
         working-directory: app/android
         run: ./gradlew assembleDebug --no-daemon
 
+      - name: Print APK signing certificate
+        run: keytool -printcert -jarfile android/app/build/outputs/apk/debug/app-debug.apk | grep -E 'SHA256|Owner'
+
       - name: Locate merged manifest
         id: manifest
         run: |
