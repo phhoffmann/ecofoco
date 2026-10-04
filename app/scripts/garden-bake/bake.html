@@ -1,0 +1,126 @@
+<!doctype html>
+<!--
+  Renders one garden sprite for scripts/bake-garden-sprites.ts, which loads this page in headless Chrome and
+  screenshots it. The view is a fixed orthographic camera at 30° elevation and 45° azimuth, so one world unit
+  of ground projects to the same 2:1 diamond the garden draws, and every sprite shares one pixel scale.
+  The page reads its job from the `job` query parameter (JSON, see SpriteJob in sprites.ts).
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: transparent;
+        overflow: hidden;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <script type="module">
+      import * as THREE from 'three'
+      import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+      import { buildProcedural } from './procedural.js'
+
+      const job = JSON.parse(new URLSearchParams(location.search).get('job'))
+      const { width, height, originX, originY, pixelsPerUnit } = job.frame
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true })
+      renderer.setPixelRatio(1)
+      renderer.setSize(width, height)
+      renderer.setClearColor(0x000000, 0)
+      renderer.outputColorSpace = THREE.SRGBColorSpace
+      document.body.appendChild(renderer.domElement)
+
+      const scene = new THREE.Scene()
+
+      // Asymmetric frustum: the world origin (where the sprite stands) lands on (originX, originY).
+      const camera = new THREE.OrthographicCamera(
+        -originX / pixelsPerUnit,
+        (width - originX) / pixelsPerUnit,
+        originY / pixelsPerUnit,
+        -(height - originY) / pixelsPerUnit,
+        0.1,
+        200,
+      )
+      const elevation = THREE.MathUtils.degToRad(30)
+      const azimuth = THREE.MathUtils.degToRad(45)
+      camera.position.set(
+        Math.cos(elevation) * Math.sin(azimuth) * 50,
+        Math.sin(elevation) * 50,
+        Math.cos(elevation) * Math.cos(azimuth) * 50,
+      )
+      camera.lookAt(0, 0, 0)
+
+      // Soft sky fill plus a key light from the viewer's upper left, so the three visible faces of a block
+      // read as light (top), mid (left) and shade (right) — the same convention as the ground slab.
+      scene.add(new THREE.HemisphereLight(0xf4fbff, 0x6b5a46, 1.6))
+      const key = new THREE.DirectionalLight(0xfff4e0, 2.2)
+      key.position.set(-2, 6, 7)
+      scene.add(key)
+
+      function prepare(root) {
+        root.traverse((node) => {
+          if (!node.isMesh) return
+          const materials = Array.isArray(node.material) ? node.material : [node.material]
+          const replaced = materials.map((m) => {
+            const color = job.recolor?.[m.name]
+            const next = new THREE.MeshStandardMaterial({
+              color: color ? new THREE.Color(color) : m.color,
+              map: m.map ?? null,
+              roughness: 1,
+              metalness: 0,
+              flatShading: true,
+            })
+            if (next.map) next.map.colorSpace = THREE.SRGBColorSpace
+            return next
+          })
+          node.material = Array.isArray(node.material) ? replaced : replaced[0]
+        })
+      }
+
+      async function load() {
+        if (job.procedural) return { root: buildProcedural(THREE, job.procedural), animations: [] }
+        const gltf = await new GLTFLoader().loadAsync(job.model)
+        return { root: gltf.scene, animations: gltf.animations }
+      }
+
+      const { root, animations } = await load()
+      prepare(root)
+      root.scale.setScalar(job.scale ?? 1)
+      root.rotation.y = THREE.MathUtils.degToRad(job.yaw ?? 0)
+
+      if (job.animation) {
+        const clip = animations.find((a) => a.name === job.animation.clip)
+        if (clip) {
+          const mixer = new THREE.AnimationMixer(root)
+          mixer.clipAction(clip).play()
+          mixer.setTime(job.animation.time ?? 0)
+        }
+      }
+
+      // Stand the model on the ground plane even when its pivot isn't at its feet.
+      root.updateMatrixWorld(true)
+      const box = new THREE.Box3().setFromObject(root)
+      root.position.y -= box.min.y
+      const center = box.getCenter(new THREE.Vector3())
+      if (job.center) root.position.set(-center.x, root.position.y, -center.z)
+
+      scene.add(root)
+      renderer.render(scene, camera)
+      document.title = 'baked'
+    </script>
+  </body>
+</html>

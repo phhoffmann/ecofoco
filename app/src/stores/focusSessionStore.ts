@@ -4,7 +4,7 @@ import { addCollectedEntry } from '../data/collectionRepo'
 import { recordFocusSession } from '../data/focusSessionRepo'
 import { pickRandomSpecies } from '../domain/draw'
 import { computeRemainingSeconds, hasLeftTooLong } from '../domain/focusSession'
-import type { Species } from '../domain/species'
+import type { PlantArchetype, Species } from '../domain/species'
 import { activeBiome } from './biomeStore'
 import { useCelebrationStore } from './celebrationStore'
 
@@ -14,6 +14,8 @@ interface FocusSessionState {
   status: FocusSessionStatus
   plannedDurationSeconds: number
   remainingSeconds: number
+  /** Shape the Sprout grows into while running: the archetype of the plant this session will collect. */
+  growingArchetype: PlantArchetype | null
   resultSpecies: Species | null
   start: (durationSeconds: number) => void
   fail: () => Promise<void>
@@ -52,6 +54,7 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => ({
   status: 'idle',
   plannedDurationSeconds: 0,
   remainingSeconds: 0,
+  growingArchetype: null,
   resultSpecies: null,
 
   start: (durationSeconds) => {
@@ -59,10 +62,13 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => ({
     clearAwayCheck()
     startedAt = Date.now()
     backgroundedThisSession = false
+    // Drawn up front so the Sprout can grow into its shape; only collected if the session completes.
+    const species = pickRandomSpecies('plant', activeBiome())
     set({
       status: 'running',
       plannedDurationSeconds: durationSeconds,
       remainingSeconds: durationSeconds,
+      growingArchetype: species.archetype as PlantArchetype,
       resultSpecies: null,
     })
 
@@ -77,7 +83,6 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => ({
         if (backgroundedThisSession) await failIfLeftTooLong()
         if (get().status !== 'running') return
         clearAwayCheck()
-        const species = pickRandomSpecies('plant', activeBiome())
         await addCollectedEntry(species.id, 'focus_session')
         await recordFocusSession(new Date(startedAt).toISOString(), durationSeconds, 'completed')
         set({ status: 'completed', resultSpecies: species })
@@ -99,7 +104,7 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => ({
   reset: () => {
     clearTick()
     clearAwayCheck()
-    set({ status: 'idle', plannedDurationSeconds: 0, remainingSeconds: 0, resultSpecies: null })
+    set({ status: 'idle', plannedDurationSeconds: 0, remainingSeconds: 0, growingArchetype: null, resultSpecies: null })
   },
 }))
 

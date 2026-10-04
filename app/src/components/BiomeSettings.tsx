@@ -11,9 +11,10 @@ import {
   type BiomeProgress,
 } from '../domain/biome'
 import { selectBiomeProgress, useBiomeStore, type DetectResult } from '../stores/biomeStore'
+import { BiomeSwatch } from './BiomeSwatch'
 import { DetectResultMessage, HomeBiomePicker } from './HomeBiomePicker'
-
-const actionClass = 'rounded-lg px-3 py-1.5 text-xs font-medium disabled:opacity-40'
+import { CheckIcon, LockIcon, MapPinIcon, SparkleIcon } from './icons'
+import { Button, Card, CardHeader } from './ui'
 
 function BiomeAction({ biome, progress }: { biome: BiomeId; progress: BiomeProgress }) {
   const { t } = useTranslation()
@@ -22,27 +23,33 @@ function BiomeAction({ biome, progress }: { biome: BiomeId; progress: BiomeProgr
 
   switch (biomeStatus(biome, progress)) {
     case 'current':
-      return <span className="text-xs font-medium text-emerald-300">{t('settings.biome.current')}</span>
+      return (
+        <span className="inline-flex items-center gap-1 text-caption font-bold text-accent">
+          <CheckIcon className="size-4" />
+          {t('settings.biome.current')}
+        </span>
+      )
     case 'unlocked':
       return (
-        <button onClick={() => void switchTo(biome)} className={`${actionClass} bg-emerald-500 text-emerald-950`}>
+        <Button variant="primary" size="sm" onClick={() => void switchTo(biome)}>
           {t('settings.biome.switch')}
-        </button>
+        </Button>
       )
     case 'unlockable':
       return (
-        <button
-          disabled={progress.balance < NEIGHBOUR_UNLOCK_COST}
-          onClick={() => void unlock(biome)}
-          className={`${actionClass} bg-emerald-800 text-emerald-100`}
-        >
+        <Button size="sm" disabled={progress.balance < NEIGHBOUR_UNLOCK_COST} onClick={() => void unlock(biome)}>
           {t('settings.biome.unlock', { cost: NEIGHBOUR_UNLOCK_COST })}
-        </button>
+        </Button>
       )
     case 'locked':
-      return <span className="text-xs text-emerald-500">{t('settings.biome.locked')}</span>
+      return (
+        <span className="inline-flex items-center gap-1 text-caption text-ink-faint">
+          <LockIcon className="size-3.5" />
+          {t('settings.biome.locked')}
+        </span>
+      )
     case 'coming-soon':
-      return <span className="text-xs text-emerald-600">{t('settings.biome.comingSoon')}</span>
+      return <span className="text-caption text-ink-faint">{t('settings.biome.comingSoon')}</span>
   }
 }
 
@@ -70,15 +77,19 @@ export function BiomeSettings() {
   }
 
   return (
-    <div className="rounded-xl bg-emerald-900/50 px-4 py-3">
-      <div className="flex items-baseline justify-between gap-3">
-        <p className="font-medium text-emerald-50">{t('settings.biome.title')}</p>
-        <p className="text-sm font-semibold tabular-nums text-emerald-50">
-          {t('settings.biome.points', { count: progress.balance })}
-        </p>
-      </div>
-      <p className="text-xs text-emerald-400">{t('settings.biome.hint')}</p>
-      <p className="mb-3 text-xs text-emerald-400">
+    <Card className="enter space-y-3">
+      <CardHeader
+        icon={MapPinIcon}
+        title={t('settings.biome.title')}
+        hint={t('settings.biome.hint')}
+        trailing={
+          <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-accent/15 px-2.5 py-1 text-caption font-extrabold tabular-nums text-accent">
+            <SparkleIcon className="size-3.5" />
+            {t('settings.biome.points', { count: progress.balance })}
+          </span>
+        }
+      />
+      <p className="text-caption text-ink-faint">
         {t('settings.biome.pointsHint', {
           session: FOCUS_SESSION_POINTS,
           goal: STEP_GOAL_POINTS,
@@ -87,31 +98,39 @@ export function BiomeSettings() {
       </p>
 
       <ul className="space-y-1.5">
-        {BIOME_IDS.map((biome) => (
-          <li key={biome} className="flex min-h-9 items-center justify-between gap-3 rounded-lg bg-emerald-950/40 px-3 py-1.5">
-            <span className="text-sm text-emerald-100">
-              {t(`biome.${biome}`)}
-              {biome === progress.home && (
-                <span className="ml-2 text-xs text-emerald-400">· {t('settings.biome.home')}</span>
-              )}
-            </span>
-            <BiomeAction biome={biome} progress={progress} />
-          </li>
-        ))}
+        {BIOME_IDS.map((biome) => {
+          const current = biome === progress.current
+          return (
+            <li
+              key={biome}
+              className={`flex min-h-12 items-center gap-3 rounded-control px-2.5 py-1.5 transition-colors ${
+                current ? 'bg-accent/12 ring-1 ring-accent/50' : 'bg-surface-sunken/70'
+              }`}
+            >
+              <BiomeSwatch biome={biome} className="w-8" />
+              <span className="min-w-0 flex-1 text-body font-bold text-ink">
+                {t(`biome.${biome}`)}
+                {biome === progress.home && (
+                  <span className="ml-2 text-caption font-semibold text-ink-faint">· {t('settings.biome.home')}</span>
+                )}
+              </span>
+              <BiomeAction biome={biome} progress={progress} />
+            </li>
+          )
+        })}
       </ul>
 
       <button
         onClick={() => void redetect()}
         disabled={detecting}
-        className="mt-3 text-sm text-emerald-300 underline underline-offset-4 disabled:opacity-50"
+        className="press inline-flex items-center gap-1.5 text-caption font-bold text-accent disabled:opacity-50"
       >
+        <MapPinIcon className="size-4" />
         {detecting ? t('biomeSetup.detecting') : t('settings.biome.redetect')}
       </button>
-      {result?.outcome === 'unavailable' && (
-        <p className="mt-2 text-sm text-emerald-200">{t('settings.biome.redetectUnavailable')}</p>
-      )}
+      {result?.outcome === 'unavailable' && <p className="text-caption text-ink-muted">{t('settings.biome.redetectUnavailable')}</p>}
       {result && result.outcome !== 'unavailable' && (
-        <div className="mt-2 space-y-2">
+        <div className="space-y-2">
           <DetectResultMessage result={result} />
           {result.outcome !== 'detected' && (
             <HomeBiomePicker
@@ -123,6 +142,6 @@ export function BiomeSettings() {
           )}
         </div>
       )}
-    </div>
+    </Card>
   )
 }

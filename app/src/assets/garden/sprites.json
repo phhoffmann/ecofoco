@@ -1,0 +1,131 @@
+{
+  "tilePx": 256,
+  "sprites": {
+    "flowering-tree": {
+      "width": 198,
+      "height": 415,
+      "footX": 99,
+      "footY": 402
+    },
+    "broadleaf-tree": {
+      "width": 194,
+      "height": 337,
+      "footX": 97,
+      "footY": 309
+    },
+    "emergent-tree": {
+      "width": 215,
+      "height": 420,
+      "footX": 102,
+      "footY": 402
+    },
+    "pioneer-tree": {
+      "width": 176,
+      "height": 369,
+      "footX": 93,
+      "footY": 375
+    },
+    "palm": {
+      "width": 281,
+      "height": 386,
+      "footX": 141,
+      "footY": 372
+    },
+    "shrub": {
+      "width": 144,
+      "height": 132,
+      "footX": 72,
+      "footY": 110
+    },
+    "stage-seedling": {
+      "width": 91,
+      "height": 110,
+      "footX": 46,
+      "footY": 88
+    },
+    "stage-sapling": {
+      "width": 68,
+      "height": 100,
+      "footX": 34,
+      "footY": 98
+    },
+    "primate": {
+      "width": 137,
+      "height": 156,
+      "footX": 72,
+      "footY": 137
+    },
+    "songbird": {
+      "width": 124,
+      "height": 98,
+      "footX": 63,
+      "footY": 91
+    },
+    "large-bird": {
+      "width": 153,
+      "height": 144,
+      "footX": 84,
+      "footY": 132
+    },
+    "small-mammal": {
+      "width": 92,
+      "height": 124,
+      "footX": 45,
+      "footY": 109
+    },
+    "mid-mammal": {
+      "width": 111,
+      "height": 147,
+      "footX": 65,
+      "footY": 125
+    },
+    "reptile": {
+      "width": 161,
+      "height": 137,
+      "footX": 71,
+      "footY": 85
+    },
+    "insect": {
+      "width": 76,
+      "height": 116,
+      "footX": 38,
+      "footY": 103
+    },
+    "decor-grass": {
+      "width": 88,
+      "height": 59,
+      "footX": 45,
+      "footY": 41
+    },
+    "decor-flowers": {
+      "width": 31,
+      "height": 45,
+      "footX": 12,
+      "footY": 42
+    },
+    "decor-rock": {
+      "width": 69,
+      "height": 49,
+      "footX": 30,
+      "footY": 38
+    },
+    "decor-cactus": {
+      "width": 61,
+      "height": 96,
+      "footX": 24,
+      "footY": 91
+    },
+    "decor-mushroom": {
+      "width": 48,
+      "height": 56,
+      "footX": 28,
+      "footY": 45
+    },
+    "decor-lily": {
+      "width": 38,
+      "height": 25,
+      "footX": 19,
+      "footY": 16
+    }
+  }
+}

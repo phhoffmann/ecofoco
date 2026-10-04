@@ -91,6 +91,16 @@ describe('focusSessionStore', () => {
     expect(useCelebrationStore.getState().species).toEqual(mockSpecies)
   })
 
+  it('grows the sprout into the shape of the plant it will collect, without revealing the plant early', async () => {
+    useFocusSessionStore.getState().start(3)
+
+    expect(useFocusSessionStore.getState()).toMatchObject({ growingArchetype: 'broadleaf-tree', resultSpecies: null })
+    expect(pickRandomSpecies).toHaveBeenCalledWith('plant', 'caatinga')
+
+    await vi.advanceTimersByTimeAsync(3000)
+    expect(useFocusSessionStore.getState().resultSpecies?.archetype).toBe('broadleaf-tree')
+  })
+
   it('keeps the session running while the screen is off or locked, timing it from the wall clock', async () => {
     useFocusSessionStore.getState().start(600)
     await background()
@@ -197,6 +207,7 @@ describe('focusSessionStore', () => {
       status: 'idle',
       plannedDurationSeconds: 0,
       remainingSeconds: 0,
+      growingArchetype: null,
       resultSpecies: null,
     })
   })

@@ -16,7 +16,7 @@ globalThis.IS_REACT_ACT_ENVIRONMENT = true
 // Must match the scene geometry in IsometricGarden for a 6×6 plot.
 const TILE = { width: 64, height: 32 }
 const SCENE_WIDTH = 6 * TILE.width + 2 * 8
-const ORIGIN = { x: SCENE_WIDTH / 2, y: 100 }
+const ORIGIN = { x: SCENE_WIDTH / 2, y: 110 }
 
 const entry = (id: string, speciesId: string, collectedAt: string): CollectedEntry => ({
   id,

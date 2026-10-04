@@ -44,12 +44,20 @@ export const en = {
   },
   focus: {
     chooseDuration: 'Choose a focus duration',
+    idleHint: 'Plant a seed and stay in EcoFoco while it grows into a plant from your biome.',
     durationMinutes: '{{count}} min',
     leaveWarning: 'Switching to another app will fail this session and discard the sprout. Locking the screen is fine.',
     giveUp: 'Give up',
     youCollected: 'You collected',
     sessionFailed: 'Session failed',
     leftEarly: 'You left the app before the sprout finished growing.',
+    stages: {
+      '0': 'Seedling',
+      '1': 'Sapling',
+      '2': 'Young plant',
+      '3': 'Almost grown',
+    },
+    grewInto: 'Your sprout grew into',
   },
   activity: {
     checkingHealthConnect: 'Checking Health Connect…',
@@ -59,6 +67,8 @@ export const en = {
     connecting: 'Connecting…',
     connect: 'Connect',
     todaySteps: "Today's steps",
+    ofGoal: 'of {{goal}} steps',
+    goalMet: 'Goal reached!',
     drawButton: 'Draw an animal!',
     drawDone: 'Animal already collected today — come back tomorrow.',
     keepWalking: "Keep walking to unlock today's animal draw.",
@@ -67,7 +77,7 @@ export const en = {
   },
   collection: {
     discovered: '{{count}} / {{total}} species discovered',
-    logSighting: '+ Log sighting',
+    logSighting: 'Log sighting',
     unknown: '???',
     view: {
       label: 'Collection view',
@@ -81,6 +91,7 @@ export const en = {
         week: 'Week',
         month: 'Month',
       },
+      periodLabel: 'Garden period',
       previous: 'Previous period',
       next: 'Next period',
       plants_one: '{{count}} plant',
@@ -100,6 +111,8 @@ export const en = {
     stepGoal: 'Daily step goal',
     stepGoalHint: 'Steps needed to unlock the daily animal draw',
     stepGoalValue: '{{count}} steps',
+    stepGoalDecrease: 'Decrease step goal',
+    stepGoalIncrease: 'Increase step goal',
     biome: {
       title: 'Biome',
       hint: 'Rewards come from your current biome. Earn points to unlock neighbouring biomes.',

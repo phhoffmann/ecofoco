@@ -127,7 +127,7 @@ export function BottomSheet({ onClose, labelledBy, children }: BottomSheetProps)
         aria-labelledby={labelledBy}
         tabIndex={-1}
         onKeyDown={handleKeyDown}
-        className="sheet-panel flex max-h-[90svh] w-full max-w-md flex-col rounded-t-3xl bg-emerald-950 shadow-2xl ring-1 ring-emerald-800/80 outline-none"
+        className="sheet-panel flex max-h-[90svh] w-full max-w-md flex-col rounded-t-[2rem] bg-surface shadow-2xl ring-1 ring-line outline-none"
         style={{
           transform: dragY ? `translateY(${dragY}px)` : undefined,
           transition: dragging ? 'none' : 'transform 200ms ease-out',
@@ -142,7 +142,7 @@ export function BottomSheet({ onClose, labelledBy, children }: BottomSheetProps)
           onPointerCancel={handlePointerUp}
           className="flex h-8 shrink-0 cursor-grab touch-none items-center justify-center"
         >
-          <span className="h-1.5 w-10 rounded-full bg-emerald-700" />
+          <span className="h-1.5 w-10 rounded-full bg-line" />
         </div>
         <div className="flex min-h-0 flex-1 flex-col px-6 pb-[calc(1.5rem+var(--safe-bottom))]">{children(close)}</div>
       </div>

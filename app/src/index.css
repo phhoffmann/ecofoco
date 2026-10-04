@@ -1,5 +1,147 @@
 @import "tailwindcss";
 
+/* Nunito (variable, latin subset), bundled so the app looks the same offline. SIL OFL 1.1, see assets/fonts. */
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 1000;
+  src: url("./assets/fonts/nunito-latin-wght-normal.woff2") format("woff2-variations");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+    U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/*
+ * Design tokens. Screens use only these semantic names (bg-surface, text-ink-muted, rounded-card, px-gutter…),
+ * never raw palette colours, so the whole app re-tints when the active Biome changes: App sets
+ * <html data-biome="…"> and the blocks below swap the colour values. Atlantic Forest is the default.
+ */
+@theme static {
+  --font-sans: "Nunito", ui-rounded, system-ui, sans-serif;
+
+  --color-canvas: #07261d;
+  --color-surface: #0d3428;
+  --color-surface-raised: #144737;
+  --color-surface-sunken: #051d16;
+  --color-line: #1f5a45;
+  --color-ink: #effcf5;
+  --color-ink-muted: #a9dcc3;
+  --color-ink-faint: #6a9e86;
+  --color-accent: #46d39a;
+  --color-accent-strong: #7ee8bd;
+  --color-on-accent: #04281c;
+  --color-glow: #1fae7a;
+  --color-danger: #fca5a5;
+  --color-danger-surface: #4a1d1d;
+
+  /* Rarity tiers stay the same in every Biome. */
+  --color-rarity-common: #6ee7b7;
+  --color-rarity-rare: #7dd3fc;
+  --color-rarity-epic: #fcd34d;
+
+  --text-display: 2.75rem;
+  --text-display--line-height: 1;
+  --text-display--font-weight: 800;
+  --text-title: 1.375rem;
+  --text-title--line-height: 1.25;
+  --text-title--font-weight: 800;
+  --text-body: 0.9375rem;
+  --text-body--line-height: 1.45;
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.35;
+  --text-overline: 0.6875rem;
+  --text-overline--line-height: 1.2;
+  --text-overline--letter-spacing: 0.08em;
+  --text-overline--font-weight: 800;
+
+  --spacing-gutter: 1.25rem;
+
+  --radius-control: 0.875rem;
+  --radius-card: 1.5rem;
+
+  --shadow-card: inset 0 1px 0 rgb(255 255 255 / 0.05), 0 10px 30px -18px rgb(0 0 0 / 0.7);
+  --shadow-lift: 0 10px 24px -10px color-mix(in oklab, var(--color-accent) 55%, transparent);
+
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root[data-biome="amazon"] {
+  --color-canvas: #05211f;
+  --color-surface: #0a302c;
+  --color-surface-raised: #11453e;
+  --color-surface-sunken: #031816;
+  --color-line: #1a564d;
+  --color-ink: #ecfdf9;
+  --color-ink-muted: #9fd9cd;
+  --color-ink-faint: #5f988c;
+  --color-accent: #2dd4bf;
+  --color-accent-strong: #5eead4;
+  --color-on-accent: #042f2b;
+  --color-glow: #0f9f8f;
+}
+
+:root[data-biome="caatinga"] {
+  --color-canvas: #241510;
+  --color-surface: #331f16;
+  --color-surface-raised: #482d20;
+  --color-surface-sunken: #1a0f0b;
+  --color-line: #5c3c2b;
+  --color-ink: #fff4ea;
+  --color-ink-muted: #e8c3a4;
+  --color-ink-faint: #a8826a;
+  --color-accent: #f5a04a;
+  --color-accent-strong: #fbc27f;
+  --color-on-accent: #2f1606;
+  --color-glow: #c2571f;
+}
+
+:root[data-biome="cerrado"] {
+  --color-canvas: #1c1f0c;
+  --color-surface: #282c12;
+  --color-surface-raised: #393e1b;
+  --color-surface-sunken: #13150a;
+  --color-line: #4c5226;
+  --color-ink: #fbfbea;
+  --color-ink-muted: #d7dea6;
+  --color-ink-faint: #979f68;
+  --color-accent: #e3c645;
+  --color-accent-strong: #f0d96b;
+  --color-on-accent: #2a2405;
+  --color-glow: #9a8a1c;
+}
+
+:root[data-biome="pantanal"] {
+  --color-canvas: #061c26;
+  --color-surface: #0b2a37;
+  --color-surface-raised: #123c4c;
+  --color-surface-sunken: #04131a;
+  --color-line: #1b4e61;
+  --color-ink: #ecfaff;
+  --color-ink-muted: #a3d8e8;
+  --color-ink-faint: #5e94a6;
+  --color-accent: #4cc3f5;
+  --color-accent-strong: #8fdafc;
+  --color-on-accent: #04263a;
+  --color-glow: #0b84b8;
+}
+
+:root[data-biome="pampa"] {
+  --color-canvas: #0f210f;
+  --color-surface: #173016;
+  --color-surface-raised: #224420;
+  --color-surface-sunken: #0a170a;
+  --color-line: #315c2c;
+  --color-ink: #f3ffea;
+  --color-ink-muted: #c3e6a9;
+  --color-ink-faint: #80a86a;
+  --color-accent: #a3e635;
+  --color-accent-strong: #bef264;
+  --color-on-accent: #1a2e05;
+  --color-glow: #5c9d1a;
+}
+
 /* Capacitor's SystemBars plugin injects --safe-area-inset-* on Android; env() covers the web. */
 :root {
   --safe-top: var(--safe-area-inset-top, env(safe-area-inset-top, 0px));
@@ -8,80 +150,405 @@
 
 body {
   margin: 0;
-  color-scheme: light dark;
+  color-scheme: dark;
+  background: var(--color-canvas);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Garden view: trees sway, animals bob. Delays are set inline so sprites don't move in lockstep. */
+/* The app shell: a soft Biome-coloured glow at the top over the canvas colour. */
+.app-backdrop {
+  background:
+    radial-gradient(120% 55% at 50% -12%, color-mix(in oklab, var(--color-glow) 42%, transparent), transparent 70%),
+    radial-gradient(90% 40% at 100% 110%, color-mix(in oklab, var(--color-glow) 18%, transparent), transparent 70%),
+    var(--color-canvas);
+  transition: background-color 400ms ease-out;
+}
+
+/* ---------- Micro-interactions ---------- */
+
+.press {
+  transition:
+    transform 160ms var(--ease-spring),
+    background-color 150ms ease-out,
+    color 150ms ease-out,
+    box-shadow 150ms ease-out;
+}
+
+.press:active:not(:disabled) {
+  transform: scale(0.95);
+  transition-duration: 80ms;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* `backwards` fill: no transform lingers once done, so fixed descendants stay viewport-relative. */
+.enter {
+  animation: fade-up 280ms var(--ease-out-soft) backwards;
+}
+
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.pop-in {
+  animation: pop-in 420ms var(--ease-spring) backwards;
+}
+
+/* Bottom nav: the active icon bounces once when selected. */
+@keyframes nav-bounce {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  40% {
+    transform: translateY(-3px) scale(1.12);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.nav-bounce {
+  animation: nav-bounce 380ms var(--ease-spring);
+}
+
+/* Progress bars fill with a moving sheen. */
+@keyframes sheen {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(250%);
+  }
+}
+
+.progress-sheen {
+  animation: sheen 2.4s ease-in-out infinite;
+}
+
+/* ---------- Garden ---------- */
+
+/* Idle motion per archetype; durations and delays are set inline so sprites don't move in lockstep. */
 @keyframes garden-sway {
   0%,
   100% {
-    transform: rotate(-1.5deg);
+    transform: rotate(-1.6deg);
   }
   50% {
-    transform: rotate(1.5deg);
+    transform: rotate(1.6deg);
+  }
+}
+
+@keyframes garden-rustle {
+  0%,
+  100% {
+    transform: skewX(0deg) scaleY(1);
+  }
+  30% {
+    transform: skewX(-3deg) scaleY(1.02);
+  }
+  60% {
+    transform: skewX(2deg) scaleY(0.99);
   }
 }
 
 @keyframes garden-bob {
   0%,
   100% {
-    transform: translateY(0);
+    transform: translateY(0) scale(1, 1);
   }
   50% {
-    transform: translateY(-10%);
+    transform: translateY(-5%) scale(0.98, 1.02);
   }
+}
+
+/* Mostly still, then two quick hops: reads as an animal pausing and moving on. */
+@keyframes garden-hop {
+  0%,
+  58%,
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+  62% {
+    transform: translateY(0) scale(1.06, 0.92);
+  }
+  67% {
+    transform: translateY(-16%) scale(0.96, 1.05);
+  }
+  72% {
+    transform: translateY(0) scale(1.04, 0.95);
+  }
+  77% {
+    transform: translateY(-9%) scale(0.98, 1.03);
+  }
+  82% {
+    transform: translateY(0) scale(1, 1);
+  }
+}
+
+@keyframes garden-hover {
+  0%,
+  100% {
+    transform: translateY(-6%) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-14%) rotate(3deg);
+  }
+}
+
+@keyframes garden-breathe {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.015, 1.04);
+  }
+}
+
+.garden-sway,
+.garden-rustle,
+.garden-bob,
+.garden-hop,
+.garden-hover,
+.garden-breathe {
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: transform;
 }
 
 .garden-sway {
-  transform-origin: 50% 100%;
-  animation: garden-sway 4s ease-in-out infinite;
+  animation-name: garden-sway;
 }
-
+.garden-rustle {
+  animation-name: garden-rustle;
+}
 .garden-bob {
-  animation: garden-bob 1.6s ease-in-out infinite;
+  animation-name: garden-bob;
+}
+.garden-hop {
+  animation-name: garden-hop;
+  animation-timing-function: linear;
+}
+.garden-hover {
+  animation-name: garden-hover;
+}
+.garden-breathe {
+  animation-name: garden-breathe;
 }
 
-/* Tapped garden sprite pops so the tap feels answered. */
+/* Sprites grow out of the ground, back to front, when the garden opens or the period changes. */
+@keyframes garden-grow {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.garden-grow {
+  animation: garden-grow 520ms var(--ease-out-soft) backwards;
+}
+
+/* Tapped garden sprite pops so the tap feels answered, and its tile flashes. */
 @keyframes garden-pop {
   0%,
   100% {
     transform: scale(1);
   }
   40% {
-    transform: scale(1.18);
+    transform: scale(1.18, 1.12);
   }
 }
 
 .garden-pop {
-  transform-origin: 50% 100%;
-  animation: garden-pop 300ms ease-out;
+  animation: garden-pop 320ms var(--ease-spring);
 }
 
-/* Micro-interactions: press feedback and subtle enter transitions. */
-.press {
-  transition:
-    transform 120ms ease-out,
-    background-color 150ms ease-out,
-    color 150ms ease-out;
-}
-
-.press:active:not(:disabled) {
-  transform: scale(0.95);
-}
-
-@keyframes fade-up {
+@keyframes garden-tile-flash {
   from {
+    opacity: 0.55;
+  }
+  to {
     opacity: 0;
-    transform: translateY(6px);
   }
 }
 
-/* `backwards` fill: no transform lingers once done, so fixed descendants stay viewport-relative. */
-.enter {
-  animation: fade-up 220ms ease-out backwards;
+.garden-tile-flash {
+  animation: garden-tile-flash 600ms ease-out;
 }
 
-/* Bottom sheet */
+/* A soft cloud shadow drifting across the plot. */
+@keyframes garden-cloud {
+  from {
+    transform: translateX(-110%);
+  }
+  to {
+    transform: translateX(200%);
+  }
+}
+
+.garden-cloud {
+  background: radial-gradient(closest-side, rgb(0 20 10 / 0.16), transparent);
+  animation: garden-cloud 28s linear infinite;
+  will-change: transform;
+}
+
+/* Pollen and dust drift up and sideways; fireflies also blink. */
+@keyframes garden-mote {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  20%,
+  70% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--drift-x), -60px);
+  }
+}
+
+@keyframes garden-firefly {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  15%,
+  45% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0.3;
+  }
+  60% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--drift-x), -40px);
+  }
+}
+
+.garden-mote,
+.garden-firefly {
+  opacity: 0;
+  animation: garden-mote 9s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.garden-firefly {
+  animation-name: garden-firefly;
+}
+
+/* Warm light on the ground from the upper left that slowly breathes. */
+@keyframes garden-sunlight {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.garden-sunlight {
+  background: radial-gradient(60% 60% at 30% 35%, rgb(255 244 210 / 0.18), transparent 75%);
+  animation: garden-sunlight 9s ease-in-out infinite;
+}
+
+/* ---------- Focus: the growing plant ---------- */
+
+/* Each new growth stage springs up from the soil. */
+@keyframes stage-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.35);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+  80% {
+    transform: scale(0.96);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.stage-in {
+  animation: stage-in 700ms var(--ease-out-soft) backwards;
+}
+
+/* Leaves burst out along --dx/--dy when the plant reaches a new stage. */
+@keyframes leaf-burst {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(0deg) scale(0.4);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) rotate(var(--spin)) scale(1);
+  }
+}
+
+.leaf-burst {
+  animation: leaf-burst 900ms var(--ease-out-soft) forwards;
+}
+
+/* Light rays turning slowly behind a fully grown plant. */
+@keyframes rays-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rays-spin {
+  animation: rays-spin 24s linear infinite;
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.04);
+  }
+}
+
+.glow-pulse {
+  animation: glow-pulse 3.2s ease-in-out infinite;
+}
+
+/* ---------- Bottom sheet ---------- */
+
 @keyframes sheet-in {
   from {
     transform: translateY(100%);
@@ -115,14 +582,15 @@ body {
 }
 
 .sheet-panel {
-  animation: sheet-in 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: sheet-in 300ms var(--ease-out-soft);
 }
 
 .sheet-backdrop[data-closing] .sheet-panel {
   animation: sheet-out 200ms ease-in forwards;
 }
 
-/* Celebration: the whole overlay lives under 2 s; sparkles fly out along --dx/--dy. */
+/* ---------- Celebration: the whole overlay lives under 2 s; sparkles fly out along --dx/--dy. ---------- */
+
 @keyframes celebrate-overlay {
   0% {
     opacity: 0;
@@ -190,7 +658,7 @@ body {
 }
 
 .celebrate-reveal {
-  animation: celebrate-reveal 550ms cubic-bezier(0.22, 1, 0.36, 1) 120ms backwards;
+  animation: celebrate-reveal 550ms var(--ease-out-soft) 120ms backwards;
 }
 
 .celebrate-ring {
@@ -205,11 +673,26 @@ body {
   animation: celebrate-twinkle 700ms ease-in-out infinite;
 }
 
+/* ---------- Reduced motion: keep every state change, drop the movement. ---------- */
+
 @media (prefers-reduced-motion: reduce) {
   .garden-sway,
+  .garden-rustle,
   .garden-bob,
+  .garden-hop,
+  .garden-hover,
+  .garden-breathe,
+  .garden-grow,
   .garden-pop,
+  .garden-cloud,
+  .garden-sunlight,
   .enter,
+  .pop-in,
+  .nav-bounce,
+  .progress-sheen,
+  .stage-in,
+  .rays-spin,
+  .glow-pulse,
   .sheet-backdrop,
   .sheet-panel,
   .celebrate-reveal,
@@ -224,6 +707,12 @@ body {
     opacity: 0;
   }
 
+  .garden-mote,
+  .garden-firefly,
+  .garden-tile-flash,
+  .garden-cloud,
+  .leaf-burst,
+  .progress-sheen,
   .celebrate-ring,
   .celebrate-sparkle {
     display: none;

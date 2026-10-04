@@ -1,43 +1,74 @@
-import broadleafTree from '../assets/garden/broadleaf-tree.png'
-import emergentTree from '../assets/garden/emergent-tree.png'
-import floweringTree from '../assets/garden/flowering-tree.png'
-import grass from '../assets/garden/grass.png'
-import insect from '../assets/garden/insect.png'
-import largeBird from '../assets/garden/large-bird.png'
-import midMammal from '../assets/garden/mid-mammal.png'
-import palm from '../assets/garden/palm.png'
-import pioneerTree from '../assets/garden/pioneer-tree.png'
-import primate from '../assets/garden/primate.png'
-import reptile from '../assets/garden/reptile.png'
-import shrub from '../assets/garden/shrub.png'
-import smallMammal from '../assets/garden/small-mammal.png'
-import songbird from '../assets/garden/songbird.png'
+import manifest from '../assets/garden/sprites.json'
+import type { BiomeId } from '../domain/biome'
 import type { Archetype } from '../domain/species'
 
-export type SpriteMotion = 'sway' | 'bob' | 'none'
+/** Idle motion of a garden sprite; each maps to a CSS animation in index.css. */
+export type SpriteMotion = 'sway' | 'rustle' | 'bob' | 'hop' | 'hover' | 'breathe' | 'none'
 
 export interface GardenSprite {
   src: string
-  /** Rendered width as a fraction of one tile's width; height follows the image's aspect ratio. */
+  /** Rendered width as a fraction of one tile's width. */
   width: number
+  /** Height over width. */
+  aspect: number
+  /** Where the sprite touches the ground, as fractions of its box from the top-left. */
+  footX: number
+  footY: number
   motion: SpriteMotion
 }
 
-// Placeholder CC0 art (see src/assets/garden/LICENSE.md), one sprite per archetype.
-export const ARCHETYPE_SPRITES: Record<Archetype, GardenSprite> = {
-  'flowering-tree': { src: floweringTree, width: 0.8, motion: 'sway' },
-  'broadleaf-tree': { src: broadleafTree, width: 0.75, motion: 'sway' },
-  'emergent-tree': { src: emergentTree, width: 0.95, motion: 'sway' },
-  'pioneer-tree': { src: pioneerTree, width: 0.65, motion: 'sway' },
-  palm: { src: palm, width: 0.95, motion: 'sway' },
-  shrub: { src: shrub, width: 0.5, motion: 'sway' },
-  primate: { src: primate, width: 0.38, motion: 'bob' },
-  songbird: { src: songbird, width: 0.32, motion: 'bob' },
-  'large-bird': { src: largeBird, width: 0.4, motion: 'bob' },
-  'small-mammal': { src: smallMammal, width: 0.36, motion: 'bob' },
-  'mid-mammal': { src: midMammal, width: 0.44, motion: 'bob' },
-  reptile: { src: reptile, width: 0.38, motion: 'bob' },
-  insect: { src: insect, width: 0.34, motion: 'bob' },
+type SpriteName = keyof typeof manifest.sprites
+
+const URLS = import.meta.glob<string>('../assets/garden/*.webp', { eager: true, query: '?url', import: 'default' })
+
+// Baked by scripts/bake-garden-sprites.ts (see src/assets/garden/LICENSE.md); all share one pixel scale.
+function sprite(name: SpriteName, motion: SpriteMotion): GardenSprite {
+  const { width, height, footX, footY } = manifest.sprites[name]
+  return {
+    src: URLS[`../assets/garden/${name}.webp`],
+    width: width / manifest.tilePx,
+    aspect: height / width,
+    footX: footX / width,
+    footY: footY / height,
+    motion,
+  }
 }
 
-export const GRASS_SPRITE: GardenSprite = { src: grass, width: 0.4, motion: 'none' }
+export const ARCHETYPE_SPRITES: Record<Archetype, GardenSprite> = {
+  'flowering-tree': sprite('flowering-tree', 'sway'),
+  'broadleaf-tree': sprite('broadleaf-tree', 'sway'),
+  'emergent-tree': sprite('emergent-tree', 'sway'),
+  'pioneer-tree': sprite('pioneer-tree', 'sway'),
+  palm: sprite('palm', 'sway'),
+  shrub: sprite('shrub', 'rustle'),
+  primate: sprite('primate', 'bob'),
+  songbird: sprite('songbird', 'hop'),
+  'large-bird': sprite('large-bird', 'hop'),
+  'small-mammal': sprite('small-mammal', 'hop'),
+  'mid-mammal': sprite('mid-mammal', 'bob'),
+  reptile: sprite('reptile', 'breathe'),
+  insect: sprite('insect', 'hover'),
+}
+
+/** Shared early growth stages, before a plant takes its archetype's shape. */
+export const GROWTH_STAGE_SPRITES = {
+  seedling: sprite('stage-seedling', 'rustle'),
+  sapling: sprite('stage-sapling', 'rustle'),
+}
+
+const grass = sprite('decor-grass', 'none')
+const flowers = sprite('decor-flowers', 'none')
+const rock = sprite('decor-rock', 'none')
+const cactus = sprite('decor-cactus', 'none')
+const mushroom = sprite('decor-mushroom', 'none')
+const lily = sprite('decor-lily', 'none')
+
+/** Ground decoration scattered on empty tiles, per Biome. Pantanal lilies only go on water tiles. */
+export const BIOME_DECOR: Record<BiomeId, { land: GardenSprite[]; water: GardenSprite[] }> = {
+  amazon: { land: [grass, mushroom, grass], water: [] },
+  'atlantic-forest': { land: [grass, flowers, mushroom], water: [] },
+  caatinga: { land: [rock, cactus, rock], water: [] },
+  cerrado: { land: [grass, flowers, rock], water: [] },
+  pantanal: { land: [grass, flowers], water: [lily] },
+  pampa: { land: [grass, flowers, flowers], water: [] },
+}
