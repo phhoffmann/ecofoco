@@ -57,7 +57,5 @@ The Sprout's four growth stages, from one session: [seedling](screenshots/visual
 
 ## Still open
 
-- Animated sprite frames: the Cube Pets models ship idle/walk clips that the bake could render as short strips.
-- Per-Biome variants of the archetype art, e.g. cacti for Caatinga shrubs.
-- A light theme; the tokens are ready for it, but no palette is defined.
-- Checking the numbers above on a low-end Android device.
+Follow-up visual work is tracked in the [PRD roadmap](../PRD.md#6-roadmap). The frame rates above still need
+checking on a low-end Android device.
