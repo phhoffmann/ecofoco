@@ -12,7 +12,9 @@ import {
 import type { BiomeId } from '../domain/biome'
 import { SPECIES_CATALOG } from '../domain/species'
 import type { CollectedEntry } from '../domain/types'
+import { ChevronLeftIcon, ChevronRightIcon, LeafIcon, PawIcon } from './icons'
 import { IsometricGarden } from './IsometricGarden'
+import { Card, IconButton, SegmentedControl } from './ui'
 
 const SPECIES_TYPE_BY_ID = new Map(SPECIES_CATALOG.map((s) => [s.id, s.type]))
 
@@ -53,54 +55,52 @@ export function CollectionGarden({ entries, biome, onSelectSpecies }: Collection
   const animals = periodEntries.filter((e) => SPECIES_TYPE_BY_ID.get(e.speciesId) === 'animal').length
 
   return (
-    <div className="space-y-3">
-      <div className="flex gap-2">
-        {GARDEN_PERIODS.map((p) => (
-          <button
-            key={p}
-            aria-pressed={period === p}
-            onClick={() => {
-              setPeriod(p)
-              setAnchor(new Date())
-            }}
-            className={`press flex-1 rounded-lg px-3 py-1.5 text-sm font-medium ${
-              period === p ? 'bg-emerald-500 text-emerald-950' : 'bg-emerald-800 text-emerald-100'
-            }`}
-          >
-            {t(`collection.garden.periods.${p}`)}
-          </button>
-        ))}
-      </div>
+    <Card className="space-y-3 p-3">
+      <SegmentedControl<GardenPeriod>
+        label={t('collection.garden.periodLabel')}
+        value={period}
+        onChange={(p) => {
+          setPeriod(p)
+          setAnchor(new Date())
+        }}
+        options={GARDEN_PERIODS.map((p) => ({ value: p, label: t(`collection.garden.periods.${p}`) }))}
+      />
 
-      <div className="flex items-center justify-between">
-        <button
-          aria-label={t('collection.garden.previous')}
+      <div className="flex items-center justify-between gap-2">
+        <IconButton
+          icon={ChevronLeftIcon}
+          label={t('collection.garden.previous')}
           onClick={() => setAnchor(shiftPeriod(period, anchor, -1))}
-          className="press size-9 rounded-lg bg-emerald-800 font-semibold text-emerald-100 active:bg-emerald-700"
-        >
-          ‹
-        </button>
-        <div className="text-center">
-          <p className="font-medium text-emerald-50">{formatRange(period, range, i18n.language)}</p>
-          <p className="text-xs text-emerald-400">
-            {t('collection.garden.plants', { count: plants })} · {t('collection.garden.animals', { count: animals })}
+        />
+        <div key={range.start.toISOString()} className="enter text-center">
+          <p className="text-body font-extrabold text-ink">{formatRange(period, range, i18n.language)}</p>
+          <p className="flex items-center justify-center gap-2 text-caption text-ink-muted">
+            <span className="inline-flex items-center gap-1">
+              <LeafIcon className="size-3.5 text-accent" />
+              {t('collection.garden.plants', { count: plants })}
+            </span>
+            <span className="inline-flex items-center gap-1">
+              <PawIcon className="size-3.5 text-accent" />
+              {t('collection.garden.animals', { count: animals })}
+            </span>
           </p>
         </div>
-        <button
-          aria-label={t('collection.garden.next')}
+        <IconButton
+          icon={ChevronRightIcon}
+          label={t('collection.garden.next')}
           disabled={isCurrentPeriod}
           onClick={() => setAnchor(shiftPeriod(period, anchor, 1))}
-          className="press size-9 rounded-lg bg-emerald-800 font-semibold text-emerald-100 active:bg-emerald-700 disabled:opacity-30"
-        >
-          ›
-        </button>
+        />
       </div>
 
-      <IsometricGarden entries={periodEntries} biome={biome} onSelectSpecies={onSelectSpecies} />
+      <IsometricGarden
+        entries={periodEntries}
+        biome={biome}
+        onSelectSpecies={onSelectSpecies}
+        transitionKey={`${period}:${range.start.toISOString()}`}
+      />
 
-      {plants + animals === 0 && (
-        <p className="text-center text-sm text-emerald-400">{t('collection.garden.empty')}</p>
-      )}
-    </div>
+      {plants + animals === 0 && <p className="pb-2 text-center text-caption text-ink-muted">{t('collection.garden.empty')}</p>}
+    </Card>
   )
 }

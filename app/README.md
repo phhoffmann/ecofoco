@@ -23,6 +23,7 @@ npm run dev
 | `npm run copy-sql-wasm` | Copies `sql-wasm.wasm` into `public/assets/` (see below). |
 | `npm run build:biome-grid -- <path/to/Ecoregions2017.shp>` | Regenerates the location → biome lookup (see below). |
 | `npm run build:catalog` | Regenerates the species catalog and photos (see below). |
+| `npm run bake:garden` | Re-renders the garden sprites from CC0 3D kits (see below). |
 
 CI (`.github/workflows/ci.yml`) runs `npm ci`, `lint`, `test` and `build` on every push and pull request to `main`.
 
@@ -79,6 +80,28 @@ npm run build:catalog
 
 Removing a species from the catalog is safe: collected entries for ids that no longer exist are kept in the
 database but not shown.
+
+## Garden sprites
+
+The garden and the Focus sprout use one transparent WebP per archetype (plus two early growth stages and a few
+ground decorations) in `src/assets/garden/`, and `sprites.json` with each sprite's size and foot point. They are
+baked from CC0 3D models rather than drawn, so every sprite shares one camera, one light and one palette:
+
+```sh
+npm run bake:garden
+```
+
+- **What's rendered:** `scripts/garden-bake/sprites.ts` maps each sprite to a model from Kenney's Nature Kit or
+  Cube Pets (downloaded once into `.garden-cache/`, git-ignored; set `GARDEN_CACHE_DIR` to move it), or to a
+  hand-built model in `scripts/garden-bake/procedural.js` (the lizard and the seedling), with material
+  recolours, scale and facing.
+- **How:** `scripts/garden-bake/bake.html` renders one model with three.js (loaded from a CDN, not an app
+  dependency) through an orthographic camera at 30° elevation and 45° azimuth, so one world unit of ground is
+  exactly one 2:1 garden tile. The script screenshots it in headless Chrome (`CHROME_BIN` to override
+  `google-chrome`), trims it with sharp and records where the model touches the ground.
+- **Needs:** Chrome or Chromium, `unzip`, network access for the kits and three.js.
+
+Licenses and sources per sprite: [`src/assets/garden/LICENSE.md`](src/assets/garden/LICENSE.md).
 
 ## Android
 

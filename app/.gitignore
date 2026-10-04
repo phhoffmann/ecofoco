@@ -28,3 +28,6 @@ public/assets/sql-wasm.wasm
 
 # Raw iNaturalist/GBIF responses and photos cached by the build:catalog script
 .catalog-cache
+
+# Kenney 3D kits downloaded by the bake:garden script
+.garden-cache

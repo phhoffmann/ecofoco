@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { rarityIn, speciesName } from '../domain/species'
 import { useActiveBiome } from '../stores/biomeStore'
 import { useCelebrationStore } from '../stores/celebrationStore'
+import { SparkleIcon } from './icons'
 import { RARITY_STYLES } from './rarity'
 
 /** How long a celebration stays up; matches the celebrate-overlay animation in index.css. */
@@ -49,7 +50,7 @@ export function CelebrationOverlay() {
       role="status"
       aria-live="polite"
       onClick={dismiss}
-      className="celebrate-overlay fixed inset-0 z-30 flex flex-col items-center justify-center gap-4 bg-emerald-950/85 px-6 backdrop-blur-sm"
+      className="celebrate-overlay fixed inset-0 z-30 flex flex-col items-center justify-center gap-4 bg-canvas/85 px-6 backdrop-blur-sm"
     >
       <div className="relative flex size-44 items-center justify-center">
         <span
@@ -80,17 +81,17 @@ export function CelebrationOverlay() {
         <img
           src={species.image}
           alt={name}
-          className={`celebrate-reveal size-36 rounded-3xl object-cover shadow-2xl ring-4 ${rarity.ring}`}
+          className={`celebrate-reveal size-36 rounded-card object-cover shadow-2xl ring-4 ${rarity.ring}`}
         />
       </div>
-      <p className="celebrate-twinkle text-sm font-medium tracking-wide text-emerald-200 uppercase">
-        ✨ {t('celebration.title')} ✨
+      <p className="celebrate-twinkle flex items-center gap-1.5 text-overline text-accent uppercase">
+        <SparkleIcon className="size-4" /> {t('celebration.title')} <SparkleIcon className="size-4" />
       </p>
-      <p className="celebrate-reveal text-center text-2xl font-semibold text-emerald-50">{name}</p>
-      <span className={`celebrate-reveal rounded-full px-3 py-1 text-xs font-semibold ${rarity.badge}`}>
+      <p className="celebrate-reveal text-center text-title text-ink">{name}</p>
+      <span className={`celebrate-reveal inline-flex items-center gap-1 rounded-full px-3 py-1 text-overline ${rarity.badge}`}>
         {t(`rarity.${tier}`)}
       </span>
-      <p className="text-xs text-emerald-400">{t('celebration.tapToContinue')}</p>
+      <p className="text-caption text-ink-faint">{t('celebration.tapToContinue')}</p>
     </div>
   )
 }

@@ -13,7 +13,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "build:biome-grid": "node scripts/build-biome-grid.ts",
-    "build:catalog": "node scripts/build-species-catalog.ts"
+    "build:catalog": "node scripts/build-species-catalog.ts",
+    "bake:garden": "node scripts/bake-garden-sprites.ts"
   },
   "dependencies": {
     "@capacitor-community/sqlite": "^8.1.1",

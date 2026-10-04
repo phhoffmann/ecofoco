@@ -7,6 +7,8 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   // The bundled biome lookup grid (src/assets/biomes) is binary.
   assetsInclude: ['**/*.bin'],
+  // Only the app's own page: scripts/garden-bake/bake.html loads three.js from a CDN and isn't part of the app.
+  optimizeDeps: { entries: ['index.html'] },
   test: {
     environment: 'jsdom',
   },

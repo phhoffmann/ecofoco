@@ -3,12 +3,13 @@ import { useTranslation } from 'react-i18next'
 import { BIOME_IDS } from '../domain/biome'
 import { SPECIES_CATALOG, speciesName } from '../domain/species'
 import { BottomSheet } from './BottomSheet'
+import { Button, Overline } from './ui'
 
 // TODO: register src/catalog/gbif-derived-dataset.csv at https://www.gbif.org/derived-dataset/register
 // and put the DOI it returns here (e.g. '10.15468/dd.xxxxxx').
 export const GBIF_DERIVED_DATASET_DOI: string | null = null
 
-const linkClass = 'text-emerald-300 underline underline-offset-2'
+const linkClass = 'font-bold text-accent underline underline-offset-2'
 
 interface CreditsSheetProps {
   onClose: () => void
@@ -23,10 +24,10 @@ export function CreditsSheet({ onClose }: CreditsSheetProps) {
     <BottomSheet onClose={onClose} labelledBy={titleId}>
       {(close) => (
         <>
-          <h2 id={titleId} className="mb-3 text-center text-lg font-semibold text-emerald-50">
+          <h2 id={titleId} className="mb-3 text-center text-title text-ink">
             {t('settings.credits.title')}
           </h2>
-          <div className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain text-xs text-emerald-200">
+          <div className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain text-caption text-ink-muted">
             <section className="space-y-1.5">
               <p>
                 {t('settings.credits.speciesData')}{' '}
@@ -63,13 +64,13 @@ export function CreditsSheet({ onClose }: CreditsSheetProps) {
               if (species.length === 0) return null
               return (
                 <section key={biome}>
-                  <h3 className="mb-1 font-medium tracking-wide text-emerald-500 uppercase">
-                    {t('settings.credits.photos', { biome: t(`biome.${biome}`) })}
+                  <h3 className="mb-1">
+                    <Overline>{t('settings.credits.photos', { biome: t(`biome.${biome}`) })}</Overline>
                   </h3>
                   <ul className="space-y-1">
                     {species.map((s) => (
                       <li key={s.id}>
-                        <span className="text-emerald-100">{speciesName(s, i18n.language)}</span>
+                        <span className="text-ink">{speciesName(s, i18n.language)}</span>
                         {' — '}
                         <a href={s.photo.sourceUrl} target="_blank" rel="noreferrer" className={linkClass}>
                           {s.photo.credit}
@@ -82,12 +83,9 @@ export function CreditsSheet({ onClose }: CreditsSheetProps) {
               )
             })}
           </div>
-          <button
-            onClick={close}
-            className="press mt-4 shrink-0 rounded-xl bg-emerald-800 px-5 py-3 font-medium text-emerald-50 active:bg-emerald-700"
-          >
+          <Button size="lg" onClick={close} className="mt-4 shrink-0">
             {t('common.close')}
-          </button>
+          </Button>
         </>
       )}
     </BottomSheet>

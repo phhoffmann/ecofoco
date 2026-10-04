@@ -46,12 +46,20 @@ export const ptBR: typeof en = {
   },
   focus: {
     chooseDuration: 'Escolha a duração do foco',
+    idleHint: 'Plante uma semente e fique no EcoFoco enquanto ela vira uma planta do seu bioma.',
     durationMinutes: '{{count}} min',
     leaveWarning: 'Trocar para outro app vai falhar essa sessão e descartar o broto. Bloquear a tela não tem problema.',
     giveUp: 'Desistir',
     youCollected: 'Você coletou',
     sessionFailed: 'Sessão falhou',
     leftEarly: 'Você saiu do app antes do broto terminar de crescer.',
+    stages: {
+      '0': 'Semente brotando',
+      '1': 'Muda',
+      '2': 'Planta jovem',
+      '3': 'Quase crescida',
+    },
+    grewInto: 'Seu broto virou',
   },
   activity: {
     checkingHealthConnect: 'Verificando o Health Connect…',
@@ -61,6 +69,8 @@ export const ptBR: typeof en = {
     connecting: 'Conectando…',
     connect: 'Conectar',
     todaySteps: 'Passos de hoje',
+    ofGoal: 'de {{goal}} passos',
+    goalMet: 'Meta alcançada!',
     drawButton: 'Sortear um animal!',
     drawDone: 'Animal já coletado hoje — volte amanhã.',
     keepWalking: 'Continue caminhando para liberar o sorteio de animal de hoje.',
@@ -69,7 +79,7 @@ export const ptBR: typeof en = {
   },
   collection: {
     discovered: '{{count}} / {{total}} espécies descobertas',
-    logSighting: '+ Registrar avistamento',
+    logSighting: 'Registrar avistamento',
     unknown: '???',
     view: {
       label: 'Visualização da coleção',
@@ -83,6 +93,7 @@ export const ptBR: typeof en = {
         week: 'Semana',
         month: 'Mês',
       },
+      periodLabel: 'Período do jardim',
       previous: 'Período anterior',
       next: 'Próximo período',
       plants_one: '{{count}} planta',
@@ -102,6 +113,8 @@ export const ptBR: typeof en = {
     stepGoal: 'Meta diária de passos',
     stepGoalHint: 'Passos necessários pra liberar o sorteio de animal do dia',
     stepGoalValue: '{{count}} passos',
+    stepGoalDecrease: 'Diminuir meta de passos',
+    stepGoalIncrease: 'Aumentar meta de passos',
     biome: {
       title: 'Bioma',
       hint: 'As recompensas vêm do seu bioma atual. Ganhe pontos para desbloquear biomas vizinhos.',

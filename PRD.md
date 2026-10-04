@@ -23,7 +23,7 @@ v1 is the MVP loop (focus → plants, steps → animals, one permanent Collectio
 
 ### 4.1 Focus session (plants)
 - User picks a duration (3, 15, 25 or 45 minutes) and starts the session.
-- A Sprout grows visibly in the UI for the duration of the session.
+- A Sprout grows visibly in the UI for the duration of the session: seedling, sapling, young plant, then fully grown in the shape of the plant's archetype. The plant is drawn when the session starts so the Sprout can take its shape, and is only collected if the session completes.
 - If completed without leaving the app → the Sprout becomes a permanent collected Plant, drawn from the current biome (§4.5).
 - If the user leaves for another app before it ends (beyond a 5-second grace period) → the Sprout is discarded (session fails, nothing is collected).
 - **Shipped:** turning the screen off or locking the phone keeps the session running; switching to another app with the screen on fails it after a 5-second grace period. Web/dev builds without the native plugin still fail as soon as the app is backgrounded. The screen is no longer kept awake.
@@ -39,7 +39,7 @@ v1 is the MVP loop (focus → plants, steps → animals, one permanent Collectio
 - Single, integrated view of plants + animals (one "ecosystem").
 - Dedicated **Pokédex/collection** grid for the current biome, listing everything collected so far (and what's missing).
 - The collection is **permanent** — nothing dies or decays after being collected.
-- **Isometric garden** view (Forest-style), switched from a grid ↔ garden toggle on the Collection screen itself: shows only what was collected in a chosen day / week / month, on a plot whose ground is tinted per biome; the grid stays as the full Pokédex. Sprites are CC0 placeholders, one per growth-form/body-plan archetype (not per species); baked archetype art replaces them later (§6).
+- **Isometric garden** view (Forest-style), switched from a grid ↔ garden toggle on the Collection screen itself: shows only what was collected in a chosen day / week / month, on a plot whose ground (colour, tile texture, decoration and drifting particles) follows the biome; the grid stays as the full Pokédex. Sprites are baked from CC0 3D kits, one per growth-form/body-plan archetype (not per species), and idle-animate: plants sway, animals hop, bob or hover. Switching period regrows the plot. All motion respects the system's reduced-motion setting.
 - Tapping a species (grid or garden) opens a bottom sheet with its photo (and credit, where the license asks for one), description and collection history.
 - Every new CollectedEntry plays a short celebration showing the species just collected.
 
@@ -85,7 +85,7 @@ v1 is the MVP loop (focus → plants, steps → animals, one permanent Collectio
 Planned work, roughly in order of how much it unblocks:
 
 1. **Native focus lock.** Kotlin plugins for the screen-lock overlay and app-usage reading (Usage Stats API).
-2. **App-wide visual polish.** Baked per-archetype garden art replacing the Kenney placeholders, richer per-biome ground (see `design-references/isometric-biome-example.png` for the target look), and motion/animation across the app, not only in the garden and celebrations.
+2. **Visual polish, next steps.** The first pass shipped (biome-tinted design tokens, baked archetype sprites, animated garden, growing Sprout). Still open: animated sprite frames from the kits' idle clips, per-biome variants of the archetype art (e.g. cacti for Caatinga shrubs), and a light theme. The garden stays plain DOM/CSS while it holds ~50 fps on low-end devices; PixiJS only if it stops doing so.
 3. **Android 8–11 coarse location.** Devices below Android 12 (API < 31) may not grant coarse-only location, leaving only the manual picker. Not tested on a real device yet; verify and fix if needed.
 4. **Plugin permission trim.** `@capgo/capacitor-health` merges read + write permissions for every Health Connect type; the manifest strips all but steps, and CI fails if more come back. `WRITE_STEPS` exists only for the step simulator and goes away with it before a public release.
 
