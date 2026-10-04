@@ -104,7 +104,7 @@ export function CollectionScreen() {
       )}
       {collectionView === 'grid' && loaded && collectedSpeciesIds.size === 0 && (
         <EmptyState
-          art={<img src={ARCHETYPE_SPRITES.shrub.src} alt="" className="garden-rustle h-20 w-auto" />}
+          art={<img src={ARCHETYPE_SPRITES.shrub.src} alt="" className="garden-rustle h-20 w-auto origin-bottom" />}
           title={t('collection.empty')}
         />
       )}

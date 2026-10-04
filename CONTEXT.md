@@ -11,7 +11,7 @@ A timed period where the user stays off the phone; completing it without leaving
 _Avoid_: focus timer, lock session
 
 **Sprout**:
-The in-progress growth of a Plant during an active FocusSession. Not yet permanent — it only becomes a CollectedEntry if the session completes, and is discarded if the session fails. Shown in the UI as it grows.
+The in-progress growth of a Plant during an active FocusSession. Not yet permanent — it only becomes a CollectedEntry if the session completes, and is discarded if the session fails. Shown in the UI growing through four stages (seedling, sapling, young plant, grown) into the shape of the Plant's Archetype; the Plant is drawn when the session starts, so its shape is known while it grows.
 _Avoid_: growing plant, temp plant
 
 ### Collecting
@@ -89,7 +89,7 @@ _Avoid_: sorteio, roll, pull, lottery
 ### Garden
 
 **Garden**:
-The isometric view of the Collection, an alternative to the grid on the Collection screen. Shows only the CollectedEntries from one Period, one sprite per entry by Archetype, on a Plot whose ground is tinted per Biome.
+The isometric view of the Collection, an alternative to the grid on the Collection screen. Shows only the CollectedEntries from one Period, one sprite per entry by Archetype, on a Plot whose ground follows the Biome (colour, tile texture, decoration).
 _Avoid_: isometric view (`isometric` is fine as the internal view value, but this is the concept name)
 
 **Period**:

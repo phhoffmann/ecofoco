@@ -19,9 +19,10 @@ import { ARCHETYPE_SPRITES, BIOME_DECOR, type GardenSprite, type SpriteMotion } 
 // Scene geometry in logical units. The scene scales to its container width, so everything is
 // positioned in percentages of these dimensions and taps are mapped back the same way.
 const TILE = { width: 64, height: 32 }
-const SOIL_DEPTH = 16
-const GRASS_LIP = 5
+const SOIL_DEPTH = 30
+const GRASS_LIP = 7
 const SHADOW_DROP = SOIL_DEPTH + 8
+const PEBBLES_PER_TILE_EDGE = 1.5
 const HEADROOM = 110 // room above the back tile for tall trees
 const PADDING = 8
 // Sprites stand slightly in front of the tile center so their base reads as on the ground.
@@ -153,11 +154,20 @@ export function IsometricGarden({ entries, biome, onSelectSpecies, transitionKey
     const teeth = size * 3
     const edge = Array.from({ length: teeth + 1 }, (_, i) => {
       const f = i / teeth
-      const drop = GRASS_LIP + (i % 2 ? 2.5 : -0.5)
+      // Uneven teeth, so the overhang reads as grass rather than a saw blade.
+      const drop = GRASS_LIP + (i % 2 ? 2 + tileNoise({ col: i, row: 3 }) * 3 : -1)
       return at(a.x + (b.x - a.x) * f, a.y + (b.y - a.y) * f + drop)
     })
     return [at(a.x, a.y), at(b.x, b.y), ...edge.reverse()].join(' ')
   }
+  // Pebbles in the soil, placed by stable noise along each front face.
+  const pebbles = (a: Point, b: Point, seed: number) =>
+    Array.from({ length: Math.round(size * PEBBLES_PER_TILE_EDGE) }, (_, i) => {
+      const along = (i + 0.25 + tileNoise({ col: i, row: seed }) * 0.5) / Math.round(size * PEBBLES_PER_TILE_EDGE)
+      const depth = GRASS_LIP + 4 + tileNoise({ col: seed, row: i }) * (SOIL_DEPTH - GRASS_LIP - 8)
+      const r = 1.6 + tileNoise({ col: i + seed, row: i }) * 1.8
+      return { x: origin.x + a.x + (b.x - a.x) * along, y: origin.y + a.y + (b.y - a.y) * along + depth, r }
+    })
   const gridLines = Array.from({ length: size - 1 }, (_, i) => {
     const n = i + 1
     const a = tileToScreen({ col: n, row: 0 }, TILE)
@@ -197,6 +207,9 @@ export function IsometricGarden({ entries, biome, onSelectSpecies, transitionKey
           {/* A darker stratum low in the soil, so the slab reads as earth rather than a flat edge. */}
           <polygon points={face(left, bottom, SOIL_DEPTH * 0.62, SOIL_DEPTH)} fill="black" opacity={0.14} />
           <polygon points={face(bottom, right, SOIL_DEPTH * 0.62, SOIL_DEPTH)} fill="black" opacity={0.18} />
+          {[...pebbles(left, bottom, 11), ...pebbles(bottom, right, 23)].map((p, i) => (
+            <ellipse key={i} cx={p.x} cy={p.y} rx={p.r * 1.4} ry={p.r} fill="black" opacity={0.16} />
+          ))}
           <polygon points={lip(left, bottom)} fill={ground.lip[0]} />
           <polygon points={lip(bottom, right)} fill={ground.lip[1]} />
           {tiles.map((pos) => {

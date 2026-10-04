@@ -330,24 +330,31 @@ body {
   will-change: transform;
 }
 
+/* Default cycles; the garden sets its own per sprite (MOTION_SECONDS in IsometricGarden.tsx). */
 .garden-sway {
   animation-name: garden-sway;
+  animation-duration: 5s;
 }
 .garden-rustle {
   animation-name: garden-rustle;
+  animation-duration: 3.2s;
 }
 .garden-bob {
   animation-name: garden-bob;
+  animation-duration: 2.4s;
 }
 .garden-hop {
   animation-name: garden-hop;
+  animation-duration: 6s;
   animation-timing-function: linear;
 }
 .garden-hover {
   animation-name: garden-hover;
+  animation-duration: 1.4s;
 }
 .garden-breathe {
   animation-name: garden-breathe;
+  animation-duration: 3.6s;
 }
 
 /* Sprites grow out of the ground, back to front, when the garden opens or the period changes. */

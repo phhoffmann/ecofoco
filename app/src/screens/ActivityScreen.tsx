@@ -14,7 +14,7 @@ import { useSettingsStore } from '../stores/settingsStore'
 const WAITING_ANIMALS: AnimalArchetype[] = ['songbird', 'small-mammal', 'mid-mammal']
 
 function SpriteArt({ archetype, className = '', style }: { archetype: AnimalArchetype; className?: string; style?: CSSProperties }) {
-  return <img src={ARCHETYPE_SPRITES[archetype].src} alt="" draggable={false} className={`h-20 w-auto ${className}`} style={style} />
+  return <img src={ARCHETYPE_SPRITES[archetype].src} alt="" draggable={false} className={`h-20 w-auto origin-bottom ${className}`} style={style} />
 }
 
 export function ActivityScreen() {
