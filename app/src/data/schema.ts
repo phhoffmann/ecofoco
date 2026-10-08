@@ -58,4 +58,10 @@ export async function migrate(db: MigratableDb): Promise<void> {
   if (!(await hasColumn(db, 'focus_sessions', 'failReason'))) {
     await db.execute('ALTER TABLE focus_sessions ADD COLUMN failReason TEXT')
   }
+  if (!(await hasColumn(db, 'active_focus_session', 'backgroundedAt'))) {
+    await db.execute('ALTER TABLE active_focus_session ADD COLUMN backgroundedAt TEXT')
+  }
+  if (!(await hasColumn(db, 'active_focus_session', 'backgroundedScreenOn'))) {
+    await db.execute('ALTER TABLE active_focus_session ADD COLUMN backgroundedScreenOn INTEGER')
+  }
 }
