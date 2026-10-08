@@ -44,7 +44,7 @@ v1 is the MVP loop (focus → plants, steps → animals, one permanent Collectio
 - The collection is **permanent** — nothing dies or decays after being collected.
 - **Isometric garden** view (Forest-style), switched from a grid ↔ garden toggle on the Collection screen itself: shows only what was collected in a chosen day / week / month, on a plot whose ground (colour, tile texture, decoration and drifting particles) follows the biome; the grid stays as the full Pokédex. Sprites are baked from CC0 3D kits, one per growth-form/body-plan archetype (not per species), and idle-animate: plants sway, animals hop, bob or hover. Switching period regrows the plot. All motion follows the Animations setting (the device's reduced-motion setting by default).
 - Tapping a species (grid or garden) opens a bottom sheet with its photo (and credit, where the license asks for one), description and collection history.
-- Every new CollectedEntry gets one reveal that waits for a tap: new or seen before (×N), progress through the biome, points earned, and a shortcut to see it in the garden. The grid lists collected species first, highlights the latest catch, and filters plants/animals.
+- Every new CollectedEntry gets one reveal that waits for a tap: new or seen before (×N), progress through the biome, points earned, and a shortcut to it in the Collection (opened in the saved grid or garden view, without changing it). The grid lists collected species first, highlights the latest catch, and filters plants/animals.
 - A manual sighting is searchable, asks for confirmation, and can be undone from a snackbar right after it is logged.
 
 ### 4.4 Species catalog
