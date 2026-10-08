@@ -193,6 +193,7 @@ export const en = {
     points_one: '+{{count}} point',
     points_other: '+{{count}} points',
     seeInGarden: 'See it in your garden',
+    seeInCollection: 'See it in your collection',
     continue: 'Continue',
   },
   snackbar: {

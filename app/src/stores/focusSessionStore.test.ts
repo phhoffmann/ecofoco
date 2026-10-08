@@ -3,7 +3,18 @@ import { pickRandomSpecies } from '../domain/draw'
 import { LEAVE_GRACE_MS } from '../domain/focusSession'
 import type { Species } from '../domain/species'
 
-const { appListeners, lifecycle, completeFocusSession, failFocusSession, saveActiveFocusSession, getActiveFocusSession, reveal, mockSpecies } = vi.hoisted(() => {
+const {
+  appListeners,
+  lifecycle,
+  completeFocusSession,
+  failFocusSession,
+  saveActiveFocusSession,
+  getActiveFocusSession,
+  markActiveFocusSessionBackgrounded,
+  clearActiveFocusSessionBackgrounded,
+  reveal,
+  mockSpecies,
+} = vi.hoisted(() => {
   const mockSpecies: Species = {
     id: 'jatoba',
     scientificName: 'Hymenaea courbaril',
@@ -19,11 +30,13 @@ const { appListeners, lifecycle, completeFocusSession, failFocusSession, saveAct
   return {
     appListeners: [] as Array<(isActive: boolean) => void>,
     // Stands in for the native AwayTracker plugin.
-    lifecycle: { pluginAvailable: true, otherAppMs: 0 },
+    lifecycle: { pluginAvailable: true, otherAppMs: 0, screenInUse: true },
     completeFocusSession: vi.fn().mockResolvedValue({}),
     failFocusSession: vi.fn().mockResolvedValue({}),
     saveActiveFocusSession: vi.fn().mockResolvedValue(undefined),
     getActiveFocusSession: vi.fn().mockResolvedValue(null),
+    markActiveFocusSessionBackgrounded: vi.fn().mockResolvedValue(undefined),
+    clearActiveFocusSessionBackgrounded: vi.fn().mockResolvedValue(undefined),
     reveal: vi.fn().mockResolvedValue(undefined),
     mockSpecies,
   }
@@ -36,6 +49,7 @@ vi.mock('../data/appLifecycle', () => ({
   },
   canTellScreenOffFromAppSwitch: () => lifecycle.pluginAvailable,
   timeInOtherAppsMs: async () => lifecycle.otherAppMs,
+  isScreenInUse: async () => lifecycle.screenInUse,
 }))
 
 vi.mock('../domain/draw', () => ({ pickRandomSpecies: vi.fn(() => mockSpecies) }))
@@ -45,6 +59,8 @@ vi.mock('../data/focusSessionRepo', () => ({
   failFocusSession,
   saveActiveFocusSession,
   getActiveFocusSession,
+  markActiveFocusSessionBackgrounded,
+  clearActiveFocusSessionBackgrounded,
 }))
 vi.mock('./collectionStore', () => ({ useCollectionStore: { getState: () => ({ reveal }) } }))
 
@@ -76,8 +92,12 @@ describe('focusSessionStore', () => {
     saveActiveFocusSession.mockClear()
     getActiveFocusSession.mockReset().mockResolvedValue(null)
     reveal.mockClear()
+    markActiveFocusSessionBackgrounded.mockClear()
+    clearActiveFocusSessionBackgrounded.mockClear()
+    completeFocusSession.mockResolvedValue({})
     lifecycle.pluginAvailable = true
     lifecycle.otherAppMs = 0
+    lifecycle.screenInUse = true
     useFocusSessionStore.getState().reset()
   })
 
@@ -222,6 +242,31 @@ describe('focusSessionStore', () => {
     expectFailed(60, 'gave_up')
   })
 
+  it('records when the app was backgrounded and whether the screen was on, and clears it on return', async () => {
+    useFocusSessionStore.getState().start(600)
+    await vi.advanceTimersByTimeAsync(1000)
+
+    lifecycle.screenInUse = false
+    await background()
+    expect(markActiveFocusSessionBackgrounded).toHaveBeenCalledExactlyOnceWith(new Date(Date.now()).toISOString(), false)
+
+    await foreground()
+    expect(clearActiveFocusSessionBackgrounded).toHaveBeenCalledOnce()
+  })
+
+  it('keeps a session it could not record as completed, so it can still be given up', async () => {
+    completeFocusSession.mockRejectedValueOnce(new Error('SQLITE_FULL'))
+    useFocusSessionStore.getState().start(3)
+    await vi.advanceTimersByTimeAsync(3000)
+
+    expect(useFocusSessionStore.getState().status).toBe('running')
+    expect(reveal).not.toHaveBeenCalled()
+
+    await useFocusSessionStore.getState().fail('gave_up')
+    expect(useFocusSessionStore.getState()).toMatchObject({ status: 'failed', failReason: 'gave_up' })
+    expect(failFocusSession).toHaveBeenCalledWith(expect.any(String), 3, 'gave_up')
+  })
+
   it('fail() is a no-op when there is no running session', async () => {
     await useFocusSessionStore.getState().fail('gave_up')
     expect(failFocusSession).not.toHaveBeenCalled()
@@ -273,6 +318,52 @@ describe('focusSessionStore', () => {
       expect(useFocusSessionStore.getState()).toMatchObject({ status: 'failed', failReason: 'closed' })
       expect(failFocusSession).toHaveBeenCalledWith(session.startedAt, 600, 'closed')
       expect(completeFocusSession).not.toHaveBeenCalled()
+    })
+
+    const backgroundedSecondsAgo = (seconds: number, screenOn: boolean) => ({
+      at: new Date(Date.now() - seconds * 1000).toISOString(),
+      screenOn,
+    })
+
+    it('fails as leaving the app when it was backgrounded with the screen on past the grace period', async () => {
+      const session = { ...persisted(120), backgrounded: backgroundedSecondsAgo(LEAVE_GRACE_MS / 1000 + 60, true) }
+      getActiveFocusSession.mockResolvedValue(session)
+
+      await useFocusSessionStore.getState().recover()
+
+      expect(useFocusSessionStore.getState()).toMatchObject({ status: 'failed', failReason: 'left_app' })
+      expect(failFocusSession).toHaveBeenCalledExactlyOnceWith(session.startedAt, 600, 'left_app')
+      expect(completeFocusSession).not.toHaveBeenCalled()
+    })
+
+    it('resumes when it was backgrounded with the screen on within the grace period', async () => {
+      getActiveFocusSession.mockResolvedValue({ ...persisted(120), backgrounded: backgroundedSecondsAgo(1, true) })
+
+      await useFocusSessionStore.getState().recover()
+
+      expect(useFocusSessionStore.getState()).toMatchObject({ status: 'running', remainingSeconds: 480 })
+      expect(failFocusSession).not.toHaveBeenCalled()
+      await vi.advanceTimersByTimeAsync(0)
+      expect(clearActiveFocusSessionBackgrounded).toHaveBeenCalledOnce()
+    })
+
+    it('resumes when it was backgrounded with the screen off, however long ago', async () => {
+      getActiveFocusSession.mockResolvedValue({ ...persisted(120), backgrounded: backgroundedSecondsAgo(100, false) })
+
+      await useFocusSessionStore.getState().recover()
+
+      expect(useFocusSessionStore.getState()).toMatchObject({ status: 'running', remainingSeconds: 480 })
+      expect(failFocusSession).not.toHaveBeenCalled()
+    })
+
+    it('still fails as closed when it was backgrounded with the screen off and its time ran out', async () => {
+      const session = { ...persisted(900), backgrounded: backgroundedSecondsAgo(800, false) }
+      getActiveFocusSession.mockResolvedValue(session)
+
+      await useFocusSessionStore.getState().recover()
+
+      expect(useFocusSessionStore.getState()).toMatchObject({ status: 'failed', failReason: 'closed' })
+      expect(failFocusSession).toHaveBeenCalledExactlyOnceWith(session.startedAt, 600, 'closed')
     })
 
     it('does nothing when no session was running', async () => {

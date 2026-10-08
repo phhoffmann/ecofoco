@@ -3,7 +3,7 @@ import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import '../i18n'
 import { SPECIES_CATALOG } from '../domain/species'
-import type { CollectedEntry } from '../domain/types'
+import type { CollectedEntry, CollectionView } from '../domain/types'
 import { useCollectionStore } from '../stores/collectionStore'
 import { useSettingsStore } from '../stores/settingsStore'
 import { CollectionScreen } from './CollectionScreen'
@@ -118,9 +118,9 @@ describe('CollectionScreen grid ordering and filters', () => {
   let root: Root
   const scrollIntoView = vi.fn()
 
-  async function render(highlightSpeciesId: string | null = null, stored = many) {
+  async function render(highlightSpeciesId: string | null = null, stored = many, collectionView: CollectionView = 'grid') {
     listCollectedEntries.mockResolvedValue(stored)
-    useSettingsStore.setState({ collectionView: 'grid' })
+    useSettingsStore.setState({ collectionView })
     useCollectionStore.setState({ entries: [], loaded: false, highlightSpeciesId })
     container = document.createElement('div')
     document.body.appendChild(container)
@@ -170,6 +170,18 @@ describe('CollectionScreen grid ordering and filters', () => {
     const tile = container.querySelector<HTMLElement>(`[data-species-id="${newerPlant.id}"]`)!
     expect(tile.className).toContain('catch-highlight')
     expect(tile.textContent).toContain('New')
+    expect(scrollIntoView).toHaveBeenCalled()
+    expect(useCollectionStore.getState().highlightSpeciesId).toBeNull()
+  })
+
+  it('keeps the latest catch pending in the garden view, and highlights it once the grid is opened', async () => {
+    await render(newerPlant.id, many, 'isometric')
+
+    expect(useCollectionStore.getState().highlightSpeciesId).toBe(newerPlant.id)
+
+    await act(async () => useSettingsStore.setState({ collectionView: 'grid' }))
+    const tile = container.querySelector<HTMLElement>(`[data-species-id="${newerPlant.id}"]`)!
+    expect(tile.className).toContain('catch-highlight')
     expect(scrollIntoView).toHaveBeenCalled()
     expect(useCollectionStore.getState().highlightSpeciesId).toBeNull()
   })

@@ -1,14 +1,16 @@
 import { create } from 'zustand'
-import { canTellScreenOffFromAppSwitch, onAppStateChange, timeInOtherAppsMs } from '../data/appLifecycle'
+import { canTellScreenOffFromAppSwitch, isScreenInUse, onAppStateChange, timeInOtherAppsMs } from '../data/appLifecycle'
 import {
+  clearActiveFocusSessionBackgrounded,
   completeFocusSession,
   failFocusSession,
   getActiveFocusSession,
+  markActiveFocusSessionBackgrounded,
   saveActiveFocusSession,
 } from '../data/focusSessionRepo'
 import { FOCUS_SESSION_POINTS } from '../domain/biome'
 import { pickRandomSpecies } from '../domain/draw'
-import { computeRemainingSeconds, hasLeftTooLong } from '../domain/focusSession'
+import { computeRemainingSeconds, hasLeftTooLong, LEAVE_GRACE_MS } from '../domain/focusSession'
 import { SPECIES_CATALOG, type PlantArchetype, type Species } from '../domain/species'
 import type { ActiveFocusSession, FocusFailReason } from '../domain/types'
 import { activeBiome } from './biomeStore'
@@ -42,6 +44,11 @@ let saving: Promise<void> = Promise.resolve()
 let tickHandle: ReturnType<typeof setInterval> | null = null
 let awayCheckHandle: ReturnType<typeof setInterval> | null = null
 let backgroundedThisSession = false
+
+/** Queues a write to the active session after the ones before it. */
+function persist(write: () => Promise<void>) {
+  saving = saving.catch(() => {}).then(write)
+}
 
 function clearTick() {
   if (tickHandle !== null) {
@@ -102,7 +109,12 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => {
       clearAwayCheck()
       active = null
       await saving.catch(() => {})
-      await completeFocusSession(session)
+      try {
+        await completeFocusSession(session)
+      } catch {
+        active = session
+        return
+      }
       set({ status: 'completed', resultSpecies: species })
       await useCollectionStore.getState().reveal(species, FOCUS_SESSION_POINTS)
     }, 250)
@@ -137,9 +149,16 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => {
       const session = await getActiveFocusSession()
       if (!session || get().status !== 'idle') return
       const species = SPECIES_CATALOG.find((s) => s.id === session.speciesId && s.type === 'plant')
+      const { backgrounded } = session
+      if (backgrounded?.screenOn && Date.now() - Date.parse(backgrounded.at) > LEAVE_GRACE_MS) {
+        set({ ...IDLE, status: 'failed', plannedDurationSeconds: session.plannedDurationSeconds, failReason: 'left_app' })
+        await failFocusSession(session.startedAt, session.plannedDurationSeconds, 'left_app')
+        return
+      }
       const remaining = computeRemainingSeconds(Date.parse(session.startedAt), session.plannedDurationSeconds, Date.now())
       if (species && remaining > 0) {
         run(session, species)
+        if (backgrounded) persist(clearActiveFocusSessionBackgrounded)
         return
       }
       // Its time ran out while the process was dead, so nobody saw it through: it can't count as
@@ -172,8 +191,11 @@ onAppStateChange((isActive) => {
   if (isActive) {
     clearAwayCheck()
     void failIfLeftTooLong()
+    persist(clearActiveFocusSessionBackgrounded)
   } else {
     backgroundedThisSession = true
+    const at = new Date().toISOString()
+    persist(async () => markActiveFocusSessionBackgrounded(at, await isScreenInUse()))
     clearAwayCheck()
     awayCheckHandle = setInterval(() => void failIfLeftTooLong(), AWAY_CHECK_INTERVAL_MS)
   }

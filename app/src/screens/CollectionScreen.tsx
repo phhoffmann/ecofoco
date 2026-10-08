@@ -61,10 +61,12 @@ export function CollectionScreen() {
     void refresh()
   }, [refresh])
 
-  if (pendingHighlight && pendingHighlight !== highlightId) setHighlightId(pendingHighlight)
+  // Only the grid shows the highlight, so the garden leaves it pending for when the grid is opened.
+  const showsHighlight = collectionView === 'grid'
+  if (showsHighlight && pendingHighlight && pendingHighlight !== highlightId) setHighlightId(pendingHighlight)
   useEffect(() => {
-    if (pendingHighlight) clearHighlight()
-  }, [pendingHighlight, clearHighlight])
+    if (showsHighlight && pendingHighlight) clearHighlight()
+  }, [showsHighlight, pendingHighlight, clearHighlight])
 
   const biome = useActiveBiome()
   const biomeSpecies = useMemo(() => SPECIES_CATALOG.filter((s) => s.biome.includes(biome)), [biome])
@@ -79,10 +81,10 @@ export function CollectionScreen() {
 
   // Bring the latest catch into view.
   useEffect(() => {
-    if (!highlightId || collectionView !== 'grid') return
+    if (!highlightId || !showsHighlight) return
     const tile = gridRef.current?.querySelector(`[data-species-id="${highlightId}"]`)
     tile?.scrollIntoView?.({ block: 'center', behavior: isMotionReduced() ? 'auto' : 'smooth' })
-  }, [highlightId, collectionView, kind, loaded])
+  }, [highlightId, showsHighlight, kind, loaded])
 
   return (
     <div className="space-y-4 px-gutter py-4">

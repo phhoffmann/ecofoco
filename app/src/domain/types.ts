@@ -28,6 +28,8 @@ export interface ActiveFocusSession {
   plannedDurationSeconds: number
   /** The Plant the Sprout grows into; collected only if the session completes. */
   speciesId: string
+  /** Set while the app is in the background mid-session: when it left, and whether the screen was on then. */
+  backgrounded?: { at: string; screenOn: boolean }
 }
 
 export interface DailyProgress {

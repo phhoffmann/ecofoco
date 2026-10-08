@@ -5,7 +5,7 @@ import { rarityIn, speciesName } from '../domain/species'
 import { useCelebrationStore } from '../stores/celebrationStore'
 import { useNavigationStore } from '../stores/navigationStore'
 import { useSettingsStore } from '../stores/settingsStore'
-import { GardenIcon, SparkleIcon } from './icons'
+import { GardenIcon, GridIcon, SparkleIcon } from './icons'
 import { RARITY_STYLES } from './rarity'
 import { Button } from './ui'
 
@@ -35,7 +35,7 @@ export function CelebrationOverlay() {
   const seq = useCelebrationStore((s) => s.seq)
   const dismiss = useCelebrationStore((s) => s.dismiss)
   const setTab = useNavigationStore((s) => s.setTab)
-  const setCollectionView = useSettingsStore((s) => s.setCollectionView)
+  const collectionView = useSettingsStore((s) => s.collectionView)
   const primaryRef = useRef<HTMLButtonElement>(null)
   const open = reveal !== null
 
@@ -59,9 +59,10 @@ export function CelebrationOverlay() {
   const rarity = RARITY_STYLES[tier]
   const name = speciesName(species, i18n.language)
 
-  function seeInGarden() {
+  const inGarden = collectionView === 'isometric'
+
+  function seeInCollection() {
     setTab('collection')
-    void setCollectionView('isometric')
     dismiss()
   }
 
@@ -124,8 +125,8 @@ export function CelebrationOverlay() {
       </p>
 
       <div className="mt-3 flex w-full max-w-sm flex-col gap-2">
-        <Button ref={primaryRef} variant="primary" size="lg" icon={GardenIcon} onClick={seeInGarden}>
-          {t('celebration.seeInGarden')}
+        <Button ref={primaryRef} variant="primary" size="lg" icon={inGarden ? GardenIcon : GridIcon} onClick={seeInCollection}>
+          {t(inGarden ? 'celebration.seeInGarden' : 'celebration.seeInCollection')}
         </Button>
         <Button variant="ghost" onClick={dismiss}>
           {t('celebration.continue')}

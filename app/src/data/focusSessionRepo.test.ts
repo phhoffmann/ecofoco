@@ -11,8 +11,10 @@ import {
   completeFocusSession,
   countCompletedFocusSessions,
   failFocusSession,
+  clearActiveFocusSessionBackgrounded,
   getActiveFocusSession,
   listFocusSessions,
+  markActiveFocusSessionBackgrounded,
   saveActiveFocusSession,
 } from './focusSessionRepo'
 
@@ -36,6 +38,19 @@ describe('focusSessionRepo', () => {
     // Starting again replaces it: there is only ever one running session.
     await saveActiveFocusSession({ ...active, speciesId: 'ipe-amarelo' })
     expect(await getActiveFocusSession()).toEqual({ ...active, speciesId: 'ipe-amarelo' })
+  })
+
+  it('remembers when the app was backgrounded mid-session, and forgets it on return', async () => {
+    await saveActiveFocusSession(active)
+
+    await markActiveFocusSessionBackgrounded('2026-09-10T10:05:00.000Z', true)
+    expect(await getActiveFocusSession()).toEqual({ ...active, backgrounded: { at: '2026-09-10T10:05:00.000Z', screenOn: true } })
+
+    await markActiveFocusSessionBackgrounded('2026-09-10T10:06:00.000Z', false)
+    expect((await getActiveFocusSession())?.backgrounded).toEqual({ at: '2026-09-10T10:06:00.000Z', screenOn: false })
+
+    await clearActiveFocusSessionBackgrounded()
+    expect(await getActiveFocusSession()).toEqual(active)
   })
 
   it('completes a session by collecting its plant, recording it and clearing the active session together', async () => {

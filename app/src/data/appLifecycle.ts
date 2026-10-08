@@ -4,6 +4,7 @@ import { Capacitor, registerPlugin } from '@capacitor/core'
 // Local native plugin in app/android (AwayTrackerPlugin.kt).
 interface AwayTrackerPlugin {
   getOtherAppTime(): Promise<{ otherAppMs: number }>
+  isScreenInUse(): Promise<{ inUse: boolean }>
 }
 
 const AwayTracker = registerPlugin<AwayTrackerPlugin>('AwayTracker')
@@ -26,4 +27,10 @@ export function canTellScreenOffFromAppSwitch(): boolean {
 export async function timeInOtherAppsMs(): Promise<number> {
   const { otherAppMs } = await AwayTracker.getOtherAppTime()
   return otherAppMs
+}
+
+/** Whether the screen is on and unlocked right now. */
+export async function isScreenInUse(): Promise<boolean> {
+  const { inUse } = await AwayTracker.isScreenInUse()
+  return inUse
 }

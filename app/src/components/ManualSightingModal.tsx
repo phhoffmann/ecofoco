@@ -50,8 +50,12 @@ export function ManualSightingModal({ onClose }: ManualSightingModalProps) {
   async function confirm(close: () => void) {
     if (!confirming) return
     setSaving(true)
-    await logManualSighting(confirming.id)
-    close()
+    try {
+      await logManualSighting(confirming.id)
+      close()
+    } finally {
+      setSaving(false)
+    }
   }
 
   function back() {

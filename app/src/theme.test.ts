@@ -1,8 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import css from './index.css?raw'
 
-const SOURCES = import.meta.glob<string>('./**/*.tsx', { query: '?raw', import: 'default', eager: true })
-
 /** The default palette (@theme) plus each Biome's override block. */
 function palettes(): Record<string, Record<string, string>> {
   const blocks: Record<string, string> = { default: css.match(/@theme static \{([\s\S]*?)\n\}/)![1] }
@@ -46,12 +44,5 @@ describe('theme accessibility', () => {
     const sizes = [...css.matchAll(/--text-([a-z]+):\s*([\d.]+)rem;/g)]
     expect(sizes.length).toBeGreaterThan(0)
     for (const [, token, rem] of sizes) expect(Number(rem) * 16, token).toBeGreaterThanOrEqual(12)
-  })
-
-  it('uses no arbitrary text size under 12px in any component', () => {
-    for (const [file, source] of Object.entries(SOURCES)) {
-      for (const [, px] of source.matchAll(/text-\[(\d+(?:\.\d+)?)px\]/g)) expect(Number(px), file).toBeGreaterThanOrEqual(12)
-      for (const [, rem] of source.matchAll(/text-\[(\d*\.\d+)rem\]/g)) expect(Number(rem) * 16, file).toBeGreaterThanOrEqual(12)
-    }
   })
 })

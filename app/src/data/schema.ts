@@ -21,7 +21,9 @@ export const SCHEMA = `
     id INTEGER PRIMARY KEY CHECK (id = 1),
     startedAt TEXT NOT NULL,
     plannedDurationSeconds INTEGER NOT NULL,
-    speciesId TEXT NOT NULL
+    speciesId TEXT NOT NULL,
+    backgroundedAt TEXT,
+    backgroundedScreenOn INTEGER
   );
 
   CREATE TABLE IF NOT EXISTS daily_progress (

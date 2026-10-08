@@ -67,6 +67,12 @@ class AwayTrackerPlugin : Plugin() {
         call.resolve(JSObject().apply { put("otherAppMs", ms) })
     }
 
+    /** Whether the screen is on and unlocked right now. */
+    @PluginMethod
+    fun isScreenInUse(call: PluginCall) {
+        call.resolve(JSObject().apply { put("inUse", isScreenInUse()) })
+    }
+
     /**
      * Credits the time since the last sample to other apps if the screen is on and unlocked now.
      * A gap far longer than the sample interval means the sampler was suspended — deep sleep or a

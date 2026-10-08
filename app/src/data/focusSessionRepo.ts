@@ -29,8 +29,29 @@ export async function saveActiveFocusSession(active: ActiveFocusSession): Promis
 
 export async function getActiveFocusSession(): Promise<ActiveFocusSession | null> {
   const db = await getDb()
-  const res = await db.query('SELECT startedAt, plannedDurationSeconds, speciesId FROM active_focus_session WHERE id = 1')
-  return (res.values?.[0] as ActiveFocusSession | undefined) ?? null
+  const res = await db.query(
+    'SELECT startedAt, plannedDurationSeconds, speciesId, backgroundedAt, backgroundedScreenOn FROM active_focus_session WHERE id = 1',
+  )
+  const row = res.values?.[0]
+  if (!row) return null
+  const session: ActiveFocusSession = {
+    startedAt: row.startedAt,
+    plannedDurationSeconds: row.plannedDurationSeconds,
+    speciesId: row.speciesId,
+  }
+  if (row.backgroundedAt) session.backgrounded = { at: row.backgroundedAt, screenOn: Boolean(row.backgroundedScreenOn) }
+  return session
+}
+
+/** Records the app leaving the foreground mid-session, so a relaunch after the process died can tell. */
+export async function markActiveFocusSessionBackgrounded(at: string, screenOn: boolean): Promise<void> {
+  const db = await getDb()
+  await db.run('UPDATE active_focus_session SET backgroundedAt = ?, backgroundedScreenOn = ? WHERE id = 1', [at, screenOn ? 1 : 0])
+}
+
+export async function clearActiveFocusSessionBackgrounded(): Promise<void> {
+  const db = await getDb()
+  await db.run('UPDATE active_focus_session SET backgroundedAt = NULL, backgroundedScreenOn = NULL WHERE id = 1', [])
 }
 
 /** Records the completed session and collects its Plant in one transaction, so neither exists without the other. */

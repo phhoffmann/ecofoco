@@ -99,12 +99,23 @@ describe('CelebrationOverlay', () => {
     expect(useCelebrationStore.getState().reveal).toBeNull()
   })
 
-  it('"See it in your garden" opens the Collection on the garden', () => {
+  it('"See it in your collection" opens the Collection in the grid the user chose, keeping that choice', () => {
     act(() => useCelebrationStore.getState().celebrate(firstCatch))
-    act(() => button('See it in your garden').click())
+    act(() => button('See it in your collection').click())
 
     expect(overlay()).toBeNull()
     expect(useNavigationStore.getState().tab).toBe('collection')
-    expect(setCollectionView).toHaveBeenCalledWith('isometric')
+    expect(useSettingsStore.getState().collectionView).toBe('grid')
+    expect(setCollectionView).not.toHaveBeenCalled()
+  })
+
+  it('"See it in your garden" opens the Collection when the user chose the garden view, keeping that choice', () => {
+    act(() => useSettingsStore.setState({ collectionView: 'isometric' }))
+    act(() => useCelebrationStore.getState().celebrate(firstCatch))
+    act(() => button('See it in your garden').click())
+
+    expect(useNavigationStore.getState().tab).toBe('collection')
+    expect(useSettingsStore.getState().collectionView).toBe('isometric')
+    expect(setCollectionView).not.toHaveBeenCalled()
   })
 })

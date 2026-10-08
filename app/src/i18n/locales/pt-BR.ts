@@ -195,6 +195,7 @@ export const ptBR: typeof en = {
     points_one: '+{{count}} ponto',
     points_other: '+{{count}} pontos',
     seeInGarden: 'Ver no seu jardim',
+    seeInCollection: 'Ver na sua coleção',
     continue: 'Continuar',
   },
   snackbar: {
