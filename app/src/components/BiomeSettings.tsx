@@ -123,7 +123,7 @@ export function BiomeSettings() {
       <button
         onClick={() => void redetect()}
         disabled={detecting}
-        className="press inline-flex items-center gap-1.5 text-caption font-bold text-accent disabled:opacity-50"
+        className="press inline-flex min-h-11 items-center gap-1.5 text-caption font-bold text-accent disabled:opacity-50"
       >
         <MapPinIcon className="size-4" />
         {detecting ? t('biomeSetup.detecting') : t('settings.biome.redetect')}

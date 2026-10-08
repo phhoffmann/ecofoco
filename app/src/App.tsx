@@ -1,22 +1,25 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { CatchSnackbar } from './components/CatchSnackbar'
 import { CelebrationOverlay } from './components/CelebrationOverlay'
 import { CollectionIcon, FootprintsIcon, MapPinIcon, SettingsIcon, SproutIcon } from './components/icons'
+import { TimerPill } from './components/TimerPill'
 import { ActivityScreen } from './screens/ActivityScreen'
 import { BiomeSetupScreen } from './screens/BiomeSetupScreen'
 import { CollectionScreen } from './screens/CollectionScreen'
 import { FocusScreen } from './screens/FocusScreen'
 import { SettingsScreen } from './screens/SettingsScreen'
 import { useActiveBiome, useBiomeStore } from './stores/biomeStore'
+import { useFocusSessionStore } from './stores/focusSessionStore'
+import { useNavigationStore, type Tab } from './stores/navigationStore'
 import { useSettingsStore } from './stores/settingsStore'
 
-const TABS = [
+const TABS: readonly { id: Tab; icon: typeof SproutIcon }[] = [
   { id: 'focus', icon: SproutIcon },
   { id: 'activity', icon: FootprintsIcon },
   { id: 'collection', icon: CollectionIcon },
   { id: 'settings', icon: SettingsIcon },
-] as const
-type Tab = (typeof TABS)[number]['id']
+]
 
 function App() {
   const { t } = useTranslation()
@@ -24,12 +27,15 @@ function App() {
   const loadBiomes = useBiomeStore((s) => s.load)
   const biomesLoaded = useBiomeStore((s) => s.loaded)
   const hasHomeBiome = useBiomeStore((s) => s.homeBiome !== null)
+  const recoverSession = useFocusSessionStore((s) => s.recover)
   const biome = useActiveBiome()
 
   useEffect(() => {
     void loadSettings()
     void loadBiomes()
-  }, [loadSettings, loadBiomes])
+    // A session the process was killed during resumes, or fails honestly if its time ran out.
+    void recoverSession()
+  }, [loadSettings, loadBiomes, recoverSession])
 
   // The palette in index.css follows the active Biome; onboarding keeps the default.
   useEffect(() => {
@@ -71,8 +77,10 @@ function App() {
 }
 
 function MainTabs() {
-  const [tab, setTab] = useState<Tab>('focus')
+  const { tab, setTab } = useNavigationStore()
   const { t } = useTranslation()
+  const sessionRunning = useFocusSessionStore((s) => s.status === 'running')
+  const showTimerPill = useSettingsStore((s) => s.display.timerPill) && sessionRunning && tab !== 'focus'
   const index = TABS.findIndex((item) => item.id === tab)
   return (
     <>
@@ -84,6 +92,11 @@ function MainTabs() {
       </main>
 
       <nav className="shrink-0 px-3 pt-2 pb-[calc(0.5rem+var(--safe-bottom))]">
+        {/* Part of the nav, not floating over <main>, so neither ever covers content. */}
+        <div className="flex flex-col items-center gap-2 pb-2 empty:hidden">
+          <CatchSnackbar />
+          {showTimerPill && <TimerPill />}
+        </div>
         <div className="relative flex rounded-card bg-surface/90 p-1.5 shadow-card ring-1 ring-line/60 backdrop-blur">
           {/* Indicator that slides under the active tab. */}
           <span
@@ -93,6 +106,7 @@ function MainTabs() {
           />
           {TABS.map(({ id, icon: Icon }) => {
             const active = tab === id
+            const sessionDot = id === 'focus' && sessionRunning && !active
             return (
               <button
                 key={id}
@@ -103,6 +117,9 @@ function MainTabs() {
                 }`}
               >
                 <Icon key={active ? 'on' : 'off'} className={`size-6 ${active ? 'nav-bounce' : ''}`} />
+                {sessionDot && (
+                  <span aria-hidden className="glow-pulse absolute top-1.5 left-1/2 ml-2.5 size-2.5 rounded-full bg-accent ring-2 ring-surface" />
+                )}
                 {t(`nav.${id}`)}
               </button>
             )

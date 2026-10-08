@@ -1,9 +1,15 @@
 import { isBiomeId, type BiomeId, type HomeBiomeSource } from '../domain/biome'
 import { DEFAULT_LOCALE, type Locale } from '../i18n/locale'
-import { DEFAULT_COLLECTION_VIEW, DEFAULT_STEP_GOAL, type CollectionView } from '../domain/types'
+import {
+  DEFAULT_COLLECTION_VIEW,
+  DEFAULT_DISPLAY_PREFERENCES,
+  DEFAULT_STEP_GOAL,
+  type CollectionView,
+  type DisplayPreferences,
+  type MotionPreference,
+} from '../domain/types'
 import { getDb } from './db'
 
-const NOTIFICATIONS_ENABLED_KEY = 'notificationsEnabled'
 const LANGUAGE_KEY = 'language'
 const STEP_GOAL_KEY = 'stepGoal'
 const COLLECTION_VIEW_KEY = 'collectionView'
@@ -26,12 +32,37 @@ async function setSetting(key: string, value: string): Promise<void> {
   )
 }
 
-export async function getNotificationsEnabled(): Promise<boolean> {
-  return (await getSetting(NOTIFICATIONS_ENABLED_KEY)) === 'true'
+const displayKey = (preference: keyof DisplayPreferences) => `display.${preference}`
+
+function parseBoolean(value: string | undefined, fallback: boolean): boolean {
+  return value === 'true' ? true : value === 'false' ? false : fallback
 }
 
-export async function setNotificationsEnabled(enabled: boolean): Promise<void> {
-  await setSetting(NOTIFICATIONS_ENABLED_KEY, String(enabled))
+function parseMotion(value: string | undefined): MotionPreference {
+  return value === 'system' || value === 'reduce' || value === 'full' ? value : DEFAULT_DISPLAY_PREFERENCES.motion
+}
+
+/** Each preference falls back to its default until the user changes it. */
+export async function getDisplayPreferences(): Promise<DisplayPreferences> {
+  const [celebrations, haptics, motion, timerPill] = await Promise.all([
+    getSetting(displayKey('celebrations')),
+    getSetting(displayKey('haptics')),
+    getSetting(displayKey('motion')),
+    getSetting(displayKey('timerPill')),
+  ])
+  return {
+    celebrations: parseBoolean(celebrations, DEFAULT_DISPLAY_PREFERENCES.celebrations),
+    haptics: parseBoolean(haptics, DEFAULT_DISPLAY_PREFERENCES.haptics),
+    motion: parseMotion(motion),
+    timerPill: parseBoolean(timerPill, DEFAULT_DISPLAY_PREFERENCES.timerPill),
+  }
+}
+
+export async function setDisplayPreference<K extends keyof DisplayPreferences>(
+  preference: K,
+  value: DisplayPreferences[K],
+): Promise<void> {
+  await setSetting(displayKey(preference), String(value))
 }
 
 export async function getLanguage(): Promise<Locale> {

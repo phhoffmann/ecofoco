@@ -20,7 +20,7 @@ export function HomeBiomePicker({ disabled, onPick }: HomeBiomePickerProps) {
           key={biome}
           disabled={disabled}
           onClick={() => onPick(biome)}
-          className="press enter flex items-center gap-2.5 rounded-control bg-surface p-2.5 text-left text-caption font-bold text-ink shadow-card ring-1 ring-line/60 active:bg-surface-raised disabled:opacity-50"
+          className="press enter flex min-h-11 items-center gap-2.5 rounded-control bg-surface p-2.5 text-left text-caption font-bold text-ink shadow-card ring-1 ring-line/60 active:bg-surface-raised disabled:opacity-50"
           style={{ animationDelay: `${i * 35}ms` }}
         >
           <BiomeSwatch biome={biome} className="w-8" />

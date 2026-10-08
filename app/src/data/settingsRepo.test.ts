@@ -8,11 +8,11 @@ import {
   getCurrentBiome,
   getHomeBiome,
   getHomeBiomeSource,
-  getNotificationsEnabled,
+  getDisplayPreferences,
   getStepGoal,
   setCollectionView,
+  setDisplayPreference,
   setHomeBiome,
-  setNotificationsEnabled,
   setStepGoal,
 } from './settingsRepo'
 
@@ -22,22 +22,27 @@ describe('settingsRepo', () => {
     mockDb.run.mockReset()
   })
 
-  it('getNotificationsEnabled defaults to false when unset', async () => {
+  it('getDisplayPreferences gives every preference its default when unset', async () => {
     mockDb.query.mockResolvedValue({ values: [] })
-    expect(await getNotificationsEnabled()).toBe(false)
+    expect(await getDisplayPreferences()).toEqual({ celebrations: true, haptics: true, motion: 'system', timerPill: true })
   })
 
-  it('getNotificationsEnabled reflects a stored "true" value', async () => {
-    mockDb.query.mockResolvedValue({ values: [{ value: 'true' }] })
-    expect(await getNotificationsEnabled()).toBe(true)
+  it('getDisplayPreferences reads stored values and ignores unknown ones', async () => {
+    const stored: Record<string, string> = {
+      'display.celebrations': 'false',
+      'display.haptics': 'nonsense',
+      'display.motion': 'reduce',
+      'display.timerPill': 'false',
+    }
+    mockDb.query.mockImplementation(async (_sql: string, [key]: [string]) => ({
+      values: key in stored ? [{ value: stored[key] }] : [],
+    }))
+    expect(await getDisplayPreferences()).toEqual({ celebrations: false, haptics: true, motion: 'reduce', timerPill: false })
   })
 
-  it('setNotificationsEnabled persists the value as a string', async () => {
-    await setNotificationsEnabled(true)
-    expect(mockDb.run).toHaveBeenCalledWith(expect.stringContaining('INSERT INTO settings'), [
-      'notificationsEnabled',
-      'true',
-    ])
+  it('setDisplayPreference persists the value as a string under its own key', async () => {
+    await setDisplayPreference('timerPill', false)
+    expect(mockDb.run).toHaveBeenCalledWith(expect.stringContaining('INSERT INTO settings'), ['display.timerPill', 'false'])
   })
 
   it('getStepGoal falls back to the default (6000) when unset', async () => {

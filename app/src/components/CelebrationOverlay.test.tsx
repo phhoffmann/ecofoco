@@ -2,19 +2,36 @@ import { act } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import '../i18n'
+import type { CatchReveal } from '../domain/catch'
 import { SPECIES_CATALOG, rarityIn } from '../domain/species'
-import { activeBiome } from '../stores/biomeStore'
+import { DEFAULT_DISPLAY_PREFERENCES } from '../domain/types'
 import { useCelebrationStore } from '../stores/celebrationStore'
-import { CELEBRATION_MS, CelebrationOverlay } from './CelebrationOverlay'
+import { useNavigationStore } from '../stores/navigationStore'
+import { useSettingsStore } from '../stores/settingsStore'
+import { CelebrationOverlay } from './CelebrationOverlay'
 
 declare global {
   var IS_REACT_ACT_ENVIRONMENT: boolean
 }
 globalThis.IS_REACT_ACT_ENVIRONMENT = true
 
+const { setCollectionView } = vi.hoisted(() => ({ setCollectionView: vi.fn().mockResolvedValue(undefined) }))
 vi.mock('../data/haptics', () => ({ lightHaptic: vi.fn() }))
+vi.mock('../data/settingsRepo', () => ({ setCollectionView }))
+vi.mock('@capacitor/app', () => ({
+  App: { addListener: () => Promise.resolve({ remove: vi.fn() }) },
+}))
 
 const species = SPECIES_CATALOG.find((s) => s.id === 'quaresmeira')!
+const firstCatch: CatchReveal = {
+  species,
+  biome: 'atlantic-forest',
+  isNew: true,
+  timesCollected: 1,
+  dexCollected: 12,
+  dexTotal: 80,
+  points: 10,
+}
 
 describe('CelebrationOverlay', () => {
   let container: HTMLDivElement
@@ -22,7 +39,10 @@ describe('CelebrationOverlay', () => {
 
   beforeEach(() => {
     vi.useFakeTimers()
-    useCelebrationStore.setState({ species: null, seq: 0 })
+    setCollectionView.mockClear()
+    useSettingsStore.setState({ display: DEFAULT_DISPLAY_PREFERENCES, collectionView: 'grid' })
+    useNavigationStore.setState({ tab: 'focus' })
+    useCelebrationStore.setState({ reveal: null, seq: 0, snackbar: null, pendingUndo: null })
     container = document.createElement('div')
     document.body.appendChild(container)
     root = createRoot(container)
@@ -35,35 +55,56 @@ describe('CelebrationOverlay', () => {
     vi.useRealTimers()
   })
 
-  const overlay = () => container.querySelector<HTMLElement>('[role="status"]')
+  const overlay = () => container.querySelector<HTMLElement>('[role="dialog"]')
+  const button = (label: string) => [...overlay()!.querySelectorAll('button')].find((b) => b.textContent === label)!
 
   it('renders nothing until something is collected', () => {
     expect(overlay()).toBeNull()
   })
 
-  it('reveals the new species with its rarity', () => {
-    act(() => useCelebrationStore.getState().celebrate(species))
+  it('reveals a first catch as new, with its rarity, Biome progress and points', () => {
+    act(() => useCelebrationStore.getState().celebrate(firstCatch))
 
-    expect(overlay()).not.toBeNull()
-    expect(container.querySelector('img')?.getAttribute('alt')).toBe('Glory Bush Tree')
-    expect(overlay()?.textContent).toContain({ common: 'Common', rare: 'Rare', epic: 'Epic' }[rarityIn(species, activeBiome())])
+    const text = overlay()!.textContent
+    expect(overlay()!.getAttribute('aria-labelledby')).toBeTruthy()
+    expect(text).toContain('Glory Bush Tree')
+    expect(text).toContain('New!')
+    expect(text).toContain({ common: 'Common', rare: 'Rare', epic: 'Epic' }[rarityIn(species, 'atlantic-forest')])
+    expect(text).toContain('12 / 80 Atlantic Forest species')
+    expect(text).toContain('+10 points')
   })
 
-  it('dismisses on tap', () => {
-    act(() => useCelebrationStore.getState().celebrate(species))
-    act(() => overlay()!.click())
+  it('tells a repeat catch apart from a new one, and leaves out points it did not earn', () => {
+    act(() => useCelebrationStore.getState().celebrate({ ...firstCatch, isNew: false, timesCollected: 3, points: 0 }))
 
-    expect(overlay()).toBeNull()
-    expect(useCelebrationStore.getState().species).toBeNull()
+    const text = overlay()!.textContent
+    expect(text).toContain('Seen ×3')
+    expect(text).not.toContain('New!')
+    expect(text).not.toContain('points')
   })
 
-  it('dismisses itself within 2 seconds', () => {
-    expect(CELEBRATION_MS).toBeLessThanOrEqual(2000)
-    act(() => useCelebrationStore.getState().celebrate(species))
+  it('waits for the user instead of dismissing itself', () => {
+    act(() => useCelebrationStore.getState().celebrate(firstCatch))
 
-    act(() => vi.advanceTimersByTime(CELEBRATION_MS - 1))
+    act(() => vi.advanceTimersByTime(60_000))
+
     expect(overlay()).not.toBeNull()
-    act(() => vi.advanceTimersByTime(1))
+  })
+
+  it('Continue dismisses it', () => {
+    act(() => useCelebrationStore.getState().celebrate(firstCatch))
+    act(() => button('Continue').click())
+
     expect(overlay()).toBeNull()
+    expect(useCelebrationStore.getState().reveal).toBeNull()
+  })
+
+  it('"See it in your garden" opens the Collection on the garden', () => {
+    act(() => useCelebrationStore.getState().celebrate(firstCatch))
+    act(() => button('See it in your garden').click())
+
+    expect(overlay()).toBeNull()
+    expect(useNavigationStore.getState().tab).toBe('collection')
+    expect(setCollectionView).toHaveBeenCalledWith('isometric')
   })
 })

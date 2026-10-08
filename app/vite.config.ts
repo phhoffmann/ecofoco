@@ -11,5 +11,7 @@ export default defineConfig({
   optimizeDeps: { entries: ['index.html'] },
   test: {
     environment: 'jsdom',
+    // theme.test.ts reads the design tokens from index.css?raw, which Vitest otherwise empties.
+    css: { include: [/index\.css/] },
   },
 })

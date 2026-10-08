@@ -8,8 +8,10 @@ interface AwayTrackerPlugin {
 
 const AwayTracker = registerPlugin<AwayTrackerPlugin>('AwayTracker')
 
-export function onAppStateChange(callback: (isActive: boolean) => void): void {
-  void App.addListener('appStateChange', ({ isActive }) => callback(isActive))
+/** Calls back whenever the app moves to or from the background; returns a function that stops listening. */
+export function onAppStateChange(callback: (isActive: boolean) => void): () => void {
+  const listener = App.addListener('appStateChange', ({ isActive }) => callback(isActive))
+  return () => void listener.then((l) => l.remove())
 }
 
 /** Whether this build can tell the screen turning off or locking apart from switching apps. */

@@ -49,17 +49,35 @@ export const ptBR: typeof en = {
     idleHint: 'Plante uma semente e fique no EcoFoco enquanto ela vira uma planta do seu bioma.',
     durationMinutes: '{{count}} min',
     leaveWarning: 'Trocar para outro app vai falhar essa sessão e descartar o broto. Bloquear a tela não tem problema.',
-    giveUp: 'Desistir',
-    youCollected: 'Você coletou',
-    sessionFailed: 'Sessão falhou',
-    leftEarly: 'Você saiu do app antes do broto terminar de crescer.',
+    holdToGiveUp: 'Segure para desistir',
+    minutesLeft_one: 'Falta {{count}} minuto',
+    minutesLeft_other: 'Faltam {{count}} minutos',
+    failed: {
+      gave_up: {
+        title: 'Você desistiu deste broto',
+        body: 'Ele se foi. Plante outro quando quiser.',
+      },
+      left_app: {
+        title: 'Sessão falhou',
+        body: 'Você saiu do app antes do broto terminar de crescer.',
+      },
+      closed: {
+        title: 'Sessão falhou',
+        body: 'O EcoFoco foi fechado antes do broto terminar de crescer (pelo sistema ou pelos apps recentes), então ela não pôde contar.',
+      },
+    },
     stages: {
       '0': 'Semente brotando',
       '1': 'Muda',
       '2': 'Planta jovem',
       '3': 'Quase crescida',
     },
-    grewInto: 'Seu broto virou',
+    joinedCollection: '{{name}} entrou na sua coleção.',
+    plantAnother: 'Plantar outro',
+  },
+  timerPill: {
+    label: 'Sessão de foco em andamento, faltam {{time}}. Ir para Foco.',
+    focusing: 'Focando',
   },
   activity: {
     checkingHealthConnect: 'Verificando o Health Connect…',
@@ -87,6 +105,20 @@ export const ptBR: typeof en = {
       isometric: 'Jardim',
     },
     empty: 'Complete uma sessão de foco para coletar sua primeira espécie.',
+    filter: {
+      label: 'Mostrar espécies',
+      all: 'Todas',
+      plant: 'Plantas',
+      animal: 'Animais',
+    },
+    tileCollected_one: '{{name}}, coletada uma vez',
+    tileCollected_other: '{{name}}, coletada {{count}} vezes',
+    tileUndiscovered: {
+      plant: 'Planta não descoberta',
+      animal: 'Animal não descoberto',
+    },
+    newBadge: 'Nova',
+    timesBadge: '×{{count}}',
     garden: {
       periods: {
         day: 'Dia',
@@ -106,15 +138,29 @@ export const ptBR: typeof en = {
     },
   },
   settings: {
-    notifications: 'Notificações',
-    notificationsHint: 'Lembretes e comemorações (ainda não implementado)',
     loading: 'Carregando…',
     language: 'Idioma',
     stepGoal: 'Meta diária de passos',
     stepGoalHint: 'Passos necessários pra liberar o sorteio de animal do dia',
-    stepGoalValue: '{{count}} passos',
+    stepGoalValue: '{{value}} passos',
     stepGoalDecrease: 'Diminuir meta de passos',
     stepGoalIncrease: 'Aumentar meta de passos',
+    display: {
+      title: 'Exibição e retorno',
+      celebrations: 'Comemorações',
+      celebrationsHint: 'Uma revelação em tela cheia a cada coleta. Desligado mostra um aviso pequeno.',
+      haptics: 'Vibração',
+      hapticsHint: 'Um toque leve quando você coleta algo',
+      motion: 'Animações',
+      motionHint: 'Sistema segue a opção de reduzir movimento do aparelho',
+      motionOptions: {
+        system: 'Sistema',
+        reduce: 'Reduzidas',
+        full: 'Completas',
+      },
+      timerPill: 'Cronômetro nas outras abas',
+      timerPillHint: 'Mantém a sessão em andamento à vista enquanto você navega pelo app',
+    },
     biome: {
       title: 'Bioma',
       hint: 'As recompensas vêm do seu bioma atual. Ganhe pontos para desbloquear biomas vizinhos.',
@@ -143,7 +189,18 @@ export const ptBR: typeof en = {
   },
   celebration: {
     title: 'Você coletou!',
-    tapToContinue: 'Toque para continuar',
+    new: 'Nova!',
+    seen: 'Vista ×{{count}}',
+    dex: '{{count}} / {{total}} espécies do bioma {{biome}}',
+    points_one: '+{{count}} ponto',
+    points_other: '+{{count}} pontos',
+    seeInGarden: 'Ver no seu jardim',
+    continue: 'Continuar',
+  },
+  snackbar: {
+    added: '{{name}} adicionada',
+    undo: 'Desfazer',
+    dismiss: 'Dispensar',
   },
   speciesDetail: {
     method: {
@@ -159,5 +216,13 @@ export const ptBR: typeof en = {
   manualSighting: {
     title: 'Registrar avistamento',
     subtitle: 'Viu algum desses na natureza? Adicione à sua coleção — ainda sem necessidade de foto.',
+    search: 'Buscar espécies',
+    searchPlaceholder: 'Buscar pelo nome',
+    noResults: 'Nenhuma espécie corresponde a “{{query}}”.',
+    collectedTimes: 'Coletada ×{{count}}',
+    confirmTitle: 'Registrar este avistamento?',
+    confirmBody: 'Registre só espécies que você viu de verdade na natureza.',
+    confirm: 'Registrar avistamento',
+    back: 'Voltar',
   },
 }

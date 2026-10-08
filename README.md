@@ -10,11 +10,11 @@ EcoFoco is a personal project, built as a fullstack portfolio piece. It runs ent
 
 ## Features
 
-- Focus sessions of 3, 15, 25 or 45 minutes, with a sprout that grows through four stages into the shape of the plant you'll collect; leaving the app fails the session.
+- Focus sessions of 3, 15, 25 or 45 minutes, with a sprout that grows through four stages into the shape of the plant you'll collect; leaving the app fails the session, giving up takes a hold, and a timer pill keeps a running session in view on every tab.
 - Daily step goal (default 6,000, adjustable in steps of 500) from Health Connect, with one rarity-weighted animal draw per day.
-- Manual sighting log for plants and animals you've seen in real life.
+- Manual sighting log for plants and animals you've seen in real life, with search, confirmation and undo.
 - Collection grid (a Pokédex of the current biome, collected and missing) and an animated isometric garden of what you collected in a given day, week or month, with ground and decoration per biome.
-- Species detail sheet with photo, description, photo credit and collection history; a celebration whenever something new is collected.
+- Species detail sheet with photo, description, photo credit and collection history; one reveal per catch (new or seen ×N, biome progress, points).
 - Location-based biomes for Brazil's six IBGE biomes: coarse location only, used once and never stored (only the biome id is kept), with a manual picker as fallback.
 - Points from completed sessions and met step goals (10 each); 100 points unlock a neighbouring biome, and you can switch to any unlocked one.
 - Bundled catalog for all six biomes, about 20 plants and 20 animals each, photos included.

@@ -1,8 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 const {
-  getNotificationsEnabled,
-  setNotificationsEnabled,
+  getDisplayPreferences,
+  setDisplayPreference,
+  setMotionPreference,
   getLanguage,
   setLanguage,
   getStepGoal,
@@ -11,8 +12,9 @@ const {
   setCollectionView,
   changeLanguage,
 } = vi.hoisted(() => ({
-  getNotificationsEnabled: vi.fn(),
-  setNotificationsEnabled: vi.fn().mockResolvedValue(undefined),
+  getDisplayPreferences: vi.fn(),
+  setDisplayPreference: vi.fn().mockResolvedValue(undefined),
+  setMotionPreference: vi.fn(),
   getLanguage: vi.fn(),
   setLanguage: vi.fn().mockResolvedValue(undefined),
   getStepGoal: vi.fn(),
@@ -21,9 +23,10 @@ const {
   setCollectionView: vi.fn().mockResolvedValue(undefined),
   changeLanguage: vi.fn().mockResolvedValue(undefined),
 }))
+vi.mock('../data/motion', () => ({ setMotionPreference }))
 vi.mock('../data/settingsRepo', () => ({
-  getNotificationsEnabled,
-  setNotificationsEnabled,
+  getDisplayPreferences,
+  setDisplayPreference,
   getLanguage,
   setLanguage,
   getStepGoal,
@@ -33,12 +36,14 @@ vi.mock('../data/settingsRepo', () => ({
 }))
 vi.mock('i18next', () => ({ default: { changeLanguage } }))
 
+import { DEFAULT_DISPLAY_PREFERENCES } from '../domain/types'
 import { useSettingsStore } from './settingsStore'
 
 describe('settingsStore', () => {
   beforeEach(() => {
-    getNotificationsEnabled.mockReset()
-    setNotificationsEnabled.mockClear()
+    getDisplayPreferences.mockReset().mockResolvedValue(DEFAULT_DISPLAY_PREFERENCES)
+    setDisplayPreference.mockClear()
+    setMotionPreference.mockClear()
     getLanguage.mockReset().mockResolvedValue('en')
     setLanguage.mockClear()
     getStepGoal.mockReset().mockResolvedValue(6000)
@@ -47,7 +52,7 @@ describe('settingsStore', () => {
     setCollectionView.mockClear()
     changeLanguage.mockClear()
     useSettingsStore.setState({
-      notificationsEnabled: false,
+      display: DEFAULT_DISPLAY_PREFERENCES,
       language: 'en',
       stepGoal: 6000,
       collectionView: 'grid',
@@ -55,8 +60,8 @@ describe('settingsStore', () => {
     })
   })
 
-  it('load() reads the persisted flag, language, step goal, and collection view, and marks the store as loaded', async () => {
-    getNotificationsEnabled.mockResolvedValue(true)
+  it('load() reads the persisted language, step goal, collection view and display preferences, and marks the store as loaded', async () => {
+    getDisplayPreferences.mockResolvedValue({ ...DEFAULT_DISPLAY_PREFERENCES, motion: 'reduce', haptics: false })
     getLanguage.mockResolvedValue('pt-BR')
     getStepGoal.mockResolvedValue(8000)
     getCollectionView.mockResolvedValue('isometric')
@@ -64,7 +69,8 @@ describe('settingsStore', () => {
     await useSettingsStore.getState().load()
 
     const state = useSettingsStore.getState()
-    expect(state.notificationsEnabled).toBe(true)
+    expect(state.display).toEqual({ ...DEFAULT_DISPLAY_PREFERENCES, motion: 'reduce', haptics: false })
+    expect(setMotionPreference).toHaveBeenCalledWith('reduce')
     expect(state.language).toBe('pt-BR')
     expect(state.stepGoal).toBe(8000)
     expect(state.collectionView).toBe('isometric')
@@ -72,11 +78,19 @@ describe('settingsStore', () => {
     expect(changeLanguage).toHaveBeenCalledWith('pt-BR')
   })
 
-  it('setNotificationsEnabled() persists and updates the flag', async () => {
-    await useSettingsStore.getState().setNotificationsEnabled(true)
+  it('setDisplay() persists and updates one preference', async () => {
+    await useSettingsStore.getState().setDisplay('celebrations', false)
 
-    expect(setNotificationsEnabled).toHaveBeenCalledWith(true)
-    expect(useSettingsStore.getState().notificationsEnabled).toBe(true)
+    expect(setDisplayPreference).toHaveBeenCalledWith('celebrations', false)
+    expect(useSettingsStore.getState().display).toEqual({ ...DEFAULT_DISPLAY_PREFERENCES, celebrations: false })
+    expect(setMotionPreference).not.toHaveBeenCalled()
+  })
+
+  it('setDisplay() applies a motion preference straight away', async () => {
+    await useSettingsStore.getState().setDisplay('motion', 'full')
+
+    expect(setMotionPreference).toHaveBeenCalledWith('full')
+    expect(useSettingsStore.getState().display.motion).toBe('full')
   })
 
   it('setLanguage() persists, switches i18next, and updates the store', async () => {

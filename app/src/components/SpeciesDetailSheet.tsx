@@ -57,7 +57,7 @@ export function SpeciesDetailSheet({ species, entries, onClose }: SpeciesDetailS
                   {t(`rarity.${rarity}`)}
                 </span>
               </div>
-              <figcaption className="mt-1.5 text-right text-[10px] text-ink-faint">
+              <figcaption className="mt-1.5 text-right text-fine text-ink-faint">
                 {t('speciesDetail.photoCredit', { credit: species.photo.credit, license: species.photo.license })}
               </figcaption>
             </figure>

@@ -1,6 +1,7 @@
 import { App } from '@capacitor/app'
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type PointerEvent, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
+import { isMotionReduced } from '../data/motion'
 
 // Matches the sheet-out / backdrop-out animations in index.css.
 const CLOSE_MS = 200
@@ -13,10 +14,6 @@ const FOCUSABLE = [
   'textarea:not([disabled])',
   '[tabindex]:not([tabindex="-1"])',
 ].join(',')
-
-function prefersReducedMotion(): boolean {
-  return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
-}
 
 interface BottomSheetProps {
   /** Called once the sheet has finished its closing animation. */
@@ -47,7 +44,7 @@ export function BottomSheet({ onClose, labelledBy, children }: BottomSheetProps)
   // Let the slide-out animation play before the parent unmounts the sheet.
   useEffect(() => {
     if (!closing) return
-    const timer = window.setTimeout(() => onCloseRef.current(), prefersReducedMotion() ? 0 : CLOSE_MS)
+    const timer = window.setTimeout(() => onCloseRef.current(), isMotionReduced() ? 0 : CLOSE_MS)
     return () => window.clearTimeout(timer)
   }, [closing])
 

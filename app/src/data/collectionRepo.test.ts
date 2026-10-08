@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 const mockDb = { query: vi.fn(), run: vi.fn() }
 vi.mock('./db', () => ({ getDb: () => Promise.resolve(mockDb) }))
 
-import { addCollectedEntry, listCollectedEntries } from './collectionRepo'
+import { addCollectedEntry, deleteCollectedEntry, listCollectedEntries } from './collectionRepo'
 
 describe('collectionRepo', () => {
   beforeEach(() => {
@@ -40,5 +40,10 @@ describe('collectionRepo', () => {
       'INSERT INTO collected_entries (id, speciesId, collectedAt, method) VALUES (?, ?, ?, ?)',
       [entry.id, 'jatoba', entry.collectedAt, 'focus_session'],
     )
+  })
+
+  it('deleteCollectedEntry removes only the given entry', async () => {
+    await deleteCollectedEntry('entry-1')
+    expect(mockDb.run).toHaveBeenCalledWith('DELETE FROM collected_entries WHERE id = ?', ['entry-1'])
   })
 })
