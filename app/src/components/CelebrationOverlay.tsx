@@ -63,9 +63,10 @@ function RevealDialog({ reveal }: { reveal: CatchReveal }) {
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}
+      tabIndex={-1}
       onClick={(e) => e.target === e.currentTarget && dismiss()}
       onKeyDown={handleKeyDown}
-      className="celebrate-overlay fixed inset-0 z-30 flex flex-col items-center justify-center gap-3 overflow-y-auto bg-canvas/90 px-6 py-8 backdrop-blur-sm"
+      className="celebrate-overlay fixed inset-0 z-30 flex flex-col items-center justify-center gap-3 overflow-y-auto bg-canvas/90 px-6 py-8 outline-none backdrop-blur-sm"
     >
       <div aria-hidden className="pointer-events-none relative flex size-44 shrink-0 items-center justify-center">
         <span className="celebrate-ring absolute inset-0 rounded-full border-4" style={{ borderColor: rarity.color }} />

@@ -12,8 +12,9 @@ const FOCUSABLE = [
 
 /**
  * Shared behaviour of a modal dialog, for as long as it is mounted: focus moves into it (to
- * `initialFocus`, or the container) and returns to whatever opened it; Escape and the Android back
- * button call `onDismiss`; Tab stays inside. Spread the returned handler as the container's onKeyDown.
+ * `initialFocus`, or the container) and returns to whatever opened it, unless another dialog has
+ * taken it meanwhile; Escape and the Android back button call `onDismiss`; Tab stays inside. Spread
+ * the returned handler as the container's onKeyDown.
  */
 export function useModal(
   container: RefObject<HTMLElement | null>,
@@ -27,8 +28,12 @@ export function useModal(
 
   useEffect(() => {
     const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null
-    ;(initialFocus?.current ?? container.current)?.focus()
-    return () => opener?.focus()
+    const root = container.current
+    ;(initialFocus?.current ?? root)?.focus()
+    return () => {
+      const active = document.activeElement
+      if (!active || active === document.body || root?.contains(active)) opener?.focus()
+    }
     // Refs are stable, so this runs once: focus moves in on mount and back out on unmount.
   }, [container, initialFocus])
 
