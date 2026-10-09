@@ -93,7 +93,7 @@ describe('ManualSightingModal', () => {
     expect(logManualSighting).toHaveBeenCalledExactlyOnceWith('quaresmeira')
   })
 
-  it('leaves focus in the catch reveal once the sheet has closed behind it, so Escape still dismisses it', async () => {
+  it('leaves focus in the catch reveal once the sheet has closed behind it, then returns it to what opened the sheet', async () => {
     act(() => root.unmount())
     useCelebrationStore.setState({ reveal: null, seq: 0, snackbar: null, pendingUndo: null })
     logManualSighting.mockImplementation(async () =>
@@ -134,6 +134,7 @@ describe('ManualSightingModal', () => {
 
     act(() => document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })))
     expect(useCelebrationStore.getState().reveal).toBeNull()
+    expect(document.activeElement).toBe(opener)
     opener.remove()
   })
 })

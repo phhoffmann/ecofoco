@@ -10,11 +10,25 @@ const FOCUSABLE = [
   '[tabindex]:not([tabindex="-1"])',
 ].join(',')
 
+// Who opened each mounted dialog, nearest first: a dialog opened from inside another one also
+// remembers what opened that one, in case its own opener is gone by the time it closes.
+const openers = new WeakMap<Element, HTMLElement[]>()
+
+function openersOf(active: Element | null): HTMLElement[] {
+  if (!(active instanceof HTMLElement)) return []
+  for (let node: Element | null = active; node; node = node.parentElement) {
+    const outer = openers.get(node)
+    if (outer) return [active, ...outer]
+  }
+  return [active]
+}
+
 /**
  * Shared behaviour of a modal dialog, for as long as it is mounted: focus moves into it (to
- * `initialFocus`, or the container) and returns to whatever opened it, unless another dialog has
- * taken it meanwhile; Escape and the Android back button call `onDismiss`; Tab stays inside. Spread
- * the returned handler as the container's onKeyDown.
+ * `initialFocus`, or the container) and returns to whatever opened it (or, if that is gone, to what
+ * opened the dialog it came from), unless another dialog has taken it meanwhile; Escape and the
+ * Android back button call `onDismiss`; Tab stays inside. Spread the returned handler as the
+ * container's onKeyDown.
  */
 export function useModal(
   container: RefObject<HTMLElement | null>,
@@ -27,12 +41,13 @@ export function useModal(
   }, [onDismiss])
 
   useEffect(() => {
-    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null
+    const chain = openersOf(document.activeElement)
     const root = container.current
+    if (root) openers.set(root, chain)
     ;(initialFocus?.current ?? root)?.focus()
     return () => {
       const active = document.activeElement
-      if (!active || active === document.body || root?.contains(active)) opener?.focus()
+      if (!active || active === document.body || root?.contains(active)) chain.find((el) => el.isConnected)?.focus()
     }
     // Refs are stable, so this runs once: focus moves in on mount and back out on unmount.
   }, [container, initialFocus])
