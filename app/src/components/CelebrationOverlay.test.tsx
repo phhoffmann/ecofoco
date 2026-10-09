@@ -118,4 +118,18 @@ describe('CelebrationOverlay', () => {
     expect(useSettingsStore.getState().collectionView).toBe('isometric')
     expect(setCollectionView).not.toHaveBeenCalled()
   })
+
+  it('moves focus to its main action, keeps Tab inside, and continues on Escape', () => {
+    act(() => useCelebrationStore.getState().celebrate(firstCatch))
+    const primary = button('See it in your collection')
+    expect(document.activeElement).toBe(primary)
+
+    const key = (init: KeyboardEventInit) =>
+      act(() => document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, ...init })))
+    key({ key: 'Tab', shiftKey: true })
+    expect(document.activeElement).toBe(button('Continue'))
+
+    key({ key: 'Escape' })
+    expect(overlay()).toBeNull()
+  })
 })

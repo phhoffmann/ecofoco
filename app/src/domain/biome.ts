@@ -1,5 +1,5 @@
 import { BIOME_IDS, type BiomeId } from './catalogSchema'
-import { SPECIES_CATALOG, type Species } from './species'
+import { SPECIES_CATALOG, speciesOfBiome, type Species } from './species'
 
 export { BIOME_IDS, type BiomeId } from './catalogSchema'
 
@@ -26,7 +26,7 @@ export function isBiomeId(value: unknown): value is BiomeId {
 
 /** A Biome is playable once the catalog has plants and animals for it; the rest show as "coming soon". */
 export function hasCatalog(biome: BiomeId, catalog: Species[] = SPECIES_CATALOG): boolean {
-  const inBiome = catalog.filter((s) => s.biome.includes(biome))
+  const inBiome = speciesOfBiome(biome, catalog)
   return inBiome.some((s) => s.type === 'plant') && inBiome.some((s) => s.type === 'animal')
 }
 

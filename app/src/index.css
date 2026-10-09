@@ -68,6 +68,9 @@
 
   --radius-control: 0.875rem;
   --radius-card: 1.5rem;
+  /* Nested inside a card or control, so the inner corner follows the outer one. */
+  --radius-tile: calc(var(--radius-card) - 6px);
+  --radius-thumb: calc(var(--radius-control) - 4px);
 
   --shadow-card: inset 0 1px 0 rgb(255 255 255 / 0.05), 0 10px 30px -18px rgb(0 0 0 / 0.7);
   --shadow-lift: 0 10px 24px -10px color-mix(in oklab, var(--color-accent) 55%, transparent);

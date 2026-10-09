@@ -5,37 +5,26 @@ import { ARCHETYPE_SPRITES } from '../components/gardenSprites'
 import { EyeIcon, GardenIcon, GridIcon } from '../components/icons'
 import { ManualSightingModal } from '../components/ManualSightingModal'
 import { SpeciesDetailSheet } from '../components/SpeciesDetailSheet'
-import { Button, EmptyState, SegmentedControl } from '../components/ui'
+import { Button, EmptyState, Overline, SegmentedControl } from '../components/ui'
 import { isMotionReduced } from '../data/motion'
-import { SPECIES_CATALOG, speciesName, type Species, type SpeciesKind } from '../domain/species'
-import type { CollectedEntry, CollectionView } from '../domain/types'
+import {
+  collectedBySpecies,
+  speciesById,
+  speciesName,
+  speciesOfBiome,
+  type CollectedSummary,
+  type Species,
+  type SpeciesKind,
+} from '../domain/species'
+import type { CollectionView } from '../domain/types'
 import { useActiveBiome } from '../stores/biomeStore'
 import { useCollectionStore } from '../stores/collectionStore'
 import { useSettingsStore } from '../stores/settingsStore'
 
 type KindFilter = 'all' | SpeciesKind
 
-interface Collected {
-  count: number
-  /** collectedAt of the most recent entry, for ordering. */
-  latest: string
-}
-
-function collectedBySpecies(entries: CollectedEntry[]): Map<string, Collected> {
-  const bySpecies = new Map<string, Collected>()
-  for (const { speciesId, collectedAt } of entries) {
-    const known = bySpecies.get(speciesId)
-    if (!known) bySpecies.set(speciesId, { count: 1, latest: collectedAt })
-    else {
-      known.count += 1
-      if (collectedAt > known.latest) known.latest = collectedAt
-    }
-  }
-  return bySpecies
-}
-
 /** Collected species first, most recently collected on top; undiscovered ones after, in catalog order. */
-function sortForGrid(species: Species[], collected: Map<string, Collected>): Species[] {
+function sortForGrid(species: Species[], collected: Map<string, CollectedSummary>): Species[] {
   return [...species].sort((a, b) => {
     const ca = collected.get(a.id)
     const cb = collected.get(b.id)
@@ -69,14 +58,14 @@ export function CollectionScreen() {
   }, [showsHighlight, pendingHighlight, clearHighlight])
 
   const biome = useActiveBiome()
-  const biomeSpecies = useMemo(() => SPECIES_CATALOG.filter((s) => s.biome.includes(biome)), [biome])
+  const biomeSpecies = useMemo(() => speciesOfBiome(biome), [biome])
   const collected = useMemo(() => collectedBySpecies(entries), [entries])
   const collectedCount = biomeSpecies.filter((s) => collected.has(s.id)).length
   const shown = sortForGrid(
     biomeSpecies.filter((s) => kind === 'all' || s.type === kind),
     collected,
   )
-  const selectedSpecies = SPECIES_CATALOG.find((s) => s.id === selectedSpeciesId) ?? null
+  const selectedSpecies = (selectedSpeciesId && speciesById(selectedSpeciesId)) || null
   const discovered = biomeSpecies.length ? collectedCount / biomeSpecies.length : 0
 
   // Bring the latest catch into view.
@@ -100,7 +89,7 @@ export function CollectionScreen() {
 
       <div className="flex items-center gap-3">
         <div className="min-w-0 flex-1">
-          <p className="text-overline text-ink-faint uppercase">{t(`biome.${biome}`)}</p>
+          <Overline>{t(`biome.${biome}`)}</Overline>
           <p className="text-body font-bold text-ink">
             {t('collection.discovered', { count: collectedCount, total: biomeSpecies.length })}
           </p>
@@ -159,7 +148,7 @@ export function CollectionScreen() {
                       style={delay}
                     >
                       <span className="relative block w-full">
-                        <img src={species.image} alt="" className="aspect-square w-full rounded-[calc(var(--radius-card)-6px)] object-cover" />
+                        <img src={species.image} alt="" className="aspect-square w-full rounded-tile object-cover" />
                         {highlighted && mine.count === 1 && (
                           <span className="absolute top-1 left-1 rounded-full bg-accent px-2 py-0.5 text-overline text-on-accent uppercase">
                             {t('collection.newBadge')}
@@ -181,7 +170,7 @@ export function CollectionScreen() {
                       className={`${tileShape} bg-surface-sunken/70 ring-1 ring-line/30`}
                       style={delay}
                     >
-                      <span aria-hidden className="flex aspect-square w-full items-center justify-center rounded-[calc(var(--radius-card)-6px)] bg-surface/60">
+                      <span aria-hidden className="flex aspect-square w-full items-center justify-center rounded-tile bg-surface/60">
                         <span
                           className="size-3/4 bg-line"
                           style={{

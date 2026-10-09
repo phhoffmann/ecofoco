@@ -17,6 +17,16 @@ export interface GardenSprite {
   motion: SpriteMotion
 }
 
+/** CSS transform-origin at the sprite's foot, so it sways and grows from the ground. */
+export function footOrigin(sprite: Pick<GardenSprite, 'footX' | 'footY'>): string {
+  return `${sprite.footX * 100}% ${sprite.footY * 100}%`
+}
+
+/** CSS translate that puts the sprite's foot on the element's anchor point. */
+export function footTranslate(sprite: Pick<GardenSprite, 'footX' | 'footY'>): string {
+  return `${-sprite.footX * 100}% ${-sprite.footY * 100}%`
+}
+
 type SpriteName = keyof typeof manifest.sprites
 
 const URLS = import.meta.glob<string>('../assets/garden/*.webp', { eager: true, query: '?url', import: 'default' })

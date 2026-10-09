@@ -11,10 +11,10 @@ import {
   type Point,
   type TilePos,
 } from '../domain/iso'
-import { SPECIES_CATALOG, speciesName, type Species } from '../domain/species'
+import { speciesById, speciesName, type Species } from '../domain/species'
 import type { CollectedEntry } from '../domain/types'
 import { BIOME_GROUND, type GroundTexture } from './biomeGround'
-import { ARCHETYPE_SPRITES, BIOME_DECOR, type GardenSprite, type SpriteMotion } from './gardenSprites'
+import { ARCHETYPE_SPRITES, BIOME_DECOR, footOrigin, footTranslate, type GardenSprite, type SpriteMotion } from './gardenSprites'
 
 // Scene geometry in logical units. The scene scales to its container width, so everything is
 // positioned in percentages of these dimensions and taps are mapped back the same way.
@@ -43,8 +43,6 @@ const MOTION_SECONDS: Record<SpriteMotion, number> = {
   breathe: 3.6,
   none: 0,
 }
-
-const SPECIES_BY_ID = new Map(SPECIES_CATALOG.map((s) => [s.id, s]))
 
 interface GardenItem {
   entry: CollectedEntry
@@ -79,7 +77,7 @@ export function IsometricGarden({ entries, biome, onSelectSpecies, transitionKey
     const items = [...entries]
       .sort((a, b) => a.collectedAt.localeCompare(b.collectedAt))
       .flatMap((entry): GardenItem[] => {
-        const species = SPECIES_BY_ID.get(entry.speciesId)
+        const species = speciesById(entry.speciesId)
         return species ? [{ entry, species }] : []
       })
     return placeOnPlot(items)
@@ -263,8 +261,8 @@ export function IsometricGarden({ entries, biome, onSelectSpecies, transitionKey
             const center = tileCenter(s, TILE)
             const noise = tileNoise(s)
             const seconds = MOTION_SECONDS[s.sprite.motion] * (0.85 + noise * 0.3)
-            const foot = `${s.sprite.footX * 100}% ${s.sprite.footY * 100}%`
-                        return (
+            const foot = footOrigin(s.sprite)
+            return (
               <div
                 key={s.key}
                 className="pointer-events-none absolute"
@@ -272,7 +270,7 @@ export function IsometricGarden({ entries, biome, onSelectSpecies, transitionKey
                   left: `${((origin.x + center.x) / sceneWidth) * 100}%`,
                   top: `${((origin.y + center.y + FOOT_OFFSET) / sceneHeight) * 100}%`,
                   width: `${((s.sprite.width * TILE.width) / sceneWidth) * 100}%`,
-                  transform: `translate(${-s.sprite.footX * 100}%, ${-s.sprite.footY * 100}%)`,
+                  translate: footTranslate(s.sprite),
                   zIndex: i + 1,
                 }}
               >
@@ -308,7 +306,7 @@ export function IsometricGarden({ entries, biome, onSelectSpecies, transitionKey
       </div>
 
       {layout.overflow > 0 && (
-        <p className="mt-2 text-center text-xs text-ink-muted">
+        <p className="mt-2 text-center text-fine text-ink-muted">
           {t('collection.garden.overflow', { count: layout.overflow })}
         </p>
       )}

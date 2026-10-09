@@ -6,7 +6,7 @@ import { useActiveBiome } from '../stores/biomeStore'
 import { BottomSheet } from './BottomSheet'
 import { CameraIcon, EyeIcon, FootprintsIcon, SproutIcon } from './icons'
 import { RARITY_STYLES } from './rarity'
-import { Button, Overline } from './ui'
+import { Button, Chip, Overline } from './ui'
 
 const METHOD_ICONS: Record<CollectionMethod, ComponentType<{ className?: string }>> = {
   focus_session: SproutIcon,
@@ -67,14 +67,10 @@ export function SpeciesDetailSheet({ species, entries, onClose }: SpeciesDetailS
             </h2>
             <p className="text-body text-ink-faint italic">{species.scientificName}</p>
 
-            <div className="mt-3 flex flex-wrap gap-2 text-caption">
-              <span className="rounded-full bg-surface-raised px-3 py-1 font-bold text-ink-muted ring-1 ring-line/60">
-                {t(`speciesType.${species.type}`)}
-              </span>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <Chip>{t(`speciesType.${species.type}`)}</Chip>
               {species.biome.map((b) => (
-                <span key={b} className="rounded-full bg-surface-raised px-3 py-1 font-bold text-ink-muted ring-1 ring-line/60">
-                  {t(`biome.${b}`)}
-                </span>
+                <Chip key={b}>{t(`biome.${b}`)}</Chip>
               ))}
             </div>
 

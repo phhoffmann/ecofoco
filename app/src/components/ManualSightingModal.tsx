@@ -1,6 +1,6 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { SPECIES_CATALOG, speciesName, type Species } from '../domain/species'
+import { collectedBySpecies, speciesName, speciesOfBiome, type Species } from '../domain/species'
 import { useActiveBiome } from '../stores/biomeStore'
 import { useCollectionStore } from '../stores/collectionStore'
 import { BottomSheet } from './BottomSheet'
@@ -34,13 +34,9 @@ export function ManualSightingModal({ onClose }: ManualSightingModalProps) {
   const confirmRef = useRef<HTMLButtonElement>(null)
   const searchRef = useRef<HTMLInputElement>(null)
 
-  const timesCollected = useMemo(() => {
-    const counts = new Map<string, number>()
-    for (const e of entries) counts.set(e.speciesId, (counts.get(e.speciesId) ?? 0) + 1)
-    return counts
-  }, [entries])
+  const collected = useMemo(() => collectedBySpecies(entries), [entries])
   const normalizedQuery = normalize(query.trim())
-  const results = SPECIES_CATALOG.filter((s) => s.biome.includes(biome) && matches(s, normalizedQuery))
+  const results = speciesOfBiome(biome).filter((s) => matches(s, normalizedQuery))
 
   // Keyboard and screen-reader focus follows the step.
   useEffect(() => {
@@ -64,7 +60,7 @@ export function ManualSightingModal({ onClose }: ManualSightingModalProps) {
   }
 
   function collectedChip(speciesId: string) {
-    const count = timesCollected.get(speciesId)
+    const count = collected.get(speciesId)?.count
     if (!count) return null
     return (
       <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-accent/15 px-2.5 py-0.5 text-overline text-accent">
@@ -125,7 +121,7 @@ export function ManualSightingModal({ onClose }: ManualSightingModalProps) {
                       onClick={() => setConfirming(species)}
                       className="press flex w-full items-center gap-3 rounded-control bg-surface-sunken/70 p-2 text-left ring-1 ring-line/40 active:bg-surface-raised"
                     >
-                      <img src={species.image} alt="" className="size-12 shrink-0 rounded-[0.625rem] object-cover" />
+                      <img src={species.image} alt="" className="size-12 shrink-0 rounded-thumb object-cover" />
                       <div className="min-w-0 flex-1">
                         <p className="truncate text-body font-bold text-ink">{name}</p>
                         <p className="text-caption text-ink-faint">{t(`speciesType.${species.type}`)}</p>

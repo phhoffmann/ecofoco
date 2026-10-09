@@ -2,7 +2,6 @@ import type { en } from './en'
 
 export const ptBR: typeof en = {
   common: {
-    done: 'Concluído',
     cancel: 'Cancelar',
     close: 'Fechar',
     tryAgain: 'Tentar de novo',

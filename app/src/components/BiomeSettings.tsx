@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useShallow } from 'zustand/react/shallow'
 import {
@@ -10,11 +10,12 @@ import {
   type BiomeId,
   type BiomeProgress,
 } from '../domain/biome'
-import { selectBiomeProgress, useBiomeStore, type DetectResult } from '../stores/biomeStore'
+import { selectBiomeProgress, useBiomeStore } from '../stores/biomeStore'
 import { BiomeSwatch } from './BiomeSwatch'
 import { DetectResultMessage, HomeBiomePicker } from './HomeBiomePicker'
 import { CheckIcon, LockIcon, MapPinIcon, SparkleIcon } from './icons'
 import { Button, Card, CardHeader } from './ui'
+import { useDetectHome } from './useDetectHome'
 
 function BiomeAction({ biome, progress }: { biome: BiomeId; progress: BiomeProgress }) {
   const { t } = useTranslation()
@@ -57,11 +58,9 @@ function BiomeAction({ biome, progress }: { biome: BiomeId; progress: BiomeProgr
 export function BiomeSettings() {
   const { t } = useTranslation()
   const load = useBiomeStore((s) => s.load)
-  const detectHome = useBiomeStore((s) => s.detectHome)
   const setHome = useBiomeStore((s) => s.setHome)
   const progress = useBiomeStore(useShallow(selectBiomeProgress))
-  const [detecting, setDetecting] = useState(false)
-  const [result, setResult] = useState<DetectResult | null>(null)
+  const { detecting, result, detect, clearResult } = useDetectHome()
 
   // Reload on open so the balance reflects sessions and step goals completed since app start.
   useEffect(() => {
@@ -69,12 +68,6 @@ export function BiomeSettings() {
   }, [load])
 
   if (!progress) return null
-
-  async function redetect() {
-    setDetecting(true)
-    setResult(await detectHome())
-    setDetecting(false)
-  }
 
   return (
     <Card className="enter space-y-3">
@@ -121,7 +114,7 @@ export function BiomeSettings() {
       </ul>
 
       <button
-        onClick={() => void redetect()}
+        onClick={() => void detect()}
         disabled={detecting}
         className="press inline-flex min-h-11 items-center gap-1.5 text-caption font-bold text-accent disabled:opacity-50"
       >
@@ -136,7 +129,7 @@ export function BiomeSettings() {
             <HomeBiomePicker
               onPick={(biome) => {
                 void setHome(biome)
-                setResult(null)
+                clearResult()
               }}
             />
           )}

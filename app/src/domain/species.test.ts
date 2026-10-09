@@ -5,15 +5,17 @@ import {
   CATALOG_FILES,
   SPECIES_CATALOG,
   buildCatalog,
-  collectedCatalogSpeciesIds,
+  collectedBySpecies,
   rarityIn,
   speciesDescription,
+  speciesById,
   speciesName,
+  speciesOfBiome,
 } from './species'
 import type { CollectedEntry } from './types'
 
-function entry(speciesId: string): CollectedEntry {
-  return { id: `entry-${speciesId}`, speciesId, collectedAt: '2026-10-01T12:00:00.000Z', method: 'draw' }
+function entry(speciesId: string, collectedAt = '2026-10-01T12:00:00.000Z'): CollectedEntry {
+  return { id: `entry-${speciesId}-${collectedAt}`, speciesId, collectedAt, method: 'draw' }
 }
 
 // Ids of the first Atlantic Forest and Caatinga catalogs: collected entries point at them.
@@ -28,16 +30,32 @@ const LEGACY_IDS = [
 // Legacy ids the iNaturalist/GBIF catalog no longer has; collected entries for them are kept but hidden.
 const REMOVED_IDS: string[] = []
 
-describe('collectedCatalogSpeciesIds', () => {
-  it('ignores entries whose species is no longer in the catalog', () => {
-    const known = SPECIES_CATALOG[0].id
-    const ids = collectedCatalogSpeciesIds([entry(known), entry('jacaranda-mimoso')])
-    expect([...ids]).toEqual([known])
+describe('collectedBySpecies', () => {
+  it('counts each species and keeps its most recent collection time', () => {
+    const summary = collectedBySpecies([
+      entry('a', '2026-10-01T12:00:00.000Z'),
+      entry('b', '2026-10-02T12:00:00.000Z'),
+      entry('a', '2026-10-03T12:00:00.000Z'),
+      entry('a', '2026-10-02T08:00:00.000Z'),
+    ])
+    expect(Object.fromEntries(summary)).toEqual({
+      a: { count: 3, latest: '2026-10-03T12:00:00.000Z' },
+      b: { count: 1, latest: '2026-10-02T12:00:00.000Z' },
+    })
+  })
+})
+
+describe('speciesById and speciesOfBiome', () => {
+  it('finds catalog species and gives undefined for ids no longer in it', () => {
+    const known = SPECIES_CATALOG[0]
+    expect(speciesById(known.id)).toBe(known)
+    expect(speciesById('jacaranda-mimoso')).toBeUndefined()
   })
 
-  it('counts each catalog species once', () => {
-    const known = SPECIES_CATALOG[0].id
-    expect(collectedCatalogSpeciesIds([entry(known), entry(known)]).size).toBe(1)
+  it('lists exactly the species tagged with the Biome', () => {
+    const cerrado = speciesOfBiome('cerrado')
+    expect(cerrado.length).toBeGreaterThan(0)
+    expect(cerrado).toEqual(SPECIES_CATALOG.filter((s) => s.biome.includes('cerrado')))
   })
 })
 

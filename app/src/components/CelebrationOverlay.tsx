@@ -1,6 +1,6 @@
-import { App } from '@capacitor/app'
-import { useEffect, useId, useRef, type CSSProperties } from 'react'
+import { useId, useRef, type CSSProperties } from 'react'
 import { useTranslation } from 'react-i18next'
+import type { CatchReveal } from '../domain/catch'
 import { rarityIn, speciesName } from '../domain/species'
 import { useCelebrationStore } from '../stores/celebrationStore'
 import { useNavigationStore } from '../stores/navigationStore'
@@ -8,6 +8,7 @@ import { useSettingsStore } from '../stores/settingsStore'
 import { GardenIcon, GridIcon, SparkleIcon } from './icons'
 import { RARITY_STYLES } from './rarity'
 import { Button } from './ui'
+import { useModal } from './useModal'
 
 const SPARKLE_COUNT = 14
 const SPARKLE_DISTANCE_PX = 130
@@ -29,36 +30,26 @@ const SPARKLES = Array.from({ length: SPARKLE_COUNT }, (_, i) => {
  * through the Biome, points earned, and where to go next. Stays until the user taps through it.
  */
 export function CelebrationOverlay() {
-  const { t, i18n } = useTranslation()
-  const titleId = useId()
   const reveal = useCelebrationStore((s) => s.reveal)
   const seq = useCelebrationStore((s) => s.seq)
+  // Keyed per catch, so each one mounts fresh: animations replay and focus moves in again.
+  return reveal ? <RevealDialog key={seq} reveal={reveal} /> : null
+}
+
+function RevealDialog({ reveal }: { reveal: CatchReveal }) {
+  const { t, i18n } = useTranslation()
+  const titleId = useId()
   const dismiss = useCelebrationStore((s) => s.dismiss)
   const setTab = useNavigationStore((s) => s.setTab)
   const collectionView = useSettingsStore((s) => s.collectionView)
+  const dialogRef = useRef<HTMLDivElement>(null)
   const primaryRef = useRef<HTMLButtonElement>(null)
-  const open = reveal !== null
-
-  // Focus the next action, and let Escape or the Android back button continue.
-  useEffect(() => {
-    if (!open) return
-    primaryRef.current?.focus()
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && dismiss()
-    window.addEventListener('keydown', onKey)
-    const back = App.addListener('backButton', dismiss)
-    return () => {
-      window.removeEventListener('keydown', onKey)
-      void back.then((l) => l.remove())
-    }
-  }, [open, seq, dismiss])
-
-  if (!reveal) return null
+  const handleKeyDown = useModal(dialogRef, dismiss, primaryRef)
 
   const { species } = reveal
   const tier = rarityIn(species, reveal.biome)
   const rarity = RARITY_STYLES[tier]
   const name = speciesName(species, i18n.language)
-
   const inGarden = collectionView === 'isometric'
 
   function seeInCollection() {
@@ -68,11 +59,12 @@ export function CelebrationOverlay() {
 
   return (
     <div
-      key={seq}
+      ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}
       onClick={(e) => e.target === e.currentTarget && dismiss()}
+      onKeyDown={handleKeyDown}
       className="celebrate-overlay fixed inset-0 z-30 flex flex-col items-center justify-center gap-3 overflow-y-auto bg-canvas/90 px-6 py-8 backdrop-blur-sm"
     >
       <div aria-hidden className="pointer-events-none relative flex size-44 shrink-0 items-center justify-center">
