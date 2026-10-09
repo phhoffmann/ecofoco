@@ -41,7 +41,7 @@ vi.mock('../domain/biome', async (importOriginal) => {
 })
 
 import { NEIGHBOUR_UNLOCK_COST } from '../domain/biome'
-import { activeBiome, selectBiomeProgress, useBiomeStore } from './biomeStore'
+import { activeBiome, selectBiomeProgress, selectPointBalance, useBiomeStore } from './biomeStore'
 
 async function loadWith({
   home = 'atlantic-forest',
@@ -90,6 +90,17 @@ describe('biomeStore', () => {
         purchased: ['caatinga'],
         balance: 50,
       })
+    })
+
+    it('recounts earned points without reloading the rest', async () => {
+      await loadWith({ sessions: 12, goalDays: 3, unlocks: [{ biomeId: 'caatinga', cost: 100 }] })
+      mocks.countCompletedFocusSessions.mockResolvedValue(13)
+      mocks.countStepGoalDaysMet.mockResolvedValue(4)
+
+      await useBiomeStore.getState().refreshPoints()
+
+      expect(selectPointBalance(useBiomeStore.getState())).toBe(70)
+      expect(mocks.getHomeBiome).toHaveBeenCalledOnce()
     })
 
     it('keeps a stored current biome only while it is unlocked', async () => {
