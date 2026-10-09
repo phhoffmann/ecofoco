@@ -1,13 +1,10 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { isMotionReduced } from '../data/motion'
 import { selectPointBalance, useBiomeStore } from '../stores/biomeStore'
 import { useNavigationStore } from '../stores/navigationStore'
 import { SparkleIcon } from './icons'
 
-export const BIOME_SETTINGS_ID = 'biome-settings'
-
-/** The point balance, always in the header; tapping it opens the Biome unlocks in Settings. */
+/** The point balance, always in the header; tapping it opens Settings. */
 export function PointsChip() {
   const { t } = useTranslation()
   const balance = useBiomeStore(selectPointBalance)
@@ -20,18 +17,9 @@ export function PointsChip() {
     setChanges((n) => n + 1)
   }
 
-  function openBiomes() {
-    setTab('settings')
-    requestAnimationFrame(() =>
-      document
-        .getElementById(BIOME_SETTINGS_ID)
-        ?.scrollIntoView?.({ behavior: isMotionReduced() ? 'auto' : 'smooth', block: 'start' }),
-    )
-  }
-
   return (
     <button
-      onClick={openBiomes}
+      onClick={() => setTab('settings')}
       aria-label={t('pointsChip.label', { count: balance })}
       // A 44px tap target around a compact chip; the negative margin keeps the header its height.
       className="press -my-1.5 inline-flex min-h-11 shrink-0 items-center"

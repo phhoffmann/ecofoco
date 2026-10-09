@@ -14,7 +14,6 @@ import { selectBiomeProgress, useBiomeStore, type DetectResult } from '../stores
 import { BiomeSwatch } from './BiomeSwatch'
 import { DetectResultMessage, HomeBiomePicker } from './HomeBiomePicker'
 import { CheckIcon, LockIcon, MapPinIcon, SparkleIcon } from './icons'
-import { BIOME_SETTINGS_ID } from './PointsChip'
 import { Button, Card, CardHeader } from './ui'
 
 function BiomeAction({ biome, progress }: { biome: BiomeId; progress: BiomeProgress }) {
@@ -78,7 +77,7 @@ export function BiomeSettings() {
   }
 
   return (
-    <Card id={BIOME_SETTINGS_ID} className="enter scroll-mt-4 space-y-3">
+    <Card className="enter space-y-3">
       <CardHeader
         icon={MapPinIcon}
         title={t('settings.biome.title')}

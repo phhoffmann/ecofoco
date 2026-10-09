@@ -130,7 +130,7 @@ describe('App header points', () => {
     expect(number().classList.contains('points-bump')).toBe(true)
   })
 
-  it('opens the biome unlocks in Settings when tapped', async () => {
+  it('opens Settings when tapped', async () => {
     await act(async () => chip()!.click())
 
     expect(useNavigationStore.getState().tab).toBe('settings')
