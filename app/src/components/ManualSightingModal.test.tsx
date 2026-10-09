@@ -96,7 +96,8 @@ describe('ManualSightingModal', () => {
   it('leaves focus in the catch reveal once the sheet has closed behind it, then returns it to what opened the sheet', async () => {
     act(() => root.unmount())
     useCelebrationStore.setState({ reveal: null, seq: 0, snackbar: null, pendingUndo: null })
-    logManualSighting.mockImplementation(async () =>
+    let finishSaving!: () => void
+    logManualSighting.mockImplementation(() => new Promise<void>((resolve) => (finishSaving = resolve)).then(() =>
       useCelebrationStore.getState().celebrate({
         species: SPECIES_CATALOG.find((s) => s.id === 'quaresmeira')!,
         biome: 'atlantic-forest',
@@ -106,7 +107,7 @@ describe('ManualSightingModal', () => {
         dexTotal: 80,
         points: 0,
       }),
-    )
+    ))
     const opener = document.createElement('button')
     container.before(opener)
     opener.focus()
@@ -124,7 +125,15 @@ describe('ManualSightingModal', () => {
 
     search('glory')
     act(() => (rows()[0] as HTMLButtonElement).click())
-    await act(async () => button('Log sighting').click())
+    act(() => button('Log sighting').click())
+    // Browsers drop focus to <body> when the focused button becomes disabled; jsdom doesn't (nor
+    // can it blur a disabled element), so move focus off it by hand in that case.
+    if (button('Log sighting').disabled) {
+      const sink = document.body.appendChild(document.createElement('input'))
+      sink.focus()
+      sink.remove()
+    }
+    await act(async () => finishSaving())
     act(() => vi.advanceTimersByTime(200))
     expect(onClose).toHaveBeenCalledOnce()
     render(false)

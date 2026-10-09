@@ -44,7 +44,7 @@ export function ManualSightingModal({ onClose }: ManualSightingModalProps) {
   }, [confirming])
 
   async function confirm(close: () => void) {
-    if (!confirming) return
+    if (!confirming || saving) return
     setSaving(true)
     try {
       await logManualSighting(confirming.id)
@@ -86,7 +86,17 @@ export function ManualSightingModal({ onClose }: ManualSightingModalProps) {
               <p className="mt-2 max-w-80 text-caption text-ink-muted">{t('manualSighting.confirmBody')}</p>
             </div>
             <div className="mt-4 flex shrink-0 flex-col gap-2">
-              <Button ref={confirmRef} variant="primary" size="lg" icon={EyeIcon} disabled={saving} onClick={() => void confirm(close)}>
+              {/* aria-disabled, not disabled: browsers blur a focused button that becomes disabled, and the
+                  reveal opened after saving needs focus still in this sheet to know where to return it. */}
+              <Button
+                ref={confirmRef}
+                variant="primary"
+                size="lg"
+                icon={EyeIcon}
+                aria-disabled={saving}
+                className="aria-disabled:opacity-45"
+                onClick={() => void confirm(close)}
+              >
                 {t('manualSighting.confirm')}
               </Button>
               <Button variant="ghost" disabled={saving} onClick={back}>
