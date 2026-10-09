@@ -1,6 +1,5 @@
 export const en = {
   common: {
-    done: 'Done',
     cancel: 'Cancel',
     close: 'Close',
     tryAgain: 'Try again',

@@ -11,15 +11,16 @@ import { FocusScreen } from './screens/FocusScreen'
 import { SettingsScreen } from './screens/SettingsScreen'
 import { useActiveBiome, useBiomeStore } from './stores/biomeStore'
 import { useFocusSessionStore } from './stores/focusSessionStore'
-import { useNavigationStore, type Tab } from './stores/navigationStore'
+import { TAB_IDS, useNavigationStore, type Tab } from './stores/navigationStore'
 import { useSettingsStore } from './stores/settingsStore'
 
-const TABS: readonly { id: Tab; icon: typeof SproutIcon }[] = [
-  { id: 'focus', icon: SproutIcon },
-  { id: 'activity', icon: FootprintsIcon },
-  { id: 'collection', icon: CollectionIcon },
-  { id: 'settings', icon: SettingsIcon },
-]
+const TAB_ICONS: Record<Tab, typeof SproutIcon> = {
+  focus: SproutIcon,
+  activity: FootprintsIcon,
+  collection: CollectionIcon,
+  settings: SettingsIcon,
+}
+const TABS = TAB_IDS.map((id) => ({ id, icon: TAB_ICONS[id] }))
 
 function App() {
   const { t } = useTranslation()
@@ -101,7 +102,7 @@ function MainTabs() {
           {/* Indicator that slides under the active tab. */}
           <span
             aria-hidden
-            className="absolute top-1.5 bottom-1.5 left-1.5 rounded-[calc(var(--radius-card)-6px)] bg-accent/15 transition-transform duration-300 ease-spring motion-reduce:transition-none"
+            className="absolute top-1.5 bottom-1.5 left-1.5 rounded-tile bg-accent/15 transition-transform duration-300 ease-spring motion-reduce:transition-none"
             style={{ width: `calc((100% - 0.75rem) / ${TABS.length})`, transform: `translateX(${index * 100}%)` }}
           />
           {TABS.map(({ id, icon: Icon }) => {

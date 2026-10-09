@@ -52,16 +52,17 @@ async function hasColumn(db: MigratableDb, table: string, column: string): Promi
   return (res.values ?? []).some((c: { name: string }) => c.name === column)
 }
 
+// Columns added after their table first shipped: installs from before them get them on open.
+const ADDED_COLUMNS: { table: string; column: string; type: string }[] = [
+  { table: 'focus_sessions', column: 'failReason', type: 'TEXT' },
+  { table: 'active_focus_session', column: 'backgroundedAt', type: 'TEXT' },
+  { table: 'active_focus_session', column: 'backgroundedScreenOn', type: 'INTEGER' },
+]
+
 /** Creates missing tables, then adds columns that installs from before them lack. */
 export async function migrate(db: MigratableDb): Promise<void> {
   await db.execute(SCHEMA)
-  if (!(await hasColumn(db, 'focus_sessions', 'failReason'))) {
-    await db.execute('ALTER TABLE focus_sessions ADD COLUMN failReason TEXT')
-  }
-  if (!(await hasColumn(db, 'active_focus_session', 'backgroundedAt'))) {
-    await db.execute('ALTER TABLE active_focus_session ADD COLUMN backgroundedAt TEXT')
-  }
-  if (!(await hasColumn(db, 'active_focus_session', 'backgroundedScreenOn'))) {
-    await db.execute('ALTER TABLE active_focus_session ADD COLUMN backgroundedScreenOn INTEGER')
+  for (const { table, column, type } of ADDED_COLUMNS) {
+    if (!(await hasColumn(db, table, column))) await db.execute(`ALTER TABLE ${table} ADD COLUMN ${column} ${type}`)
   }
 }

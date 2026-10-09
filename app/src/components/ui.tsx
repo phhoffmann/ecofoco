@@ -118,7 +118,7 @@ export function SegmentedControl<T extends string>({ label, options, value, onCh
     <div role="group" aria-label={label} className={`relative flex rounded-control bg-surface-sunken p-1 ring-1 ring-line/60 ${className}`}>
       <span
         aria-hidden
-        className="absolute top-1 bottom-1 left-1 rounded-[calc(var(--radius-control)-4px)] bg-accent shadow-lift transition-transform duration-300 ease-spring motion-reduce:transition-none"
+        className="absolute top-1 bottom-1 left-1 rounded-thumb bg-accent shadow-lift transition-transform duration-300 ease-spring motion-reduce:transition-none"
         style={{ width: `calc((100% - 0.5rem) / ${options.length})`, transform: `translateX(${index * 100}%)` }}
       />
       {options.map((option) => {
@@ -129,7 +129,7 @@ export function SegmentedControl<T extends string>({ label, options, value, onCh
             key={option.value}
             aria-pressed={selected}
             onClick={() => onChange(option.value)}
-            className={`relative z-10 flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-[calc(var(--radius-control)-4px)] px-3 text-caption font-bold transition-colors duration-200 ${
+            className={`relative z-10 flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-thumb px-3 text-caption font-bold transition-colors duration-200 ${
               selected ? 'text-on-accent' : 'text-ink-muted'
             }`}
           >
@@ -289,7 +289,7 @@ export function HoldButton({
 
 export function Chip({ className = '', children }: { className?: string; children: ReactNode }) {
   return (
-    <span className={`inline-flex items-center gap-1 rounded-full bg-surface-raised px-3 py-1 text-caption font-semibold text-ink-muted ring-1 ring-line/60 ${className}`}>
+    <span className={`inline-flex items-center gap-1 rounded-full bg-surface-raised px-3 py-1 text-caption font-bold text-ink-muted ring-1 ring-line/60 ${className}`}>
       {children}
     </span>
   )

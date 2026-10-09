@@ -2,9 +2,9 @@ import type { CSSProperties } from 'react'
 import type { BiomeId } from '../domain/biome'
 import { STAGE_STARTS, growthStage, progressWithinStage, type GrowthStage } from '../domain/growth'
 import type { PlantArchetype } from '../domain/species'
-import { BIOME_GROUND } from './biomeGround'
+import { ARCHETYPE_SPRITES, GROWTH_STAGE_SPRITES, footOrigin, footTranslate, type GardenSprite } from './gardenSprites'
+import { GroundTile } from './GroundTile'
 import { FULL_RING_SIZE } from './sproutRing'
-import { ARCHETYPE_SPRITES, GROWTH_STAGE_SPRITES, type GardenSprite } from './gardenSprites'
 
 // Display height per stage, in px at the full ring size. The last two stages are the archetype's own shape.
 const STAGE_HEIGHT = [70, 96, 120, 172]
@@ -54,7 +54,6 @@ export function Sprout({ progress, archetype, biome, mood = 'growing', size = RI
   // Keep growing a little inside each stage, so the plant visibly moves even between stage changes.
   const withinStage = mood === 'growing' ? progressWithinStage(progress) : 1
   const height = STAGE_HEIGHT[stage] * (0.84 + withinStage * 0.16) * scale
-  const ground = BIOME_GROUND[biome]
 
   const radius = (RING.size - RING.stroke) / 2
   const circumference = 2 * Math.PI * radius
@@ -132,26 +131,21 @@ export function Sprout({ progress, archetype, biome, mood = 'growing', size = RI
       />
 
       {/* One garden tile, the same ground as the Biome's garden. */}
-      <svg
-        viewBox="0 0 140 86"
+      <GroundTile
+        biome={biome}
+        width={140}
         className="absolute"
         style={{ top: GROUND.top * scale, left: ((RING.size - GROUND.width) / 2) * scale, width: GROUND.width * scale }}
-        aria-hidden
       >
-        <polygon points="0,35 70,70 70,86 0,51" fill={ground.soil[0]} />
-        <polygon points="70,70 140,35 140,51 70,86" fill={ground.soil[1]} />
-        <polygon points="0,35 70,70 70,75 0,40" fill={ground.lip[0]} />
-        <polygon points="70,70 140,35 140,40 70,75" fill={ground.lip[1]} />
-        <polygon points="70,0 140,35 70,70 0,35" fill={ground.tile[0]} />
         <ellipse cx="70" cy="37" rx="26" ry="11" fill="black" opacity={0.18} />
-      </svg>
+      </GroundTile>
 
       {mood !== 'gone' && (
         <div className="absolute" style={{ left: '50%', top: FOOT_Y * scale }}>
           <div
             key={`${stage}-${mood}`}
             className={stage > 0 && mood === 'growing' ? 'stage-in' : mood === 'grown' ? 'pop-in' : undefined}
-            style={{ transformOrigin: `${sprite.footX * 100}% ${sprite.footY * 100}%`, translate: `${-sprite.footX * 100}% ${-sprite.footY * 100}%` }}
+            style={{ transformOrigin: footOrigin(sprite), translate: footTranslate(sprite) }}
           >
             <img
               src={sprite.src}
@@ -163,7 +157,7 @@ export function Sprout({ progress, archetype, biome, mood = 'growing', size = RI
               style={{
                 height,
                 aspectRatio: `1 / ${sprite.aspect}`,
-                transformOrigin: `${sprite.footX * 100}% ${sprite.footY * 100}%`,
+                transformOrigin: footOrigin(sprite),
                 animationDuration: stage < 2 ? '3.2s' : '5s',
               }}
             />

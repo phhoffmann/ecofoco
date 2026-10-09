@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { addCollectedEntry, deleteCollectedEntry, listCollectedEntries } from '../data/collectionRepo'
 import { describeCatch } from '../domain/catch'
-import { SPECIES_CATALOG, type Species } from '../domain/species'
+import { speciesById, type Species } from '../domain/species'
 import type { CollectedEntry } from '../domain/types'
 import { activeBiome } from './biomeStore'
 import { useCelebrationStore } from './celebrationStore'
@@ -37,7 +37,7 @@ export const useCollectionStore = create<CollectionState>((set, get) => ({
   clearHighlight: () => set({ highlightSpeciesId: null }),
 
   logManualSighting: async (speciesId) => {
-    const species = SPECIES_CATALOG.find((s) => s.id === speciesId)
+    const species = speciesById(speciesId)
     if (!species) return
     const entry = await addCollectedEntry(speciesId, 'manual_sighting')
     await get().reveal(species, 0, async () => {

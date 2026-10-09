@@ -11,15 +11,16 @@ import {
 import { FOCUS_SESSION_POINTS } from '../domain/biome'
 import { pickRandomSpecies } from '../domain/draw'
 import { computeRemainingSeconds, hasLeftTooLong, LEAVE_GRACE_MS } from '../domain/focusSession'
-import { SPECIES_CATALOG, type PlantArchetype, type Species } from '../domain/species'
+import { speciesById, type PlantArchetype, type Species } from '../domain/species'
 import type { ActiveFocusSession, FocusFailReason } from '../domain/types'
 import { activeBiome } from './biomeStore'
 import { useCollectionStore } from './collectionStore'
 
-export type FocusSessionStatus = 'idle' | 'running' | 'completed' | 'failed'
+/** Where the Focus screen is; a recorded FocusSession is only ever completed or failed. */
+export type FocusScreenStatus = 'idle' | 'running' | 'completed' | 'failed'
 
 interface FocusSessionState {
-  status: FocusSessionStatus
+  status: FocusScreenStatus
   plannedDurationSeconds: number
   remainingSeconds: number
   /** Shape the Sprout grows into while running: the archetype of the plant this session will collect. */
@@ -120,6 +121,14 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => {
     }, 250)
   }
 
+  /** Shows the failure, then records it once any pending write of the session has landed. */
+  async function endFailed(session: ActiveFocusSession, reason: FocusFailReason) {
+    // Flip the status before awaiting, so concurrent callers can't record the failure twice.
+    set({ ...IDLE, status: 'failed', plannedDurationSeconds: session.plannedDurationSeconds, failReason: reason })
+    await saving.catch(() => {})
+    await failFocusSession(session.startedAt, session.plannedDurationSeconds, reason)
+  }
+
   return {
     ...IDLE,
 
@@ -128,7 +137,7 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => {
       const species = pickRandomSpecies('plant', activeBiome())
       const session = { startedAt: new Date().toISOString(), plannedDurationSeconds: durationSeconds, speciesId: species.id }
       run(session, species)
-      saving = saveActiveFocusSession(session)
+      persist(() => saveActiveFocusSession(session))
       await saving
     },
 
@@ -138,21 +147,18 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => {
       active = null
       clearTick()
       clearAwayCheck()
-      // Flip the status before awaiting, so concurrent callers can't record the failure twice.
-      set({ status: 'failed', remainingSeconds: 0, failReason: reason })
-      await saving.catch(() => {})
-      await failFocusSession(session.startedAt, session.plannedDurationSeconds, reason)
+      await endFailed(session, reason)
     },
 
     recover: async () => {
       if (get().status !== 'idle') return
       const session = await getActiveFocusSession()
       if (!session || get().status !== 'idle') return
-      const species = SPECIES_CATALOG.find((s) => s.id === session.speciesId && s.type === 'plant')
+      const found = speciesById(session.speciesId)
+      const species = found?.type === 'plant' ? found : undefined
       const { backgrounded } = session
       if (backgrounded?.screenOn && Date.now() - Date.parse(backgrounded.at) > LEAVE_GRACE_MS) {
-        set({ ...IDLE, status: 'failed', plannedDurationSeconds: session.plannedDurationSeconds, failReason: 'left_app' })
-        await failFocusSession(session.startedAt, session.plannedDurationSeconds, 'left_app')
+        await endFailed(session, 'left_app')
         return
       }
       const remaining = computeRemainingSeconds(Date.parse(session.startedAt), session.plannedDurationSeconds, Date.now())
@@ -163,8 +169,7 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => {
       }
       // Its time ran out while the process was dead, so nobody saw it through: it can't count as
       // completed. A species dropped from the catalog can't be grown either.
-      set({ ...IDLE, status: 'failed', plannedDurationSeconds: session.plannedDurationSeconds, failReason: 'closed' })
-      await failFocusSession(session.startedAt, session.plannedDurationSeconds, 'closed')
+      await endFailed(session, 'closed')
     },
 
     reset: () => {

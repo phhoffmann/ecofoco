@@ -1,5 +1,5 @@
 import type { BiomeId } from './biome'
-import { SPECIES_CATALOG, collectedCatalogSpeciesIds, type Species } from './species'
+import { SPECIES_CATALOG, collectedBySpecies, speciesOfBiome, type Species } from './species'
 import type { CollectedEntry } from './types'
 
 /** What one new CollectedEntry means for the user, shown once when it is collected. */
@@ -25,14 +25,15 @@ export function describeCatch(
   points: number,
   catalog: Species[] = SPECIES_CATALOG,
 ): CatchReveal {
-  const timesCollected = Math.max(1, entries.filter((e) => e.speciesId === species.id).length)
-  const biomeSpecies = catalog.filter((s) => s.biome.includes(biome))
+  const collected = collectedBySpecies(entries)
+  const timesCollected = Math.max(1, collected.get(species.id)?.count ?? 0)
+  const biomeSpecies = speciesOfBiome(biome, catalog)
   return {
     species,
     biome,
     isNew: timesCollected === 1,
     timesCollected,
-    dexCollected: collectedCatalogSpeciesIds(entries, biomeSpecies).size,
+    dexCollected: biomeSpecies.filter((s) => collected.has(s.id)).length,
     dexTotal: biomeSpecies.length,
     points,
   }

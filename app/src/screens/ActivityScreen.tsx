@@ -2,7 +2,7 @@ import { useEffect, type CSSProperties } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ARCHETYPE_SPRITES } from '../components/gardenSprites'
 import { CheckIcon, FootprintsIcon, RefreshIcon, SparkleIcon } from '../components/icons'
-import { Button, Card, EmptyState } from '../components/ui'
+import { Button, Card, EmptyState, Overline } from '../components/ui'
 import { onAppStateChange } from '../data/appLifecycle'
 import type { AnimalArchetype } from '../domain/species'
 import { useDailyProgressStore } from '../stores/dailyProgressStore'
@@ -89,7 +89,7 @@ export function ActivityScreen() {
     <div className="flex flex-1 flex-col justify-center gap-4 px-gutter py-6">
       <Card className="enter overflow-hidden p-5">
         <div className="flex items-center justify-between gap-3">
-          <p className="text-overline text-ink-faint uppercase">{t('activity.todaySteps')}</p>
+          <Overline>{t('activity.todaySteps')}</Overline>
           {progress.goalMet && (
             <span className="pop-in inline-flex items-center gap-1 rounded-full bg-accent px-2.5 py-0.5 text-overline text-on-accent">
               <CheckIcon className="size-3" />

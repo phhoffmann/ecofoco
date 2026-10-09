@@ -1,19 +1,11 @@
-import { App } from '@capacitor/app'
-import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type PointerEvent, type ReactNode } from 'react'
+import { useCallback, useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { isMotionReduced } from '../data/motion'
+import { useModal } from './useModal'
 
 // Matches the sheet-out / backdrop-out animations in index.css.
 const CLOSE_MS = 200
 const DRAG_DISMISS_PX = 80
-const FOCUSABLE = [
-  'a[href]',
-  'button:not([disabled])',
-  'input:not([disabled])',
-  'select:not([disabled])',
-  'textarea:not([disabled])',
-  '[tabindex]:not([tabindex="-1"])',
-].join(',')
 
 interface BottomSheetProps {
   /** Called once the sheet has finished its closing animation. */
@@ -48,45 +40,7 @@ export function BottomSheet({ onClose, labelledBy, children }: BottomSheetProps)
     return () => window.clearTimeout(timer)
   }, [closing])
 
-  // Move focus into the sheet, and give it back to whatever opened it.
-  useEffect(() => {
-    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null
-    panelRef.current?.focus()
-    return () => opener?.focus()
-  }, [])
-
-  // While a backButton listener exists Capacitor skips its default (leave the app), so only hold
-  // one while the sheet is open.
-  useEffect(() => {
-    const listener = App.addListener('backButton', close)
-    return () => {
-      void listener.then((l) => l.remove())
-    }
-  }, [close])
-
-  function handleKeyDown(e: KeyboardEvent<HTMLDivElement>) {
-    if (e.key === 'Escape') {
-      e.stopPropagation()
-      close()
-      return
-    }
-    if (e.key !== 'Tab' || !panelRef.current) return
-    const focusable = [...panelRef.current.querySelectorAll<HTMLElement>(FOCUSABLE)]
-    if (focusable.length === 0) {
-      e.preventDefault()
-      return
-    }
-    const first = focusable[0]
-    const last = focusable[focusable.length - 1]
-    const active = document.activeElement
-    if (e.shiftKey && (active === first || active === panelRef.current)) {
-      e.preventDefault()
-      last.focus()
-    } else if (!e.shiftKey && active === last) {
-      e.preventDefault()
-      first.focus()
-    }
-  }
+  const handleKeyDown = useModal(panelRef, close)
 
   function handlePointerDown(e: PointerEvent<HTMLDivElement>) {
     if (closing) return

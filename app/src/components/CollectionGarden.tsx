@@ -10,13 +10,11 @@ import {
   type GardenPeriod,
 } from '../domain/period'
 import type { BiomeId } from '../domain/biome'
-import { SPECIES_CATALOG } from '../domain/species'
+import { speciesById } from '../domain/species'
 import type { CollectedEntry } from '../domain/types'
 import { ChevronLeftIcon, ChevronRightIcon, LeafIcon, PawIcon } from './icons'
 import { IsometricGarden } from './IsometricGarden'
 import { Card, IconButton, SegmentedControl } from './ui'
-
-const SPECIES_TYPE_BY_ID = new Map(SPECIES_CATALOG.map((s) => [s.id, s.type]))
 
 function formatRange(period: GardenPeriod, range: DateRange, locale: string): string {
   switch (period) {
@@ -51,8 +49,8 @@ export function CollectionGarden({ entries, biome, onSelectSpecies }: Collection
   const range = periodRange(period, anchor)
   const isCurrentPeriod = isInRange(new Date(), range)
   const periodEntries = useMemo(() => entriesInRange(entries, periodRange(period, anchor)), [entries, period, anchor])
-  const plants = periodEntries.filter((e) => SPECIES_TYPE_BY_ID.get(e.speciesId) === 'plant').length
-  const animals = periodEntries.filter((e) => SPECIES_TYPE_BY_ID.get(e.speciesId) === 'animal').length
+  const plants = periodEntries.filter((e) => speciesById(e.speciesId)?.type === 'plant').length
+  const animals = periodEntries.filter((e) => speciesById(e.speciesId)?.type === 'animal').length
 
   return (
     <Card className="space-y-3 p-3">

@@ -2,7 +2,10 @@ import { act } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import '../i18n'
+import { SPECIES_CATALOG } from '../domain/species'
+import { useCelebrationStore } from '../stores/celebrationStore'
 import { useCollectionStore } from '../stores/collectionStore'
+import { CelebrationOverlay } from './CelebrationOverlay'
 import { ManualSightingModal } from './ManualSightingModal'
 
 declare global {
@@ -11,6 +14,7 @@ declare global {
 globalThis.IS_REACT_ACT_ENVIRONMENT = true
 
 vi.mock('../data/collectionRepo', () => ({}))
+vi.mock('../data/haptics', () => ({ lightHaptic: vi.fn() }))
 vi.mock('@capacitor/app', () => ({
   App: { addListener: () => Promise.resolve({ remove: vi.fn() }) },
 }))
@@ -87,5 +91,59 @@ describe('ManualSightingModal', () => {
     act(() => (rows()[0] as HTMLButtonElement).click())
     await act(async () => button('Log sighting').click())
     expect(logManualSighting).toHaveBeenCalledExactlyOnceWith('quaresmeira')
+  })
+
+  it('leaves focus in the catch reveal once the sheet has closed behind it, then returns it to what opened the sheet', async () => {
+    act(() => root.unmount())
+    useCelebrationStore.setState({ reveal: null, seq: 0, snackbar: null, pendingUndo: null })
+    let finishSaving!: () => void
+    logManualSighting.mockImplementation(() => new Promise<void>((resolve) => (finishSaving = resolve)).then(() =>
+      useCelebrationStore.getState().celebrate({
+        species: SPECIES_CATALOG.find((s) => s.id === 'quaresmeira')!,
+        biome: 'atlantic-forest',
+        isNew: false,
+        timesCollected: 3,
+        dexCollected: 12,
+        dexTotal: 80,
+        points: 0,
+      }),
+    ))
+    const opener = document.createElement('button')
+    container.before(opener)
+    opener.focus()
+    root = createRoot(container)
+    const render = (sheetOpen: boolean) =>
+      act(() =>
+        root.render(
+          <>
+            {sheetOpen && <ManualSightingModal onClose={onClose} />}
+            <CelebrationOverlay />
+          </>,
+        ),
+      )
+    render(true)
+
+    search('glory')
+    act(() => (rows()[0] as HTMLButtonElement).click())
+    act(() => button('Log sighting').click())
+    // Browsers drop focus to <body> when the focused button becomes disabled; jsdom doesn't (nor
+    // can it blur a disabled element), so move focus off it by hand in that case.
+    if (button('Log sighting').disabled) {
+      const sink = document.body.appendChild(document.createElement('input'))
+      sink.focus()
+      sink.remove()
+    }
+    await act(async () => finishSaving())
+    act(() => vi.advanceTimersByTime(200))
+    expect(onClose).toHaveBeenCalledOnce()
+    render(false)
+
+    const reveal = container.querySelector<HTMLElement>('[role="dialog"]')!
+    expect(reveal.contains(document.activeElement)).toBe(true)
+
+    act(() => document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })))
+    expect(useCelebrationStore.getState().reveal).toBeNull()
+    expect(document.activeElement).toBe(opener)
+    opener.remove()
   })
 })

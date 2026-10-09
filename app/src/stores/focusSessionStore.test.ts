@@ -125,7 +125,7 @@ describe('focusSessionStore', () => {
   })
 
   it('persists the session as soon as it starts, so it survives the process being killed', async () => {
-    void useFocusSessionStore.getState().start(900)
+    await useFocusSessionStore.getState().start(900)
 
     expect(saveActiveFocusSession).toHaveBeenCalledWith({
       startedAt: expect.any(String),

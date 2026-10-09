@@ -73,6 +73,17 @@ export function buildCatalog(files: CatalogFile[], photoUrls: Record<string, str
 
 export const SPECIES_CATALOG: Species[] = buildCatalog(CATALOG_FILES)
 
+const SPECIES_BY_ID = new Map(SPECIES_CATALOG.map((s) => [s.id, s]))
+
+/** Undefined for ids no longer in the catalog: their entries are kept but not shown. */
+export function speciesById(id: string): Species | undefined {
+  return SPECIES_BY_ID.get(id)
+}
+
+export function speciesOfBiome(biome: BiomeId, catalog: Species[] = SPECIES_CATALOG): Species[] {
+  return catalog.filter((s) => s.biome.includes(biome))
+}
+
 /** The species' Rarity in the given Biome, or in its first Biome when it does not belong to that one. */
 export function rarityIn(species: Pick<Species, 'rarityByBiome' | 'biome'>, biome: BiomeId): Rarity {
   return species.rarityByBiome[biome] ?? species.rarityByBiome[species.biome[0]]!
@@ -86,11 +97,23 @@ export function speciesDescription(species: Pick<Species, 'descriptions'>, langu
   return species.descriptions[toLocale(language)]
 }
 
-/** Collected species ids that still exist in the catalog: entries for removed species are kept but not shown. */
-export function collectedCatalogSpeciesIds(
-  entries: CollectedEntry[],
-  catalog: Species[] = SPECIES_CATALOG,
-): Set<string> {
-  const catalogIds = new Set(catalog.map((s) => s.id))
-  return new Set(entries.map((e) => e.speciesId).filter((id) => catalogIds.has(id)))
+export interface CollectedSummary {
+  /** How many times the species was collected. */
+  count: number
+  /** collectedAt of the most recent entry. */
+  latest: string
+}
+
+/** Per collected species id: how often and when it was last collected. */
+export function collectedBySpecies(entries: readonly CollectedEntry[]): Map<string, CollectedSummary> {
+  const bySpecies = new Map<string, CollectedSummary>()
+  for (const { speciesId, collectedAt } of entries) {
+    const known = bySpecies.get(speciesId)
+    if (!known) bySpecies.set(speciesId, { count: 1, latest: collectedAt })
+    else {
+      known.count += 1
+      if (collectedAt > known.latest) known.latest = collectedAt
+    }
+  }
+  return bySpecies
 }

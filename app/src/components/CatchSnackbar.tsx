@@ -43,7 +43,7 @@ export function CatchSnackbar() {
       role="status"
       className="snackbar-in flex w-full max-w-md items-center gap-2 rounded-card bg-surface-raised py-1.5 pr-1.5 pl-2 shadow-card ring-1 ring-line"
     >
-      <img src={reveal.species.image} alt="" className="size-9 shrink-0 rounded-[0.625rem] object-cover" />
+      <img src={reveal.species.image} alt="" className="size-9 shrink-0 rounded-thumb object-cover" />
       <p className="min-w-0 flex-1 text-caption text-ink">
         <span className="font-bold">{t('snackbar.added', { name })}</span>
         <span className="text-ink-muted"> · {reveal.isNew ? t('celebration.new') : t('celebration.seen', { count: reveal.timesCollected })}</span>
