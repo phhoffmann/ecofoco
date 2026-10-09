@@ -1,23 +1,92 @@
-import type { FocusSession, FocusSessionStatus } from '../domain/types'
+import type { ActiveFocusSession, CollectedEntry, FocusFailReason, FocusSession } from '../domain/types'
+import { insertCollectedEntry, newCollectedEntry } from './collectionRepo'
 import { getDb } from './db'
 
-export async function recordFocusSession(
+const CLEAR_ACTIVE = { statement: 'DELETE FROM active_focus_session', values: [] }
+
+function insertFocusSession(session: FocusSession) {
+  return {
+    statement:
+      'INSERT INTO focus_sessions (id, startedAt, endedAt, plannedDurationSeconds, status, failReason) VALUES (?, ?, ?, ?, ?, ?)',
+    values: [
+      session.id,
+      session.startedAt,
+      session.endedAt,
+      session.plannedDurationSeconds,
+      session.status,
+      session.failReason,
+    ],
+  }
+}
+
+export async function saveActiveFocusSession(active: ActiveFocusSession): Promise<void> {
+  const db = await getDb()
+  await db.run(
+    'INSERT OR REPLACE INTO active_focus_session (id, startedAt, plannedDurationSeconds, speciesId) VALUES (1, ?, ?, ?)',
+    [active.startedAt, active.plannedDurationSeconds, active.speciesId],
+  )
+}
+
+export async function getActiveFocusSession(): Promise<ActiveFocusSession | null> {
+  const db = await getDb()
+  const res = await db.query(
+    'SELECT startedAt, plannedDurationSeconds, speciesId, backgroundedAt, backgroundedScreenOn FROM active_focus_session WHERE id = 1',
+  )
+  const row = res.values?.[0]
+  if (!row) return null
+  const session: ActiveFocusSession = {
+    startedAt: row.startedAt,
+    plannedDurationSeconds: row.plannedDurationSeconds,
+    speciesId: row.speciesId,
+  }
+  if (row.backgroundedAt) session.backgrounded = { at: row.backgroundedAt, screenOn: Boolean(row.backgroundedScreenOn) }
+  return session
+}
+
+/** Records the app leaving the foreground mid-session, so a relaunch after the process died can tell. */
+export async function markActiveFocusSessionBackgrounded(at: string, screenOn: boolean): Promise<void> {
+  const db = await getDb()
+  await db.run('UPDATE active_focus_session SET backgroundedAt = ?, backgroundedScreenOn = ? WHERE id = 1', [at, screenOn ? 1 : 0])
+}
+
+export async function clearActiveFocusSessionBackgrounded(): Promise<void> {
+  const db = await getDb()
+  await db.run('UPDATE active_focus_session SET backgroundedAt = NULL, backgroundedScreenOn = NULL WHERE id = 1', [])
+}
+
+/** Records the completed session and collects its Plant in one transaction, so neither exists without the other. */
+export async function completeFocusSession(
+  active: ActiveFocusSession,
+): Promise<{ session: FocusSession; entry: CollectedEntry }> {
+  const entry = newCollectedEntry(active.speciesId, 'focus_session')
+  const session: FocusSession = {
+    id: crypto.randomUUID(),
+    startedAt: active.startedAt,
+    endedAt: entry.collectedAt,
+    plannedDurationSeconds: active.plannedDurationSeconds,
+    status: 'completed',
+    failReason: null,
+  }
+  const db = await getDb()
+  await db.executeSet([insertCollectedEntry(entry), insertFocusSession(session), CLEAR_ACTIVE], true)
+  return { session, entry }
+}
+
+export async function failFocusSession(
   startedAt: string,
   plannedDurationSeconds: number,
-  status: FocusSessionStatus,
+  reason: FocusFailReason,
 ): Promise<FocusSession> {
   const session: FocusSession = {
     id: crypto.randomUUID(),
     startedAt,
     endedAt: new Date().toISOString(),
     plannedDurationSeconds,
-    status,
+    status: 'failed',
+    failReason: reason,
   }
   const db = await getDb()
-  await db.run(
-    'INSERT INTO focus_sessions (id, startedAt, endedAt, plannedDurationSeconds, status) VALUES (?, ?, ?, ?, ?)',
-    [session.id, session.startedAt, session.endedAt, session.plannedDurationSeconds, session.status],
-  )
+  await db.executeSet([insertFocusSession(session), CLEAR_ACTIVE], true)
   return session
 }
 

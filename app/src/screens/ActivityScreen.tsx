@@ -2,11 +2,9 @@ import { useEffect, type CSSProperties } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ARCHETYPE_SPRITES } from '../components/gardenSprites'
 import { CheckIcon, FootprintsIcon, RefreshIcon, SparkleIcon } from '../components/icons'
-import { RARITY_STYLES } from '../components/rarity'
 import { Button, Card, EmptyState } from '../components/ui'
-import { rarityIn, speciesName, type AnimalArchetype } from '../domain/species'
-import { useActiveBiome } from '../stores/biomeStore'
-import { useCollectionStore } from '../stores/collectionStore'
+import { onAppStateChange } from '../data/appLifecycle'
+import type { AnimalArchetype } from '../domain/species'
 import { useDailyProgressStore } from '../stores/dailyProgressStore'
 import { useSettingsStore } from '../stores/settingsStore'
 
@@ -20,64 +18,25 @@ function SpriteArt({ archetype, className = '', style }: { archetype: AnimalArch
 export function ActivityScreen() {
   const { t, i18n } = useTranslation()
   const stepGoal = useSettingsStore((s) => s.stepGoal)
-  const biome = useActiveBiome()
-  const {
-    healthAvailable,
-    authorized,
-    progress,
-    resultSpecies,
-    loading,
-    error,
-    refresh,
-    connect,
-    draw,
-    clearResult,
-    simulateSteps,
-  } = useDailyProgressStore()
-  const refreshCollection = useCollectionStore((s) => s.refresh)
+  const { healthAvailable, authorized, progress, loading, error, refresh, connect, draw, simulateSteps } =
+    useDailyProgressStore()
   const formatNumber = (n: number) => n.toLocaleString(i18n.language)
 
   // TODO: remove once the Activity flow is validated on-device — lets us hit the
   // step goal without actually walking 6,000 steps on every test cycle.
   const devSimulateButton = healthAvailable ? (
-    <button onClick={() => void simulateSteps(stepGoal)} className="text-caption text-ink-faint underline underline-offset-4">
+    <button onClick={() => void simulateSteps(stepGoal)} className="min-h-11 text-caption text-ink-faint underline underline-offset-4">
       {t('activity.simulateSteps', { count: stepGoal })}
     </button>
   ) : null
 
+  // Re-read steps on open and whenever the app comes back to the foreground: the user walked meanwhile.
   useEffect(() => {
     void refresh()
+    return onAppStateChange((isActive) => {
+      if (isActive) void refresh()
+    })
   }, [refresh])
-
-  if (resultSpecies) {
-    const tier = rarityIn(resultSpecies, biome)
-    return (
-      <div className="flex flex-1 flex-col items-center justify-center gap-5 px-gutter py-6">
-        <p className="text-overline text-accent uppercase">{t('focus.youCollected')}</p>
-        <img
-          src={resultSpecies.image}
-          alt={speciesName(resultSpecies, i18n.language)}
-          className={`pop-in size-44 rounded-card object-cover shadow-card ring-4 ${RARITY_STYLES[tier].ring}`}
-        />
-        <p className="text-title text-ink">{speciesName(resultSpecies, i18n.language)}</p>
-        <span className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-overline ${RARITY_STYLES[tier].badge}`}>
-          <SparkleIcon className="size-3" />
-          {t(`rarity.${tier}`)}
-        </span>
-        <Button
-          variant="primary"
-          size="lg"
-          className="w-full max-w-sm"
-          onClick={() => {
-            clearResult()
-            void refreshCollection()
-          }}
-        >
-          {t('common.done')}
-        </Button>
-      </div>
-    )
-  }
 
   if (healthAvailable === null) {
     return (

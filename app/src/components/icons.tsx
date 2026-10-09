@@ -187,11 +187,28 @@ export function GlobeIcon(props: IconProps) {
   )
 }
 
-export function BellIcon(props: IconProps) {
+export function SearchIcon(props: IconProps) {
   return (
     <Svg {...props}>
-      <path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15Z" />
-      <path d="M10 20.5a2 2 0 0 0 4 0" />
+      <circle cx="11" cy="11" r="6.5" />
+      <path d="m16 16 4.5 4.5" />
+    </Svg>
+  )
+}
+
+export function CloseIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="m6 6 12 12M18 6 6 18" />
+    </Svg>
+  )
+}
+
+export function UndoIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M9 14 4 9l5-5" />
+      <path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11" />
     </Svg>
   )
 }

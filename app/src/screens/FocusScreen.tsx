@@ -1,39 +1,32 @@
-import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { SparkleIcon, TimerIcon } from '../components/icons'
-import { RARITY_STYLES } from '../components/rarity'
+import { TimerIcon } from '../components/icons'
 import { Sprout } from '../components/Sprout'
-import { Button, Card } from '../components/ui'
+import { sproutRingSize } from '../components/sproutRing'
+import { Button, HoldButton } from '../components/ui'
+import { useViewportHeight } from '../components/useViewportHeight'
+import { formatClock } from '../domain/focusSession'
 import { growthStage } from '../domain/growth'
-import { rarityIn, speciesName } from '../domain/species'
+import { speciesName } from '../domain/species'
 import { useActiveBiome } from '../stores/biomeStore'
-import { useCollectionStore } from '../stores/collectionStore'
 import { useFocusSessionStore } from '../stores/focusSessionStore'
 
 // TODO: remove the 3-minute option once manual on-device testing is done.
 const DURATIONS_MINUTES = [3, 15, 25, 45]
 
-function formatTime(totalSeconds: number): string {
-  const m = Math.floor(totalSeconds / 60)
-  const s = totalSeconds % 60
-  return `${m}:${s.toString().padStart(2, '0')}`
-}
+// Tighter spacing on short screens, so the controls stay above the nav at 360×640.
+const LAYOUT = 'flex flex-1 flex-col items-center justify-center gap-4 px-gutter py-4 [@media(min-height:720px)]:gap-6 [@media(min-height:720px)]:py-6'
 
 export function FocusScreen() {
   const { t, i18n } = useTranslation()
-  const { status, plannedDurationSeconds, remainingSeconds, growingArchetype, resultSpecies, start, fail, reset } =
+  const { status, plannedDurationSeconds, remainingSeconds, growingArchetype, resultSpecies, failReason, start, fail, reset } =
     useFocusSessionStore()
-  const refreshCollection = useCollectionStore((s) => s.refresh)
   const biome = useActiveBiome()
-
-  useEffect(() => {
-    if (status === 'completed') void refreshCollection()
-  }, [status, refreshCollection])
+  const ringSize = sproutRingSize(useViewportHeight())
 
   if (status === 'idle') {
     return (
-      <div className="flex flex-1 flex-col items-center justify-center gap-6 px-gutter py-6">
-        <Sprout progress={0} archetype={null} biome={biome} />
+      <div className={LAYOUT}>
+        <Sprout progress={0} archetype={null} biome={biome} size={ringSize} />
         <div className="space-y-1 text-center">
           <h1 className="text-title text-ink">{t('focus.chooseDuration')}</h1>
           <p className="mx-auto max-w-72 text-body text-ink-muted">{t('focus.idleHint')}</p>
@@ -42,8 +35,8 @@ export function FocusScreen() {
           {DURATIONS_MINUTES.map((min, i) => (
             <button
               key={min}
-              onClick={() => start(min * 60)}
-              className="press enter flex flex-col items-center gap-1 rounded-card bg-surface py-3 font-extrabold text-ink shadow-card ring-1 ring-line/60 active:bg-accent active:text-on-accent"
+              onClick={() => void start(min * 60)}
+              className="press enter flex min-h-14 flex-col items-center justify-center gap-1 rounded-card bg-surface py-2.5 font-extrabold text-ink shadow-card ring-1 ring-line/60 active:bg-accent active:text-on-accent"
               style={{ animationDelay: `${i * 40}ms` }}
             >
               <TimerIcon className="size-4 text-accent" />
@@ -58,57 +51,50 @@ export function FocusScreen() {
   if (status === 'running') {
     const progress = 1 - remainingSeconds / plannedDurationSeconds
     return (
-      <div className="flex flex-1 flex-col items-center justify-center gap-5 px-gutter py-6">
-        <Sprout progress={progress} archetype={growingArchetype} biome={biome} />
+      <div className={LAYOUT}>
+        <Sprout progress={progress} archetype={growingArchetype} biome={biome} size={ringSize} />
         <div className="text-center">
-          <p className="text-display tabular-nums text-ink">{formatTime(remainingSeconds)}</p>
+          <p role="timer" className="text-display tabular-nums text-ink">
+            {formatClock(remainingSeconds)}
+          </p>
+          {/* The visible clock changes every second; screen readers hear the minutes instead. */}
+          <p className="sr-only" aria-live="polite">
+            {t('focus.minutesLeft', { count: Math.ceil(remainingSeconds / 60) })}
+          </p>
           <p key={growthStage(progress)} className="pop-in mt-2 text-overline text-accent uppercase">
             {t(`focus.stages.${growthStage(progress)}`)}
           </p>
         </div>
         <p className="max-w-80 text-center text-caption text-ink-muted">{t('focus.leaveWarning')}</p>
-        <Button variant="danger" size="sm" onClick={() => void fail()}>
-          {t('focus.giveUp')}
-        </Button>
+        <HoldButton onConfirm={() => void fail('gave_up')}>{t('focus.holdToGiveUp')}</HoldButton>
       </div>
     )
   }
 
   if (status === 'completed') {
-    const tier = resultSpecies ? rarityIn(resultSpecies, biome) : null
     return (
-      <div className="flex flex-1 flex-col items-center justify-center gap-5 px-gutter py-6">
-        <Sprout progress={1} archetype={growingArchetype} biome={biome} mood="grown" />
-        {resultSpecies && tier && (
-          <Card className="enter flex w-full max-w-sm items-center gap-4">
-            <img
-              src={resultSpecies.image}
-              alt={speciesName(resultSpecies, i18n.language)}
-              className={`size-16 shrink-0 rounded-control object-cover ring-2 ${RARITY_STYLES[tier].ring}`}
-            />
-            <div className="min-w-0 flex-1">
-              <p className="text-caption text-ink-muted">{t('focus.grewInto')}</p>
-              <p className="truncate text-title text-ink">{speciesName(resultSpecies, i18n.language)}</p>
-              <span className={`mt-1 inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-overline ${RARITY_STYLES[tier].badge}`}>
-                <SparkleIcon className="size-3" />
-                {t(`rarity.${tier}`)}
-              </span>
-            </div>
-          </Card>
+      <div className={LAYOUT}>
+        <Sprout progress={1} archetype={growingArchetype} biome={biome} mood="grown" size={ringSize} />
+        {resultSpecies && (
+          <p className="enter max-w-80 text-center text-body font-bold text-ink">
+            {t('focus.joinedCollection', { name: speciesName(resultSpecies, i18n.language) })}
+          </p>
         )}
         <Button variant="primary" size="lg" className="w-full max-w-sm" onClick={reset}>
-          {t('common.done')}
+          {t('focus.plantAnother')}
         </Button>
       </div>
     )
   }
 
+  // A failed Sprout is gone: the ring stays, empty.
+  const reason = failReason ?? 'left_app'
   return (
-    <div className="flex flex-1 flex-col items-center justify-center gap-5 px-gutter py-6">
-      <Sprout progress={0} archetype={null} biome={biome} mood="wilted" />
-      <div className="space-y-1 text-center">
-        <h1 className="text-title text-danger">{t('focus.sessionFailed')}</h1>
-        <p className="mx-auto max-w-72 text-body text-ink-muted">{t('focus.leftEarly')}</p>
+    <div className={LAYOUT}>
+      <Sprout progress={0} archetype={null} biome={biome} mood="gone" size={ringSize} />
+      <div className="space-y-1 text-center" role="status">
+        <h1 className="text-title text-danger">{t(`focus.failed.${reason}.title`)}</h1>
+        <p className="mx-auto max-w-80 text-body text-ink-muted">{t(`focus.failed.${reason}.body`)}</p>
       </div>
       <Button variant="primary" size="lg" className="w-full max-w-sm" onClick={reset}>
         {t('common.tryAgain')}

@@ -47,17 +47,35 @@ export const en = {
     idleHint: 'Plant a seed and stay in EcoFoco while it grows into a plant from your biome.',
     durationMinutes: '{{count}} min',
     leaveWarning: 'Switching to another app will fail this session and discard the sprout. Locking the screen is fine.',
-    giveUp: 'Give up',
-    youCollected: 'You collected',
-    sessionFailed: 'Session failed',
-    leftEarly: 'You left the app before the sprout finished growing.',
+    holdToGiveUp: 'Hold to give up',
+    minutesLeft_one: '{{count}} minute left',
+    minutesLeft_other: '{{count}} minutes left',
+    failed: {
+      gave_up: {
+        title: 'You gave up this sprout',
+        body: "It's gone. Plant another whenever you're ready.",
+      },
+      left_app: {
+        title: 'Session failed',
+        body: 'You left the app before the sprout finished growing.',
+      },
+      closed: {
+        title: 'Session failed',
+        body: "EcoFoco was closed before the sprout finished growing (by the system or from your recent apps), so it couldn't count.",
+      },
+    },
     stages: {
       '0': 'Seedling',
       '1': 'Sapling',
       '2': 'Young plant',
       '3': 'Almost grown',
     },
-    grewInto: 'Your sprout grew into',
+    joinedCollection: '{{name}} joined your collection.',
+    plantAnother: 'Plant another',
+  },
+  timerPill: {
+    label: 'Focus session running, {{time}} left. Go to Focus.',
+    focusing: 'Focusing',
   },
   activity: {
     checkingHealthConnect: 'Checking Health Connect…',
@@ -85,6 +103,20 @@ export const en = {
       isometric: 'Garden',
     },
     empty: 'Complete a focus session to collect your first species.',
+    filter: {
+      label: 'Show species',
+      all: 'All',
+      plant: 'Plants',
+      animal: 'Animals',
+    },
+    tileCollected_one: '{{name}}, collected once',
+    tileCollected_other: '{{name}}, collected {{count}} times',
+    tileUndiscovered: {
+      plant: 'Undiscovered plant',
+      animal: 'Undiscovered animal',
+    },
+    newBadge: 'New',
+    timesBadge: '×{{count}}',
     garden: {
       periods: {
         day: 'Day',
@@ -104,15 +136,29 @@ export const en = {
     },
   },
   settings: {
-    notifications: 'Notifications',
-    notificationsHint: 'Reminders and celebrations (not implemented yet)',
     loading: 'Loading…',
     language: 'Language',
     stepGoal: 'Daily step goal',
     stepGoalHint: 'Steps needed to unlock the daily animal draw',
-    stepGoalValue: '{{count}} steps',
+    stepGoalValue: '{{value}} steps',
     stepGoalDecrease: 'Decrease step goal',
     stepGoalIncrease: 'Increase step goal',
+    display: {
+      title: 'Display & feedback',
+      celebrations: 'Celebrations',
+      celebrationsHint: 'A full-screen reveal for each catch. Off shows a small note instead.',
+      haptics: 'Haptics',
+      hapticsHint: 'A light tap when you collect something',
+      motion: 'Animations',
+      motionHint: 'System follows your device’s reduce-motion setting',
+      motionOptions: {
+        system: 'System',
+        reduce: 'Reduced',
+        full: 'Full',
+      },
+      timerPill: 'Timer on other tabs',
+      timerPillHint: 'Keep a running session in view while you browse the app',
+    },
     biome: {
       title: 'Biome',
       hint: 'Rewards come from your current biome. Earn points to unlock neighbouring biomes.',
@@ -141,7 +187,19 @@ export const en = {
   },
   celebration: {
     title: 'You collected!',
-    tapToContinue: 'Tap to continue',
+    new: 'New!',
+    seen: 'Seen ×{{count}}',
+    dex: '{{count}} / {{total}} {{biome}} species',
+    points_one: '+{{count}} point',
+    points_other: '+{{count}} points',
+    seeInGarden: 'See it in your garden',
+    seeInCollection: 'See it in your collection',
+    continue: 'Continue',
+  },
+  snackbar: {
+    added: '{{name}} added',
+    undo: 'Undo',
+    dismiss: 'Dismiss',
   },
   speciesDetail: {
     method: {
@@ -157,5 +215,13 @@ export const en = {
   manualSighting: {
     title: 'Log a sighting',
     subtitle: "Spotted one of these in the wild? Add it to your collection — no photo needed yet.",
+    search: 'Search species',
+    searchPlaceholder: 'Search by name',
+    noResults: 'No species match “{{query}}”.',
+    collectedTimes: 'Collected ×{{count}}',
+    confirmTitle: 'Log this sighting?',
+    confirmBody: 'Only log species you have really seen in the wild.',
+    confirm: 'Log sighting',
+    back: 'Back',
   },
 }

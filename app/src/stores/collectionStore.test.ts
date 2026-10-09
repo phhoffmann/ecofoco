@@ -1,21 +1,33 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import type { CollectedEntry } from '../domain/types'
 
-const { listCollectedEntries, addCollectedEntry } = vi.hoisted(() => ({
+const { listCollectedEntries, addCollectedEntry, deleteCollectedEntry } = vi.hoisted(() => ({
   listCollectedEntries: vi.fn(),
-  addCollectedEntry: vi.fn().mockResolvedValue({ id: 'entry-1' }),
+  addCollectedEntry: vi.fn(),
+  deleteCollectedEntry: vi.fn().mockResolvedValue(undefined),
 }))
-vi.mock('../data/collectionRepo', () => ({ listCollectedEntries, addCollectedEntry }))
+vi.mock('../data/collectionRepo', () => ({ listCollectedEntries, addCollectedEntry, deleteCollectedEntry }))
 vi.mock('../data/haptics', () => ({ lightHaptic: vi.fn() }))
+vi.mock('../data/settingsRepo', () => ({}))
+vi.mock('./biomeStore', () => ({ activeBiome: () => 'atlantic-forest' }))
 
 import { useCelebrationStore } from './celebrationStore'
 import { useCollectionStore } from './collectionStore'
 
+const sighting: CollectedEntry = {
+  id: 'entry-1',
+  speciesId: 'quaresmeira',
+  collectedAt: '2026-09-10T00:00:00.000Z',
+  method: 'manual_sighting',
+}
+
 describe('collectionStore', () => {
   beforeEach(() => {
     listCollectedEntries.mockReset()
-    addCollectedEntry.mockClear()
-    useCollectionStore.setState({ entries: [], loaded: false })
-    useCelebrationStore.setState({ species: null })
+    addCollectedEntry.mockReset().mockResolvedValue(sighting)
+    deleteCollectedEntry.mockClear()
+    useCollectionStore.setState({ entries: [], loaded: false, highlightSpeciesId: null })
+    useCelebrationStore.setState({ reveal: null, snackbar: null, pendingUndo: null })
   })
 
   it('refresh() loads entries from the repository and marks the store as loaded', async () => {
@@ -24,38 +36,47 @@ describe('collectionStore', () => {
 
     await useCollectionStore.getState().refresh()
 
-    expect(useCollectionStore.getState()).toEqual({
-      entries,
-      loaded: true,
-      refresh: expect.any(Function),
-      logManualSighting: expect.any(Function),
-    })
+    expect(useCollectionStore.getState()).toMatchObject({ entries, loaded: true })
   })
 
-  it('logManualSighting() adds the entry via the repository and refreshes the collection', async () => {
-    const entries = [{ id: '2', speciesId: 'jatoba', collectedAt: '2026-09-10T00:00:00.000Z', method: 'manual_sighting' }]
-    listCollectedEntries.mockResolvedValue(entries)
-
-    await useCollectionStore.getState().logManualSighting('jatoba')
-
-    expect(addCollectedEntry).toHaveBeenCalledWith('jatoba', 'manual_sighting')
-    expect(useCollectionStore.getState().entries).toEqual(entries)
-    expect(useCollectionStore.getState().loaded).toBe(true)
-  })
-
-  it('logManualSighting() celebrates the sighted catalog species', async () => {
-    listCollectedEntries.mockResolvedValue([])
+  it('logManualSighting() adds the entry, refreshes the collection and highlights the species', async () => {
+    listCollectedEntries.mockResolvedValue([sighting])
 
     await useCollectionStore.getState().logManualSighting('quaresmeira')
 
-    expect(useCelebrationStore.getState().species?.id).toBe('quaresmeira')
+    expect(addCollectedEntry).toHaveBeenCalledWith('quaresmeira', 'manual_sighting')
+    expect(useCollectionStore.getState()).toMatchObject({ entries: [sighting], loaded: true, highlightSpeciesId: 'quaresmeira' })
   })
 
-  it('logManualSighting() skips the celebration for an id missing from the catalog', async () => {
+  it('logManualSighting() reveals the catch as new, with no points', async () => {
+    listCollectedEntries.mockResolvedValue([sighting])
+
+    await useCollectionStore.getState().logManualSighting('quaresmeira')
+
+    expect(useCelebrationStore.getState().reveal).toMatchObject({
+      species: { id: 'quaresmeira' },
+      isNew: true,
+      timesCollected: 1,
+      points: 0,
+    })
+  })
+
+  it('logManualSighting() can be undone, removing only that entry', async () => {
+    listCollectedEntries.mockResolvedValue([sighting])
+    await useCollectionStore.getState().logManualSighting('quaresmeira')
+    useCelebrationStore.getState().dismiss()
+
     listCollectedEntries.mockResolvedValue([])
+    await useCelebrationStore.getState().snackbar!.undo!()
 
-    await useCollectionStore.getState().logManualSighting('jatoba')
+    expect(deleteCollectedEntry).toHaveBeenCalledWith('entry-1')
+    expect(useCollectionStore.getState()).toMatchObject({ entries: [], highlightSpeciesId: null })
+  })
 
-    expect(useCelebrationStore.getState().species).toBeNull()
+  it('logManualSighting() ignores an id missing from the catalog', async () => {
+    await useCollectionStore.getState().logManualSighting('not-a-species')
+
+    expect(addCollectedEntry).not.toHaveBeenCalled()
+    expect(useCelebrationStore.getState().reveal).toBeNull()
   })
 })

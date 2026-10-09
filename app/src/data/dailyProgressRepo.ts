@@ -19,6 +19,10 @@ export async function getTodayProgress(): Promise<DailyProgress> {
   return { date: row.date, steps: row.steps, goalMet: !!row.goalMet, drawCompleted: !!row.drawCompleted }
 }
 
+/**
+ * Once a day's StepGoal is met it stays met: raising the goal later that day must not take back the
+ * Draw or the Points the day already earned.
+ */
 export async function upsertTodaySteps(steps: number, stepGoal: number): Promise<DailyProgress> {
   const db = await getDb()
   const date = todayKey()
@@ -26,7 +30,7 @@ export async function upsertTodaySteps(steps: number, stepGoal: number): Promise
   await db.run(
     `INSERT INTO daily_progress (date, steps, goalMet, drawCompleted)
      VALUES (?, ?, ?, 0)
-     ON CONFLICT(date) DO UPDATE SET steps = excluded.steps, goalMet = excluded.goalMet`,
+     ON CONFLICT(date) DO UPDATE SET steps = excluded.steps, goalMet = MAX(goalMet, excluded.goalMet)`,
     [date, steps, goalMet ? 1 : 0],
   )
   return getTodayProgress()

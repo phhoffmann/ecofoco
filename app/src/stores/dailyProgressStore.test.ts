@@ -12,6 +12,7 @@ const {
   isStepsAuthorized,
   requestStepsAuthorization,
   getTodaySteps,
+  reveal,
 } = vi.hoisted(() => ({
   mockSpecies: {
     id: 'quati',
@@ -33,6 +34,7 @@ const {
   isStepsAuthorized: vi.fn(),
   requestStepsAuthorization: vi.fn(),
   getTodaySteps: vi.fn(),
+  reveal: vi.fn().mockResolvedValue(undefined),
 }))
 
 vi.mock('../data/collectionRepo', () => ({ addCollectedEntry }))
@@ -45,10 +47,9 @@ vi.mock('../data/stepProvider', () => ({
   writeTestSteps: vi.fn(),
 }))
 vi.mock('../domain/draw', () => ({ pickRandomSpecies: vi.fn(() => mockSpecies) }))
-vi.mock('../data/haptics', () => ({ lightHaptic: vi.fn() }))
+vi.mock('./collectionStore', () => ({ useCollectionStore: { getState: () => ({ reveal }) } }))
 vi.mock('./biomeStore', () => ({ activeBiome: () => 'caatinga' }))
 
-import { useCelebrationStore } from './celebrationStore'
 import { useDailyProgressStore } from './dailyProgressStore'
 
 const idleProgress = { date: '2026-09-10', steps: 0, goalMet: false, drawCompleted: false }
@@ -67,11 +68,10 @@ describe('dailyProgressStore', () => {
       healthAvailable: null,
       authorized: false,
       progress: idleProgress,
-      resultSpecies: null,
       loading: false,
       error: null,
     })
-    useCelebrationStore.setState({ species: null })
+    reveal.mockClear()
   })
 
   it('refresh() falls back to stored progress when Health Connect is unavailable', async () => {
@@ -129,7 +129,7 @@ describe('dailyProgressStore', () => {
 
     expect(addCollectedEntry).not.toHaveBeenCalled()
     expect(markDrawCompleted).not.toHaveBeenCalled()
-    expect(useCelebrationStore.getState().species).toBeNull()
+    expect(reveal).not.toHaveBeenCalled()
   })
 
   it('draw() is a no-op when today\'s draw is already completed', async () => {
@@ -151,8 +151,8 @@ describe('dailyProgressStore', () => {
     expect(addCollectedEntry).toHaveBeenCalledWith('quati', 'draw')
     expect(markDrawCompleted).toHaveBeenCalled()
     const state = useDailyProgressStore.getState()
-    expect(state.resultSpecies).toEqual(mockSpecies)
     expect(state.progress).toEqual(afterDraw)
-    expect(useCelebrationStore.getState().species).toEqual(mockSpecies)
+    // Revealed once, by the shared catch reveal; a Draw earns no points of its own.
+    expect(reveal).toHaveBeenCalledExactlyOnceWith(mockSpecies, 0)
   })
 })

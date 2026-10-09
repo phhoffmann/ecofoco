@@ -7,11 +7,11 @@ The core domain of a focus-lock app where staying off the phone grows plants, an
 ### Focus & growth
 
 **FocusSession**:
-A timed period where the user stays off the phone; completing it without leaving the app grows a Sprout into a permanent CollectedEntry, leaving early discards it. Turning the screen off or locking the phone keeps the session running; only time spent in another app beyond a 5-second grace period fails it (Forest-style).
+A timed period where the user stays off the phone; completing it without leaving the app grows a Sprout into a permanent CollectedEntry, leaving early discards it. Turning the screen off or locking the phone keeps the session running; only time spent in another app beyond a 5-second grace period fails it (Forest-style). A failed session records why: the user gave up (a deliberate hold), left the app, or the app was closed before the session ended.
 _Avoid_: focus timer, lock session
 
 **Sprout**:
-The in-progress growth of a Plant during an active FocusSession. Not yet permanent — it only becomes a CollectedEntry if the session completes, and is discarded if the session fails. Shown in the UI growing through four stages (seedling, sapling, young plant, grown) into the shape of the Plant's Archetype; the Plant is drawn when the session starts, so its shape is known while it grows.
+The in-progress growth of a Plant during an active FocusSession. Not yet permanent — it only becomes a CollectedEntry if the session completes, and is discarded if the session fails — it disappears, never lingering as a withered plant. Shown in the UI growing through four stages (seedling, sapling, young plant, grown) into the shape of the Plant's Archetype; the Plant is drawn when the session starts, so its shape is known while it grows.
 _Avoid_: growing plant, temp plant
 
 ### Collecting
@@ -32,7 +32,7 @@ A permanent record that one Species has been added to the user's Collection, alo
 _Avoid_: catch, item
 
 **Collection**:
-The full set of a user's CollectedEntry records across all Species. Permanent — entries never decay or get removed.
+The full set of a user's CollectedEntry records across all Species. Permanent — entries never decay or get removed. The one exception is undoing a Manual Sighting right after logging it, which corrects a mistake rather than removing a catch.
 
 **Rarity**:
 A tier (Common, Rare, Epic) assigned to a Species in each of its Biomes that weights how likely it is to be selected in a Draw there.

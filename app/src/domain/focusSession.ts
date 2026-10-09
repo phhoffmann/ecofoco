@@ -9,3 +9,10 @@ export const LEAVE_GRACE_MS = 5_000
 export function hasLeftTooLong(otherAppMs: number): boolean {
   return otherAppMs > LEAVE_GRACE_MS
 }
+
+/** m:ss, e.g. 24:05. */
+export function formatClock(totalSeconds: number): string {
+  const m = Math.floor(totalSeconds / 60)
+  const s = totalSeconds % 60
+  return `${m}:${s.toString().padStart(2, '0')}`
+}

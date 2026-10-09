@@ -1,13 +1,13 @@
-import { useEffect, type CSSProperties } from 'react'
+import { App } from '@capacitor/app'
+import { useEffect, useId, useRef, type CSSProperties } from 'react'
 import { useTranslation } from 'react-i18next'
 import { rarityIn, speciesName } from '../domain/species'
-import { useActiveBiome } from '../stores/biomeStore'
 import { useCelebrationStore } from '../stores/celebrationStore'
-import { SparkleIcon } from './icons'
+import { useNavigationStore } from '../stores/navigationStore'
+import { useSettingsStore } from '../stores/settingsStore'
+import { GardenIcon, GridIcon, SparkleIcon } from './icons'
 import { RARITY_STYLES } from './rarity'
-
-/** How long a celebration stays up; matches the celebrate-overlay animation in index.css. */
-export const CELEBRATION_MS = 1900
+import { Button } from './ui'
 
 const SPARKLE_COUNT = 14
 const SPARKLE_DISTANCE_PX = 130
@@ -24,44 +24,62 @@ const SPARKLES = Array.from({ length: SPARKLE_COUNT }, (_, i) => {
   }
 })
 
-/** Sparkle burst and species reveal shown whenever a CollectedEntry is created. Tap to dismiss. */
+/**
+ * The one reveal per catch, shown whenever a CollectedEntry is created: new or seen before, progress
+ * through the Biome, points earned, and where to go next. Stays until the user taps through it.
+ */
 export function CelebrationOverlay() {
   const { t, i18n } = useTranslation()
-  const species = useCelebrationStore((s) => s.species)
+  const titleId = useId()
+  const reveal = useCelebrationStore((s) => s.reveal)
   const seq = useCelebrationStore((s) => s.seq)
   const dismiss = useCelebrationStore((s) => s.dismiss)
-  const biome = useActiveBiome()
+  const setTab = useNavigationStore((s) => s.setTab)
+  const collectionView = useSettingsStore((s) => s.collectionView)
+  const primaryRef = useRef<HTMLButtonElement>(null)
+  const open = reveal !== null
 
+  // Focus the next action, and let Escape or the Android back button continue.
   useEffect(() => {
-    if (!species) return
-    const timer = window.setTimeout(dismiss, CELEBRATION_MS)
-    return () => window.clearTimeout(timer)
-  }, [species, seq, dismiss])
+    if (!open) return
+    primaryRef.current?.focus()
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && dismiss()
+    window.addEventListener('keydown', onKey)
+    const back = App.addListener('backButton', dismiss)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      void back.then((l) => l.remove())
+    }
+  }, [open, seq, dismiss])
 
-  if (!species) return null
+  if (!reveal) return null
 
-  const tier = rarityIn(species, biome)
+  const { species } = reveal
+  const tier = rarityIn(species, reveal.biome)
   const rarity = RARITY_STYLES[tier]
   const name = speciesName(species, i18n.language)
+
+  const inGarden = collectionView === 'isometric'
+
+  function seeInCollection() {
+    setTab('collection')
+    dismiss()
+  }
 
   return (
     <div
       key={seq}
-      role="status"
-      aria-live="polite"
-      onClick={dismiss}
-      className="celebrate-overlay fixed inset-0 z-30 flex flex-col items-center justify-center gap-4 bg-canvas/85 px-6 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={titleId}
+      onClick={(e) => e.target === e.currentTarget && dismiss()}
+      className="celebrate-overlay fixed inset-0 z-30 flex flex-col items-center justify-center gap-3 overflow-y-auto bg-canvas/90 px-6 py-8 backdrop-blur-sm"
     >
-      <div className="relative flex size-44 items-center justify-center">
-        <span
-          aria-hidden
-          className="celebrate-ring absolute inset-0 rounded-full border-4"
-          style={{ borderColor: rarity.color }}
-        />
+      <div aria-hidden className="pointer-events-none relative flex size-44 shrink-0 items-center justify-center">
+        <span className="celebrate-ring absolute inset-0 rounded-full border-4" style={{ borderColor: rarity.color }} />
         {SPARKLES.map((s, i) => (
           <span
             key={i}
-            aria-hidden
             className="celebrate-sparkle absolute top-1/2 left-1/2 rounded-full"
             style={
               {
@@ -78,20 +96,42 @@ export function CelebrationOverlay() {
             }
           />
         ))}
-        <img
-          src={species.image}
-          alt={name}
-          className={`celebrate-reveal size-36 rounded-card object-cover shadow-2xl ring-4 ${rarity.ring}`}
-        />
+        <img src={species.image} alt="" className={`celebrate-reveal size-36 rounded-card object-cover shadow-2xl ring-4 ${rarity.ring}`} />
       </div>
+
       <p className="celebrate-twinkle flex items-center gap-1.5 text-overline text-accent uppercase">
         <SparkleIcon className="size-4" /> {t('celebration.title')} <SparkleIcon className="size-4" />
       </p>
-      <p className="celebrate-reveal text-center text-title text-ink">{name}</p>
-      <span className={`celebrate-reveal inline-flex items-center gap-1 rounded-full px-3 py-1 text-overline ${rarity.badge}`}>
-        {t(`rarity.${tier}`)}
-      </span>
-      <p className="text-caption text-ink-faint">{t('celebration.tapToContinue')}</p>
+      <h2 id={titleId} className="celebrate-reveal text-center text-title text-ink">
+        {name}
+      </h2>
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        {reveal.isNew ? (
+          <span className="inline-flex items-center rounded-full bg-accent px-3 py-1 text-overline text-on-accent uppercase">
+            {t('celebration.new')}
+          </span>
+        ) : (
+          <span className="inline-flex items-center rounded-full bg-surface-raised px-3 py-1 text-overline text-ink-muted ring-1 ring-line">
+            {t('celebration.seen', { count: reveal.timesCollected })}
+          </span>
+        )}
+        <span className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-overline ${rarity.badge}`}>{t(`rarity.${tier}`)}</span>
+      </div>
+      <p className="text-center text-body text-ink-muted">
+        {t('celebration.dex', { count: reveal.dexCollected, total: reveal.dexTotal, biome: t(`biome.${reveal.biome}`) })}
+        {reveal.points > 0 && (
+          <span className="font-extrabold text-accent"> · {t('celebration.points', { count: reveal.points })}</span>
+        )}
+      </p>
+
+      <div className="mt-3 flex w-full max-w-sm flex-col gap-2">
+        <Button ref={primaryRef} variant="primary" size="lg" icon={inGarden ? GardenIcon : GridIcon} onClick={seeInCollection}>
+          {t(inGarden ? 'celebration.seeInGarden' : 'celebration.seeInCollection')}
+        </Button>
+        <Button variant="ghost" onClick={dismiss}>
+          {t('celebration.continue')}
+        </Button>
+      </div>
     </div>
   )
 }

@@ -10,23 +10,20 @@ import {
 } from '../data/stepProvider'
 import { canDraw } from '../domain/dailyProgress'
 import { pickRandomSpecies } from '../domain/draw'
-import type { Species } from '../domain/species'
 import type { DailyProgress } from '../domain/types'
 import { activeBiome } from './biomeStore'
-import { useCelebrationStore } from './celebrationStore'
+import { useCollectionStore } from './collectionStore'
 import { useSettingsStore } from './settingsStore'
 
 interface DailyProgressState {
   healthAvailable: boolean | null
   authorized: boolean
   progress: DailyProgress
-  resultSpecies: Species | null
   loading: boolean
   error: string | null
   refresh: () => Promise<void>
   connect: () => Promise<void>
   draw: () => Promise<void>
-  clearResult: () => void
   simulateSteps: (count: number) => Promise<void>
 }
 
@@ -34,7 +31,6 @@ export const useDailyProgressStore = create<DailyProgressState>((set, get) => ({
   healthAvailable: null,
   authorized: false,
   progress: { date: '', steps: 0, goalMet: false, drawCompleted: false },
-  resultSpecies: null,
   loading: false,
   error: null,
 
@@ -75,12 +71,10 @@ export const useDailyProgressStore = create<DailyProgressState>((set, get) => ({
     const species = pickRandomSpecies('animal', activeBiome())
     await addCollectedEntry(species.id, 'draw')
     await markDrawCompleted()
-    const updated = await getTodayProgress()
-    set({ progress: updated, resultSpecies: species })
-    useCelebrationStore.getState().celebrate(species)
+    set({ progress: await getTodayProgress() })
+    // A Draw earns no points itself: the day's points come from meeting the StepGoal.
+    await useCollectionStore.getState().reveal(species, 0)
   },
-
-  clearResult: () => set({ resultSpecies: null }),
 
   simulateSteps: async (count) => {
     set({ loading: true, error: null })

@@ -3,7 +3,7 @@ import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } 
 const mockDb = { query: vi.fn(), run: vi.fn() }
 vi.mock('./db', () => ({ getDb: () => Promise.resolve(mockDb) }))
 
-import { getTodayProgress, markDrawCompleted, upsertTodaySteps } from './dailyProgressRepo'
+import { countStepGoalDaysMet, getTodayProgress, markDrawCompleted, upsertTodaySteps } from './dailyProgressRepo'
 
 describe('dailyProgressRepo', () => {
   beforeEach(() => {
@@ -78,6 +78,35 @@ describe('dailyProgressRepo', () => {
     expect(mockDb.run).toHaveBeenCalledWith('UPDATE daily_progress SET drawCompleted = 1 WHERE date = ?', [
       '2026-09-10',
     ])
+  })
+})
+
+describe('dailyProgressRepo on a real database', () => {
+  beforeEach(async () => {
+    const { createTestDb } = await import('./testing/sqliteTestDb')
+    const testDb = await createTestDb()
+    mockDb.query.mockReset().mockImplementation(testDb.query)
+    mockDb.run.mockReset().mockImplementation(testDb.run)
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(new Date('2026-09-10T12:00:00.000Z'))
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
+  it('keeps the goal met when the step goal is raised later the same day', async () => {
+    expect((await upsertTodaySteps(6500, 6000)).goalMet).toBe(true)
+
+    const afterRaise = await upsertTodaySteps(6600, 8000)
+
+    expect(afterRaise).toMatchObject({ steps: 6600, goalMet: true })
+    expect(await countStepGoalDaysMet()).toBe(1)
+  })
+
+  it('still marks the goal met later in the day once steps reach it', async () => {
+    expect((await upsertTodaySteps(3000, 6000)).goalMet).toBe(false)
+    expect((await upsertTodaySteps(6100, 6000)).goalMet).toBe(true)
   })
 })
 

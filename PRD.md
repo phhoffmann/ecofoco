@@ -25,7 +25,10 @@ v1 is the MVP loop (focus → plants, steps → animals, one permanent Collectio
 - User picks a duration (3, 15, 25 or 45 minutes) and starts the session.
 - A Sprout grows visibly in the UI for the duration of the session: seedling, sapling, young plant, then fully grown in the shape of the plant's archetype. The plant is drawn when the session starts so the Sprout can take its shape, and is only collected if the session completes.
 - If completed without leaving the app → the Sprout becomes a permanent collected Plant, drawn from the current biome (§4.5).
-- If the user leaves for another app before it ends (beyond a 5-second grace period) → the Sprout is discarded (session fails, nothing is collected).
+- If the user leaves for another app before it ends (beyond a 5-second grace period) → the Sprout is discarded (session fails, nothing is collected). A failed Sprout disappears; it never stays behind as a withered plant.
+- Giving up takes a ~1.5 s hold, so a stray tap can't throw a session away; each failure records and explains why (gave up, left the app, or the app was closed).
+- While a session runs, the bottom nav stays available and a timer pill on every other tab leads back to Focus.
+- The running session is saved when it starts: if the process is killed, it resumes on the next launch, or fails with an honest explanation if its time ran out meanwhile.
 - **Shipped:** turning the screen off or locking the phone keeps the session running; switching to another app with the screen on fails it after a 5-second grace period. Web/dev builds without the native plugin still fail as soon as the app is backgrounded. The screen is no longer kept awake.
 - **Planned (native focus lock, §6):** a real lock — a screen overlay plus app-usage monitoring.
 
@@ -39,9 +42,10 @@ v1 is the MVP loop (focus → plants, steps → animals, one permanent Collectio
 - Single, integrated view of plants + animals (one "ecosystem").
 - Dedicated **Pokédex/collection** grid for the current biome, listing everything collected so far (and what's missing).
 - The collection is **permanent** — nothing dies or decays after being collected.
-- **Isometric garden** view (Forest-style), switched from a grid ↔ garden toggle on the Collection screen itself: shows only what was collected in a chosen day / week / month, on a plot whose ground (colour, tile texture, decoration and drifting particles) follows the biome; the grid stays as the full Pokédex. Sprites are baked from CC0 3D kits, one per growth-form/body-plan archetype (not per species), and idle-animate: plants sway, animals hop, bob or hover. Switching period regrows the plot. All motion respects the system's reduced-motion setting.
+- **Isometric garden** view (Forest-style), switched from a grid ↔ garden toggle on the Collection screen itself: shows only what was collected in a chosen day / week / month, on a plot whose ground (colour, tile texture, decoration and drifting particles) follows the biome; the grid stays as the full Pokédex. Sprites are baked from CC0 3D kits, one per growth-form/body-plan archetype (not per species), and idle-animate: plants sway, animals hop, bob or hover. Switching period regrows the plot. All motion follows the Animations setting (the device's reduced-motion setting by default).
 - Tapping a species (grid or garden) opens a bottom sheet with its photo (and credit, where the license asks for one), description and collection history.
-- Every new CollectedEntry plays a short celebration showing the species just collected.
+- Every new CollectedEntry gets one reveal that waits for a tap: new or seen before (×N), progress through the biome, points earned, and a shortcut to it in the Collection (opened in the saved grid or garden view, without changing it). The grid lists collected species first, highlights the latest catch, and filters plants/animals.
+- A manual sighting is searchable, asks for confirmation, and can be undone from a snackbar right after it is logged.
 
 ### 4.4 Species catalog
 - Static list of species (plants and animals), built at build time from **iNaturalist** and **GBIF** data (filtering to CC0/CC-BY licenses only, compatible with future commercial use): the most-observed species per biome, leaving out those recorded as introduced, with a bundled photo and its credit.
@@ -55,7 +59,7 @@ v1 is the MVP loop (focus → plants, steps → animals, one permanent Collectio
 - A home that came from real detection stays unlocked if a later re-detect moves the home elsewhere; a manually picked home is a stand-in and does not.
 
 ### 4.6 Settings
-- Notifications **off by default**, with an option to enable them (structure in place, no real notifications implemented in the MVP).
+- **Display & feedback**: celebrations (full-screen reveal, or a small snackbar), haptics, the timer pill, and animations (system / reduced / full). Each has a sensible default; toggles exist only where users genuinely disagree. There is no Notifications setting until notifications exist.
 - Language selector: English or Portuguese (Brazil), applied to both UI chrome and species names/descriptions.
 - Daily step goal is editable (default 6,000, adjustable in increments of 500).
 - Biome: current biome, point balance, unlocking neighbours, switching, and re-detecting the home biome.
