@@ -132,6 +132,16 @@ describe('migrating an install from before versioning', () => {
     expect(localDateKey(new Date(COMPLETED_AT))).toBe('2026-02-28')
   })
 
+  it('records the points already earned at the rate they were earned at', async () => {
+    const db = await migratedDb()
+
+    expect((await db.query('SELECT id, points FROM focus_sessions ORDER BY id')).values).toEqual([
+      { id: 'session-done', points: 10 },
+      { id: 'session-failed', points: 0 },
+    ])
+    expect((await db.query('SELECT date, points FROM daily_progress')).values).toEqual([{ date: '2026-03-02', points: 10 }])
+  })
+
   it('stamps rows that track updates with the migration time', async () => {
     const db = await migratedDb()
     for (const table of ['daily_progress', 'settings']) {
@@ -174,6 +184,8 @@ describe('a fresh install', () => {
       'id', 'speciesId', 'collectedAt', 'method', 'pendingSync', 'biomeId', 'localDate', 'focusSessionId',
     ])
     expect(await columns(db, 'focus_sessions')).toContain('localDate')
+    expect(await columns(db, 'focus_sessions')).toContain('points')
+    expect(await columns(db, 'daily_progress')).toContain('points')
     expect(await columns(db, 'active_focus_session')).toContain('biomeId')
     expect(await columns(db, 'daily_progress')).toContain('updatedAt')
     expect(await columns(db, 'settings')).toContain('updatedAt')

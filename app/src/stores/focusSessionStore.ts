@@ -9,7 +9,7 @@ import {
   saveActiveFocusSession,
   type SavedActiveFocusSession,
 } from '../data/focusSessionRepo'
-import { FOCUS_SESSION_POINTS } from '../domain/biome'
+import { focusSessionPoints } from '../domain/biome'
 import { pickRandomSpecies } from '../domain/draw'
 import { computeRemainingSeconds, hasLeftTooLong, LEAVE_GRACE_MS } from '../domain/focusSession'
 import { SPECIES_CATALOG, type PlantArchetype, type Species } from '../domain/species'
@@ -118,7 +118,7 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => {
       }
       set({ status: 'completed', resultSpecies: species })
       void refreshPoints().catch(() => {})
-      await useCollectionStore.getState().reveal(species, FOCUS_SESSION_POINTS)
+      await useCollectionStore.getState().reveal(species, focusSessionPoints(session.plannedDurationSeconds))
     }, 250)
   }
 

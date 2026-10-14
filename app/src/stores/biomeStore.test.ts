@@ -8,8 +8,8 @@ const mocks = vi.hoisted(() => ({
   setCurrentBiome: vi.fn().mockResolvedValue(undefined),
   listBiomeUnlocks: vi.fn(),
   addBiomeUnlock: vi.fn().mockResolvedValue(undefined),
-  countCompletedFocusSessions: vi.fn(),
-  countStepGoalDaysMet: vi.fn(),
+  sumFocusSessionPoints: vi.fn(),
+  sumStepGoalPoints: vi.fn(),
   getApproximatePosition: vi.fn(),
   loadEcoregionGrid: vi.fn().mockResolvedValue({}),
   biomeAt: vi.fn(),
@@ -27,8 +27,8 @@ vi.mock('../data/biomeUnlockRepo', () => ({
   listBiomeUnlocks: mocks.listBiomeUnlocks,
   addBiomeUnlock: mocks.addBiomeUnlock,
 }))
-vi.mock('../data/focusSessionRepo', () => ({ countCompletedFocusSessions: mocks.countCompletedFocusSessions }))
-vi.mock('../data/dailyProgressRepo', () => ({ countStepGoalDaysMet: mocks.countStepGoalDaysMet }))
+vi.mock('../data/focusSessionRepo', () => ({ sumFocusSessionPoints: mocks.sumFocusSessionPoints }))
+vi.mock('../data/dailyProgressRepo', () => ({ sumStepGoalPoints: mocks.sumStepGoalPoints }))
 vi.mock('../data/location', () => ({ getApproximatePosition: mocks.getApproximatePosition }))
 vi.mock('../data/ecoregionGrid', () => ({ loadEcoregionGrid: mocks.loadEcoregionGrid }))
 vi.mock('../domain/biomeLookup', () => ({ biomeAt: mocks.biomeAt }))
@@ -48,22 +48,22 @@ async function loadWith({
   source = 'picked',
   current = null,
   unlocks = [],
-  sessions = 0,
-  goalDays = 0,
+  sessionPoints = 0,
+  goalPoints = 0,
 }: {
   home?: string | null
   source?: string
   current?: string | null
   unlocks?: { biomeId: string; cost: number }[]
-  sessions?: number
-  goalDays?: number
+  sessionPoints?: number
+  goalPoints?: number
 } = {}) {
   mocks.getHomeBiome.mockResolvedValue(home)
   mocks.getHomeBiomeSource.mockResolvedValue(source)
   mocks.getCurrentBiome.mockResolvedValue(current)
   mocks.listBiomeUnlocks.mockResolvedValue(unlocks.map((u) => ({ ...u, unlockedAt: '2026-10-01T00:00:00.000Z' })))
-  mocks.countCompletedFocusSessions.mockResolvedValue(sessions)
-  mocks.countStepGoalDaysMet.mockResolvedValue(goalDays)
+  mocks.sumFocusSessionPoints.mockResolvedValue(sessionPoints)
+  mocks.sumStepGoalPoints.mockResolvedValue(goalPoints)
   await useBiomeStore.getState().load()
 }
 
@@ -82,8 +82,8 @@ describe('biomeStore', () => {
       expect(activeBiome()).toBe('atlantic-forest')
     })
 
-    it('derives the balance from completed sessions and step goals minus unlock costs', async () => {
-      await loadWith({ sessions: 12, goalDays: 3, unlocks: [{ biomeId: 'caatinga', cost: 100 }] })
+    it('derives the balance from the points sessions and step goals earned minus unlock costs', async () => {
+      await loadWith({ sessionPoints: 120, goalPoints: 30, unlocks: [{ biomeId: 'caatinga', cost: 100 }] })
       expect(selectBiomeProgress(useBiomeStore.getState())).toEqual({
         home: 'atlantic-forest',
         current: 'atlantic-forest',
@@ -92,14 +92,14 @@ describe('biomeStore', () => {
       })
     })
 
-    it('recounts earned points without reloading the rest', async () => {
-      await loadWith({ sessions: 12, goalDays: 3, unlocks: [{ biomeId: 'caatinga', cost: 100 }] })
-      mocks.countCompletedFocusSessions.mockResolvedValue(13)
-      mocks.countStepGoalDaysMet.mockResolvedValue(4)
+    it('re-sums earned points without reloading the rest', async () => {
+      await loadWith({ sessionPoints: 120, goalPoints: 30, unlocks: [{ biomeId: 'caatinga', cost: 100 }] })
+      mocks.sumFocusSessionPoints.mockResolvedValue(145)
+      mocks.sumStepGoalPoints.mockResolvedValue(50)
 
       await useBiomeStore.getState().refreshPoints()
 
-      expect(selectPointBalance(useBiomeStore.getState())).toBe(70)
+      expect(selectPointBalance(useBiomeStore.getState())).toBe(95)
       expect(mocks.getHomeBiome).toHaveBeenCalledOnce()
     })
 
@@ -174,7 +174,7 @@ describe('biomeStore', () => {
       await loadWith({
         home: 'atlantic-forest',
         source: 'detected',
-        sessions: 10,
+        sessionPoints: 100,
         unlocks: [{ biomeId: 'caatinga', cost: 100 }],
       })
       await useBiomeStore.getState().setHome('caatinga', 'detected')
@@ -227,7 +227,7 @@ describe('biomeStore', () => {
 
   describe('unlock', () => {
     it('spends points on a neighbouring biome', async () => {
-      await loadWith({ sessions: 10 })
+      await loadWith({ sessionPoints: NEIGHBOUR_UNLOCK_COST })
       expect(await useBiomeStore.getState().unlock('caatinga')).toBe(true)
 
       expect(mocks.addBiomeUnlock).toHaveBeenCalledWith('caatinga', NEIGHBOUR_UNLOCK_COST)
@@ -237,7 +237,7 @@ describe('biomeStore', () => {
     })
 
     it('buys at most once under concurrent calls and never overspends', async () => {
-      await loadWith({ home: 'cerrado', sessions: 10 })
+      await loadWith({ home: 'cerrado', sessionPoints: NEIGHBOUR_UNLOCK_COST })
       let finish!: () => void
       mocks.addBiomeUnlock.mockReturnValueOnce(new Promise<void>((resolve) => (finish = resolve)))
 
@@ -254,15 +254,15 @@ describe('biomeStore', () => {
     })
 
     it('rolls back when saving the unlock fails', async () => {
-      await loadWith({ sessions: 10 })
+      await loadWith({ sessionPoints: NEIGHBOUR_UNLOCK_COST })
       mocks.addBiomeUnlock.mockRejectedValueOnce(new Error('disk full'))
 
       expect(await useBiomeStore.getState().unlock('caatinga')).toBe(false)
-      expect(selectBiomeProgress(useBiomeStore.getState())).toMatchObject({ purchased: [], balance: 100 })
+      expect(selectBiomeProgress(useBiomeStore.getState())).toMatchObject({ purchased: [], balance: NEIGHBOUR_UNLOCK_COST })
     })
 
     it('refuses when the balance is short', async () => {
-      await loadWith({ sessions: 9 })
+      await loadWith({ sessionPoints: NEIGHBOUR_UNLOCK_COST - 1 })
       expect(await useBiomeStore.getState().unlock('caatinga')).toBe(false)
       expect(mocks.addBiomeUnlock).not.toHaveBeenCalled()
     })

@@ -1,3 +1,4 @@
+import { STEP_GOAL_POINTS } from '../domain/biome'
 import type { DailyProgress } from '../domain/types'
 import { getDb } from './db'
 import { localDateKey } from './localDate'
@@ -21,15 +22,17 @@ export async function upsertTodaySteps(steps: number, stepGoal: number): Promise
   const date = localDateKey()
   const goalMet = steps >= stepGoal
   await db.run(
-    `INSERT INTO daily_progress (date, steps, goalMet, drawCompleted, updatedAt, pendingSync)
-     VALUES (?, ?, ?, 0, ?, 1)
+    `INSERT INTO daily_progress (date, steps, goalMet, drawCompleted, points, updatedAt, pendingSync)
+     VALUES (?, ?, ?, 0, ?, ?, 1)
      ON CONFLICT(date) DO UPDATE SET
        steps = excluded.steps,
        goalMet = MAX(goalMet, excluded.goalMet),
+       -- The day earns its Points when the goal is first met, and keeps what it earned then.
+       points = CASE WHEN goalMet = 0 THEN excluded.points ELSE points END,
        updatedAt = excluded.updatedAt,
        pendingSync = 1
      WHERE daily_progress.steps <> excluded.steps OR daily_progress.goalMet < excluded.goalMet`,
-    [date, steps, goalMet ? 1 : 0, new Date().toISOString()],
+    [date, steps, goalMet ? 1 : 0, goalMet ? STEP_GOAL_POINTS : 0, new Date().toISOString()],
   )
   return getTodayProgress()
 }
@@ -42,8 +45,9 @@ export async function markDrawCompleted(): Promise<void> {
   ])
 }
 
-export async function countStepGoalDaysMet(): Promise<number> {
+/** Points earned by meeting the StepGoal, each day at the rate it was earned at. */
+export async function sumStepGoalPoints(): Promise<number> {
   const db = await getDb()
-  const res = await db.query('SELECT COUNT(*) AS count FROM daily_progress WHERE goalMet = 1')
-  return Number(res.values?.[0]?.count ?? 0)
+  const res = await db.query('SELECT COALESCE(SUM(points), 0) AS points FROM daily_progress')
+  return Number(res.values?.[0]?.points ?? 0)
 }

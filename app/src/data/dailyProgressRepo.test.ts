@@ -3,7 +3,7 @@ import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } 
 const mockDb = { query: vi.fn(), run: vi.fn() }
 vi.mock('./db', () => ({ getDb: () => Promise.resolve(mockDb) }))
 
-import { countStepGoalDaysMet, getTodayProgress, markDrawCompleted, upsertTodaySteps } from './dailyProgressRepo'
+import { getTodayProgress, markDrawCompleted, sumStepGoalPoints, upsertTodaySteps } from './dailyProgressRepo'
 import { createTestDb, type TestDb } from './testing/sqliteTestDb'
 
 describe('dailyProgressRepo', () => {
@@ -45,6 +45,7 @@ describe('dailyProgressRepo', () => {
       '2026-09-10',
       6000,
       1,
+      20,
       '2026-09-10T12:00:00.000Z',
     ])
   })
@@ -59,6 +60,7 @@ describe('dailyProgressRepo', () => {
       '2026-09-10',
       5999,
       0,
+      0,
       '2026-09-10T12:00:00.000Z',
     ])
   })
@@ -72,6 +74,7 @@ describe('dailyProgressRepo', () => {
     expect(mockDb.run).toHaveBeenCalledWith(expect.stringContaining('INSERT INTO daily_progress'), [
       '2026-09-10',
       6000,
+      0,
       0,
       '2026-09-10T12:00:00.000Z',
     ])
@@ -107,7 +110,15 @@ describe('dailyProgressRepo on a real database', () => {
     const afterRaise = await upsertTodaySteps(6600, 8000)
 
     expect(afterRaise).toMatchObject({ steps: 6600, goalMet: true })
-    expect(await countStepGoalDaysMet()).toBe(1)
+    expect(await sumStepGoalPoints()).toBe(20)
+  })
+
+  it('keeps the points a day earned before the step goal rate changed', async () => {
+    await testDb.run('INSERT INTO daily_progress (date, steps, goalMet, points) VALUES (?, ?, 1, 10)', ['2026-09-10', 6500])
+
+    await upsertTodaySteps(7000, 6000)
+
+    expect(await sumStepGoalPoints()).toBe(10)
   })
 
   it('still marks the goal met later in the day once steps reach it', async () => {

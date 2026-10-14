@@ -5,8 +5,8 @@ const mockDb = { query: vi.fn(), run: vi.fn() }
 vi.mock('./db', () => ({ getDb: () => Promise.resolve(mockDb) }))
 
 import { addBiomeUnlock, listBiomeUnlocks } from './biomeUnlockRepo'
-import { countStepGoalDaysMet } from './dailyProgressRepo'
-import { countCompletedFocusSessions } from './focusSessionRepo'
+import { sumStepGoalPoints } from './dailyProgressRepo'
+import { sumFocusSessionPoints } from './focusSessionRepo'
 
 describe('biomeUnlockRepo', () => {
   beforeEach(() => {
@@ -35,15 +35,15 @@ describe('biomeUnlockRepo', () => {
 describe('point sources', () => {
   beforeEach(() => mockDb.query.mockReset())
 
-  it('countCompletedFocusSessions counts only completed sessions', async () => {
-    mockDb.query.mockResolvedValue({ values: [{ count: 4 }] })
-    expect(await countCompletedFocusSessions()).toBe(4)
-    expect(mockDb.query).toHaveBeenCalledWith(expect.stringContaining("status = 'completed'"))
+  it('sumFocusSessionPoints adds up the points recorded on each session', async () => {
+    mockDb.query.mockResolvedValue({ values: [{ points: 85 }] })
+    expect(await sumFocusSessionPoints()).toBe(85)
+    expect(mockDb.query).toHaveBeenCalledWith(expect.stringContaining('SUM(points)'))
   })
 
-  it('countStepGoalDaysMet counts days with the goal met', async () => {
-    mockDb.query.mockResolvedValue({ values: [{ count: 2 }] })
-    expect(await countStepGoalDaysMet()).toBe(2)
-    expect(mockDb.query).toHaveBeenCalledWith(expect.stringContaining('goalMet = 1'))
+  it('sumStepGoalPoints adds up the points recorded on each day', async () => {
+    mockDb.query.mockResolvedValue({ values: [{ points: 40 }] })
+    expect(await sumStepGoalPoints()).toBe(40)
+    expect(mockDb.query).toHaveBeenCalledWith(expect.stringContaining('SUM(points)'))
   })
 })

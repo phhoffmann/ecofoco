@@ -2,7 +2,7 @@ import type { capSQLiteVersionUpgrade, SQLiteDBConnection } from '@capacitor-com
 import type { BiomeId } from '../domain/biome'
 
 /** The newest schema version: the last `toVersion` in {@link upgradeStatements}. */
-export const DB_VERSION = 2
+export const DB_VERSION = 3
 
 /** Tables a sync with the server will carry: every write to them sets `pendingSync = 1`. */
 export const SYNCED_TABLES = ['collected_entries', 'focus_sessions', 'daily_progress', 'biome_unlocks', 'settings'] as const
@@ -109,6 +109,20 @@ function v2Sync(catalog: readonly { id: string; biome: readonly BiomeId[] }[]): 
   ]
 }
 
+// What every completed FocusSession and every met StepGoal earned before awards were recorded per row.
+const LEGACY_AWARD_POINTS = 10
+
+/**
+ * Records the Points each FocusSession and day earned on its own row, so the balance is a sum of
+ * awards rather than a count times today's rates. Past awards keep the value they were earned at.
+ */
+const V3_RECORDED_POINTS = [
+  'ALTER TABLE focus_sessions ADD COLUMN points INTEGER NOT NULL DEFAULT 0',
+  'ALTER TABLE daily_progress ADD COLUMN points INTEGER NOT NULL DEFAULT 0',
+  `UPDATE focus_sessions SET points = ${LEGACY_AWARD_POINTS}, pendingSync = 1 WHERE status = 'completed'`,
+  `UPDATE daily_progress SET points = ${LEGACY_AWARD_POINTS}, updatedAt = ${NOW_ISO}, pendingSync = 1 WHERE goalMet = 1`,
+]
+
 /**
  * Every schema version, for `@capacitor-community/sqlite` to run on open: each step above the
  * database's user_version runs in its own transaction. Each string must hold exactly one statement,
@@ -122,6 +136,7 @@ export function upgradeStatements(
   return [
     { toVersion: 1, statements: V1_BASELINE },
     { toVersion: 2, statements: v2Sync(catalog) },
+    { toVersion: 3, statements: V3_RECORDED_POINTS },
   ]
 }
 

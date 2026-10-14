@@ -169,7 +169,7 @@ export const en = {
       hint: 'Rewards come from your current biome. Earn points to unlock neighbouring biomes.',
       points_one: '{{count}} point',
       points_other: '{{count}} points',
-      pointsHint: '+{{session}} per focus session, +{{goal}} per step goal met. A neighbour costs {{cost}}.',
+      pointsHint: '+{{minute}} per focus minute, +{{goal}} per step goal met. A neighbour costs {{cost}}.',
       home: 'Home',
       current: 'Current',
       switch: 'Switch',

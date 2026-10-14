@@ -55,7 +55,7 @@ v1 is the MVP loop (focus → plants, steps → animals, one permanent Collectio
 - The six biomes are IBGE's for Brazil. A biome is playable once the catalog has plants and animals for it.
 - The home biome comes from the user's location: coarse location only, asked once at onboarding (plus a re-detect action in Settings), looked up in a bundled grid built from RESOLVE Ecoregions 2017. Only the biome id is stored, never coordinates. A manual picker is the fallback (permission denied, no fix, outside Brazil, or a biome without species yet).
 - Focus rewards, step-goal Draws, manual sightings and the Collection grid all come from the **current** biome.
-- Completed focus sessions and met step goals earn points (10 each); 100 points unlock one **neighbouring** biome (one that shares a border with an already unlocked biome — no travel needed). The user can switch only to an unlocked biome.
+- Completed focus sessions earn 1 point per planned minute and met step goals earn 20 points; 250 points unlock one **neighbouring** biome (one that shares a border with an already unlocked biome — no travel needed). The user can switch only to an unlocked biome.
 - A home that came from real detection stays unlocked if a later re-detect moves the home elsewhere; a manually picked home is a stand-in and does not.
 
 ### 4.6 Settings

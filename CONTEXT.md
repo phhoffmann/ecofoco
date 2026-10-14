@@ -58,11 +58,11 @@ A Biome that shares a land border inside Brazil with another (e.g. Caatinga bord
 _Avoid_: adjacent biome
 
 **Points**:
-The currency earned by completing a FocusSession or meeting the StepGoal for a day (10 each). The balance is derived — points earned minus points spent on Unlocks — not stored as a running total.
+The currency earned by completing a FocusSession (1 per planned minute) or meeting the StepGoal for a day (20). Each award is recorded with its FocusSession or day at the rate it was earned at. The balance is derived — points earned minus points spent on Unlocks — not stored as a running total.
 _Avoid_: XP, coins
 
 **Unlock**:
-Spending Points (100) to make a Neighbour Biome permanently available, with no travel needed. An unlocked Biome can become the Current Biome.
+Spending Points (250) to make a Neighbour Biome permanently available, with no travel needed. An unlocked Biome can become the Current Biome.
 
 **Manual Sighting**:
 A user-entered claim of having encountered a real Plant or Animal Species, added directly as a CollectedEntry with no automatic validation.
