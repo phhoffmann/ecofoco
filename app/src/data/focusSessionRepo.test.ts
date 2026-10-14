@@ -10,13 +10,13 @@ vi.mock('./db', () => ({ getDb: () => Promise.resolve(db) }))
 import { listCollectedEntries } from './collectionRepo'
 import {
   completeFocusSession,
-  countCompletedFocusSessions,
   failFocusSession,
   clearActiveFocusSessionBackgrounded,
   getActiveFocusSession,
   listFocusSessions,
   markActiveFocusSessionBackgrounded,
   saveActiveFocusSession,
+  sumFocusSessionPoints,
 } from './focusSessionRepo'
 
 const active: ActiveFocusSession = {
@@ -82,7 +82,8 @@ describe('focusSessionRepo', () => {
     expect(entry).toMatchObject({ speciesId: 'jatoba', method: 'focus_session' })
     expect(await listCollectedEntries()).toEqual([entry])
     expect(await listFocusSessions()).toEqual([session])
-    expect(await countCompletedFocusSessions()).toBe(1)
+    // 1 point per planned minute.
+    expect(await sumFocusSessionPoints()).toBe(15)
     expect(await getActiveFocusSession()).toBeNull()
   })
 
@@ -105,7 +106,7 @@ describe('focusSessionRepo', () => {
     expect(session).toMatchObject({ status: 'failed', failReason: 'gave_up' })
     expect(await listFocusSessions()).toEqual([session])
     expect(await listCollectedEntries()).toEqual([])
-    expect(await countCompletedFocusSessions()).toBe(0)
+    expect(await sumFocusSessionPoints()).toBe(0)
     expect(await getActiveFocusSession()).toBeNull()
   })
 

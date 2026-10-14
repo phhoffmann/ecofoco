@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useShallow } from 'zustand/react/shallow'
 import {
   BIOME_IDS,
-  FOCUS_SESSION_POINTS,
+  FOCUS_MINUTE_POINTS,
   NEIGHBOUR_UNLOCK_COST,
   STEP_GOAL_POINTS,
   biomeStatus,
@@ -91,7 +91,7 @@ export function BiomeSettings() {
       />
       <p className="text-caption text-ink-faint">
         {t('settings.biome.pointsHint', {
-          session: FOCUS_SESSION_POINTS,
+          minute: FOCUS_MINUTE_POINTS,
           goal: STEP_GOAL_POINTS,
           cost: NEIGHBOUR_UNLOCK_COST,
         })}

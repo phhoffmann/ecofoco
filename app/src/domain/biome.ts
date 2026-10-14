@@ -16,9 +16,9 @@ export const BIOME_NEIGHBOURS: Readonly<Record<BiomeId, readonly BiomeId[]>> = {
 // The original catalog's Biome, used only if a reward is drawn before onboarding picked a home.
 export const FALLBACK_BIOME: BiomeId = 'atlantic-forest'
 
-export const FOCUS_SESSION_POINTS = 10 // per completed FocusSession
-export const STEP_GOAL_POINTS = 10 // per day the StepGoal was met
-export const NEIGHBOUR_UNLOCK_COST = 100 // points to unlock one neighbouring Biome
+export const FOCUS_MINUTE_POINTS = 1 // per minute of a completed FocusSession's planned duration
+export const STEP_GOAL_POINTS = 20 // per day the StepGoal was met
+export const NEIGHBOUR_UNLOCK_COST = 250 // points to unlock one neighbouring Biome
 
 export function isBiomeId(value: unknown): value is BiomeId {
   return (BIOME_IDS as readonly unknown[]).includes(value)
@@ -30,8 +30,9 @@ export function hasCatalog(biome: BiomeId, catalog: Species[] = SPECIES_CATALOG)
   return inBiome.some((s) => s.type === 'plant') && inBiome.some((s) => s.type === 'animal')
 }
 
-export function earnedPoints(completedFocusSessions: number, stepGoalDaysMet: number): number {
-  return completedFocusSessions * FOCUS_SESSION_POINTS + stepGoalDaysMet * STEP_GOAL_POINTS
+/** What a completed FocusSession earns. Each award is recorded with its session, so changing this never rewrites past ones. */
+export function focusSessionPoints(plannedDurationSeconds: number): number {
+  return Math.floor(plannedDurationSeconds / 60) * FOCUS_MINUTE_POINTS
 }
 
 /** A detected home is where the user lives; a picked one is a stand-in that does not stay unlocked once replaced. */

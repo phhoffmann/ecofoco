@@ -16,7 +16,7 @@ EcoFoco is a personal project, built as a fullstack portfolio piece. It runs ent
 - Collection grid (a Pokédex of the current biome, collected and missing) and an animated isometric garden of what you collected in a given day, week or month, with ground and decoration per biome.
 - Species detail sheet with photo, description, photo credit and collection history; one reveal per catch (new or seen ×N, biome progress, points).
 - Location-based biomes for Brazil's six IBGE biomes: coarse location only, used once and never stored (only the biome id is kept), with a manual picker as fallback.
-- Points from completed sessions and met step goals (10 each); 100 points unlock a neighbouring biome, and you can switch to any unlocked one. The balance is always shown in the header.
+- Points from completed sessions (1 per focus minute) and met step goals (20 each); 250 points unlock a neighbouring biome, and you can switch to any unlocked one. The balance is always shown in the header.
 - Bundled catalog for all six biomes, about 20 plants and 20 animals each, photos included.
 - English and Portuguese (Brazil), including species names and descriptions.
 

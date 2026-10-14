@@ -111,10 +111,10 @@ describe('focusSessionStore', () => {
   })
 
   it('completes the session and collects a plant when the timer runs out', async () => {
-    useFocusSessionStore.getState().start(3)
+    useFocusSessionStore.getState().start(180)
     expect(useFocusSessionStore.getState().status).toBe('running')
 
-    await vi.advanceTimersByTimeAsync(3000)
+    await vi.advanceTimersByTimeAsync(180_000)
 
     const state = useFocusSessionStore.getState()
     expect(state.status).toBe('completed')
@@ -122,12 +122,12 @@ describe('focusSessionStore', () => {
     expect(pickRandomSpecies).toHaveBeenCalledWith('plant', 'caatinga')
     expect(completeFocusSession).toHaveBeenCalledWith({
       startedAt: expect.any(String),
-      plannedDurationSeconds: 3,
+      plannedDurationSeconds: 180,
       speciesId: 'jatoba',
       biomeId: 'caatinga',
     })
-    // One reveal for the catch, with the session's points, and the header balance recounted.
-    expect(reveal).toHaveBeenCalledExactlyOnceWith(mockSpecies, 10)
+    // One reveal for the catch, with a point per planned minute, and the header balance recounted.
+    expect(reveal).toHaveBeenCalledExactlyOnceWith(mockSpecies, 3)
     expect(refreshPoints).toHaveBeenCalled()
   })
 

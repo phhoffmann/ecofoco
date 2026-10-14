@@ -1,8 +1,8 @@
 import { create } from 'zustand'
 import { addBiomeUnlock, listBiomeUnlocks } from '../data/biomeUnlockRepo'
-import { countStepGoalDaysMet } from '../data/dailyProgressRepo'
+import { sumStepGoalPoints } from '../data/dailyProgressRepo'
 import { loadEcoregionGrid } from '../data/ecoregionGrid'
-import { countCompletedFocusSessions } from '../data/focusSessionRepo'
+import { sumFocusSessionPoints } from '../data/focusSessionRepo'
 import { getApproximatePosition } from '../data/location'
 import { getCurrentBiome, getHomeBiome, getHomeBiomeSource, setCurrentBiome, setHomeBiome } from '../data/settingsRepo'
 import {
@@ -10,7 +10,6 @@ import {
   NEIGHBOUR_UNLOCK_COST,
   canSwitchTo,
   canUnlock,
-  earnedPoints,
   hasCatalog,
   unlockedBiomes,
   type BiomeId,
@@ -34,7 +33,7 @@ interface BiomeState {
   spent: number
   loaded: boolean
   load: () => Promise<void>
-  /** Recount earned points after a FocusSession completes or a StepGoal may have been met. */
+  /** Re-sum earned points after a FocusSession completes or a StepGoal may have been met. */
   refreshPoints: () => Promise<void>
   /** Coarse location → Biome. Sets it as home only when it is playable; otherwise the caller offers the picker. */
   detectHome: () => Promise<DetectResult>
@@ -75,6 +74,11 @@ export function refreshPoints(): Promise<void> {
   return useBiomeStore.getState().refreshPoints()
 }
 
+async function sumEarnedPoints(): Promise<number> {
+  const [sessions, goalDays] = await Promise.all([sumFocusSessionPoints(), sumStepGoalPoints()])
+  return sessions + goalDays
+}
+
 export const useBiomeStore = create<BiomeState>((set, get) => ({
   homeBiome: null,
   homeSource: 'picked',
@@ -85,13 +89,12 @@ export const useBiomeStore = create<BiomeState>((set, get) => ({
   loaded: false,
 
   load: async () => {
-    const [homeBiome, homeSource, storedCurrent, unlocks, sessions, goalDays] = await Promise.all([
+    const [homeBiome, homeSource, storedCurrent, unlocks, earned] = await Promise.all([
       getHomeBiome(),
       getHomeBiomeSource(),
       getCurrentBiome(),
       listBiomeUnlocks(),
-      countCompletedFocusSessions(),
-      countStepGoalDaysMet(),
+      sumEarnedPoints(),
     ])
     const purchased = unlocks.map((u) => u.biomeId)
     const unlocked = homeBiome ? unlockedBiomes({ home: homeBiome, purchased }) : new Set<BiomeId>()
@@ -102,15 +105,14 @@ export const useBiomeStore = create<BiomeState>((set, get) => ({
       homeSource,
       currentBiome,
       purchased,
-      earned: earnedPoints(sessions, goalDays),
+      earned,
       spent: unlocks.reduce((sum, u) => sum + u.cost, 0),
       loaded: true,
     })
   },
 
   refreshPoints: async () => {
-    const [sessions, goalDays] = await Promise.all([countCompletedFocusSessions(), countStepGoalDaysMet()])
-    set({ earned: earnedPoints(sessions, goalDays) })
+    set({ earned: await sumEarnedPoints() })
   },
 
   detectHome: async () => {

@@ -1,4 +1,4 @@
-import type { BiomeId } from '../domain/biome'
+import { focusSessionPoints, type BiomeId } from '../domain/biome'
 import type { ActiveFocusSession, CollectedEntry, FocusFailReason, FocusSession } from '../domain/types'
 import { insertCollectedEntry, newCollectedEntry } from './collectionRepo'
 import { getDb } from './db'
@@ -9,8 +9,8 @@ const CLEAR_ACTIVE = { statement: 'DELETE FROM active_focus_session', values: []
 function insertFocusSession(session: FocusSession) {
   return {
     statement: `INSERT INTO focus_sessions
-      (id, startedAt, endedAt, plannedDurationSeconds, status, failReason, localDate, pendingSync)
-      VALUES (?, ?, ?, ?, ?, ?, ?, 1)`,
+      (id, startedAt, endedAt, plannedDurationSeconds, status, failReason, localDate, points, pendingSync)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)`,
     values: [
       session.id,
       session.startedAt,
@@ -20,6 +20,8 @@ function insertFocusSession(session: FocusSession) {
       session.failReason,
       // A session counts toward the day it started on.
       localDateKey(new Date(session.startedAt)),
+      // Only a completed session earns Points.
+      session.status === 'completed' ? focusSessionPoints(session.plannedDurationSeconds) : 0,
     ],
   }
 }
@@ -110,8 +112,9 @@ export async function listFocusSessions(): Promise<FocusSession[]> {
   return (res.values ?? []) as FocusSession[]
 }
 
-export async function countCompletedFocusSessions(): Promise<number> {
+/** Points earned by every FocusSession, each at the rate it was earned at. */
+export async function sumFocusSessionPoints(): Promise<number> {
   const db = await getDb()
-  const res = await db.query("SELECT COUNT(*) AS count FROM focus_sessions WHERE status = 'completed'")
-  return Number(res.values?.[0]?.count ?? 0)
+  const res = await db.query('SELECT COALESCE(SUM(points), 0) AS points FROM focus_sessions')
+  return Number(res.values?.[0]?.points ?? 0)
 }

@@ -6,7 +6,7 @@ import {
   biomeStatus,
   canSwitchTo,
   canUnlock,
-  earnedPoints,
+  focusSessionPoints,
   hasCatalog,
   isBiomeId,
   unlockedBiomes,
@@ -77,10 +77,15 @@ describe('hasCatalog', () => {
   })
 })
 
-describe('earnedPoints', () => {
-  it('adds points per completed focus session and per step goal met', () => {
-    expect(earnedPoints(0, 0)).toBe(0)
-    expect(earnedPoints(3, 2)).toBe(50)
+describe('focusSessionPoints', () => {
+  it('earns a point per planned minute', () => {
+    expect(focusSessionPoints(3 * 60)).toBe(3)
+    expect(focusSessionPoints(25 * 60)).toBe(25)
+  })
+
+  it('earns nothing for a part of a minute', () => {
+    expect(focusSessionPoints(0)).toBe(0)
+    expect(focusSessionPoints(59)).toBe(0)
   })
 })
 

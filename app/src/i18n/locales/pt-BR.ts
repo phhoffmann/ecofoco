@@ -172,7 +172,7 @@ export const ptBR: typeof en = {
       hint: 'As recompensas vêm do seu bioma atual. Ganhe pontos para desbloquear biomas vizinhos.',
       points_one: '{{count}} ponto',
       points_other: '{{count}} pontos',
-      pointsHint: '+{{session}} por sessão de foco, +{{goal}} por meta de passos batida. Um vizinho custa {{cost}}.',
+      pointsHint: '+{{minute}} por minuto de foco, +{{goal}} por meta de passos batida. Um vizinho custa {{cost}}.',
       home: 'Casa',
       current: 'Atual',
       switch: 'Trocar',
