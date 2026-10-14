@@ -48,7 +48,12 @@ export async function addCollectedEntry(
   return entry
 }
 
-/** Only for undoing a Manual Sighting right after it was logged; the Collection is otherwise permanent. */
+/**
+ * Only for undoing a Manual Sighting right after it was logged; the Collection is otherwise permanent.
+ * Every write except this undo delete is queued for sync; the delete is local-only and never synced.
+ * The sync push must not push a Manual Sighting until its undo window has closed, so an undone
+ * sighting never reaches the server.
+ */
 export async function deleteCollectedEntry(id: string): Promise<void> {
   const db = await getDb()
   await db.run('DELETE FROM collected_entries WHERE id = ?', [id])
