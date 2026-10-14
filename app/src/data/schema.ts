@@ -69,9 +69,13 @@ function backfillEntryBiomes(catalog: readonly { id: string; biome: readonly Bio
   return [`UPDATE collected_entries SET biomeId = CASE speciesId ${cases.join(' ')} END`]
 }
 
-/** Prepares the tables for sync: what is still to upload, when rows changed, and who this device is. */
+/**
+ * Prepares the tables for sync: what is still to upload, when rows changed, and who this device is.
+ * Starts with the baseline again, so it works on an empty database even if the v1 step was skipped.
+ */
 function v2Sync(catalog: readonly { id: string; biome: readonly BiomeId[] }[]): string[] {
   return [
+    ...V1_BASELINE,
     ...SYNCED_TABLES.map((table) => `ALTER TABLE ${table} ADD COLUMN pendingSync INTEGER NOT NULL DEFAULT 1`),
     'ALTER TABLE collected_entries ADD COLUMN biomeId TEXT',
     'ALTER TABLE collected_entries ADD COLUMN localDate TEXT',
@@ -79,6 +83,7 @@ function v2Sync(catalog: readonly { id: string; biome: readonly BiomeId[] }[]): 
     'ALTER TABLE focus_sessions ADD COLUMN localDate TEXT',
     'ALTER TABLE daily_progress ADD COLUMN updatedAt TEXT',
     'ALTER TABLE settings ADD COLUMN updatedAt TEXT',
+    'ALTER TABLE active_focus_session ADD COLUMN biomeId TEXT',
 
     // The local calendar day, as the app counts days; 'localtime' is the device's time zone.
     `UPDATE collected_entries SET localDate = date(collectedAt, 'localtime')`,

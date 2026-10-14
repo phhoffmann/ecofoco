@@ -110,7 +110,7 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => {
       active = null
       await saving.catch(() => {})
       try {
-        await completeFocusSession(session, activeBiome())
+        await completeFocusSession(session)
       } catch {
         active = session
         return
@@ -126,8 +126,14 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => {
 
     start: async (durationSeconds) => {
       // Drawn up front so the Sprout can grow into its shape; only collected if the session completes.
-      const species = pickRandomSpecies('plant', activeBiome())
-      const session = { startedAt: new Date().toISOString(), plannedDurationSeconds: durationSeconds, speciesId: species.id }
+      const biomeId = activeBiome()
+      const species = pickRandomSpecies('plant', biomeId)
+      const session = {
+        startedAt: new Date().toISOString(),
+        plannedDurationSeconds: durationSeconds,
+        speciesId: species.id,
+        biomeId,
+      }
       run(session, species)
       saving = saveActiveFocusSession(session)
       await saving
@@ -147,8 +153,9 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => {
 
     recover: async () => {
       if (get().status !== 'idle') return
-      const session = await getActiveFocusSession()
-      if (!session || get().status !== 'idle') return
+      const saved = await getActiveFocusSession()
+      if (!saved || get().status !== 'idle') return
+      const session = { ...saved, biomeId: saved.biomeId ?? activeBiome() }
       const species = SPECIES_CATALOG.find((s) => s.id === session.speciesId && s.type === 'plant')
       const { backgrounded } = session
       if (backgrounded?.screenOn && Date.now() - Date.parse(backgrounded.at) > LEAVE_GRACE_MS) {

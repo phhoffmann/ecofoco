@@ -27,22 +27,26 @@ function insertFocusSession(session: FocusSession) {
 export async function saveActiveFocusSession(active: ActiveFocusSession): Promise<void> {
   const db = await getDb()
   await db.run(
-    'INSERT OR REPLACE INTO active_focus_session (id, startedAt, plannedDurationSeconds, speciesId) VALUES (1, ?, ?, ?)',
-    [active.startedAt, active.plannedDurationSeconds, active.speciesId],
+    'INSERT OR REPLACE INTO active_focus_session (id, startedAt, plannedDurationSeconds, speciesId, biomeId) VALUES (1, ?, ?, ?, ?)',
+    [active.startedAt, active.plannedDurationSeconds, active.speciesId, active.biomeId],
   )
 }
 
-export async function getActiveFocusSession(): Promise<ActiveFocusSession | null> {
+/** An active session as saved; `biomeId` is null for one saved before sessions recorded their Biome. */
+export type SavedActiveFocusSession = Omit<ActiveFocusSession, 'biomeId'> & { biomeId: BiomeId | null }
+
+export async function getActiveFocusSession(): Promise<SavedActiveFocusSession | null> {
   const db = await getDb()
   const res = await db.query(
-    'SELECT startedAt, plannedDurationSeconds, speciesId, backgroundedAt, backgroundedScreenOn FROM active_focus_session WHERE id = 1',
+    'SELECT startedAt, plannedDurationSeconds, speciesId, biomeId, backgroundedAt, backgroundedScreenOn FROM active_focus_session WHERE id = 1',
   )
   const row = res.values?.[0]
   if (!row) return null
-  const session: ActiveFocusSession = {
+  const session: SavedActiveFocusSession = {
     startedAt: row.startedAt,
     plannedDurationSeconds: row.plannedDurationSeconds,
     speciesId: row.speciesId,
+    biomeId: row.biomeId,
   }
   if (row.backgroundedAt) session.backgrounded = { at: row.backgroundedAt, screenOn: Boolean(row.backgroundedScreenOn) }
   return session
@@ -59,13 +63,9 @@ export async function clearActiveFocusSessionBackgrounded(): Promise<void> {
   await db.run('UPDATE active_focus_session SET backgroundedAt = NULL, backgroundedScreenOn = NULL WHERE id = 1', [])
 }
 
-/**
- * Records the completed session and collects its Plant in one transaction, so neither exists without the other.
- * `biomeId` is the Biome the Plant was drawn from.
- */
+/** Records the completed session and collects its Plant in one transaction, so neither exists without the other. */
 export async function completeFocusSession(
   active: ActiveFocusSession,
-  biomeId: BiomeId,
 ): Promise<{ session: FocusSession; entry: CollectedEntry }> {
   const entry = newCollectedEntry(active.speciesId, 'focus_session')
   const session: FocusSession = {
@@ -78,7 +78,7 @@ export async function completeFocusSession(
   }
   const db = await getDb()
   await db.executeSet(
-    [insertCollectedEntry(entry, { biomeId, focusSessionId: session.id }), insertFocusSession(session), CLEAR_ACTIVE],
+    [insertCollectedEntry(entry, { biomeId: active.biomeId, focusSessionId: session.id }), insertFocusSession(session), CLEAR_ACTIVE],
     true,
   )
   return { session, entry }

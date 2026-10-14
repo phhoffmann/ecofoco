@@ -1,3 +1,5 @@
+import type { BiomeId } from './biome'
+
 export type CollectionMethod = 'focus_session' | 'draw' | 'manual_sighting' | 'photo_ai'
 
 export interface CollectedEntry {
@@ -28,6 +30,8 @@ export interface ActiveFocusSession {
   plannedDurationSeconds: number
   /** The Plant the Sprout grows into; collected only if the session completes. */
   speciesId: string
+  /** The Biome the Plant was drawn from, active when the session started. */
+  biomeId: BiomeId
   /** Set while the app is in the background mid-session: when it left, and whether the screen was on then. */
   backgrounded?: { at: string; screenOn: boolean }
 }

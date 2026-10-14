@@ -15,6 +15,7 @@ const {
   reveal,
   refreshPoints,
   mockSpecies,
+  biome,
 } = vi.hoisted(() => {
   const mockSpecies: Species = {
     id: 'jatoba',
@@ -41,6 +42,7 @@ const {
     reveal: vi.fn().mockResolvedValue(undefined),
     refreshPoints: vi.fn().mockResolvedValue(undefined),
     mockSpecies,
+    biome: { active: 'caatinga' },
   }
 })
 
@@ -55,7 +57,7 @@ vi.mock('../data/appLifecycle', () => ({
 }))
 
 vi.mock('../domain/draw', () => ({ pickRandomSpecies: vi.fn(() => mockSpecies) }))
-vi.mock('./biomeStore', () => ({ activeBiome: () => 'caatinga', refreshPoints }))
+vi.mock('./biomeStore', () => ({ activeBiome: () => biome.active, refreshPoints }))
 vi.mock('../data/focusSessionRepo', () => ({
   completeFocusSession,
   failFocusSession,
@@ -100,6 +102,7 @@ describe('focusSessionStore', () => {
     lifecycle.pluginAvailable = true
     lifecycle.otherAppMs = 0
     lifecycle.screenInUse = true
+    biome.active = 'caatinga'
     useFocusSessionStore.getState().reset()
   })
 
@@ -117,10 +120,12 @@ describe('focusSessionStore', () => {
     expect(state.status).toBe('completed')
     expect(state.resultSpecies).toEqual(mockSpecies)
     expect(pickRandomSpecies).toHaveBeenCalledWith('plant', 'caatinga')
-    expect(completeFocusSession).toHaveBeenCalledWith(
-      { startedAt: expect.any(String), plannedDurationSeconds: 3, speciesId: 'jatoba' },
-      'caatinga',
-    )
+    expect(completeFocusSession).toHaveBeenCalledWith({
+      startedAt: expect.any(String),
+      plannedDurationSeconds: 3,
+      speciesId: 'jatoba',
+      biomeId: 'caatinga',
+    })
     // One reveal for the catch, with the session's points, and the header balance recounted.
     expect(reveal).toHaveBeenCalledExactlyOnceWith(mockSpecies, 10)
     expect(refreshPoints).toHaveBeenCalled()
@@ -133,7 +138,17 @@ describe('focusSessionStore', () => {
       startedAt: expect.any(String),
       plannedDurationSeconds: 900,
       speciesId: 'jatoba',
+      biomeId: 'caatinga',
     })
+  })
+
+  it('collects the Plant in the Biome it was drawn from, even if the Biome is switched mid-session', async () => {
+    useFocusSessionStore.getState().start(3)
+    biome.active = 'cerrado'
+
+    await vi.advanceTimersByTimeAsync(3000)
+
+    expect(completeFocusSession).toHaveBeenCalledWith(expect.objectContaining({ biomeId: 'caatinga' }))
   })
 
   it('grows the sprout into the shape of the plant it will collect, without revealing the plant early', async () => {
@@ -297,6 +312,7 @@ describe('focusSessionStore', () => {
       startedAt: new Date(Date.now() - startedSecondsAgo * 1000).toISOString(),
       plannedDurationSeconds,
       speciesId,
+      biomeId: 'amazon' as string | null,
     })
 
     it('resumes a session the process died during, keeping its start time and plant', async () => {
@@ -307,8 +323,17 @@ describe('focusSessionStore', () => {
       expect(useFocusSessionStore.getState()).toMatchObject({ status: 'running', remainingSeconds: 480, plannedDurationSeconds: 600 })
       await vi.advanceTimersByTimeAsync(480_000)
       expect(useFocusSessionStore.getState().status).toBe('completed')
-      expect(completeFocusSession).toHaveBeenCalledWith(expect.objectContaining({ speciesId: 'quaresmeira' }), 'caatinga')
+      expect(completeFocusSession).toHaveBeenCalledWith(expect.objectContaining({ speciesId: 'quaresmeira', biomeId: 'amazon' }))
       expect(reveal).toHaveBeenCalledWith(expect.objectContaining({ id: 'quaresmeira' }), 10)
+    })
+
+    it('collects a session saved before sessions recorded their Biome in the active Biome', async () => {
+      getActiveFocusSession.mockResolvedValue({ ...persisted(120), biomeId: null })
+
+      await useFocusSessionStore.getState().recover()
+      await vi.advanceTimersByTimeAsync(480_000)
+
+      expect(completeFocusSession).toHaveBeenCalledWith(expect.objectContaining({ biomeId: 'caatinga' }))
     })
 
     it('fails a session whose time ran out while the app was closed, saying so', async () => {

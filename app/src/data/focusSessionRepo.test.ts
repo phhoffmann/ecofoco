@@ -23,6 +23,7 @@ const active: ActiveFocusSession = {
   startedAt: '2026-09-10T10:00:00.000Z',
   plannedDurationSeconds: 900,
   speciesId: 'jatoba',
+  biomeId: 'cerrado',
 }
 
 describe('focusSessionRepo', () => {
@@ -41,6 +42,24 @@ describe('focusSessionRepo', () => {
     expect(await getActiveFocusSession()).toEqual({ ...active, speciesId: 'ipe-amarelo' })
   })
 
+  it('stamps the Plant with the Biome saved with the session', async () => {
+    await saveActiveFocusSession({ ...active, biomeId: 'caatinga' })
+
+    const saved = await getActiveFocusSession()
+    expect(saved?.biomeId).toBe('caatinga')
+    const { entry } = await completeFocusSession({ ...active, biomeId: 'caatinga' })
+
+    const res = await db.query('SELECT biomeId FROM collected_entries WHERE id = ?', [entry.id])
+    expect(res.values).toEqual([{ biomeId: 'caatinga' }])
+  })
+
+  it('reads no Biome for a session saved before sessions recorded one', async () => {
+    await saveActiveFocusSession(active)
+    await db.execute('UPDATE active_focus_session SET biomeId = NULL')
+
+    expect((await getActiveFocusSession())?.biomeId).toBeNull()
+  })
+
   it('remembers when the app was backgrounded mid-session, and forgets it on return', async () => {
     await saveActiveFocusSession(active)
 
@@ -57,7 +76,7 @@ describe('focusSessionRepo', () => {
   it('completes a session by collecting its plant, recording it and clearing the active session together', async () => {
     await saveActiveFocusSession(active)
 
-    const { session, entry } = await completeFocusSession(active, 'cerrado')
+    const { session, entry } = await completeFocusSession(active)
 
     expect(session).toMatchObject({ startedAt: active.startedAt, plannedDurationSeconds: 900, status: 'completed', failReason: null })
     expect(entry).toMatchObject({ speciesId: 'jatoba', method: 'focus_session' })
@@ -72,7 +91,7 @@ describe('focusSessionRepo', () => {
     // Break the second write of the transaction.
     await db.execute('DROP TABLE focus_sessions')
 
-    await expect(completeFocusSession(active, 'cerrado')).rejects.toThrow()
+    await expect(completeFocusSession(active)).rejects.toThrow()
 
     expect(await listCollectedEntries()).toEqual([])
     expect(await getActiveFocusSession()).toEqual(active)
@@ -93,7 +112,7 @@ describe('focusSessionRepo', () => {
   it('links the collected Plant to its session, and queues both for sync', async () => {
     await saveActiveFocusSession(active)
 
-    const { session, entry } = await completeFocusSession(active, 'cerrado')
+    const { session, entry } = await completeFocusSession(active)
 
     const entries = await db.query('SELECT biomeId, localDate, focusSessionId, pendingSync FROM collected_entries')
     expect(entries.values).toEqual([

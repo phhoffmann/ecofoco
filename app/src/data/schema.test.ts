@@ -94,7 +94,10 @@ describe('migrating an install from before versioning', () => {
       { id: 'session-done', status: 'completed', failReason: null },
       { id: 'session-failed', status: 'failed', failReason: 'gave_up' },
     ])
-    expect((await db.query('SELECT speciesId FROM active_focus_session')).values).toEqual([{ speciesId: 'jatoba' }])
+    // Saved before sessions recorded their Biome.
+    expect((await db.query('SELECT speciesId, biomeId FROM active_focus_session')).values).toEqual([
+      { speciesId: 'jatoba', biomeId: null },
+    ])
     expect((await db.query('SELECT date, steps, goalMet, drawCompleted FROM daily_progress')).values).toEqual([
       { date: '2026-03-02', steps: 7000, goalMet: 1, drawCompleted: 1 },
     ])
@@ -166,17 +169,30 @@ describe('migrating an install from before versioning', () => {
 })
 
 describe('a fresh install', () => {
-  it('gets every table and sync column', async () => {
-    const db = await createTestDb()
-
+  async function expectNewestSchema(db: TestDb) {
     expect(await columns(db, 'collected_entries')).toEqual([
       'id', 'speciesId', 'collectedAt', 'method', 'pendingSync', 'biomeId', 'localDate', 'focusSessionId',
     ])
     expect(await columns(db, 'focus_sessions')).toContain('localDate')
+    expect(await columns(db, 'active_focus_session')).toContain('biomeId')
     expect(await columns(db, 'daily_progress')).toContain('updatedAt')
     expect(await columns(db, 'settings')).toContain('updatedAt')
     for (const table of SYNCED_TABLES) expect(await columns(db, table), table).toContain('pendingSync')
     expect((await db.query('SELECT deviceId FROM sync_state')).values).toEqual([{ deviceId: expect.stringMatching(UUID_V4) }])
+    expect(await userVersion(db)).toBe(DB_VERSION)
+  }
+
+  it('gets every table and sync column', async () => {
+    await expectNewestSchema(await createTestDb())
+  })
+
+  it('gets every table and sync column even when the empty database is already at version 1', async () => {
+    const db = await createEmptyTestDb()
+    await db.execute('PRAGMA user_version = 1')
+
+    await openTestDb(db, upgradeStatements([]))
+
+    await expectNewestSchema(db)
   })
 
   it('gives each device its own id', async () => {
