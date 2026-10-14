@@ -327,13 +327,15 @@ describe('focusSessionStore', () => {
       expect(reveal).toHaveBeenCalledWith(expect.objectContaining({ id: 'quaresmeira' }), 10)
     })
 
-    it('collects a session saved before sessions recorded their Biome in the active Biome', async () => {
+    it('collects a session saved before sessions recorded their Biome in the Biome active when it completes', async () => {
       getActiveFocusSession.mockResolvedValue({ ...persisted(120), biomeId: null })
 
       await useFocusSessionStore.getState().recover()
+      // The Biomes finish loading after recovery: the one active at completion counts.
+      biome.active = 'cerrado'
       await vi.advanceTimersByTimeAsync(480_000)
 
-      expect(completeFocusSession).toHaveBeenCalledWith(expect.objectContaining({ biomeId: 'caatinga' }))
+      expect(completeFocusSession).toHaveBeenCalledWith(expect.objectContaining({ biomeId: 'cerrado' }))
     })
 
     it('fails a session whose time ran out while the app was closed, saying so', async () => {

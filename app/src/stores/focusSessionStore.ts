@@ -7,12 +7,13 @@ import {
   getActiveFocusSession,
   markActiveFocusSessionBackgrounded,
   saveActiveFocusSession,
+  type SavedActiveFocusSession,
 } from '../data/focusSessionRepo'
 import { FOCUS_SESSION_POINTS } from '../domain/biome'
 import { pickRandomSpecies } from '../domain/draw'
 import { computeRemainingSeconds, hasLeftTooLong, LEAVE_GRACE_MS } from '../domain/focusSession'
 import { SPECIES_CATALOG, type PlantArchetype, type Species } from '../domain/species'
-import type { ActiveFocusSession, FocusFailReason } from '../domain/types'
+import type { FocusFailReason } from '../domain/types'
 import { activeBiome, refreshPoints } from './biomeStore'
 import { useCollectionStore } from './collectionStore'
 
@@ -38,7 +39,7 @@ interface FocusSessionState {
 // even if the user never comes back.
 const AWAY_CHECK_INTERVAL_MS = 1_000
 
-let active: ActiveFocusSession | null = null
+let active: SavedActiveFocusSession | null = null
 // The session's end is written only after its start, so ending it can't be undone by a late save.
 let saving: Promise<void> = Promise.resolve()
 let tickHandle: ReturnType<typeof setInterval> | null = null
@@ -80,7 +81,7 @@ const IDLE = {
 
 export const useFocusSessionStore = create<FocusSessionState>((set, get) => {
   /** Runs the session's clock from its wall-clock start, whether just started or recovered. */
-  function run(session: ActiveFocusSession, species: Species) {
+  function run(session: SavedActiveFocusSession, species: Species) {
     clearTick()
     clearAwayCheck()
     active = session
@@ -110,7 +111,7 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => {
       active = null
       await saving.catch(() => {})
       try {
-        await completeFocusSession(session)
+        await completeFocusSession({ ...session, biomeId: session.biomeId ?? activeBiome() })
       } catch {
         active = session
         return
@@ -153,9 +154,8 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => {
 
     recover: async () => {
       if (get().status !== 'idle') return
-      const saved = await getActiveFocusSession()
-      if (!saved || get().status !== 'idle') return
-      const session = { ...saved, biomeId: saved.biomeId ?? activeBiome() }
+      const session = await getActiveFocusSession()
+      if (!session || get().status !== 'idle') return
       const species = SPECIES_CATALOG.find((s) => s.id === session.speciesId && s.type === 'plant')
       const { backgrounded } = session
       if (backgrounded?.screenOn && Date.now() - Date.parse(backgrounded.at) > LEAVE_GRACE_MS) {
