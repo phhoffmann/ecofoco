@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { createTestDb } from './testing/sqliteTestDb'
 
 const mockDb = { query: vi.fn(), run: vi.fn() }
 vi.mock('./db', () => ({ getDb: () => Promise.resolve(mockDb) }))
@@ -19,13 +20,15 @@ describe('biomeUnlockRepo', () => {
     expect(await listBiomeUnlocks()).toEqual([caatinga])
   })
 
-  it('addBiomeUnlock records the biome and what it cost', async () => {
+  it('addBiomeUnlock records the biome and what it cost, queued for sync', async () => {
+    const testDb = await createTestDb()
+    mockDb.query.mockImplementation(testDb.query)
+    mockDb.run.mockImplementation(testDb.run)
+
     await addBiomeUnlock('caatinga', 100)
-    expect(mockDb.run).toHaveBeenCalledWith('INSERT INTO biome_unlocks (biomeId, unlockedAt, cost) VALUES (?, ?, ?)', [
-      'caatinga',
-      expect.any(String),
-      100,
-    ])
+
+    expect(await listBiomeUnlocks()).toEqual([{ biomeId: 'caatinga', unlockedAt: expect.any(String), cost: 100 }])
+    expect((await testDb.query('SELECT pendingSync FROM biome_unlocks')).values).toEqual([{ pendingSync: 1 }])
   })
 })
 

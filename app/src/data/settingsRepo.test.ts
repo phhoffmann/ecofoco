@@ -1,4 +1,5 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { createTestDb, type TestDb } from './testing/sqliteTestDb'
 
 const mockDb = { query: vi.fn(), run: vi.fn() }
 vi.mock('./db', () => ({ getDb: () => Promise.resolve(mockDb) }))
@@ -42,7 +43,7 @@ describe('settingsRepo', () => {
 
   it('setDisplayPreference persists the value as a string under its own key', async () => {
     await setDisplayPreference('timerPill', false)
-    expect(mockDb.run).toHaveBeenCalledWith(expect.stringContaining('INSERT INTO settings'), ['display.timerPill', 'false'])
+    expect(mockDb.run).toHaveBeenCalledWith(expect.stringContaining('INSERT INTO settings'), ['display.timerPill', 'false', expect.any(String)])
   })
 
   it('getStepGoal falls back to the default (6000) when unset', async () => {
@@ -62,7 +63,7 @@ describe('settingsRepo', () => {
 
   it('setStepGoal persists the value as a string', async () => {
     await setStepGoal(8000)
-    expect(mockDb.run).toHaveBeenCalledWith(expect.stringContaining('INSERT INTO settings'), ['stepGoal', '8000'])
+    expect(mockDb.run).toHaveBeenCalledWith(expect.stringContaining('INSERT INTO settings'), ['stepGoal', '8000', expect.any(String)])
   })
 
   it('getCollectionView defaults to the grid when unset', async () => {
@@ -85,6 +86,7 @@ describe('settingsRepo', () => {
     expect(mockDb.run).toHaveBeenCalledWith(expect.stringContaining('INSERT INTO settings'), [
       'collectionView',
       'isometric',
+      expect.any(String),
     ])
   })
 
@@ -106,7 +108,7 @@ describe('settingsRepo', () => {
 
   it('setHomeBiome persists only the biome id and how it was set', async () => {
     await setHomeBiome('caatinga', 'detected')
-    expect(mockDb.run.mock.calls.map(([, params]) => params)).toEqual([
+    expect(mockDb.run.mock.calls.map(([, [key, value]]) => [key, value])).toEqual([
       ['homeBiome', 'caatinga'],
       ['homeBiomeSource', 'detected'],
     ])
@@ -117,5 +119,46 @@ describe('settingsRepo', () => {
     expect(await getHomeBiomeSource()).toBe('picked')
     mockDb.query.mockResolvedValue({ values: [{ value: 'detected' }] })
     expect(await getHomeBiomeSource()).toBe('detected')
+  })
+})
+
+describe('settingsRepo on a real database', () => {
+  let testDb: TestDb
+
+  beforeEach(async () => {
+    testDb = await createTestDb()
+    mockDb.query.mockReset().mockImplementation(testDb.query)
+    mockDb.run.mockReset().mockImplementation(testDb.run)
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(new Date('2026-09-10T12:00:00.000Z'))
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
+  const syncFields = async () => (await testDb.query("SELECT value, updatedAt, pendingSync FROM settings WHERE key = 'stepGoal'")).values
+
+  it('queues a changed setting for sync, stamped with when it changed', async () => {
+    await setStepGoal(8000)
+    expect(await syncFields()).toEqual([{ value: '8000', updatedAt: '2026-09-10T12:00:00.000Z', pendingSync: 1 }])
+
+    // As if a sync had uploaded the row.
+    await testDb.run('UPDATE settings SET pendingSync = 0')
+    vi.setSystemTime(new Date('2026-09-10T13:00:00.000Z'))
+    await setStepGoal(9000)
+
+    expect(await syncFields()).toEqual([{ value: '9000', updatedAt: '2026-09-10T13:00:00.000Z', pendingSync: 1 }])
+    expect(await getStepGoal()).toBe(9000)
+  })
+
+  it('leaves the row alone when a setting is set to the value it already has', async () => {
+    await setStepGoal(8000)
+    await testDb.run('UPDATE settings SET pendingSync = 0')
+    vi.setSystemTime(new Date('2026-09-10T13:00:00.000Z'))
+
+    await setStepGoal(8000)
+
+    expect(await syncFields()).toEqual([{ value: '8000', updatedAt: '2026-09-10T12:00:00.000Z', pendingSync: 0 }])
   })
 })

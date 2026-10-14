@@ -7,12 +7,13 @@ import {
   getActiveFocusSession,
   markActiveFocusSessionBackgrounded,
   saveActiveFocusSession,
+  type SavedActiveFocusSession,
 } from '../data/focusSessionRepo'
 import { FOCUS_SESSION_POINTS } from '../domain/biome'
 import { pickRandomSpecies } from '../domain/draw'
 import { computeRemainingSeconds, hasLeftTooLong, LEAVE_GRACE_MS } from '../domain/focusSession'
 import { SPECIES_CATALOG, type PlantArchetype, type Species } from '../domain/species'
-import type { ActiveFocusSession, FocusFailReason } from '../domain/types'
+import type { FocusFailReason } from '../domain/types'
 import { activeBiome, refreshPoints } from './biomeStore'
 import { useCollectionStore } from './collectionStore'
 
@@ -38,7 +39,7 @@ interface FocusSessionState {
 // even if the user never comes back.
 const AWAY_CHECK_INTERVAL_MS = 1_000
 
-let active: ActiveFocusSession | null = null
+let active: SavedActiveFocusSession | null = null
 // The session's end is written only after its start, so ending it can't be undone by a late save.
 let saving: Promise<void> = Promise.resolve()
 let tickHandle: ReturnType<typeof setInterval> | null = null
@@ -80,7 +81,7 @@ const IDLE = {
 
 export const useFocusSessionStore = create<FocusSessionState>((set, get) => {
   /** Runs the session's clock from its wall-clock start, whether just started or recovered. */
-  function run(session: ActiveFocusSession, species: Species) {
+  function run(session: SavedActiveFocusSession, species: Species) {
     clearTick()
     clearAwayCheck()
     active = session
@@ -110,7 +111,7 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => {
       active = null
       await saving.catch(() => {})
       try {
-        await completeFocusSession(session)
+        await completeFocusSession({ ...session, biomeId: session.biomeId ?? activeBiome() })
       } catch {
         active = session
         return
@@ -126,8 +127,14 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => {
 
     start: async (durationSeconds) => {
       // Drawn up front so the Sprout can grow into its shape; only collected if the session completes.
-      const species = pickRandomSpecies('plant', activeBiome())
-      const session = { startedAt: new Date().toISOString(), plannedDurationSeconds: durationSeconds, speciesId: species.id }
+      const biomeId = activeBiome()
+      const species = pickRandomSpecies('plant', biomeId)
+      const session = {
+        startedAt: new Date().toISOString(),
+        plannedDurationSeconds: durationSeconds,
+        speciesId: species.id,
+        biomeId,
+      }
       run(session, species)
       saving = saveActiveFocusSession(session)
       await saving

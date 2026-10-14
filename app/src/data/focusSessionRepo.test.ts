@@ -1,6 +1,7 @@
 // @vitest-environment node
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import type { ActiveFocusSession } from '../domain/types'
+import { localDateKey } from './localDate'
 import { createTestDb, type TestDb } from './testing/sqliteTestDb'
 
 let db: TestDb
@@ -22,6 +23,7 @@ const active: ActiveFocusSession = {
   startedAt: '2026-09-10T10:00:00.000Z',
   plannedDurationSeconds: 900,
   speciesId: 'jatoba',
+  biomeId: 'cerrado',
 }
 
 describe('focusSessionRepo', () => {
@@ -38,6 +40,24 @@ describe('focusSessionRepo', () => {
     // Starting again replaces it: there is only ever one running session.
     await saveActiveFocusSession({ ...active, speciesId: 'ipe-amarelo' })
     expect(await getActiveFocusSession()).toEqual({ ...active, speciesId: 'ipe-amarelo' })
+  })
+
+  it('stamps the Plant with the Biome saved with the session', async () => {
+    await saveActiveFocusSession({ ...active, biomeId: 'caatinga' })
+
+    const saved = await getActiveFocusSession()
+    expect(saved?.biomeId).toBe('caatinga')
+    const { entry } = await completeFocusSession({ ...active, biomeId: 'caatinga' })
+
+    const res = await db.query('SELECT biomeId FROM collected_entries WHERE id = ?', [entry.id])
+    expect(res.values).toEqual([{ biomeId: 'caatinga' }])
+  })
+
+  it('reads no Biome for a session saved before sessions recorded one', async () => {
+    await saveActiveFocusSession(active)
+    await db.execute('UPDATE active_focus_session SET biomeId = NULL')
+
+    expect((await getActiveFocusSession())?.biomeId).toBeNull()
   })
 
   it('remembers when the app was backgrounded mid-session, and forgets it on return', async () => {
@@ -87,5 +107,25 @@ describe('focusSessionRepo', () => {
     expect(await listCollectedEntries()).toEqual([])
     expect(await countCompletedFocusSessions()).toBe(0)
     expect(await getActiveFocusSession()).toBeNull()
+  })
+
+  it('links the collected Plant to its session, and queues both for sync', async () => {
+    await saveActiveFocusSession(active)
+
+    const { session, entry } = await completeFocusSession(active)
+
+    const entries = await db.query('SELECT biomeId, localDate, focusSessionId, pendingSync FROM collected_entries')
+    expect(entries.values).toEqual([
+      { biomeId: 'cerrado', localDate: localDateKey(new Date(entry.collectedAt)), focusSessionId: session.id, pendingSync: 1 },
+    ])
+    const sessions = await db.query('SELECT localDate, pendingSync FROM focus_sessions')
+    expect(sessions.values).toEqual([{ localDate: localDateKey(new Date(active.startedAt)), pendingSync: 1 }])
+  })
+
+  it('queues a failed session for sync, dated by the local day it started', async () => {
+    await failFocusSession(active.startedAt, 900, 'left_app')
+
+    const res = await db.query('SELECT localDate, pendingSync FROM focus_sessions')
+    expect(res.values).toEqual([{ localDate: localDateKey(new Date(active.startedAt)), pendingSync: 1 }])
   })
 })

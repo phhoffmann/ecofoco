@@ -71,7 +71,7 @@ export const useDailyProgressStore = create<DailyProgressState>((set, get) => ({
     const { progress } = get()
     if (!canDraw(progress)) return
     const species = pickRandomSpecies('animal', activeBiome())
-    await addCollectedEntry(species.id, 'draw')
+    await addCollectedEntry(species.id, 'draw', activeBiome())
     await markDrawCompleted()
     set({ progress: await getTodayProgress() })
     // A Draw earns no points itself: the day's points come from meeting the StepGoal.
