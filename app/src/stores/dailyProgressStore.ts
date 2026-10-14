@@ -11,7 +11,7 @@ import {
 import { canDraw } from '../domain/dailyProgress'
 import { pickRandomSpecies } from '../domain/draw'
 import type { DailyProgress } from '../domain/types'
-import { activeBiome } from './biomeStore'
+import { activeBiome, refreshPoints } from './biomeStore'
 import { useCollectionStore } from './collectionStore'
 import { useSettingsStore } from './settingsStore'
 
@@ -45,6 +45,8 @@ export const useDailyProgressStore = create<DailyProgressState>((set, get) => ({
         const steps = await getTodaySteps()
         const progress = await upsertTodaySteps(steps, useSettingsStore.getState().stepGoal)
         set({ progress, loading: false })
+        // Today's StepGoal may have just been met, which earns points.
+        void refreshPoints().catch(() => {})
       } else {
         const progress = await getTodayProgress()
         set({ progress, loading: false })

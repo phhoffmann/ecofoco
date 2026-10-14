@@ -217,6 +217,24 @@ body {
   animation: pop-in 420ms var(--ease-spring) backwards;
 }
 
+/* Header points chip: the number bumps when the balance changes. */
+@keyframes points-bump {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.points-bump {
+  display: inline-block;
+  animation: points-bump 480ms var(--ease-spring);
+}
+
 /* Bottom nav: the active icon bounces once when selected. */
 @keyframes nav-bounce {
   0% {
@@ -725,6 +743,7 @@ body {
   .garden-sunlight,
   .enter,
   .pop-in,
+  .points-bump,
   .nav-bounce,
   .progress-sheen,
   .stage-in,

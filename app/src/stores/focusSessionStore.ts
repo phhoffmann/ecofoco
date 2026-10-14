@@ -13,7 +13,7 @@ import { pickRandomSpecies } from '../domain/draw'
 import { computeRemainingSeconds, hasLeftTooLong, LEAVE_GRACE_MS } from '../domain/focusSession'
 import { SPECIES_CATALOG, type PlantArchetype, type Species } from '../domain/species'
 import type { ActiveFocusSession, FocusFailReason } from '../domain/types'
-import { activeBiome } from './biomeStore'
+import { activeBiome, refreshPoints } from './biomeStore'
 import { useCollectionStore } from './collectionStore'
 
 export type FocusSessionStatus = 'idle' | 'running' | 'completed' | 'failed'
@@ -116,6 +116,7 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => {
         return
       }
       set({ status: 'completed', resultSpecies: species })
+      void refreshPoints().catch(() => {})
       await useCollectionStore.getState().reveal(species, FOCUS_SESSION_POINTS)
     }, 250)
   }

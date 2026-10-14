@@ -13,6 +13,7 @@ const {
   markActiveFocusSessionBackgrounded,
   clearActiveFocusSessionBackgrounded,
   reveal,
+  refreshPoints,
   mockSpecies,
 } = vi.hoisted(() => {
   const mockSpecies: Species = {
@@ -38,6 +39,7 @@ const {
     markActiveFocusSessionBackgrounded: vi.fn().mockResolvedValue(undefined),
     clearActiveFocusSessionBackgrounded: vi.fn().mockResolvedValue(undefined),
     reveal: vi.fn().mockResolvedValue(undefined),
+    refreshPoints: vi.fn().mockResolvedValue(undefined),
     mockSpecies,
   }
 })
@@ -53,7 +55,7 @@ vi.mock('../data/appLifecycle', () => ({
 }))
 
 vi.mock('../domain/draw', () => ({ pickRandomSpecies: vi.fn(() => mockSpecies) }))
-vi.mock('./biomeStore', () => ({ activeBiome: () => 'caatinga' }))
+vi.mock('./biomeStore', () => ({ activeBiome: () => 'caatinga', refreshPoints }))
 vi.mock('../data/focusSessionRepo', () => ({
   completeFocusSession,
   failFocusSession,
@@ -120,8 +122,9 @@ describe('focusSessionStore', () => {
       plannedDurationSeconds: 3,
       speciesId: 'jatoba',
     })
-    // One reveal for the catch, with the session's points.
+    // One reveal for the catch, with the session's points, and the header balance recounted.
     expect(reveal).toHaveBeenCalledExactlyOnceWith(mockSpecies, 10)
+    expect(refreshPoints).toHaveBeenCalled()
   })
 
   it('persists the session as soon as it starts, so it survives the process being killed', async () => {

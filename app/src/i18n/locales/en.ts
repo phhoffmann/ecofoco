@@ -73,6 +73,11 @@ export const en = {
     joinedCollection: '{{name}} joined your collection.',
     plantAnother: 'Plant another',
   },
+  pointsChip: {
+    label_zero: '{{count}} points',
+    label_one: '{{count}} point',
+    label_other: '{{count}} points',
+  },
   timerPill: {
     label: 'Focus session running, {{time}} left. Go to Focus.',
     focusing: 'Focusing',

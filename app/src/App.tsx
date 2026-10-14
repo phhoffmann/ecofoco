@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { CatchSnackbar } from './components/CatchSnackbar'
 import { CelebrationOverlay } from './components/CelebrationOverlay'
 import { CollectionIcon, FootprintsIcon, MapPinIcon, SettingsIcon, SproutIcon } from './components/icons'
+import { PointsChip } from './components/PointsChip'
 import { TimerPill } from './components/TimerPill'
 import { ActivityScreen } from './screens/ActivityScreen'
 import { BiomeSetupScreen } from './screens/BiomeSetupScreen'
@@ -48,17 +49,20 @@ function App() {
   return (
     <div className="app-backdrop flex h-svh flex-col overflow-hidden text-ink">
       <header className="flex shrink-0 items-center justify-between gap-3 px-gutter pt-[calc(1rem+var(--safe-top))] pb-2">
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <span className="flex size-8 items-center justify-center rounded-control bg-accent text-on-accent shadow-lift">
             <SproutIcon className="size-5" />
           </span>
           <span className="text-title tracking-tight">EcoFoco</span>
         </div>
         {hasHomeBiome && (
-          <span key={biome} className="pop-in inline-flex items-center gap-1 rounded-full bg-surface/80 px-3 py-1 text-caption font-bold text-ink-muted ring-1 ring-line/60">
-            <MapPinIcon className="size-3.5 text-accent" />
-            {t(`biome.${biome}`)}
-          </span>
+          <div className="flex min-w-0 items-center gap-1.5">
+            <span key={biome} className="pop-in inline-flex min-w-0 items-center gap-1 rounded-full bg-surface/80 px-3 py-1 text-caption font-bold text-ink-muted ring-1 ring-line/60">
+              <MapPinIcon className="size-3.5 shrink-0 text-accent" />
+              <span className="truncate">{t(`biome.${biome}`)}</span>
+            </span>
+            <PointsChip />
+          </div>
         )}
       </header>
 
@@ -84,6 +88,13 @@ function MainTabs() {
   const index = TABS.findIndex((item) => item.id === tab)
   return (
     <>
+      {/* Under the header, well clear of the nav, so it is never mistaken for or tapped as a tab. */}
+      {showTimerPill && (
+        <div className="flex shrink-0 justify-center px-gutter pb-2">
+          <TimerPill />
+        </div>
+      )}
+
       <main key={tab} className="enter flex min-h-0 flex-1 flex-col overflow-y-auto">
         {tab === 'focus' && <FocusScreen />}
         {tab === 'activity' && <ActivityScreen />}
@@ -92,10 +103,9 @@ function MainTabs() {
       </main>
 
       <nav className="shrink-0 px-3 pt-2 pb-[calc(0.5rem+var(--safe-bottom))]">
-        {/* Part of the nav, not floating over <main>, so neither ever covers content. */}
-        <div className="flex flex-col items-center gap-2 pb-2 empty:hidden">
+        {/* Part of the nav, not floating over <main>, so it never covers content. */}
+        <div className="flex flex-col items-center pb-2 empty:hidden">
           <CatchSnackbar />
-          {showTimerPill && <TimerPill />}
         </div>
         <div className="relative flex rounded-card bg-surface/90 p-1.5 shadow-card ring-1 ring-line/60 backdrop-blur">
           {/* Indicator that slides under the active tab. */}

@@ -34,6 +34,8 @@ interface BiomeState {
   spent: number
   loaded: boolean
   load: () => Promise<void>
+  /** Recount earned points after a FocusSession completes or a StepGoal may have been met. */
+  refreshPoints: () => Promise<void>
   /** Coarse location → Biome. Sets it as home only when it is playable; otherwise the caller offers the picker. */
   detectHome: () => Promise<DetectResult>
   /** Home from detection or the manual picker. Free and unlocked; the first home also becomes current. A former detected home stays unlocked. */
@@ -49,11 +51,15 @@ export function selectBiomeProgress(state: BiomeState): BiomeProgress | null {
     home: state.homeBiome,
     current: state.currentBiome ?? state.homeBiome,
     purchased: state.purchased,
-    balance: state.earned - state.spent,
+    balance: selectPointBalance(state),
   }
 }
 
 const selectActiveBiome = (state: BiomeState): BiomeId => state.currentBiome ?? state.homeBiome ?? FALLBACK_BIOME
+
+export function selectPointBalance(state: BiomeState): number {
+  return state.earned - state.spent
+}
 
 /** The Biome rewards are drawn from right now. */
 export function activeBiome(): BiomeId {
@@ -62,6 +68,11 @@ export function activeBiome(): BiomeId {
 
 export function useActiveBiome(): BiomeId {
   return useBiomeStore(selectActiveBiome)
+}
+
+/** Recount the balance from outside React, after something that earns points was saved. */
+export function refreshPoints(): Promise<void> {
+  return useBiomeStore.getState().refreshPoints()
 }
 
 export const useBiomeStore = create<BiomeState>((set, get) => ({
@@ -95,6 +106,11 @@ export const useBiomeStore = create<BiomeState>((set, get) => ({
       spent: unlocks.reduce((sum, u) => sum + u.cost, 0),
       loaded: true,
     })
+  },
+
+  refreshPoints: async () => {
+    const [sessions, goalDays] = await Promise.all([countCompletedFocusSessions(), countStepGoalDaysMet()])
+    set({ earned: earnedPoints(sessions, goalDays) })
   },
 
   detectHome: async () => {

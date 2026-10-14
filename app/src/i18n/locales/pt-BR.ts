@@ -75,6 +75,12 @@ export const ptBR: typeof en = {
     joinedCollection: '{{name}} entrou na sua coleção.',
     plantAnother: 'Plantar outro',
   },
+  pointsChip: {
+    // CLDR puts 0 in Portuguese's "one" category; "0 ponto" reads wrong.
+    label_zero: '{{count}} pontos',
+    label_one: '{{count}} ponto',
+    label_other: '{{count}} pontos',
+  },
   timerPill: {
     label: 'Sessão de foco em andamento, faltam {{time}}. Ir para Foco.',
     focusing: 'Focando',

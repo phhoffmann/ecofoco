@@ -13,6 +13,7 @@ const {
   requestStepsAuthorization,
   getTodaySteps,
   reveal,
+  refreshPoints,
 } = vi.hoisted(() => ({
   mockSpecies: {
     id: 'quati',
@@ -35,6 +36,7 @@ const {
   requestStepsAuthorization: vi.fn(),
   getTodaySteps: vi.fn(),
   reveal: vi.fn().mockResolvedValue(undefined),
+  refreshPoints: vi.fn().mockResolvedValue(undefined),
 }))
 
 vi.mock('../data/collectionRepo', () => ({ addCollectedEntry }))
@@ -48,7 +50,7 @@ vi.mock('../data/stepProvider', () => ({
 }))
 vi.mock('../domain/draw', () => ({ pickRandomSpecies: vi.fn(() => mockSpecies) }))
 vi.mock('./collectionStore', () => ({ useCollectionStore: { getState: () => ({ reveal }) } }))
-vi.mock('./biomeStore', () => ({ activeBiome: () => 'caatinga' }))
+vi.mock('./biomeStore', () => ({ activeBiome: () => 'caatinga', refreshPoints }))
 
 import { useDailyProgressStore } from './dailyProgressStore'
 
@@ -98,6 +100,8 @@ describe('dailyProgressStore', () => {
 
     expect(upsertTodaySteps).toHaveBeenCalledWith(6500, 6000)
     expect(useDailyProgressStore.getState().progress).toEqual(updated)
+    // A met goal earns points, so the header balance is recounted.
+    expect(refreshPoints).toHaveBeenCalled()
   })
 
   it('connect() requests authorization and refreshes on success', async () => {
