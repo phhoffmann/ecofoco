@@ -1,6 +1,7 @@
 // @vitest-environment node
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import type { ActiveFocusSession } from '../domain/types'
+import { localDateKey } from './localDate'
 import { createTestDb, type TestDb } from './testing/sqliteTestDb'
 
 let db: TestDb
@@ -56,7 +57,7 @@ describe('focusSessionRepo', () => {
   it('completes a session by collecting its plant, recording it and clearing the active session together', async () => {
     await saveActiveFocusSession(active)
 
-    const { session, entry } = await completeFocusSession(active)
+    const { session, entry } = await completeFocusSession(active, 'cerrado')
 
     expect(session).toMatchObject({ startedAt: active.startedAt, plannedDurationSeconds: 900, status: 'completed', failReason: null })
     expect(entry).toMatchObject({ speciesId: 'jatoba', method: 'focus_session' })
@@ -71,7 +72,7 @@ describe('focusSessionRepo', () => {
     // Break the second write of the transaction.
     await db.execute('DROP TABLE focus_sessions')
 
-    await expect(completeFocusSession(active)).rejects.toThrow()
+    await expect(completeFocusSession(active, 'cerrado')).rejects.toThrow()
 
     expect(await listCollectedEntries()).toEqual([])
     expect(await getActiveFocusSession()).toEqual(active)
@@ -87,5 +88,25 @@ describe('focusSessionRepo', () => {
     expect(await listCollectedEntries()).toEqual([])
     expect(await countCompletedFocusSessions()).toBe(0)
     expect(await getActiveFocusSession()).toBeNull()
+  })
+
+  it('links the collected Plant to its session, and queues both for sync', async () => {
+    await saveActiveFocusSession(active)
+
+    const { session, entry } = await completeFocusSession(active, 'cerrado')
+
+    const entries = await db.query('SELECT biomeId, localDate, focusSessionId, pendingSync FROM collected_entries')
+    expect(entries.values).toEqual([
+      { biomeId: 'cerrado', localDate: localDateKey(new Date(entry.collectedAt)), focusSessionId: session.id, pendingSync: 1 },
+    ])
+    const sessions = await db.query('SELECT localDate, pendingSync FROM focus_sessions')
+    expect(sessions.values).toEqual([{ localDate: localDateKey(new Date(active.startedAt)), pendingSync: 1 }])
+  })
+
+  it('queues a failed session for sync, dated by the local day it started', async () => {
+    await failFocusSession(active.startedAt, 900, 'left_app')
+
+    const res = await db.query('SELECT localDate, pendingSync FROM focus_sessions')
+    expect(res.values).toEqual([{ localDate: localDateKey(new Date(active.startedAt)), pendingSync: 1 }])
   })
 })

@@ -117,11 +117,10 @@ describe('focusSessionStore', () => {
     expect(state.status).toBe('completed')
     expect(state.resultSpecies).toEqual(mockSpecies)
     expect(pickRandomSpecies).toHaveBeenCalledWith('plant', 'caatinga')
-    expect(completeFocusSession).toHaveBeenCalledWith({
-      startedAt: expect.any(String),
-      plannedDurationSeconds: 3,
-      speciesId: 'jatoba',
-    })
+    expect(completeFocusSession).toHaveBeenCalledWith(
+      { startedAt: expect.any(String), plannedDurationSeconds: 3, speciesId: 'jatoba' },
+      'caatinga',
+    )
     // One reveal for the catch, with the session's points, and the header balance recounted.
     expect(reveal).toHaveBeenCalledExactlyOnceWith(mockSpecies, 10)
     expect(refreshPoints).toHaveBeenCalled()
@@ -308,7 +307,7 @@ describe('focusSessionStore', () => {
       expect(useFocusSessionStore.getState()).toMatchObject({ status: 'running', remainingSeconds: 480, plannedDurationSeconds: 600 })
       await vi.advanceTimersByTimeAsync(480_000)
       expect(useFocusSessionStore.getState().status).toBe('completed')
-      expect(completeFocusSession).toHaveBeenCalledWith(expect.objectContaining({ speciesId: 'quaresmeira' }))
+      expect(completeFocusSession).toHaveBeenCalledWith(expect.objectContaining({ speciesId: 'quaresmeira' }), 'caatinga')
       expect(reveal).toHaveBeenCalledWith(expect.objectContaining({ id: 'quaresmeira' }), 10)
     })
 

@@ -1,13 +1,16 @@
+import type { BiomeId } from '../domain/biome'
 import type { ActiveFocusSession, CollectedEntry, FocusFailReason, FocusSession } from '../domain/types'
 import { insertCollectedEntry, newCollectedEntry } from './collectionRepo'
 import { getDb } from './db'
+import { localDateKey } from './localDate'
 
 const CLEAR_ACTIVE = { statement: 'DELETE FROM active_focus_session', values: [] }
 
 function insertFocusSession(session: FocusSession) {
   return {
-    statement:
-      'INSERT INTO focus_sessions (id, startedAt, endedAt, plannedDurationSeconds, status, failReason) VALUES (?, ?, ?, ?, ?, ?)',
+    statement: `INSERT INTO focus_sessions
+      (id, startedAt, endedAt, plannedDurationSeconds, status, failReason, localDate, pendingSync)
+      VALUES (?, ?, ?, ?, ?, ?, ?, 1)`,
     values: [
       session.id,
       session.startedAt,
@@ -15,6 +18,8 @@ function insertFocusSession(session: FocusSession) {
       session.plannedDurationSeconds,
       session.status,
       session.failReason,
+      // A session counts toward the day it started on.
+      localDateKey(new Date(session.startedAt)),
     ],
   }
 }
@@ -54,9 +59,13 @@ export async function clearActiveFocusSessionBackgrounded(): Promise<void> {
   await db.run('UPDATE active_focus_session SET backgroundedAt = NULL, backgroundedScreenOn = NULL WHERE id = 1', [])
 }
 
-/** Records the completed session and collects its Plant in one transaction, so neither exists without the other. */
+/**
+ * Records the completed session and collects its Plant in one transaction, so neither exists without the other.
+ * `biomeId` is the Biome the Plant was drawn from.
+ */
 export async function completeFocusSession(
   active: ActiveFocusSession,
+  biomeId: BiomeId,
 ): Promise<{ session: FocusSession; entry: CollectedEntry }> {
   const entry = newCollectedEntry(active.speciesId, 'focus_session')
   const session: FocusSession = {
@@ -68,7 +77,10 @@ export async function completeFocusSession(
     failReason: null,
   }
   const db = await getDb()
-  await db.executeSet([insertCollectedEntry(entry), insertFocusSession(session), CLEAR_ACTIVE], true)
+  await db.executeSet(
+    [insertCollectedEntry(entry, { biomeId, focusSessionId: session.id }), insertFocusSession(session), CLEAR_ACTIVE],
+    true,
+  )
   return { session, entry }
 }
 
@@ -92,7 +104,9 @@ export async function failFocusSession(
 
 export async function listFocusSessions(): Promise<FocusSession[]> {
   const db = await getDb()
-  const res = await db.query('SELECT * FROM focus_sessions ORDER BY startedAt DESC')
+  const res = await db.query(
+    'SELECT id, startedAt, endedAt, plannedDurationSeconds, status, failReason FROM focus_sessions ORDER BY startedAt DESC',
+  )
   return (res.values ?? []) as FocusSession[]
 }
 

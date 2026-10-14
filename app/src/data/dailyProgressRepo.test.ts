@@ -4,6 +4,7 @@ const mockDb = { query: vi.fn(), run: vi.fn() }
 vi.mock('./db', () => ({ getDb: () => Promise.resolve(mockDb) }))
 
 import { countStepGoalDaysMet, getTodayProgress, markDrawCompleted, upsertTodaySteps } from './dailyProgressRepo'
+import { createTestDb, type TestDb } from './testing/sqliteTestDb'
 
 describe('dailyProgressRepo', () => {
   beforeEach(() => {
@@ -44,6 +45,7 @@ describe('dailyProgressRepo', () => {
       '2026-09-10',
       6000,
       1,
+      '2026-09-10T12:00:00.000Z',
     ])
   })
 
@@ -57,6 +59,7 @@ describe('dailyProgressRepo', () => {
       '2026-09-10',
       5999,
       0,
+      '2026-09-10T12:00:00.000Z',
     ])
   })
 
@@ -70,21 +73,24 @@ describe('dailyProgressRepo', () => {
       '2026-09-10',
       6000,
       0,
+      '2026-09-10T12:00:00.000Z',
     ])
   })
 
-  it('markDrawCompleted updates the drawCompleted flag for today', async () => {
+  it('markDrawCompleted updates the drawCompleted flag for today, queued for sync', async () => {
     await markDrawCompleted()
-    expect(mockDb.run).toHaveBeenCalledWith('UPDATE daily_progress SET drawCompleted = 1 WHERE date = ?', [
-      '2026-09-10',
-    ])
+    expect(mockDb.run).toHaveBeenCalledWith(
+      'UPDATE daily_progress SET drawCompleted = 1, updatedAt = ?, pendingSync = 1 WHERE date = ?',
+      ['2026-09-10T12:00:00.000Z', '2026-09-10'],
+    )
   })
 })
 
 describe('dailyProgressRepo on a real database', () => {
+  let testDb: TestDb
+
   beforeEach(async () => {
-    const { createTestDb } = await import('./testing/sqliteTestDb')
-    const testDb = await createTestDb()
+    testDb = await createTestDb()
     mockDb.query.mockReset().mockImplementation(testDb.query)
     mockDb.run.mockReset().mockImplementation(testDb.run)
     vi.useFakeTimers({ toFake: ['Date'] })
@@ -108,6 +114,40 @@ describe('dailyProgressRepo on a real database', () => {
     expect((await upsertTodaySteps(3000, 6000)).goalMet).toBe(false)
     expect((await upsertTodaySteps(6100, 6000)).goalMet).toBe(true)
   })
+
+  const syncFields = async () => (await testDb.query('SELECT updatedAt, pendingSync FROM daily_progress')).values
+
+  it('queues a changed step count for sync, stamped with when it changed', async () => {
+    await upsertTodaySteps(3000, 6000)
+    expect(await syncFields()).toEqual([{ updatedAt: '2026-09-10T12:00:00.000Z', pendingSync: 1 }])
+
+    // As if a sync had uploaded the row.
+    await testDb.run('UPDATE daily_progress SET pendingSync = 0')
+    vi.setSystemTime(new Date('2026-09-10T13:00:00.000Z'))
+    await upsertTodaySteps(3500, 6000)
+
+    expect(await syncFields()).toEqual([{ updatedAt: '2026-09-10T13:00:00.000Z', pendingSync: 1 }])
+  })
+
+  it('leaves the row alone when a step reading changes nothing', async () => {
+    await upsertTodaySteps(3000, 6000)
+    await testDb.run('UPDATE daily_progress SET pendingSync = 0')
+    vi.setSystemTime(new Date('2026-09-10T13:00:00.000Z'))
+
+    await upsertTodaySteps(3000, 6000)
+
+    expect(await syncFields()).toEqual([{ updatedAt: '2026-09-10T12:00:00.000Z', pendingSync: 0 }])
+  })
+
+  it('queues the Draw for sync', async () => {
+    await upsertTodaySteps(6500, 6000)
+    await testDb.run('UPDATE daily_progress SET pendingSync = 0')
+    vi.setSystemTime(new Date('2026-09-10T13:00:00.000Z'))
+
+    await markDrawCompleted()
+
+    expect(await syncFields()).toEqual([{ updatedAt: '2026-09-10T13:00:00.000Z', pendingSync: 1 }])
+  })
 })
 
 describe('dailyProgressRepo at UTC−3 (America/Sao_Paulo)', () => {
@@ -125,8 +165,8 @@ describe('dailyProgressRepo at UTC−3 (America/Sao_Paulo)', () => {
     drawCompletedDates.clear()
     mockDb.run.mockReset()
     mockDb.query.mockReset()
-    mockDb.run.mockImplementation(async (sql: string, [date]: [string]) => {
-      if (sql.startsWith('UPDATE daily_progress SET drawCompleted = 1')) drawCompletedDates.add(date)
+    mockDb.run.mockImplementation(async (sql: string, values: string[]) => {
+      if (sql.startsWith('UPDATE daily_progress SET drawCompleted = 1')) drawCompletedDates.add(values[values.length - 1])
     })
     mockDb.query.mockImplementation(async (_sql: string, [date]: [string]) => ({
       values: [{ date, steps: 7000, goalMet: 1, drawCompleted: drawCompletedDates.has(date) ? 1 : 0 }],

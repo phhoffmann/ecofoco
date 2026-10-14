@@ -152,7 +152,7 @@ describe('dailyProgressStore', () => {
     await useDailyProgressStore.getState().draw()
 
     expect(pickRandomSpecies).toHaveBeenCalledWith('animal', 'caatinga')
-    expect(addCollectedEntry).toHaveBeenCalledWith('quati', 'draw')
+    expect(addCollectedEntry).toHaveBeenCalledWith('quati', 'draw', 'caatinga')
     expect(markDrawCompleted).toHaveBeenCalled()
     const state = useDailyProgressStore.getState()
     expect(state.progress).toEqual(afterDraw)

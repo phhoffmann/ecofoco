@@ -39,7 +39,7 @@ export const useCollectionStore = create<CollectionState>((set, get) => ({
   logManualSighting: async (speciesId) => {
     const species = SPECIES_CATALOG.find((s) => s.id === speciesId)
     if (!species) return
-    const entry = await addCollectedEntry(speciesId, 'manual_sighting')
+    const entry = await addCollectedEntry(speciesId, 'manual_sighting', activeBiome())
     await get().reveal(species, 0, async () => {
       await deleteCollectedEntry(entry.id)
       if (get().highlightSpeciesId === speciesId) set({ highlightSpeciesId: null })

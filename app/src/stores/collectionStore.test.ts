@@ -44,7 +44,7 @@ describe('collectionStore', () => {
 
     await useCollectionStore.getState().logManualSighting('quaresmeira')
 
-    expect(addCollectedEntry).toHaveBeenCalledWith('quaresmeira', 'manual_sighting')
+    expect(addCollectedEntry).toHaveBeenCalledWith('quaresmeira', 'manual_sighting', 'atlantic-forest')
     expect(useCollectionStore.getState()).toMatchObject({ entries: [sighting], loaded: true, highlightSpeciesId: 'quaresmeira' })
   })
 

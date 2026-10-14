@@ -110,7 +110,7 @@ export const useFocusSessionStore = create<FocusSessionState>((set, get) => {
       active = null
       await saving.catch(() => {})
       try {
-        await completeFocusSession(session)
+        await completeFocusSession(session, activeBiome())
       } catch {
         active = session
         return

@@ -1,5 +1,5 @@
-import type { SQLiteDBConnection } from '@capacitor-community/sqlite'
-import { migrate } from '../schema'
+import type { capSQLiteVersionUpgrade, SQLiteDBConnection } from '@capacitor-community/sqlite'
+import { addPreVersioningColumns, upgradeStatements } from '../schema'
 
 interface SqlJsStatement {
   bind(values: unknown[]): void
@@ -20,7 +20,8 @@ type Statement = { statement?: string; values?: unknown[] }
 /** The slice of SQLiteDBConnection the repos use, backed by an in-memory sql.js database. */
 export type TestDb = Pick<SQLiteDBConnection, 'query' | 'run' | 'execute' | 'executeSet'>
 
-export async function createTestDb(): Promise<TestDb> {
+/** An empty database, at user_version 0 like a fresh install or one from before versioning. */
+export async function createEmptyTestDb(): Promise<TestDb> {
   // The same sql.js build jeep-sqlite runs on the web, so tests exercise real SQLite semantics.
   const { default: initSqlJs } = (await import('jeep-sqlite/node_modules/sql.js')) as {
     default: () => Promise<{ Database: new () => SqlJsDatabase }>
@@ -57,6 +58,28 @@ export async function createTestDb(): Promise<TestDb> {
       return { changes: { changes: sqlite.getRowsModified() } }
     },
   }
-  await migrate(db as unknown as SQLiteDBConnection)
   return db as unknown as TestDb
+}
+
+/**
+ * Opens the database the way the app does: upgrade statements run as `@capacitor-community/sqlite`
+ * runs them (each version above user_version in one transaction, one statement per string), then the
+ * pre-versioning columns are added.
+ */
+export async function openTestDb(db: TestDb, upgrades: capSQLiteVersionUpgrade[]): Promise<void> {
+  const res = await db.query('PRAGMA user_version')
+  const current = Number(res.values?.[0]?.user_version ?? 0)
+  for (const { toVersion, statements } of [...upgrades].sort((a, b) => a.toVersion - b.toVersion)) {
+    if (toVersion <= current) continue
+    await db.executeSet(statements.map((statement) => ({ statement, values: [] })), true)
+    await db.execute(`PRAGMA user_version = ${toVersion}`)
+  }
+  await addPreVersioningColumns(db)
+}
+
+/** A fresh install's database, at the newest schema version. */
+export async function createTestDb(): Promise<TestDb> {
+  const db = await createEmptyTestDb()
+  await openTestDb(db, upgradeStatements([]))
+  return db
 }

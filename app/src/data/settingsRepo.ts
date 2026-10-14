@@ -23,12 +23,14 @@ async function getSetting(key: string): Promise<string | undefined> {
   return res.values?.[0]?.value
 }
 
+/** Writing the value a setting already has leaves the row as it was, so it is not queued for sync again. */
 async function setSetting(key: string, value: string): Promise<void> {
   const db = await getDb()
   await db.run(
-    `INSERT INTO settings (key, value) VALUES (?, ?)
-     ON CONFLICT(key) DO UPDATE SET value = excluded.value`,
-    [key, value],
+    `INSERT INTO settings (key, value, updatedAt, pendingSync) VALUES (?, ?, ?, 1)
+     ON CONFLICT(key) DO UPDATE SET value = excluded.value, updatedAt = excluded.updatedAt, pendingSync = 1
+     WHERE settings.value <> excluded.value`,
+    [key, value, new Date().toISOString()],
   )
 }
 

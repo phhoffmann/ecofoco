@@ -1,7 +1,8 @@
 import { CapacitorSQLite, SQLiteConnection, type SQLiteDBConnection } from '@capacitor-community/sqlite'
 import { Capacitor } from '@capacitor/core'
 import { defineCustomElements } from 'jeep-sqlite/loader'
-import { migrate } from './schema'
+import { SPECIES_CATALOG } from '../domain/species'
+import { addPreVersioningColumns, DB_VERSION, upgradeStatements } from './schema'
 
 const DB_NAME = 'ecofoco'
 
@@ -27,16 +28,22 @@ async function initWebStore() {
   await connection.initWebStore()
 }
 
+/** The plugin runs the pending upgrade statements when the connection opens. */
+async function openVersionedConnection(): Promise<SQLiteDBConnection> {
+  await connection.addUpgradeStatement(DB_NAME, upgradeStatements(SPECIES_CATALOG))
+  return connection.createConnection(DB_NAME, false, 'no-encryption', DB_VERSION, false)
+}
+
 async function openDb(): Promise<SQLiteDBConnection> {
   await initWebStore()
 
   const isConn = (await connection.isConnection(DB_NAME, false)).result
   const db = isConn
     ? await connection.retrieveConnection(DB_NAME, false)
-    : await connection.createConnection(DB_NAME, false, 'no-encryption', 1, false)
+    : await openVersionedConnection()
 
   await db.open()
-  await migrate(db)
+  await addPreVersioningColumns(db)
   return db
 }
 
