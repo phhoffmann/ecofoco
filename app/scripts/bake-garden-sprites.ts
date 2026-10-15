@@ -5,7 +5,7 @@
  *   src/assets/garden/<name>.webp      one transparent sprite per entry in scripts/garden-bake/sprites.ts
  *   src/assets/garden/sprites.json     each sprite's size and foot point, in pixels
  *
- * Run from app/ (Node ≥ 22.18, for TypeScript type stripping):  npm run bake:garden
+ * Run from app/ (Node ≥ 22.18, for TypeScript type stripping):  pnpm bake:garden
  * Needs Google Chrome or Chromium (set CHROME_BIN to override `google-chrome`) and `unzip`. The kits are
  * downloaded once into app/.garden-cache/ (git-ignored; override with GARDEN_CACHE_DIR).
  *

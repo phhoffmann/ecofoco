@@ -1,28 +1,30 @@
-import { BIOME_IDS, type BiomeId } from './catalogSchema'
+import {
+  biomeStatus as sharedBiomeStatus,
+  canSwitchTo as sharedCanSwitchTo,
+  canUnlock as sharedCanUnlock,
+  type BiomeId,
+  type BiomeProgress,
+  type BiomeStatus,
+} from '@ecofoco/shared'
 import { SPECIES_CATALOG, type Species } from './species'
 
-export { BIOME_IDS, type BiomeId } from './catalogSchema'
-
-/** Biomes that share a land border inside Brazil. Symmetric. */
-export const BIOME_NEIGHBOURS: Readonly<Record<BiomeId, readonly BiomeId[]>> = {
-  amazon: ['cerrado'],
-  'atlantic-forest': ['cerrado', 'caatinga', 'pampa'],
-  caatinga: ['cerrado', 'atlantic-forest'],
-  cerrado: ['amazon', 'atlantic-forest', 'caatinga', 'pantanal'],
-  pantanal: ['cerrado'],
-  pampa: ['atlantic-forest'],
-}
+export {
+  BIOME_IDS,
+  BIOME_NEIGHBOURS,
+  FOCUS_MINUTE_POINTS,
+  NEIGHBOUR_UNLOCK_COST,
+  STEP_GOAL_POINTS,
+  focusSessionPoints,
+  isBiomeId,
+  unlockedBiomes,
+  type BiomeId,
+  type BiomeProgress,
+  type BiomeStatus,
+  type HomeBiomeSource,
+} from '@ecofoco/shared'
 
 // The original catalog's Biome, used only if a reward is drawn before onboarding picked a home.
 export const FALLBACK_BIOME: BiomeId = 'atlantic-forest'
-
-export const FOCUS_MINUTE_POINTS = 1 // per minute of a completed FocusSession's planned duration
-export const STEP_GOAL_POINTS = 20 // per day the StepGoal was met
-export const NEIGHBOUR_UNLOCK_COST = 250 // points to unlock one neighbouring Biome
-
-export function isBiomeId(value: unknown): value is BiomeId {
-  return (BIOME_IDS as readonly unknown[]).includes(value)
-}
 
 /** A Biome is playable once the catalog has plants and animals for it; the rest show as "coming soon". */
 export function hasCatalog(biome: BiomeId, catalog: Species[] = SPECIES_CATALOG): boolean {
@@ -30,42 +32,17 @@ export function hasCatalog(biome: BiomeId, catalog: Species[] = SPECIES_CATALOG)
   return inBiome.some((s) => s.type === 'plant') && inBiome.some((s) => s.type === 'animal')
 }
 
-/** What a completed FocusSession earns. Each award is recorded with its session, so changing this never rewrites past ones. */
-export function focusSessionPoints(plannedDurationSeconds: number): number {
-  return Math.floor(plannedDurationSeconds / 60) * FOCUS_MINUTE_POINTS
-}
-
-/** A detected home is where the user lives; a picked one is a stand-in that does not stay unlocked once replaced. */
-export type HomeBiomeSource = 'detected' | 'picked'
-
-/** Where the user stands with Biomes: home (detected or picked) plus Biomes bought with points. */
-export interface BiomeProgress {
-  home: BiomeId
-  current: BiomeId
-  purchased: BiomeId[]
-  balance: number
-}
-
-export function unlockedBiomes(progress: Pick<BiomeProgress, 'home' | 'purchased'>): Set<BiomeId> {
-  return new Set([progress.home, ...progress.purchased])
-}
-
-export type BiomeStatus = 'current' | 'unlocked' | 'unlockable' | 'locked' | 'coming-soon'
+// The unlock rules live in @ecofoco/shared; the app supplies which Biomes its bundled catalog makes playable.
+const playableIn = (catalog: Species[]) => (biome: BiomeId) => hasCatalog(biome, catalog)
 
 export function biomeStatus(biome: BiomeId, progress: BiomeProgress, catalog: Species[] = SPECIES_CATALOG): BiomeStatus {
-  if (biome === progress.current) return 'current'
-  if (!hasCatalog(biome, catalog)) return 'coming-soon'
-  const unlocked = unlockedBiomes(progress)
-  if (unlocked.has(biome)) return 'unlocked'
-  const bordersUnlocked = BIOME_NEIGHBOURS[biome].some((n) => unlocked.has(n))
-  return bordersUnlocked ? 'unlockable' : 'locked'
+  return sharedBiomeStatus(biome, progress, playableIn(catalog))
 }
 
-/** A neighbour of any unlocked Biome can be bought once the balance covers its cost. */
 export function canUnlock(biome: BiomeId, progress: BiomeProgress, catalog: Species[] = SPECIES_CATALOG): boolean {
-  return biomeStatus(biome, progress, catalog) === 'unlockable' && progress.balance >= NEIGHBOUR_UNLOCK_COST
+  return sharedCanUnlock(biome, progress, playableIn(catalog))
 }
 
 export function canSwitchTo(biome: BiomeId, progress: BiomeProgress, catalog: Species[] = SPECIES_CATALOG): boolean {
-  return biomeStatus(biome, progress, catalog) === 'unlocked'
+  return sharedCanSwitchTo(biome, progress, playableIn(catalog))
 }

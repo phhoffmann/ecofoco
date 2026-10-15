@@ -1,3 +1,4 @@
+import { canDraw } from '@ecofoco/shared'
 import { create } from 'zustand'
 import { addCollectedEntry } from '../data/collectionRepo'
 import { getTodayProgress, markDrawCompleted, upsertTodaySteps } from '../data/dailyProgressRepo'
@@ -8,7 +9,6 @@ import {
   requestStepsAuthorization,
   writeTestSteps,
 } from '../data/stepProvider'
-import { canDraw } from '../domain/dailyProgress'
 import { pickRandomSpecies } from '../domain/draw'
 import type { DailyProgress } from '../domain/types'
 import { activeBiome, refreshPoints } from './biomeStore'

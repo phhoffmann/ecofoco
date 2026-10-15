@@ -1,0 +1,21 @@
+# Local Postgres for the API. Works with `podman compose` and `docker compose`.
+# Host port 5433, so it doesn't clash with a Postgres already on 5432.
+services:
+  db:
+    image: docker.io/library/postgres:17
+    environment:
+      POSTGRES_USER: ecofoco
+      POSTGRES_PASSWORD: ecofoco
+      POSTGRES_DB: ecofoco
+    ports:
+      - '5433:5432'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ecofoco -d ecofoco']
+      interval: 2s
+      timeout: 5s
+      retries: 15
+
+volumes:
+  db-data:

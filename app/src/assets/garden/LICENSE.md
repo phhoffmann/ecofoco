@@ -1,6 +1,6 @@
 # Garden sprites
 
-The sprites in this folder are baked by `npm run bake:garden` (`scripts/bake-garden-sprites.ts`) from CC0 3D
+The sprites in this folder are baked by `pnpm bake:garden` (`scripts/bake-garden-sprites.ts`) from CC0 3D
 models: each model is rendered with one fixed orthographic camera and one lighting setup, recoloured to a shared
 palette, and saved as a transparent WebP. `sprites.json` holds each sprite's size and foot point. What gets
 rendered, and from which model, is listed in `scripts/garden-bake/sprites.ts`.

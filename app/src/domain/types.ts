@@ -1,28 +1,14 @@
 import type { BiomeId } from './biome'
 
-export type CollectionMethod = 'focus_session' | 'draw' | 'manual_sighting' | 'photo_ai'
-
-export interface CollectedEntry {
-  id: string
-  speciesId: string
-  collectedAt: string
-  method: CollectionMethod
-}
-
-export type FocusSessionStatus = 'completed' | 'failed'
-
-/** Why a FocusSession failed: the user held Give up, stayed in another app, or the app was closed before it ended. */
-export type FocusFailReason = 'gave_up' | 'left_app' | 'closed'
-
-export interface FocusSession {
-  id: string
-  startedAt: string
-  endedAt: string
-  plannedDurationSeconds: number
-  status: FocusSessionStatus
-  /** Set only on failed sessions; null on completed ones and on failures recorded before reasons existed. */
-  failReason: FocusFailReason | null
-}
+export {
+  DEFAULT_STEP_GOAL,
+  type CollectedEntry,
+  type CollectionMethod,
+  type DailyProgress,
+  type FocusFailReason,
+  type FocusSession,
+  type FocusSessionStatus,
+} from '@ecofoco/shared'
 
 /** The session that is running right now, persisted so it survives the process being killed. */
 export interface ActiveFocusSession {
@@ -35,15 +21,6 @@ export interface ActiveFocusSession {
   /** Set while the app is in the background mid-session: when it left, and whether the screen was on then. */
   backgrounded?: { at: string; screenOn: boolean }
 }
-
-export interface DailyProgress {
-  date: string
-  steps: number
-  goalMet: boolean
-  drawCompleted: boolean
-}
-
-export const DEFAULT_STEP_GOAL = 6000
 
 /** How the Collection tab is shown: the full Pokédex grid, or the isometric garden for a period. */
 export type CollectionView = 'grid' | 'isometric'

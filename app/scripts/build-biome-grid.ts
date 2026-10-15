@@ -7,7 +7,7 @@
  *
  * Regenerate (Node ≥ 22.18, for TypeScript type stripping):
  *   curl -LO https://storage.googleapis.com/teow2016/Ecoregions2017.zip && unzip Ecoregions2017.zip
- *   npm run build:biome-grid -- path/to/Ecoregions2017.shp
+ *   pnpm build:biome-grid path/to/Ecoregions2017.shp
  *
  * The 149 MB source is not committed. Grid format: see src/domain/biomeLookup.ts. Attribution: src/assets/biomes/LICENSE.md.
  */
@@ -192,7 +192,7 @@ ${lines.join('\n')}
 function main() {
   const shpPath = process.argv[2]
   if (!shpPath?.endsWith('.shp')) {
-    console.error('Usage: npm run build:biome-grid -- path/to/Ecoregions2017.shp')
+    console.error('Usage: pnpm build:biome-grid path/to/Ecoregions2017.shp')
     process.exit(1)
   }
   const ecoregions = readEcoregions(join(dirname(shpPath), `${basename(shpPath, '.shp')}.dbf`))

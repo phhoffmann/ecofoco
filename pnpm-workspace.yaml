@@ -1,0 +1,18 @@
+packages:
+  - app
+  - api
+  - packages/*
+
+# Capacitor writes each plugin's real path into android/capacitor.settings.gradle; pnpm's default
+# symlinked store would bake versioned .pnpm/... paths into that committed file.
+nodeLinker: hoisted
+
+allowBuilds:
+  '@prisma/engines': true
+  '@swc/core': true
+  esbuild: true
+  prisma: true
+
+overrides:
+  # jeep-sqlite loads sql-wasm.wasm at runtime; the copied wasm must match its JS glue (see app/scripts/copy-sql-wasm.mjs).
+  sql.js: 1.12.0
