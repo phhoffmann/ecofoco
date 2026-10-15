@@ -4,32 +4,34 @@ The EcoFoco Android app: Capacitor 8 + Vite + React 19 + TypeScript + Tailwind 4
 
 ## Setup
 
-Requires Node 22 (what CI uses). Run everything from this `app/` folder.
+Requires Node 22 (what CI uses) and pnpm 12 (the exact version is pinned in the root `package.json`'s `packageManager` field). The app is one package of the pnpm workspace at the repository root: install from there, then run the scripts from this `app/` folder.
 
 ```sh
-npm ci
-npm run dev
+pnpm install     # from the repository root
+pnpm dev
 ```
+
+The game rules (points, biome neighbours, unlock cost) and the shared domain types live in [`../packages/shared`](../packages/shared) (`@ecofoco/shared`), so the API can apply the same code; `src/domain/biome.ts` and `src/domain/types.ts` re-export them. `pnpm dev` and `pnpm test` load it from source, so edits apply without a rebuild.
 
 ## Scripts
 
 | Script | What it does |
 |---|---|
-| `npm run dev` | Vite dev server. Runs `copy-sql-wasm` first. |
-| `npm test` | Vitest, once (`vitest run`). |
-| `npm run lint` | Oxlint. |
-| `npm run build` | Type-checks (`tsc -b`) and builds to `dist/`. Runs `copy-sql-wasm` first. |
-| `npm run preview` | Serves the built `dist/`. |
-| `npm run copy-sql-wasm` | Copies `sql-wasm.wasm` into `public/assets/` (see below). |
-| `npm run build:biome-grid -- <path/to/Ecoregions2017.shp>` | Regenerates the location → biome lookup (see below). |
-| `npm run build:catalog` | Regenerates the species catalog and photos (see below). |
-| `npm run bake:garden` | Re-renders the garden sprites from CC0 3D kits (see below). |
+| `pnpm dev` | Vite dev server. Runs `copy-sql-wasm` first. |
+| `pnpm test` | Vitest, once (`vitest run`). |
+| `pnpm lint` | Oxlint. |
+| `pnpm build` | Type-checks (`tsc -b`) and builds to `dist/`. Runs `copy-sql-wasm` first. |
+| `pnpm preview` | Serves the built `dist/`. |
+| `pnpm copy-sql-wasm` | Copies `sql-wasm.wasm` into `public/assets/` (see below). |
+| `pnpm build:biome-grid <path/to/Ecoregions2017.shp>` | Regenerates the location → biome lookup (see below). |
+| `pnpm build:catalog` | Regenerates the species catalog and photos (see below). |
+| `pnpm bake:garden` | Re-renders the garden sprites from CC0 3D kits (see below). |
 
-CI (`.github/workflows/ci.yml`) runs `npm ci`, `lint`, `test` and `build` on every push and pull request to `main`.
+CI (`.github/workflows/ci.yml`) runs `pnpm install --frozen-lockfile`, `lint`, `test` and `build` on every push and pull request to `main`.
 
 ### The sql.js wasm copy step
 
-In the browser, SQLite runs through `jeep-sqlite`, which loads `/assets/sql-wasm.wasm` at runtime. That wasm must come from the same sql.js version as its JS glue, so `package.json` pins sql.js through `overrides` and `scripts/copy-sql-wasm.mjs` copies the matching file to `public/assets/sql-wasm.wasm`. The copy is git-ignored and runs automatically before `dev` and `build`; run `npm run copy-sql-wasm` by hand only if you serve the app some other way. On Android the native SQLite plugin is used instead.
+In the browser, SQLite runs through `jeep-sqlite`, which loads `/assets/sql-wasm.wasm` at runtime. That wasm must come from the same sql.js version as its JS glue, so the root `pnpm-workspace.yaml` pins sql.js through `overrides` and `scripts/copy-sql-wasm.mjs` copies the matching file to `public/assets/sql-wasm.wasm`. The copy is git-ignored and runs automatically before `dev` and `build`; run `pnpm copy-sql-wasm` by hand only if you serve the app some other way. On Android the native SQLite plugin is used instead.
 
 ## Location → biome grid
 
@@ -43,7 +45,7 @@ To regenerate them (Node ≥ 22.18, for TypeScript type stripping), download the
 ```sh
 curl -LO https://storage.googleapis.com/teow2016/Ecoregions2017.zip
 unzip Ecoregions2017.zip -d /tmp/resolve
-npm run build:biome-grid -- /tmp/resolve/Ecoregions2017.shp
+pnpm build:biome-grid /tmp/resolve/Ecoregions2017.shp
 ```
 
 The output is deterministic, so an unchanged source and table produce no diff. Edit `scripts/brazil-biome-ecoregions.ts` to change which ecoregions belong to which biome. Attribution and the changes made to the source data: [`src/assets/biomes/LICENSE.md`](src/assets/biomes/LICENSE.md).
@@ -55,7 +57,7 @@ The bundled catalog — `src/catalog/<biome>.json` for Brazil's six biomes plus 
 Regenerate it from `app/` with Node ≥ 22.18:
 
 ```sh
-npm run build:catalog
+pnpm build:catalog
 ```
 
 - **Candidates:** iNaturalist species with research-grade observations that carry CC0/CC-BY photos, in the
@@ -88,7 +90,7 @@ ground decorations) in `src/assets/garden/`, and `sprites.json` with each sprite
 baked from CC0 3D models rather than drawn, so every sprite shares one camera, one light and one palette:
 
 ```sh
-npm run bake:garden
+pnpm bake:garden
 ```
 
 - **What's rendered:** `scripts/garden-bake/sprites.ts` maps each sprite to a model from Kenney's Nature Kit or
@@ -124,9 +126,11 @@ Or download the artifact from the run's page under **Actions** on GitHub and unz
 Mirrors the CI job; needs JDK 21 and the Android SDK.
 
 ```sh
-npm run build
-npx cap sync android
+pnpm build
+pnpm exec cap sync android
 cd android && ./gradlew assembleDebug
 ```
+
+The workspace uses pnpm's hoisted `node_modules` (`nodeLinker: hoisted` in `pnpm-workspace.yaml`): Capacitor writes each plugin's real path into `android/capacitor.settings.gradle`, and pnpm's default symlinked store would put version-stamped paths into that committed file.
 
 The APK lands in `android/app/build/outputs/apk/debug/`.

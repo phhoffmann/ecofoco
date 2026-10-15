@@ -1,0 +1,13 @@
+// The server's database. No models yet: real tables arrive with the backup/restore milestone.
+// The connection URL lives in prisma.config.ts (Prisma 7).
+
+generator client {
+  provider            = "prisma-client"
+  output              = "../src/generated/prisma"
+  moduleFormat        = "cjs"
+  importFileExtension = "js"
+}
+
+datasource db {
+  provider = "postgresql"
+}

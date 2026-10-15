@@ -1,10 +1,9 @@
 // Catalog vocabulary shared by the app and the build-time catalog pipeline (scripts/build-species-catalog.ts).
 // Kept free of app-only imports (bundled JSON, assets) so Node can type-check the pipeline against it.
+import type { BiomeId } from '@ecofoco/shared'
 import type { Locale } from '../i18n/locale.ts'
 
-// IBGE's six Brazilian biomes. Which of them are playable comes from the catalog, not from this list.
-export const BIOME_IDS = ['amazon', 'atlantic-forest', 'caatinga', 'cerrado', 'pantanal', 'pampa'] as const
-export type BiomeId = (typeof BIOME_IDS)[number]
+export { BIOME_IDS, type BiomeId } from '@ecofoco/shared'
 
 export type SpeciesKind = 'plant' | 'animal'
 export type Rarity = 'common' | 'rare' | 'epic'

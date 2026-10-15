@@ -22,8 +22,8 @@ export type TestDb = Pick<SQLiteDBConnection, 'query' | 'run' | 'execute' | 'exe
 
 /** An empty database, at user_version 0 like a fresh install or one from before versioning. */
 export async function createEmptyTestDb(): Promise<TestDb> {
-  // The same sql.js build jeep-sqlite runs on the web, so tests exercise real SQLite semantics.
-  const { default: initSqlJs } = (await import('jeep-sqlite/node_modules/sql.js')) as {
+  // The same sql.js build jeep-sqlite runs on the web (pinned by the workspace override), so tests exercise real SQLite semantics.
+  const { default: initSqlJs } = (await import('sql.js')) as {
     default: () => Promise<{ Database: new () => SqlJsDatabase }>
   }
   const SQL = await initSqlJs()

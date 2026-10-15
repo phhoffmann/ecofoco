@@ -6,7 +6,7 @@
  *   src/assets/species/<id>.webp          one CC0/CC-BY observation photo per species
  *   src/catalog/gbif-derived-dataset.csv  GBIF datasets behind the presence check, for the derived-dataset citation
  *
- * Run from app/ (Node ≥ 22.18, for TypeScript type stripping):  npm run build:catalog
+ * Run from app/ (Node ≥ 22.18, for TypeScript type stripping):  pnpm build:catalog
  * Raw API responses and photos are cached in app/.catalog-cache/ (git-ignored; override with CATALOG_CACHE_DIR),
  * so reruns are cheap. Delete the cache to pick up new observations.
  *

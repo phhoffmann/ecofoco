@@ -1,0 +1,2 @@
+-- Baseline: no tables yet. Applying it creates Prisma's _prisma_migrations history table, so later
+-- migrations (the backup/restore milestone's tables) apply on top of a tracked database.

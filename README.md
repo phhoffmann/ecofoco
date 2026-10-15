@@ -6,7 +6,7 @@ A focus app for Android that turns time off your phone and steps outside into a 
 - **Walk → animals.** Meet your daily step goal (read from Health Connect) and you get one animal draw per day, weighted by rarity.
 - **Your biome.** Species come from the biome you live in, found from a coarse location fix. Points from focus sessions and step goals unlock neighbouring biomes.
 
-EcoFoco is a personal project, built as a fullstack portfolio piece. It runs entirely on-device: no account, no backend.
+EcoFoco is a personal project, built as a fullstack portfolio piece. The app runs entirely on-device, with no account. A server skeleton (`api/`) is in place for the planned backup and restore; the app doesn't talk to it yet.
 
 ## Features
 
@@ -33,22 +33,63 @@ The whole app re-tints with the current biome; before/after shots of every scree
 - **App:** Capacitor 8, Vite, React 19, TypeScript, Tailwind CSS 4 (design tokens per biome), Zustand, i18next
 - **On-device data:** SQLite (`@capacitor-community/sqlite`; `jeep-sqlite`/sql.js in the browser)
 - **Native plugins:** Health Connect steps (`@capgo/capacitor-health`), coarse geolocation, app lifecycle, haptics, local AwayTracker (Kotlin; time spent in other apps with the screen on)
-- **Tooling:** Vitest, Oxlint, GitHub Actions (lint, tests, build, debug APK, manifest permission checks)
+- **Server (skeleton):** NestJS 11, Prisma 7 (`@prisma/adapter-pg`), PostgreSQL 17; only `GET /health` so far
+- **Shared rules:** `@ecofoco/shared` (points, biome neighbours, unlock cost, domain types), used by the app and, later, the server
+- **Tooling:** pnpm workspaces, Vitest, Oxlint, GitHub Actions (lint, tests, build, API end-to-end tests against Postgres, debug APK, manifest permission checks)
+
+## Repository layout
+
+A pnpm workspace:
+
+| Folder | Package | What it is |
+|---|---|---|
+| `app/` | `@ecofoco/app` | The Capacitor Android app |
+| `api/` | `@ecofoco/api` | The NestJS server (skeleton) |
+| `packages/shared/` | `@ecofoco/shared` | Game rules and domain types used by both, built to ESM and CommonJS |
 
 ## Quick start
 
-Requires Node 22.
+Requires Node 22 and pnpm 12 (the exact version is pinned in `package.json`'s `packageManager` field). Install once from the repository root; it also builds `@ecofoco/shared`.
 
 ```sh
+pnpm install
 cd app
-npm ci
-npm run dev      # dev server in the browser
-npm test         # unit tests
-npm run lint
-npm run build
+pnpm dev         # dev server in the browser
+pnpm test        # unit tests
+pnpm lint
+pnpm build
 ```
 
+From the root, `pnpm lint`, `pnpm test` and `pnpm build` run every package (the API's end-to-end tests are separate; see below).
+
 Health Connect and location don't exist in the browser, so the step and location features only work on a device. More details, including how to regenerate the biome lookup grid, are in [`app/README.md`](app/README.md).
+
+## Run the server locally
+
+The server needs Postgres. `compose.yaml` runs Postgres 17 on host port **5433** (not 5432, so it won't clash with a Postgres already on this machine). It works with `podman compose` or `docker compose`; with podman-docker installed, `docker compose` runs on Podman.
+
+```sh
+podman compose up -d db              # start Postgres in the background (ready a few seconds later)
+cp api/.env.example api/.env         # DATABASE_URL for that database, PORT=3000
+cd api
+pnpm db:migrate                      # apply migrations (prisma migrate deploy)
+pnpm dev                             # server on http://localhost:3000, restarts on changes
+```
+
+Open http://localhost:3000/health:
+
+- `200` with `{"status":"ok","info":{"database":{"status":"up"}},...}` when Postgres answered.
+- `503` with `{"status":"error","error":{"database":{"status":"down"}},...}` when it didn't; the server itself is up.
+
+Other commands, from `api/`:
+
+```sh
+pnpm test:e2e     # end-to-end tests against the database in DATABASE_URL (start it first)
+pnpm lint         # Oxlint and type check
+pnpm build        # compile to dist/; run it with `pnpm start`
+```
+
+Stop the database with `podman compose down` from the root (add `-v` to delete its data too). The server only runs locally for now; there is no cloud deploy.
 
 ## Install on Android
 

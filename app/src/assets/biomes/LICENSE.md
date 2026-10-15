@@ -16,7 +16,7 @@ The 149 MB source is not committed. With Node ≥ 22.18, from `app/`:
 ```sh
 curl -LO https://storage.googleapis.com/teow2016/Ecoregions2017.zip
 unzip Ecoregions2017.zip -d /tmp/resolve
-npm run build:biome-grid -- /tmp/resolve/Ecoregions2017.shp
+pnpm build:biome-grid /tmp/resolve/Ecoregions2017.shp
 ```
 
 This rewrites both `ecoregion-grid.bin` and `src/domain/ecoregionBiomes.ts`; the output is deterministic.
