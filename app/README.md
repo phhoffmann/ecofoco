@@ -11,7 +11,7 @@ pnpm install     # from the repository root
 pnpm dev
 ```
 
-The game rules (points, biome neighbours, unlock cost) and the shared domain types live in [`../packages/shared`](../packages/shared) (`@ecofoco/shared`), so the API can apply the same code; `src/domain/biome.ts` and `src/domain/types.ts` re-export them. `pnpm install` builds that package.
+The game rules (points, biome neighbours, unlock cost) and the shared domain types live in [`../packages/shared`](../packages/shared) (`@ecofoco/shared`), so the API can apply the same code; `src/domain/biome.ts` and `src/domain/types.ts` re-export them. `pnpm dev` and `pnpm test` load it from source, so edits apply without a rebuild.
 
 ## Scripts
 
